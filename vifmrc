@@ -1,0 +1,12 @@
+set history=10000
+
+filetype *.pdf zathura
+
+filetype *.wmv,*.3gp vlc
+
+fileview */ tree %c
+
+nnoremap w :view<cr> "
+
+fileviewer *.pdf,*.bpm,*.jpg,*.jpeg,*.png,*.gif,*.xpm
+        \ /home/ryanm/.vifm/vifmPreview.sh %px %py %pw %ph %c
