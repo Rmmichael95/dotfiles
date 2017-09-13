@@ -31,6 +31,13 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('/home/ryanm/.nvim/bundles/repos/github.com/Shougo/dein.vim')
     call dein#add('Shougo/dein.vim')
     call dein#add('Shougo/deoplete.nvim')
+    call dein#add('zchee/deoplete-clang')
+    call dein#add('zchee/libclang-python3')
+    call dein#add('Shougo/neoinclude.vim')
+    call dein#add('artur-shaik/vim-javacomplete2')
+    call dein#add('zchee/deoplete-jedi')
+    call dein#add('davidhalter/jedi')
+    call dein#add('Shougo/neco-vim')
     call dein#add('Shougo/vimproc.vim', {
                 \ 'build' : {
                 \     'windows' : 'tools\\update-dll-mingw',
@@ -55,7 +62,8 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('LucHermitte/lh-dev')
     call dein#add('LucHermitte/lh-brackets')
     call dein#add('LucHermitte/vim-refactor')
-    call dein#add("zowens/vim-eclim")
+    "call dein#add('zowens/vim-eclim')
+    "call dein#add('JulioJu/Eclim-for-Neovim')
     call dein#add('dbgx/lldb.nvim')
     call dein#add('godlygeek/tabular')
     call dein#add('scrooloose/syntastic')
@@ -189,6 +197,11 @@ nnoremap <F9> :Dispatch<CR>
 set rtp+=/home/ryanm/repos/github.com/Shougo/deoplete.nvim/
 let g:deoplete#enable_at_startup = 1
 
+" c++
+let g:deoplete#sources#clang#libclang_path="/usr/lib/libclang.so"
+let g:deoplete#sources#clang#clang_header="/usr/lib/clang"
+
+
 " }}}
 
 " --------[ Syntastic Options ]---------------- {{{
@@ -242,7 +255,7 @@ autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
 autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
 " for debugging pyclewn
 let pyclewn_args="--terminal='tmux,split-window'" " open tmux split to interact with debugee
-"let g:pyclewn_python = 
+"let g:pyclewn_python =
 
 " }}}
 
@@ -639,6 +652,7 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType c set omnifunc=ccomplete#Complete
 autocmd FileType java set omnifunc=javacomplete#Complete
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
 " use syntax complete if nothing else available
 if has("autocmd") && exists("+omnifunc")

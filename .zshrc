@@ -56,11 +56,13 @@ plugins=(archlinux gem git github perl pip python ruby rvm sudo terminator tmux 
 # Load screenfetch on terminal start
 screenfetch # Display system/terminal info
 
+alias tmux250="tmux new -s A250 -c /home/ryanm/batcave/C++/A250"
+
 alias vim="nvim"
 
 # For Base16 256colors
 BASE16_SHELL_SET_BACKGROUND=false
-BASE16_SHELL=$HOME/.config/base16-shell/
+BASE16_SHELL=$HOME/.base16-manager/chriskempson/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
 # For The Fuck
