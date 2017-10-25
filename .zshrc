@@ -57,6 +57,7 @@ plugins=(archlinux gem git github perl pip python ruby rvm sudo terminator tmux 
 screenfetch # Display system/terminal info
 
 alias tmux250="tmux new -s A250 -c /home/ryanm/batcave/C++/A250"
+alias tmux200="tmux new -s A200 -c /home/ryanm/batcave/C++/A200"
 
 alias vim="nvim"
 

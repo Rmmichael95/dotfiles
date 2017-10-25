@@ -40,9 +40,6 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('Shougo/neco-vim')
     call dein#add('Shougo/vimproc.vim', {
                 \ 'build' : {
-                \     'windows' : 'tools\\update-dll-mingw',
-                \     'cygwin' : 'make -f make_cygwin.mak',
-                \     'mac' : 'make',
                 \     'linux' : 'make',
                 \     'unix' : 'gmake',
                 \    },
@@ -51,11 +48,12 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('Shougo/neomru.vim')
     call dein#add('Shougo/unite.vim')
     call dein#add('tpope/vim-endwise')
-    call dein#add('tpope/vim-surround')
     call dein#add('tpope/vim-commentary')
     call dein#add('tpope/vim-repeat')
     call dein#add('tpope/vim-dispatch') " Used with vim-tags
     call dein#add('tpope/vim-fugitive') " for help with c tags and git/buffer handling ...
+    call dein#add('tpope/vim-surround')
+    call dein#add('jiangmiao/auto-pairs')
     " general refactoring
     call dein#add('LucHermitte/lh-vim-lib')
     call dein#add('LucHermitte/lh-tags')
@@ -67,7 +65,6 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('dbgx/lldb.nvim')
     call dein#add('godlygeek/tabular')
     call dein#add('scrooloose/syntastic')
-    call dein#add('chriskempson/base16-vim')
     call dein#add('majutsushi/tagbar') " taskbar with indexed ctags
     call dein#add('jeffkreeftmeijer/vim-numbertoggle') " Toggle absolute and relative line numbers
     call dein#add('ntpeters/vim-better-whitespace') " Whitespace hightlighting
@@ -79,6 +76,7 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
                 \	'unix': 'cd ruby/command-t/ext/command-t && {make clean; ruby extconf.rb && make }'
                 \  }
                 \})
+    call dein#add('wincent/ferret')
     call dein#add('mileszs/ack.vim')
     call dein#add('mbbill/undotree', {'on': 'UndotreeToggle'})
     call dein#add('scrooloose/nerdtree', {'on':['NERDTreeToggle','NERDTreeFind']})
@@ -97,7 +95,6 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('editorconfig/editorconfig-vim')
     call dein#add('kristijanhusak/vim-multiple-cursors')
     call dein#add('chrisbra/NrrwRgn')
-    call dein#add('jiangmiao/auto-pairs')
     " Java
     call dein#add('Dinduks/vim-java-get-set') " Generate java getters and setters
     " Groovy
@@ -126,13 +123,7 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('mustache/vim-mustache-handlebars', {'for': 'html.handlebars'})
     call dein#add('PProvost/vim-markdown-jekyll', {'for': ['html', 'hbs']})
     " Colors Themes
-    call dein#add('daylerees/colour-schemes')
-    call dein#add('flazz/vim-colorschemes')
-    call dein#add('encody/vim-colors')
-    call dein#add('dracula/vim')
-    call dein#add('morhetz/gruvbox')
-    call dein#add('effkay/argonaut.vim')
-    call dein#add('airblade/vim-gitgutter')
+    call dein#add('chriskempson/base16-vim')
 
     call dein#end()
     call dein#save_state()
@@ -618,6 +609,10 @@ hi LLBreakpointSign ctermfg=cyan
 " nnoremap <S-F8> :LL process interrupt<CR>
 " nnoremap <F9> :LL print <C-R>=expand('<cword>')<CR>
 " vnoremap <F9> :<C-U>LL print <C-R>=lldb#util#get_selection()<CR><CR>
+
+" fswitch
+nmap <silent> <leader>y :FSHere<cr>
+"nmap <buffer> <silent> <leader>PP " mapped in pluging
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
