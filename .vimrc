@@ -24,7 +24,7 @@ if &compatible
     set nocompatible
 endif
 
-set runtimepath+=/home/ryanm/.nvim/bundles/repos/github.com/Shougo/dein.vim
+set runtimepath+=/home/ryanm/.local/share/dein/repos/github.com/Shougo/dein.vim
 
 if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#begin('/home/ryanm/.nvim/bundles')
@@ -37,7 +37,6 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('artur-shaik/vim-javacomplete2')
     call dein#add('zchee/deoplete-jedi')
     call dein#add('davidhalter/jedi')
-    call dein#add('Shougo/neco-vim')
     call dein#add('Shougo/vimproc.vim', {
                 \ 'build' : {
                 \     'linux' : 'make',
@@ -51,10 +50,13 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('tpope/vim-commentary')
     call dein#add('tpope/vim-repeat')
     call dein#add('tpope/vim-dispatch') " Used with vim-tags
+    call dein#add('radenling/vim-dispatch-neovim') " dispatch nvim support
     call dein#add('tpope/vim-fugitive') " for help with c tags and git/buffer handling ...
     call dein#add('tpope/vim-surround')
     call dein#add('jiangmiao/auto-pairs')
+    call dein#add('neomake/neomake')
     " general refactoring
+    call dein#add('derekwyatt/vim-protodef')
     call dein#add('LucHermitte/lh-vim-lib')
     call dein#add('LucHermitte/lh-tags')
     call dein#add('LucHermitte/lh-dev')
@@ -64,7 +66,6 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     "call dein#add('JulioJu/Eclim-for-Neovim')
     call dein#add('dbgx/lldb.nvim')
     call dein#add('godlygeek/tabular')
-    call dein#add('scrooloose/syntastic')
     call dein#add('majutsushi/tagbar') " taskbar with indexed ctags
     call dein#add('jeffkreeftmeijer/vim-numbertoggle') " Toggle absolute and relative line numbers
     call dein#add('ntpeters/vim-better-whitespace') " Whitespace hightlighting
@@ -93,7 +94,7 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('mhinz/vim-startify')  " Cool startpage for vim
     call dein#add('oblitum/rainbow')
     call dein#add('editorconfig/editorconfig-vim')
-    call dein#add('kristijanhusak/vim-multiple-cursors')
+    call dein#add('terryma/vim-multiple-cursors')
     call dein#add('chrisbra/NrrwRgn')
     " Java
     call dein#add('Dinduks/vim-java-get-set') " Generate java getters and setters
@@ -124,6 +125,7 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('PProvost/vim-markdown-jekyll', {'for': ['html', 'hbs']})
     " Colors Themes
     call dein#add('chriskempson/base16-vim')
+    call dein#add('Soares/base16.nvim')
 
     call dein#end()
     call dein#save_state()
@@ -195,31 +197,14 @@ let g:deoplete#sources#clang#clang_header="/usr/lib/clang"
 
 " }}}
 
-" --------[ Syntastic Options ]---------------- {{{
+" --------[ Neomake ]-------------------------- {{{
 
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-let g:Syntastic_quiet_messages = { "type": "style" }
-
-let g:syntastic_cpp_compiler = 'g++'
-let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++ -Wall -Wextra -Wpedantic'
-
-let b:syntastic_cpp_cflags = 'I/usr/include/libsoup-2.4'
-let b:Syntastic_cpp_compiler_options = ' -std=c++0x'
-let syntastic_cpp_checkers=[ 'gcc', 'make' ]
-let Syntastic_cpp_include_dirs = [ 'Syntastic_cpp_remove_include_errorsdes', 'headers' ]
-"let g:syntastic_c_compiler_options = 'ansi -DMACRO_NAME'
-"let g:Syntastic_cpp_remove_include_errors = 1
-let g:syntastic_cpp_check_header = 1
-
-" }}}
+" When writing a buffer.
+call neomake#configure#automake('w')
+" When writing a buffer, and on normal mode changes (after 1s).
+"call neomake#configure#automake('nw', 1000)
+" When reading a buffer (after 750ms), and when writing.
+"call neomake#configure#automake('rw', 750)
 
 " --------[ Language specific ]---------------- {{{
 
@@ -357,6 +342,7 @@ let g:rspec_command = "Dispatch rspec {spec}"
 " }}}
 
 " -------- [ Rainbow setup ]-------------------------------- {{{
+syntax on
 let g:rainbow_active = 1
 
 let g:rainbow_load_separately = [
@@ -421,6 +407,7 @@ let g:livedown_port = 1337
 map <leader>gm :call LivedownPreview()<CR>
 " }}}
 " eclim, Run Checkstyle on open/write {{{
+"set rtp^=/usr/share/vim/vimfiles/
 autocmd BufWinEnter *.java :Checkstyle
 autocmd BufWritePost *.java :Checkstyle
 let g:EclimCompletionMethod = 'omnifunc'
@@ -452,6 +439,36 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 "  }}}
 
 " }}}
+
+" --------[ Vim-Multiple-Cursors ]---------- {{{
+
+" Default mapping
+"let g:multi_cursor_next_key='<C-n>'
+"let g:multi_cursor_prev_key='<C-p>'
+"let g:multi_cursor_skip_key='<C-x>'
+"let g:multi_cursor_quit_key='<Esc>'
+
+" Called once right before you start selecting multiple cursors
+function! Multiple_cursors_before()
+  if exists(':NeoCompleteLock')==2
+    exe 'NeoCompleteLock'
+  endif
+endfunction
+
+" Called once only when the multiple selection is canceled (default <Esc>)
+function! Multiple_cursors_after()
+  if exists(':NeoCompleteUnlock')==2
+    exe 'NeoCompleteUnlock'
+  endif
+endfunction
+
+" Default highlighting
+highlight multiple_cursors_cursor term=reverse cterm=reverse gui=reverse
+highlight link multiple_cursors_visual Visual
+
+" }}}
+
+"  }}}
 
 " }}}
 
@@ -524,7 +541,9 @@ if filereadable(expand("~/.vimrc_background"))
 endif
 
 autocmd BufEnter * hi! Normal ctermbg=NONE | hi LineNr ctermbg=NONE | hi CursorLine cterm=underline ctermbg=NONE
+
 set background=light
+let g:base16_transparent_background = 1
 
 " ------[ code folding ]------
 command! -nargs=+ Foldsearch exe "normal /".<q-args>."^M" | setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\|\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2

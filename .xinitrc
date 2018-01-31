@@ -56,6 +56,16 @@ fi
 
 #xscreensaver &
 #xsetroot -cursor_name left_ptr &
-xcompmgr &
+#xcompmgr &
 
-exec awesome
+# Default
+session=${1:-i3}
+
+case $session in
+    i3|i3wm           ) exec i3;;
+    awesome	      ) exec awesome;;
+    kde               ) exec startkde;;
+    xfce|xfce4        ) exec startxfce4;;
+    # No known session, try to run it as command
+    *                 ) exec $1;;
+esac
