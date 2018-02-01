@@ -61,13 +61,16 @@ alias tmux200="tmux new -s A200 -c /home/ryanm/batcave/C++/A200"
 
 alias vim="nvim"
 
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+
 # For Base16 256colors
 BASE16_SHELL_SET_BACKGROUND=false
 BASE16_SHELL=$HOME/.base16-manager/chriskempson/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
 # For The Fuck
-#eval "$(thefuck --alias)"
+eval "$(thefuck --alias)"
 # You can use whatever you want as an alias, like for Mondays:
 #eval "$(thefuck --alias FUCK)"
 

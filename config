@@ -200,5 +200,5 @@ bindsys $mod+Down exec playerctl pause
 bindsys $mod-Left exec playerctl previous
 bindsys $mod-Right exec playerctl next
 
-exec_always feh --bg-scale /usr/share/awesome/themes/arch/zelda_arch.png
+exec_always feh --bg-scale /home/ryanm/.config/i3/zelda_arch.png
 exec --no-startup-id nm-applet
