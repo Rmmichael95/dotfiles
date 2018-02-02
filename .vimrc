@@ -93,8 +93,7 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('jgdavey/tslime.vim')
     call dein#add('qpkorr/vim-bufkill')
     call dein#add('mhinz/vim-startify')  " Cool startpage for vim
-    call dein#add('oblitum/rainbow')
-    "call dein#add('kien/rainbow_parentheses.vim')
+    call dein#add('luochen1990/rainbow')
     call dein#add('editorconfig/editorconfig-vim')
     call dein#add('terryma/vim-multiple-cursors')
     call dein#add('chrisbra/NrrwRgn')
@@ -386,7 +385,8 @@ let g:rainbow_load_separately = [
             \ [ '*.{html,htm}' , [['(', ')'], ['\[', '\]'], ['{', '}'], ['<\a[^>]*>', '</[^>]*>']] ],
             \ ]
 
-au FileType c,cpp,h,objc,objcpp,python,java,javascript call rainbow#load()
+"au FileType c,cpp,h,objc,objcpp,python,java,javascript call rainbow#load()
+au VimEnter call rainbow#load()
 let g:rainbow_conf = {
             \   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
             \   'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
@@ -409,35 +409,6 @@ let g:rainbow_conf = {
             \       'css': 0,
             \   }
             \}
-
-au VimEnter * RainbowLoad
-
-" let g:rbpt_colorpairs = [
-"     \ ['brown',       'RoyalBlue3'],
-"     \ ['Darkblue',    'SeaGreen3'],
-"     \ ['darkgray',    'DarkOrchid3'],
-"     \ ['darkgreen',   'firebrick3'],
-"     \ ['darkcyan',    'RoyalBlue3'],
-"     \ ['darkred',     'SeaGreen3'],
-"     \ ['darkmagenta', 'DarkOrchid3'],
-"     \ ['brown',       'firebrick3'],
-"     \ ['gray',        'RoyalBlue3'],
-"     \ ['black',       'SeaGreen3'],
-"     \ ['darkmagenta', 'DarkOrchid3'],
-"     \ ['Darkblue',    'firebrick3'],
-"     \ ['darkgreen',   'RoyalBlue3'],
-"     \ ['darkcyan',    'SeaGreen3'],
-"     \ ['darkred',     'DarkOrchid3'],
-"     \ ['red',         'firebrick3'],
-"     \ ]
-
-" let g:rbpt_max = 16
-" let g:rbpt_loadcmd_toggle = 0
-
-" au VimEnter * RainbowParenthesesToggleAll
-" au Syntax * RainbowParenthesesLoadRound
-" au Syntax * RainbowParenthesesLoadSquare
-" au Syntax * RainbowParenthesesLoadBraces
 
 " }}}
 
