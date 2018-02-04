@@ -32,18 +32,19 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('Shougo/dein.vim')
     call dein#add('Shougo/deoplete.nvim')
     call dein#add('zchee/deoplete-clang')
+    call dein#add('Shougo/neco-vim')
     call dein#add('zchee/libclang-python3')
     call dein#add('Shougo/neoinclude.vim')
     call dein#add('artur-shaik/vim-javacomplete2')
     call dein#add('zchee/deoplete-jedi')
     call dein#add('davidhalter/jedi')
+    call dein#add('starcraftman/vim-eclim')
     call dein#add('Shougo/vimproc.vim', {
                 \ 'build' : {
                 \     'linux' : 'make',
                 \     'unix' : 'gmake',
                 \    },
                 \ })
-    call dein#add('Shougo/vimshell.vim')
     call dein#add('Shougo/neomru.vim')
     call dein#add('Shougo/unite.vim')
     call dein#add('tpope/vim-endwise')
@@ -62,8 +63,6 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('LucHermitte/lh-dev')
     call dein#add('LucHermitte/lh-brackets')
     call dein#add('LucHermitte/vim-refactor')
-    "call dein#add('zowens/vim-eclim')
-    "call dein#add('JulioJu/Eclim-for-Neovim')
     call dein#add('dbgx/lldb.nvim')
     call dein#add('godlygeek/tabular')
     call dein#add('majutsushi/tagbar') " taskbar with indexed ctags
@@ -108,6 +107,7 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('derekwyatt/vim-protodef', { 'for': ['cpp', 'c', 'h'] })  " Parsing c++ .h files
     call dein#add('derekwyatt/vim-fswitch', { 'for': ['cpp', 'c'] })  " better switching between files
     call dein#add('vim-scripts/DoxygenToolkit.vim')
+    call dein#add('sakhnik/nvim-gdb')
     " Ctag auto generate
     call dein#add('szw/vim-tags')
     call dein#add('vim-scripts/cscope.vim')
@@ -129,7 +129,6 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add("tpope/vim-bundler")
     call dein#add("slim-template/vim-slim")
     call dein#add("tpope/vim-haml")
-
     " Web
     call dein#add('othree/html5.vim', { 'for': ['html', 'html.handlebars'] })
     call dein#add('cakebaker/scss-syntax.vim', {'for': ['less', 'scss', 'sass']})
@@ -193,8 +192,12 @@ autocmd BufRead,BufNewFile *.md,*.markdown setlocal filetype=pandoc.markdown \" 
 " Python
 autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
 autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+
+" nvim-gdb
+"let g:loaded_nvimgdb = 1 " 1 to disable
+
 " for debugging pyclewn
-let pyclewn_args="--terminal='tmux,split-window'" " open tmux split to interact with debugee
+"let pyclewn_args="--terminal='tmux,split-window'" " open tmux split to interact with debugee
 "let g:pyclewn_python =
 
 " }}}
@@ -662,18 +665,18 @@ vnoremap > >gv
 " :cd. change working directory to that of the current file
 cmap cd. lcd %:p:h
 
-" map leader p to start Pyclewn, leader o to set up the debugging enviernment
+" " map leader p to start Pyclewn, leader o to set up the debugging enviernment
 " map <leader>p :Pyclewn gdb <cr>
 " map <leader>o :Cinferiortty \| :Cmapkeys \| :Cfile main <cr>
 
 " lldb mapping
-map <leader>o :LLsession new<CR>
-map <leader>p :LLmode debug<CR>
-map <leader>l :LLmode code<CR>
-nmap <leader>f  <Plug>LLBreakSwitch
-map <leader>c :LL continue<CR>
-map <leader>m :LL step<CR>
-map <leader>n :LL next<CR>
+map <leader>O :LLsession new<CR>
+map <leader>P :LLmode debug<CR>
+map <leader>L :LLmode code<CR>
+nmap <leader>F  <Plug>LLBreakSwitch
+map <leader>C :LL continue<CR>
+map <leader>M :LL step<CR>
+map <leader>N :LL next<CR>
 " color break symbol
 hi LLBreakpointSign ctermfg=cyan
 " vmap <F2> <Plug>LLStdInSelected
@@ -707,6 +710,18 @@ endif
 " --------[ Language specific ]--------
 
 " C++
+" nvim gdbmappings
+let g:nvimgdb_key_continue = "<leader>c"
+let g:nvimgdb_key_next = "<leader>n"
+let g:nvimgdb_key_step = "<leader>s"
+let g:nvimgdb_key_finish = "<leader>f"
+let g:nvimgdb_key_breakpoint = "<leader>b"
+let g:nvimgdb_key_frameup = "<leader>u"
+let g:nvimgdb_key_framedown = "<leader>d"
+let g:nvimgdb_key_eval = "<leader>e"
+let g:nvimgdb_key_watch = "<leader>w"
+
+
 " ,g generates the header guard
 map <leader>g :call IncludeGuard()<CR> " func in other section
 map <leader>h :call IncHeader()<CR>

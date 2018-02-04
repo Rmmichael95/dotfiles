@@ -49,12 +49,11 @@ ZSH_THEME="ys"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(archlinux gem git github perl pip python ruby rvm sudo terminator tmux vi-mode zsh-syntax-highlighting zsh-url-highlighter)
+plugins=(archlinux gem git github perl pip python ruby rvm sudo tmux vi-mode fast-syntax-highlighting url)
 
 # ===========[ User configuration ]========================================= {{{
 
-# Load screenfetch on terminal start
-screenfetch # Display system/terminal info
+#screenfetch # Display system/terminal info
 
 alias tmux250="tmux new -s A250 -c /home/ryanm/batcave/C++/A250"
 alias tmux200="tmux new -s A200 -c /home/ryanm/batcave/C++/A200"
