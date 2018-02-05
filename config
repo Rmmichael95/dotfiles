@@ -199,6 +199,9 @@ bindsys $mod+Up exec playerctl play
 bindsys $mod+Down exec playerctl pause
 bindsys $mod-Left exec playerctl previous
 bindsys $mod-Right exec playerctl next
+bindsym Print exec scrot $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png
+bindsym $mod+Print exec scrot -u $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png
+bindsym $mod+Shift+p exec scrot $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png
 
 exec_always feh --bg-scale /home/ryanm/.config/i3/zelda_arch.png
 exec --no-startup-id nm-applet

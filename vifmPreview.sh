@@ -2,7 +2,7 @@
 #
 # Based on script by z3bra -- 2014-01-21
  
-W3MIMGDISPLAY="/usr/libexec/w3m/w3mimgdisplay"
+W3MIMGDISPLAY="/usr/lib/w3m/w3mimgdisplay"
 FONTH=15 # Size of one terminal row
 FONTW=7 # Size of one terminal column
  
