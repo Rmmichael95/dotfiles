@@ -1,10 +1,8 @@
 " Maintainer: Ryan M Sullivan
 " Last Change: February 5, 2018
-
 " ------------------------------------------------------------------------------
 " Vim Configuration
 " ------------------------------------------------------------------------ " {{{
-
 " ========{ Plugins }===================================================== " {{{
 
 if has('nvim')
@@ -41,6 +39,7 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('radenling/vim-dispatch-neovim') " dispatch nvim support
     call dein#add('tpope/vim-fugitive') " for help with c tags and git/buffer handling ...
     call dein#add('tpope/vim-surround')
+    call dein#add('tpope/vim-sensible')
     call dein#add('jiangmiao/auto-pairs')
     call dein#add('neomake/neomake')
     call dein#add('godlygeek/tabular')
@@ -49,7 +48,7 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('christoomey/vim-tmux-navigator') " Unified tmix pane vim split navigation
     call dein#add('easymotion/vim-easymotion')
     call dein#add('wincent/ferret')
-    call dein#add('mileszs/ack.vim')
+    "call dein#add('mileszs/ack.vim')
     " Colors Themes
     call dein#add('chriskempson/base16-vim')
     call dein#add('Soares/base16.nvim')
@@ -72,21 +71,22 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('dhruvasagar/vim-table-mode')
     call dein#add('vim-airline/vim-airline')
     call dein#add('vim-airline/vim-airline-themes')
+    call dein#add('raghur/vim-ghost')
     call dein#add('Shougo/vimproc.vim', {'build':'make'})
     call dein#add('wincent/command-t', {
-		\ 'build':
-		\      'sh -c "cd ruby/command-t && ruby extconf.rb && make"'
-        \ })
+                \ 'build':
+                \      'sh -c "cd ruby/command-t && ruby extconf.rb && make"'
+                \ })
     call dein#add('mbbill/undotree', {'on_cmd': 'UndotreeToggle'})
     call dein#add('scrooloose/nerdtree', {'on_cmd':['NERDTreeToggle','NERDTreeFind']})
     call dein#add('Xuyuanp/nerdtree-git-plugin', {'on_cmd':['<Plug>NERDTreeToggle','<Plug>NERDTreeFind']})
     call dein#add('zhaocai/GoldenView.Vim', {'on_cmd':'<Plug>ToggleGoldenViewAutoResize'})
-    call dein#add('thoughtbot/vim-rspec', {'on_ft':['ruby','rb']})
+    call dein#add('thoughtbot/vim-rspec', {'on_func':['RunCurrentSpecFile','RunNearestSpec', 'RunAllSpecs', 'RunLastSpec']})
     " Groovy
     call dein#add('vim-scripts/groovy.vim', {'on_ft':['groovy']})
     " Gradle
     call dein#add('tfnico/vim-gradle', {'on_ft':['gradle']})
-       " Java
+    " Java
     call dein#add('Dinduks/vim-java-get-set', {'on_ft':['java']}) " Generate java getters and setters
     " C++
     call dein#add('octol/vim-cpp-enhanced-highlight', {'on_ft':['cpp', 'c', 'h']})
@@ -102,9 +102,8 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('LucHermitte/lh-dev', {'on_ft':['cpp', 'c']})
     call dein#add('LucHermitte/lh-brackets', {'on_ft':['cpp', 'c']})
     call dein#add('LucHermitte/vim-refactor', {'on_ft':['cpp', 'c']})
-    "call dein#add('sakhnik/nvim-gdb', {'on_ft':['cpp', 'c']})
     call dein#add('huawenyu/neogdb.vim', {'on_ft':['cpp', 'c']})
-    call dein#add('dbgx/lldb.nvim', {'on_ft':['cpp', 'c']})
+    "call dein#add('dbgx/lldb.nvim', {'on_ft':['cpp', 'c']})
     " Cscope
     call dein#add('vim-scripts/cscope.vim', {'on_ft':['cpp', 'c']})
     call dein#add('JCLiang/vim-cscope-utils', {'on_ft':['cpp', 'c']})
@@ -142,7 +141,6 @@ filetype plugin indent on
 syntax enable
 
 " }}}
-
 " --------[ Plugin Settings ]----------------------------------------------- {{{
 "
 " auto install new plugins
@@ -150,20 +148,16 @@ if dein#check_install()
     call dein#install()
 endi
 
-set rtp+=/home/ryanm/.nvim/bundles/repos/github.com/dbgx/lldb.nvim
+"set rtp+=/home/ryanm/.nvim/bundles/repos/github.com/dbgx/lldb.nvim
 
 " --------[ General Plugin Settings ]---------- {{{
-
 " Gitgutter setup
 let g:gitgutter_realtime=0
-
 " }}}
 " --------[ Language specific ]---------------- {{{
-
 " C-support
 let  g:C_UseTool_cmake    = 'yes'
 let  g:C_UseTool_doxygen = 'yes'
-
 " Doxygen
 let g:DoxygenToolkit_briefTag_pre="@Synopsis"
 let g:DoxygenToolkit_paramTag_pre="@Param"
@@ -172,34 +166,21 @@ let g:DoxygenToolkit_blockHeader="----------------------------------------------
 let g:DoxygenToolkit_blockFooter="--------------------------------------------------------------------------"
 let g:DoxygenToolkit_authorName="Ryan M Sullivan"
 let g:DoxygenToolkit_licenseTag="My license"
-
 " Markdown                                                                   \/ added this
 autocmd BufRead,BufNewFile *.md,*.markdown setlocal filetype=pandoc.markdown \" Automatically set filetype for Markdown files"
-
 " Python
 autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
 autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
-
-" nvim-gdb
-"let g:loaded_nvimgdb = 1 " 1 to disable
-
-" for debugging pyclewn
-"let pyclewn_args="--terminal='tmux,split-window'" " open tmux split to interact with debugee
-"let g:pyclewn_python =
-
 " }}}
 " --------[ Ctags ]---------------------------- {{{
 let g:vim_tags_auto_generate = 0
 let g:vim_tags_use_language_field = 1
 let g:vim_tags_main_file = 'tags'
-
 " lh-tags
-
-
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
 au BufWritePost *.c,*.cpp,*.h silent! !ctags -R &
-
+" }}}
 " --------[ Cscope ]--------------------------- {{{
 " s: Find this C symbol
 nnoremap  <leader>fs :call cscope#find('s', expand('<cword>'))<CR>
@@ -217,40 +198,28 @@ nnoremap  <leader>fe :call cscope#find('e', expand('<cword>'))<CR>
 nnoremap  <leader>ff :call cscope#find('f', expand('<cword>'))<CR>
 " i: Find files #including this file
 nnoremap  <leader>fi :call cscope#find('i', expand('<cword>'))<CR>
-
-"  }}}
-
 " }}}
 " --------[ Deoplete ]---------------------- {{{
-
 set rtp+=/home/ryanm/repos/github.com/Shougo/deoplete.nvim/
 let g:deoplete#enable_at_startup = 1
-
 " c++
 let g:deoplete#sources#clang#libclang_path="/usr/lib/libclang.so"
 let g:deoplete#sources#clang#clang_header="/usr/lib/clang"
-
-
 " }}}
 " --------[ Neomake ]-------------------------- {{{
-
 " When writing a buffer.
 call neomake#configure#automake('w')
 " When writing a buffer, and on normal mode changes (after 1s).
 "call neomake#configure#automake('nw', 1000)
 " When reading a buffer (after 750ms), and when writing.
 "call neomake#configure#automake('rw', 750)
-
 " }}}
 " --------[ Undotree setup ]----------------------- {{{
-
 " let g:undotree_WindowLayout='botright'
 let g:undotree_SetFocusWhenToggle=1
 nnoremap <silent> <F5> :UndotreeToggle<CR>
-
 " }}}
 " --------[ NERDTree setup ]------------------------ {{{
-
 let NERDTreeShowHidden=0
 let NERDTreeQuitOnOpen=0
 let g:NERDTreeUseSimpleIndicator=1
@@ -261,10 +230,8 @@ let NERDTreeIgnore=['\.hg', '.DS_Store']
 "let NERDTreeBookmarksFile=expand(g:vimDir.'/.cache/NERDTree/NERDTreeBookmarks')
 nnoremap <F2> :NERDTreeToggle<CR>
 "nnoremap <F3> :NERDTreeFind<CR>
-
 " }}}
 " --------[ Unite setup ]----------------- {{{
-
 "let g:unite_data_directory=g:vimDir.'/.cache/unite'
 let g:unite_enable_start_insert=1
 let g:unite_source_history_yank_enable=1
@@ -286,43 +253,34 @@ function! s:unite_settings()
 endfunction
 
 autocmd FileType unite call s:unite_settings()
-
 " Set Unite leader
 nmap <space> [unite]
 nnoremap [unite] <nop>
-
 " Set useful Unite mappings
 nnoremap <silent> [unite]t :<C-u>Unite -auto-resize -buffer-name=files file<cr>
 nnoremap <silent> [unite]y :<C-u>Unite -auto-resize -buffer-name=yanks history/yank<cr>
 nnoremap <silent> [unite]l :<C-u>Unite -auto-resize -buffer-name=line line<cr>
 nnoremap <silent> [unite]b :<C-u>Unite -auto-resize -buffer-name=buffers buffer<cr>
 nnoremap <silent> [unite]m :<C-u>Unite -auto-resize -buffer-name=mappings mapping<cr>
-
 " }}}
 " --------[ GoldenView setup ]--------------------- {{{
-
 let g:goldenview__enable_default_mapping=0
 nmap <F4> <Plug>ToggleGoldenViewAutoResize
-
 " }}}
 " --------[ UltiSnips setup ]---------------------- {{{
 let g:UltiSnipsExpandTrigger='<c-e>'
 let g:UltiSnipsJumpForwardTrigger='<c-j>'
 let g:UltiSnipsJumpBackwardTrigger='<c-k>'
 "let g:UltiSnipsSnippetsDir=plugDir.'/vim-snippets/UltiSnips'
-
 " }}}
 " --------[ RSpec.vim mappings ]----------------------- {{{
 map <Leader>rs :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
-
 let g:rspec_command = "Dispatch rspec {spec}"
-
 " }}}
 "--------[ Startify Configuration ]---------------------- {{{
-
 "|g:autoloaded_startify|
 "g:startify_bookmarks|
 "g:startify_change_to_dir|
@@ -345,13 +303,11 @@ let g:rspec_command = "Dispatch rspec {spec}"
 "g:startify_session_savevars|
 "g:startify_skiplist_server|
 "g:startify_skiplist|
-
 "Vim Startify setup
 "let g:startify_session_dir = g:vimDir.'/.cache/sessions'
 "let g:startify_change_to_vcs_root = 1
 "let g:startify_show_sessions = 1
 "nnoremap <F1> :Startify<cr>
-
 " }}}
 " ------- [ Rainbow setup ]-------------------------------- {{{
 syntax on
@@ -388,10 +344,8 @@ let g:rainbow_conf = {
             \       'css': 0,
             \   }
             \}
-
 " }}}
 " --------[ Tabularize setup ]---------------------- {{{
-
 nmap <Leader>a& :Tabularize /&<CR>
 vmap <Leader>a& :Tabularize /&<CR>
 nmap <Leader>a= :Tabularize /=<CR>
@@ -404,40 +358,32 @@ nmap <Leader>a, :Tabularize /,<CR>
 vmap <Leader>a, :Tabularize /,<CR>
 nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-
 " }}}
 " --------[ Pandoc setup ]-------------------------- {{{
-
 let g:pandoc_use_conceal = 1
 let g:pandoc_syntax_dont_use_conceal_for_rules = ['block', 'codeblock_start', 'codeblock_delim']
 let g:pandoc_syntax_user_cchars = {'li': '*'}
 let g:pantondoc_use_pandoc_markdown = 1
 "let g:pandoc#formatting#equalprg = \"pandoc -t markdown --no-wrap --atx-headers"
-
 " }}}
 " --------[ Livedown setup ]----------------------- {{{
-
 let g:livedown_autorun = 0
 let g:livedown_open = 1
 let g:livedown_port = 1337
 map <leader>gm :call LivedownPreview()<CR>
-
 " }}}
 " --------[ eclim ]-------------------------------- {{{
-
 "Run Checkstyle on open/write
 set rtp^=/usr/share/vim/vimfiles/
 autocmd BufWinEnter *.java :Checkstyle
 autocmd BufWritePost *.java :Checkstyle
 let g:EclimCompletionMethod = 'omnifunc'
-
 " }}}
 " --------[ Neobugger ]---------------------------------------- {{{
-
 function! NeogdbvimNmapCallback()
     " Let fzf.vim open files in the current window by default.
     " This is so that, when navigating files,
-    " we don't switch to a new tab and thus *always* see the neogdb's splits. 
+    " we don't switch to a new tab and thus *always* see the neogdb's splits.
     let g:fzf_action = { 'enter': 'edit' }
 endfunc
 
@@ -447,17 +393,15 @@ function! NeogdbvimUnmapCallback()
     let g:fzf_action = { 'enter': 'tabnew' }
 endfunc
 
+let g:neogdb_window = ['backtrace', 'breakpoint']
 " }}}
 " --------[ Gruvbox setup ]--------------------- {{{
-
 let g:gruvbox_bold = 0
 if !has("gui_running")
     let g:gruvbox_italic = 0
 endif
-
 " }}}
 " --------[ Fugitive setup ]-------------------- {{{
-
 nnoremap <silent> <leader>gs :Gstatus<CR>
 nnoremap <silent> <leader>gd :Gdiff<CR>
 nnoremap <silent> <leader>gc :Gcommit<CR>
@@ -468,102 +412,94 @@ nnoremap <silent> <leader>gw :Gwrite<CR>
 nnoremap <silent> <leader>gr :Gremove<CR>
 autocmd FileType gitcommit nmap <buffer> U :Git checkout -- <C-r><C-g><CR>
 autocmd BufReadPost fugitive://* set bufhidden=delete
-
 " }}}
 " --------[ Vim-Multiple-Cursors ]---------- {{{
-
 " Default mapping
 "let g:multi_cursor_next_key='<C-n>'
 "let g:multi_cursor_prev_key='<C-p>'
 "let g:multi_cursor_skip_key='<C-x>'
 "let g:multi_cursor_quit_key='<Esc>'
-
 " Called once right before you start selecting multiple cursors
 function! Multiple_cursors_before()
-  if exists(':NeoCompleteLock')==2
-    exe 'NeoCompleteLock'
-  endif
+    if exists(':NeoCompleteLock')==2
+        exe 'NeoCompleteLock'
+    endif
 endfunction
-
 " Called once only when the multiple selection is canceled (default <Esc>)
 function! Multiple_cursors_after()
-  if exists(':NeoCompleteUnlock')==2
-    exe 'NeoCompleteUnlock'
-  endif
+    if exists(':NeoCompleteUnlock')==2
+        exe 'NeoCompleteUnlock'
+    endif
 endfunction
-
 " Default highlighting
 highlight multiple_cursors_cursor term=reverse cterm=reverse gui=reverse
 highlight link multiple_cursors_visual Visual
-
 " }}}
 " --------[ Airline ]---------------------- {{{
-
 let g:airline_theme='bubblegum'
-
 " }}}
 " --------[ Base16-Vim ]------------------- {{{
-
 " if filereadable(expand("~/.vimrc_background"))
 "     let base16colorspace=256
 "     source ~/.vimrc_background
 " endif
 
-
 autocmd BufEnter * hi! Normal ctermbg=NONE | hi LineNr ctermbg=NONE | hi CursorLine cterm=underline ctermbg=NONE
-
 set background=light
 let g:base16_transparent_background = 1
-
 " }}}
-
 " }}}
-
 " }}}
 " ========{ Formatting }================================================== " {{{
-
-set history=10000	" remember everything
-set t_Co=256        "256 color vim
-set number " Always turn on line numbers
-set ruler		    " show the cursor position all the time
-set showcmd		    " display incomplete commands
-set incsearch		" do incremental searching
-set autoread        " auto read when file changes from outside
-set listchars=tab:▸\ ,eol:¬
-set autoindent      " set autoindent
-set hidden
+set backup
+set backupskip=/tmp/*,/private/tmp/*",*.gpg
+set backupdir=~/.vim/tmp,/tmp
+set browsedir=buffer
+set directory=~/.vim/tmp,/tmp"
+set history=10000
+set mouse=a
+set number
+set ruler
+set showcmd
+set hlsearch
 set ignorecase
 set smartcase
 set showmatch
-set hlsearch
-set ls=2
-" allow backspacing over everything in insert mode
-set backspace=indent,eol,start
-set bs=2
-set spelllang=en_us   " Turn on spell check: English
+set autoindent
+set laststatus=2
+set hidden
+set spelllang=en_us
+set encoding=utf-8
+set termencoding=big5
+set fileencoding=utf-8
+set fileencodings=big5,utf-8
+set fileformat=unix
+set fileformats=unix,dos,mac
+set formatprg=par
 set cursorline
 set nowrap
 set completeopt -=preview
-set wildchar=<TAB>  " start wild expansion in the command line using <TAB>"
 set wildmenu
-set wildignore=*.o,*.class,*.pyc " ignore these files while expanding wild chars
+set wildchar=<TAB>
+set wildmode=list:longest,list:full
+set wildignore=*.o,*.class,*.pyc
 set noshowmode
 set cmdheight=1
-"s]et fileformat=unix  " unix file format
-"set nrformats-=octal " octal num format
-autocmd FileType perl set autoindent|set smartindent|syntax on " autoindent
+set visualbell t_vb=".
+set splitbelow
+set splitright
+set omnifunc=syntaxcomplete#Complete
+au FileType markdown,md,pandoc.markdown,doc set list lcs=tab:▸\ ,eol:¬
+au BufEnter init.vim set list lcs=tab:▸\ ,eol:¬
+autocmd FileType perl set autoindent|set smartindent|syntax on
 highlight LineNr ctermfg=grey " line number coloring
 let perl_include_pod = 1 " my perl includes pod
 let perl_extended_vars = 1 " syntax color complex things like @{${foo}}
 command! -nargs=+ Foldsearch exe "normal /".<q-args>."^M" | setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\|\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2
-set fdm=marker " for folds
-" autocmd InsertEnter * :bufdo e " reload buff on insert mode
-
+set fdm=marker
 " }}}
 " ========{ Basic UI Configuration }====================================== " {{{
-
 " --------[ Leaders ]---------------------------------------- {{{
-
 map Q gq " Don't use Ex mode, use Q for formatting
 let leader = "," " remap leader to z (from \)
 let g:leader = "," " remap leader to z (global)
@@ -572,37 +508,29 @@ let g:mapleader = "," " remap leader to z (global)
 set timeoutlen=2000
 set pastetoggle=<F3>
 map <leader>r :source ~/.config/nvim/init.vim<cr>
-
 " }}}
 " --------[ Mappings ]---------------------------------------- {{{
-
 " Navigate Vim Splits
 nnoremap <C-J> <C-W><C-J> "Ctrl-j to move down a split
 nnoremap <C-K> <C-W><C-K> "Ctrl-k to move up a split
 nnoremap <C-L> <C-W><C-L> "Ctrl-l to move    right a split
 nnoremap <C-H> <C-W><C-H> "Ctrl-h to move left a split
-
 " ,g generates the header guard
 map <leader>g :call IncludeGuard()<CR> " func in other section
 map <leader>h :call IncHeader()<CR>
-
 " new tab
 map <C-t><C-t> :tabnew<CR>
 " close tab
 map <C-t><C-w> :tabclose<CR>
-
 " Bash like keys for the command line
 cnoremap <C-A>      <Home>
 cnoremap <C-E>      <End>
 cnoremap <C-K> <C-U>
-
 " allow multiple indentation/deindentation in visual mode
 vnoremap < <gv
 vnoremap > >gv
-
 " :cd. change working directory to that of the current file
 cmap cd. lcd %:p:h
-
 "Max out the height of the current split
 "ctrl + w _
 "Max out the width of the current split
@@ -615,48 +543,29 @@ cmap cd. lcd %:p:h
 "Ctrl+W T
 "Close every window in the current tabview but the current one
 "Ctrl+W o
-
 " }}}
 " --------[ Plugin Maps ]------------------------------------------------ {{{
-
 "  dispatch
 nnoremap <F9> :Dispatch<CR>
 " fswitch
 nmap <silent> <leader>y :FSHere<cr>
 "nmap <buffer> <silent> <leader>PP " mapped in pluging
 
-
-"Open new split panes to right and bottom, which feels more natural than Vim’s default:
-set splitbelow
-set splitright
-
 " lldb mapping
-map <leader>O :LLsession new<CR>
-map <leader>P :LLmode debug<CR>
-map <leader>L :LLmode code<CR>
-nmap <leader>F  <Plug>LLBreakSwitch
-map <leader>C :LL continue<CR>
-map <leader>M :LL step<CR>
-map <leader>N :LL next<CR>
+" map <leader>O :LLsession new<CR>
+" map <leader>P :LLmode debug<CR>
+" map <leader>L :LLmode code<CR>
+" nmap <leader>F  <Plug>LLBreakSwitch
+" map <leader>C :LL continue<CR>
+" map <leader>M :LL step<CR>
+" map <leader>N :LL next<CR>
 " color break symbol
-hi LLBreakpointSign ctermfg=cyan
+"hi LLBreakpointSign ctermfg=cyan
 " vmap <F2> <Plug>LLStdInSelected
 " nnoremap <F4> :LLstdin<CR>
 " nnoremap <S-F8> :LL process interrupt<CR>
 " nnoremap <F9> :LL print <C-R>=expand('<cword>')<CR>
 " vnoremap <F9> :<C-U>LL print <C-R>=lldb#util#get_selection()<CR><CR>
-
-" C++
-" nvim gdbmappings
-" let g:nvimgdb_key_continue = "<leader>c"
-" let g:nvimgdb_key_next = "<leader>n"
-" let g:nvimgdb_key_step = "<leader>s"
-" let g:nvimgdb_key_finish = "<leader>N"
-" let g:nvimgdb_key_breakpoint = "<leader>b"
-" let g:nvimgdb_key_frameup = "<leader>u"
-" let g:nvimgdb_key_framedown = "<leader>d"
-" let g:nvimgdb_key_eval = "<leader>e"
-" let g:nvimgdb_key_watch = "<leader>w"
 
 " let g:neobugger_leader = ';'
 let g:gdb_keymap_continue = '<leader>c'
@@ -669,12 +578,9 @@ let g:gdb_keymap_frame_up = '<leader>u'
 let g:gdb_keymap_frame_down = '<leader>d'
 let g:gdb_keymap_clear_break = '<leader>W'
 let g:gdb_keymap_debug_stop = '<leader>z'
-
 " }}}
 " --------[ Commands ]-------------------------------------{{{
-
 autocmd! bufwritepost init.vim source ~/.config/nvim/init.vim " auto reload vimrc when editing it
-
 " Enable omni completion. (Ctrl-X Ctrl-O)
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
@@ -685,41 +591,24 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 autocmd FileType java set omnifunc=javacomplete#Complete
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
-" use syntax complete if nothing else available
-if has("autocmd") && exists("+omnifunc")
-    autocmd Filetype *
-                \	if &omnifunc == "" |
-                \		setlocal omnifunc=syntaxcomplete#Complete |
-                \	endif
-endif
-
 set cot-=preview "disable doc preview in omnicomplete
-
 " make CSS omnicompletion work for SASS and SCSS
 autocmd BufNewFile,BufRead *.scss             set ft=scss.css
 autocmd BufNewFile,BufRead *.sass             set ft=sass.css
-
 " Notes
 let g:notes_dir = "/home/ryanm/Documents/Notes"
-
-
 " }}}
-
 " }}}
 " ========{ Vim Script Functions }======================================== " {{{
-
-" -------[ Make the 81st column stand out ]--------------------------- {{{
+" --------[ Make the 81st column stand out ]--------------------------- {{{
 "  " OR ELSE just the 81st column of wide lines...
 highlight ColorColumn ctermbg=167
 call matchadd('ColorColumn', '\%81v', 100)
-
 " }}}
 " --------[ Highlight matches when jumping to next ]------------------- {{{
-
 " This rewires n and N to do the highlighing...
 "nnoremap <silent> n   n:call HLNext(0.4)<cr>
 "nnoremap <silent> N   N:call HLNext(0.4)<cr>
-
 " OR ELSE just highlight the match in gold...
 fun! HLNext (blinktime)
     let [bufnum, lnum, col, off] = getpos('.')
@@ -731,7 +620,6 @@ fun! HLNext (blinktime)
     call matchdelete(ring)
     redraw
 endfun
-
 " }}}
 " --------[ Always turn on syntax highlighting for diffs ]------------------ {{{
 " EITHER select by the file-suffix directly...
@@ -739,17 +627,14 @@ augroup PatchDiffHighlight
     autocmd!
     autocmd BufEnter  *.patch,*.rej,*.diff   syntax enable
 augroup END
-
 " OR ELSE use the filetype mechanism to select automatically...
 filetype on
 augroup PatchDiffHighlight
     autocmd!
     autocmd FileType diff   syntax enable
 augroup END
-
 " }}}
-" ------[ Open file with existing swp in readonly mode ]--------- {{{
-
+" --------[ Open file with existing swp in readonly mode ]--------- {{{
 augroup NoSimultaneousEdits
     autocmd!
     autocmd SwapExists * let v:swapchoice = 'o'
@@ -758,10 +643,8 @@ augroup NoSimultaneousEdits
     autocmd SwapExists * echohl None
     autocmd SwapExists * sleep 2
 augroup END
-
 " }}}
 " ------- [ generate header guard ]---------------------------------------- {{{
-
 fun! IncludeGuard()
     let basename = substitute(bufname(""), '.*/', '', '')
     let guard = '_' . substitute(toupper(basename), '\.', '_', "H")
@@ -769,10 +652,8 @@ fun! IncludeGuard()
     call append(1, "#define " . guard)
     call append(line("$"), "#endif // for #ifndef " . guard)
 endfun
-
 " }}}
 " --------[ IncHeader ]-------------------------------------------------- {{{
-
 fun! IncHeader()
     let date = strftime("%B %d, %Y")
     call append(0, "" . "")
@@ -785,9 +666,8 @@ fun! IncHeader()
     call append(6, " * " . "Lab ")
     call append(7, " */" . "")
 endfun
-
 " }}}
-" -------- [ file Encoding ]-------------------------------------------- {{{
+" ------- [ file Encoding ]-------------------------------------------- {{{
 fun! ViewUTF8()
     set encoding=utf-8
     set termencoding=big5
@@ -804,9 +684,6 @@ fun! Big5()
     set encoding=big5
     set fileencoding=big5
 endfun
-
 " }}}
-
 " }}}
-
 " }}}
