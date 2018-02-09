@@ -57,8 +57,13 @@ plugins=(archlinux gem git github perl pip python ruby rvm sudo tmux vi-mode fas
 
 alias tmux250="tmux -u new -s A250 -c /home/ryanm/batcave/C++/A250"
 alias tmux200="tmux -u new -s A200 -c /home/ryanm/batcave/C++/A200"
-alias tmux='tmux -u'
+alias tmux="tmux -u"
 alias vim="nvim"
+alias vimrc="nvim ~/.vimrc"
+alias zshrc="nvim ~/.zshrc"
+alias tmuxconf="nvim ~/.tmux.conf"
+alias i3conf="nvim ~/.config/i3/config"
+alias termconf="nvim ~/.config/termite/config"
 
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
@@ -68,10 +73,9 @@ BASE16_SHELL_SET_BACKGROUND=false
 BASE16_SHELL=$HOME/.base16-manager/chriskempson/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
-# For The Fuck
-eval "$(thefuck --alias)"
 # You can use whatever you want as an alias, like for Mondays:
 #eval "$(thefuck --alias FUCK)"
+eval "$(thefuck --alias)"
 
 # Let zsh be in vi mode
 bindkey -v
@@ -82,6 +86,7 @@ bindkey '^?' backward-delete-char
 bindkey '^h' backward-delete-char
 bindkey '^w' backward-kill-word
 bindkey '^r' history-incremental-search-backward
+bindkey '^o' open-notes-vim
 
 function zle-line-init zle-keymap-select {
     VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
@@ -89,10 +94,16 @@ function zle-line-init zle-keymap-select {
     zle reset-prompt
 }
 
+open-notes-vim() nvim $NOTES_DIR/$SEMESTER
+zle -N open-notes-vim
 zle -N zle-line-init
 zle -N zle-keymap-select
 export KEYTIMEOUT=1
 
+export EDITOR=nvim
+export SEMESTER=Spring18
+export NOTES_DIR="/home/ryanm/Documents/Notes/OCC"
+export TODO_DIR='/home/ryanm/Documents/Notes'
 # }}}
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/ryanm/GOG_Games/:/home/ryanm/android/sdks/platform-tools/:/home/ryanm/android/sdks/tools/:/home/ryanm/genymotion/:/usr/local/go/bin/:/opt/eclipse/:/opt/android-studio/bin:/opt/kaku-linux64/"
@@ -120,7 +131,3 @@ source $ZSH/oh-my-zsh.sh
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
