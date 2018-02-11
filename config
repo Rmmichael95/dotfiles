@@ -30,7 +30,7 @@ font ubuntu:monospace 12
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec termite
+bindsym $mod+Return exec st
 
 # kill focused window
 bindsym $mod+x kill
@@ -95,6 +95,7 @@ bindsym $mod+a focus parent
 set $workspace1 "1: Browser"
 set $workspace2 "2: Work"
 set $workspace3 "3: Overflow"
+set $workspace10 "10: Gaming"
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -106,7 +107,7 @@ bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+0 workspace $workspace10
 
 
 # move focused container to workspace
@@ -119,10 +120,11 @@ bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+0 move container to workspace $workspace10
 
 assign [class="Navigator"] $workspace1
-assign [class="Firefox"] $workspace1
+assign [class="steam"] $workspace10
+
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -203,5 +205,5 @@ bindsym Print exec scrot $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.pn
 bindsym $mod+Print exec scrot -u $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png
 bindsym $mod+Shift+p exec scrot $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png
 
-exec_always feh --bg-scale /home/ryanm/.config/i3/zelda_arch.png
+exec_always feh --bg-scale /home/ryanm/.config/i3/FF-Void.png
 exec --no-startup-id nm-applet

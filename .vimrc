@@ -750,10 +750,11 @@ autocmd FileType txt  let b:deoplete_disable_auto_complete = 1
 autocmd FileType tex  let b:deoplete_disable_auto_complete = 1
 augroup markdown
    au!
-   au BufNewFile,BufRead,BufWrite *.txt,*.md,*.mkd,*.markdown,*.mdwn setl ft=markdown
+   au BufNewFile,BufRead,BufWrite *.txt,*.md,*.mkd,*.markdown,*.mdwn setl ft=rmd
    au BufRead,BufNewFile,BufEnter   $NOTES_DIR/*/*.txt let &complete="$NOTES_DIR/**/*.txt"
    au BufRead,BufNewFile,BufEnter   $NOTES_DIR/*/*.txt lcd %:h
    au BufRead,BufWrite,InsertChange $NOTES_DIR/*/*.txt syn match ErrorMsg '\%>77v.\+'
+   au Filetype rmd map <C-p> :!echo<space>"require(rmarkdown);<space>render('<c-r>%')"<space>\|<space>R<space>--vanilla<enter>
 augroup end
 " }}}
 " }}}

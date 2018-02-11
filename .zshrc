@@ -49,24 +49,43 @@ ZSH_THEME="ys"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(archlinux gem git github perl pip python ruby rvm sudo tmux vi-mode fast-syntax-highlighting url)
+plugins=(
+cargo
+colored-man-pages
+colorize
+gem
+git
+github
+perl
+pip
+python
+rails
+ruby
+rvm
+sudo
+thefuck
+tmux
+vi-mode
+zsh_reload
+fast-syntax-highlighting)
 
 # ===========[ User configuration ]========================================= {{{
 
 #screenfetch # Display system/terminal info
 
-alias tmux250="tmux -u new -s A250 -c /home/ryanm/batcave/C++/A250"
-alias tmux200="tmux -u new -s A200 -c /home/ryanm/batcave/C++/A200"
-alias tmux="tmux -u"
-alias vim="nvim"
-alias vimrc="nvim ~/.vimrc"
-alias zshrc="nvim ~/.zshrc"
-alias tmuxconf="nvim ~/.tmux.conf"
-alias i3conf="nvim ~/.config/i3/config"
-alias termconf="nvim ~/.config/termite/config"
+alias tmux250='tmux -u new -s A250 -c /home/ryanm/batcave/C++/A250'
+alias tmux200='tmux -u new -s A200 -c /home/ryanm/batcave/C++/A200'
+alias tmux='tmux -u'
+alias vim='nvim'
+alias vimrc='nvim ~/.vimrc'
+alias zshrc='nvim ~/.zshrc'
+alias tmuxconf='nvim ~/.tmux.conf'
+alias i3conf='nvim ~/.config/i3/config'
+alias termconf='nvim ~/.config/termite/config'
 
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
+source /usr/share/doc/fzf/key-bindings.zsh
+source /usr/share/doc/fzf/completion.zsh
+source /home/ryanm/.rvm/scripts/rvm
 
 # For Base16 256colors
 BASE16_SHELL_SET_BACKGROUND=false
@@ -75,7 +94,12 @@ BASE16_SHELL=$HOME/.base16-manager/chriskempson/base16-shell/
 
 # You can use whatever you want as an alias, like for Mondays:
 #eval "$(thefuck --alias FUCK)"
-eval "$(thefuck --alias)"
+eval "$(thefuck --alias)":
+
+if [[ -n "$TMUX" ]] && [[ -z $ALREADY_RAN_TMUX_STARTUP ]]; then
+    export ALREADY_RAN_TMUX_STARTUP=true;
+    neofetch
+fi
 
 # Let zsh be in vi mode
 bindkey -v
@@ -106,8 +130,8 @@ export NOTES_DIR="/home/ryanm/Documents/Notes/OCC"
 export TODO_DIR='/home/ryanm/Documents/Notes'
 # }}}
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/ryanm/GOG_Games/:/home/ryanm/android/sdks/platform-tools/:/home/ryanm/android/sdks/tools/:/home/ryanm/genymotion/:/usr/local/go/bin/:/opt/eclipse/:/opt/android-studio/bin:/opt/kaku-linux64/"
-# export MANPATH="/usr/local/man:$MANPATH"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/texlive/2017/bin/x86_64-linux:"
+export MANPATH="/usr/local/man:$MANPATH:/opt/texlive/2017/texmf-dist/doc/man:"
 
 source $ZSH/oh-my-zsh.sh
 
