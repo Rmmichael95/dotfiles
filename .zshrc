@@ -130,7 +130,7 @@ export NOTES_DIR="/home/ryanm/Documents/Notes/OCC"
 export TODO_DIR='/home/ryanm/Documents/Notes'
 # }}}
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/texlive/2017/bin/x86_64-linux:"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/texlive/2017/bin/x86_64-linux:$HOME/.rvm/gems/ruby-2.5.0/bin:"
 export MANPATH="/usr/local/man:$MANPATH:/opt/texlive/2017/texmf-dist/doc/man:"
 
 source $ZSH/oh-my-zsh.sh
@@ -155,3 +155,6 @@ source $ZSH/oh-my-zsh.sh
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

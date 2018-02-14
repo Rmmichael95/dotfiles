@@ -21,18 +21,17 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#begin('/home/ryanm/.nvim/bundles')
     call dein#add('/home/ryanm/.nvim/bundles/repos/github.com/Shougo/dein.vim')
     call dein#add('Shougo/dein.vim')
-    call dein#add('Shougo/deoplete.nvim')
-    call dein#add('zchee/deoplete-clang')
-    call dein#add('Shougo/neco-vim')
+    call dein#add('Shougo/deoplete.nvim', {'on_ft':['cpp', 'c', 'java', 'rd', 'pl', ]})
+    call dein#add('zchee/deoplete-clang', {'on_ft':['cpp', 'c']})
     call dein#add('zchee/libclang-python3')
+    call dein#add('Shougo/neco-vim')
     call dein#add('Shougo/neoinclude.vim')
-    call dein#add('artur-shaik/vim-javacomplete2')
-    call dein#add('zchee/deoplete-jedi')
+    call dein#add('artur-shaik/vim-javacomplete2', {'on_ft':['java']})
+    call dein#add('zchee/deoplete-jedi', {'on_ft':['py']})
     call dein#add('davidhalter/jedi')
-    call dein#add('ternjs/tern_for_vim', {'build':'npm install'})
+    call dein#add('cyansprite/omnisharp.nvim', {'build':['./install.sh']})
+    call dein#add('ternjs/tern_for_vim', {'build':['npm install']})
     call dein#add('starcraftman/vim-eclim', {'on_ft':'java'})
-    call dein#add('Shougo/neomru.vim')
-    call dein#add('Shougo/unite.vim')
     call dein#add('tpope/vim-endwise')
     call dein#add('tpope/vim-commentary')
     call dein#add('tpope/vim-repeat')
@@ -43,15 +42,12 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('tpope/vim-sensible')
     call dein#add('jiangmiao/auto-pairs')
     call dein#add('neomake/neomake')
-    call dein#add('godlygeek/tabular')
+    call dein#add('godlygeek/tabular', {'on_cmd':['Tabularize']})
     call dein#add('jeffkreeftmeijer/vim-numbertoggle')
     call dein#add('ntpeters/vim-better-whitespace')
     call dein#add('christoomey/vim-tmux-navigator')
     call dein#add('easymotion/vim-easymotion')
     call dein#add('wincent/ferret')
-    " Colors Themes
-    call dein#add('chriskempson/base16-vim')
-    call dein#add('Soares/base16.nvim')
     call dein#add('powerman/vim-plugin-viewdoc')
     call dein#add('SirVer/ultisnips')
     call dein#add('honza/vim-snippets')
@@ -70,13 +66,9 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('dhruvasagar/vim-table-mode')
     call dein#add('vim-airline/vim-airline')
     call dein#add('vim-airline/vim-airline-themes')
-    call dein#add('raghur/vim-ghost')
-    call dein#add('Shougo/vimproc.vim', {'build':'make'})
-    call dein#add('wincent/command-t', {
-                \ 'build':
-                \      'sh -c "cd ruby/command-t && ruby extconf.rb && make"'
-                \ })
-    call dein#add('mbbill/undotree', {'on_cmd': 'UndotreeToggle'})
+    call dein#add('kien/ctrlp.vim')
+    call dein#add('Shougo/vimproc.vim', {'build':['make']})
+    call dein#add('mbbill/undotree', {'on_cmd':['UndotreeToggle']})
     call dein#add('scrooloose/nerdtree', {'on_cmd':['NERDTreeToggle','NERDTreeFind']})
     call dein#add('Xuyuanp/nerdtree-git-plugin', {'on_cmd':['<Plug>NERDTreeToggle','<Plug>NERDTreeFind']})
     call dein#add('zhaocai/GoldenView.Vim', {'on_cmd':'<Plug>ToggleGoldenViewAutoResize'})
@@ -96,23 +88,18 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('szw/vim-tags', {'on_ft':['cpp', 'c']})
     " general refactoring
     call dein#add('derekwyatt/vim-protodef', {'on_ft':['cpp', 'c']})
-    " call dein#add('LucHermitte/lh-vim-lib', {'on_ft':['cpp', 'c']})
-    " call dein#add('LucHermitte/lh-tags', {'on_ft':['cpp', 'c']})
-    " call dein#add('LucHermitte/lh-dev', {'on_ft':['cpp', 'c']})
-    " call dein#add('LucHermitte/lh-brackets', {'on_ft':['cpp', 'c']})
-    "call dein#add('LucHermitte/vim-refactor', {'on_ft':['cpp', 'c']})
     call dein#add('huawenyu/neogdb.vim', {'on_ft':['cpp', 'c']})
     "call dein#add('dbgx/lldb.nvim', {'on_ft':['cpp', 'c']})
     " Cscope
     call dein#add('vim-scripts/cscope.vim', {'on_ft':['cpp', 'c']})
     call dein#add('JCLiang/vim-cscope-utils', {'on_ft':['cpp', 'c']})
     " Markdown
-    call dein#add('vim-pandoc/vim-pandoc-syntax', {'on_ft':['markdown', 'pandoc.markdown', 'md']})
-    call dein#add('vim-pandoc/vim-pantondoc', {'on_ft':['markdown', 'pandoc.markdown', 'md']})
-    call dein#add('shime/vim-livedown', {'on_ft':['markdown', 'pandoc.markdown', 'md']})
-    call dein#add('PProvost/vim-markdown-jekyll', {'on_ft':['html', 'hbs', 'markdown', 'pandoc.markdown', 'md']})
+    call dein#add('vim-pandoc/vim-pandoc-syntax', {'on_ft':['markdown', 'pandoc.markdown', 'rmd']})
+    call dein#add('vim-pandoc/vim-pantondoc', {'on_ft':['markdown', 'pandoc.markdown', 'rmd']})
+    call dein#add('shime/vim-livedown', {'on_ft':['markdown', 'pandoc.markdown', 'rmd']})
+    call dein#add('PProvost/vim-markdown-jekyll', {'on_ft':['html', 'hbs', 'markdown', 'pandoc.markdown', 'rmd']})
     " tex
-    call dein#add('xuhdev/vim-latex-live-preview', {'on_ft':['tex']})
+    call dein#add('xuhdev/vim-latex-live-preview', {'on_ft':['tex', 'rmd']})
     " Perl
     "call dein#add('vim-perl/vim-perl', {'build':['make clean carp dancer highlight-all-pragmas moose test-more try-tiny']})
     " Python
@@ -204,6 +191,9 @@ let g:deoplete#enable_at_startup = 1
 " c++
 let g:deoplete#sources#clang#libclang_path="/usr/lib/libclang.so"
 let g:deoplete#sources#clang#clang_header="/usr/lib/clang"
+" omnisharp
+let g:deoplete_omnisharp_exe_path   = get(g:, "deoplete_omnisharp_exe_path", '~/.nvim/bundles/repos/github.com/cyansprite/omnisharp.nvim/omnisharp-server/OmniSharp/bin/Debug/OmniSharp.exe')
+let g:deoplete_omnisharp_port   = get(g:, "deoplete_omnisharp_port", 9999)
 " }}}
 " --------[ Neomake ]-------------------------- {{{
 " When writing a buffer.
@@ -229,38 +219,6 @@ let NERDTreeIgnore=['\.hg', '.DS_Store']
 "let NERDTreeBookmarksFile=expand(g:vimDir.'/.cache/NERDTree/NERDTreeBookmarks')
 nnoremap <F2> :NERDTreeToggle<CR>
 "nnoremap <F3> :NERDTreeFind<CR>
-" }}}
-" --------[ Unite setup ]----------------- {{{
-"let g:unite_data_directory=g:vimDir.'/.cache/unite'
-let g:unite_enable_start_insert=1
-let g:unite_source_history_yank_enable=1
-let g:unite_source_rec_max_cache_files=5000
-let g:unite_prompt='» '
-
-if executable('ack')
-    let g:unite_source_grep_command='ack'
-    let g:unite_source_grep_default_opts='--no-heading --no-color -a -C4'
-    let g:unite_source_grep_recursive_opt=''
-endif
-
-function! s:unite_settings()
-    imap <buffer> <C-j>   <Plug>(unite_select_next_line)
-    imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
-    nmap <buffer> Q <plug>(unite_exit)
-    nmap <buffer> <esc> <plug>(unite_exit)
-    imap <buffer> <esc> <plug>(unite_exit)
-endfunction
-
-autocmd FileType unite call s:unite_settings()
-" Set Unite leader
-nmap <space> [unite]
-nnoremap [unite] <nop>
-" Set useful Unite mappings
-nnoremap <silent> [unite]t :<C-u>Unite -auto-resize -buffer-name=files file<cr>
-nnoremap <silent> [unite]y :<C-u>Unite -auto-resize -buffer-name=yanks history/yank<cr>
-nnoremap <silent> [unite]l :<C-u>Unite -auto-resize -buffer-name=line line<cr>
-nnoremap <silent> [unite]b :<C-u>Unite -auto-resize -buffer-name=buffers buffer<cr>
-nnoremap <silent> [unite]m :<C-u>Unite -auto-resize -buffer-name=mappings mapping<cr>
 " }}}
 " --------[ GoldenView setup ]--------------------- {{{
 let g:goldenview__enable_default_mapping=0
@@ -347,20 +305,6 @@ let g:rainbow_conf = {
             \   }
             \}
 " }}}
-" --------[ Tabularize setup ]---------------------- {{{
-nmap <Leader>a& :Tabularize /&<CR>
-vmap <Leader>a& :Tabularize /&<CR>
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a: :Tabularize /:<CR>
-vmap <Leader>a: :Tabularize /:<CR>
-nmap <Leader>a:: :Tabularize /:\zs<CR>
-vmap <Leader>a:: :Tabularize /:\zs<CR>
-nmap <Leader>a, :Tabularize /,<CR>
-vmap <Leader>a, :Tabularize /,<CR>
-nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-" }}}
 " --------[ Pandoc setup ]-------------------------- {{{
 let g:pandoc_use_conceal = 1
 let g:pandoc_syntax_dont_use_conceal_for_rules = ['block', 'codeblock_start', 'codeblock_delim']
@@ -372,7 +316,6 @@ let g:pantondoc_use_pandoc_markdown = 1
 let g:livedown_autorun = 0
 let g:livedown_open = 1
 let g:livedown_port = 1337
-map <leader>gm :call LivedownPreview()<CR>
 " }}}
 " --------[ eclim ]-------------------------------- {{{
 "Run Checkstyle on open/write
@@ -396,12 +339,6 @@ function! NeogdbvimUnmapCallback()
 endfunc
 
 let g:neogdb_window = ['backtrace', 'breakpoint']
-" }}}
-" --------[ Gruvbox setup ]--------------------- {{{
-let g:gruvbox_bold = 0
-if !has("gui_running")
-    let g:gruvbox_italic = 0
-endif
 " }}}
 " --------[ Fugitive setup ]-------------------- {{{
 nnoremap <silent> <leader>gs :Gstatus<CR>
@@ -438,7 +375,7 @@ highlight multiple_cursors_cursor term=reverse cterm=reverse gui=reverse
 highlight link multiple_cursors_visual Visual
 " }}}
 " --------[ Airline ]---------------------- {{{
-let g:airline_theme='bubblegum'
+let g:airline_theme='mine'
 
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
@@ -462,16 +399,6 @@ if !exists('g:airline_symbols')
   let g:airline_symbols.spell = 'Ꞩ'
   let g:airline_symbols.notexists = '∄'
 let g:airline_symbols.whitespace = '␣'
-" }}}
-" --------[ Base16-Vim ]------------------- {{{
-" if filereadable(expand("~/.vimrc_background"))
-"     let base16colorspace=256
-"     source ~/.vimrc_background
-" endif
-
-autocmd BufEnter * hi! Normal ctermbg=NONE | hi LineNr ctermbg=NONE | hi CursorLine cterm=underline ctermbg=NONE
-set background=light
-let g:base16_transparent_background = 1
 " }}}
 " }}}
 " }}}
@@ -545,6 +472,8 @@ nnoremap <leader>[ :Ngrep
 " --------[ Plugin Maps ]------------------------------------------------ {{{
 "  Vim protodef
 "  pull defs to cursor <leader>PP
+"  vim livedown
+map <leader>gm :call LivedownPreview()<CR>
 " lldb mapping
 " map <leader>O :LLsession new<CR>
 " map <leader>P :LLmode debug<CR>
@@ -753,15 +682,20 @@ augroup markdown
    au BufNewFile,BufRead,BufWrite *.txt,*.md,*.mkd,*.markdown,*.mdwn setl ft=rmd
    au BufRead,BufNewFile,BufEnter   $NOTES_DIR/*/*.txt let &complete="$NOTES_DIR/**/*.txt"
    au BufRead,BufNewFile,BufEnter   $NOTES_DIR/*/*.txt lcd %:h
-   au BufRead,BufWrite,InsertChange $NOTES_DIR/*/*.txt syn match ErrorMsg '\%>77v.\+'
+   "au BufRead,BufWrite,InsertChange $NOTES_DIR/*/*.txt syn match ErrorMsg '\%>79v.\+'
    au Filetype rmd map <C-p> :!echo<space>"require(rmarkdown);<space>render('<c-r>%')"<space>\|<space>R<space>--vanilla<enter>
 augroup end
+
+" augroup lLength
+"   autocmd BufEnter * highlight OverLength ctermbg=11 ctermfg=9 guibg=11
+"   autocmd BufEnter * match OverLength /\%79v.*/
+" augroup END
 " }}}
 " }}}
 " ========{ Vim Script Functions }======================================== " {{{
 " --------[ Make the 81st column stand out ]--------------------------- {{{
 "  " OR ELSE just the 81st column of wide lines...
-highlight ColorColumn ctermbg=167
+highlight ColorColumn ctermbg=9 ctermfg=7
 call matchadd('ColorColumn', '\%81v', 100)
 " }}}
 " --------[ Highlight matches when jumping to next ]------------------- {{{
