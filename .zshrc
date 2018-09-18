@@ -87,11 +87,6 @@ source /usr/share/doc/fzf/key-bindings.zsh
 source /usr/share/doc/fzf/completion.zsh
 source /home/ryanm/.rvm/scripts/rvm
 
-# For Base16 256colors
-BASE16_SHELL_SET_BACKGROUND=false
-BASE16_SHELL=$HOME/.base16-manager/chriskempson/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-
 # You can use whatever you want as an alias, like for Mondays:
 #eval "$(thefuck --alias FUCK)"
 eval "$(thefuck --alias)":
@@ -118,19 +113,20 @@ function zle-line-init zle-keymap-select {
     zle reset-prompt
 }
 
-open-notes-vim() nvim $NOTES_DIR/$SEMESTER
+open-notes-vim() nvim $NOTES_DIR/$YEAR/$SEMESTER
 zle -N open-notes-vim
 zle -N zle-line-init
 zle -N zle-keymap-select
 export KEYTIMEOUT=1
 
 export EDITOR=nvim
-export SEMESTER=Spring18
-export NOTES_DIR="/home/ryanm/Documents/Notes/OCC"
+export SEMESTER=Fall
+export YEAR=2018
+export NOTES_DIR="/home/ryanm/Documents/Notes"
 export TODO_DIR='/home/ryanm/Documents/Notes'
 # }}}
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/texlive/2017/bin/x86_64-linux:$HOME/.rvm/gems/ruby-2.5.0/bin:"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/texlive/2018/bin/x86_64-linux:$HOME/.rvm/gems/ruby-2.5.0/bin:$HOME/Documents/Notes/:$HOME/.sh:$HOME/.local/bin"
 export MANPATH="/usr/local/man:$MANPATH:/opt/texlive/2017/texmf-dist/doc/man:"
 
 source $ZSH/oh-my-zsh.sh

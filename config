@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font ubuntu:monospace 12
+font ubuntu:monospace 14
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -67,10 +67,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+| split h
+bindsym $mod+\ split h
 
 # split in vertical orientation
-bindsym $mod+_ split v
+bindsym $mod+- split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -161,7 +161,7 @@ bindsym $mod+d mode "resize"
 
 hide_edge_borders both
 
-set $bg-color 	         #2f343f
+set $bg-color            #2f343f
 set $inactive-bg-color   #2f343f
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
@@ -181,19 +181,20 @@ bar {
         status_command i3status
         tray_output primary
         colors {
-		        background $bg-color
-	           	separator #757575
-		        #                  border             background         text
-		        focused_workspace  $bg-color          $bg-color          $text-color
-	        	inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-		        urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+                        background $bg-color
+                        separator #757575
+                        #                  border             background         text
+                        focused_workspace  $bg-color          $bg-color          $text-color
+                        inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+                        urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
 }
 }
 
-bindsym $mod+F1 exec systemctl hybrid-sleep
-bindsym $mod+F7 exec i3lock
+bindsym $mod+F1 exec gksu zzz
+bindsym $mod+F2 exec gksu ZZZ
 bindsym $mod+F5 exec xbacklight -dec 10
 bindsym $mod+F6 exec xbacklight -inc 10
+bindsym $mod+F7 exec i3lock
 bindsym $mod+F10 exec --no-startup-id pactl set-sink-mute 0 toggle
 bindsym $mod+F11 exec --no-startup-id pactl -- set-sink-volume 0 -5%
 bindsym $mod+F12 exec --no-startup-id pactl -- set-sink-volume 0 +5%

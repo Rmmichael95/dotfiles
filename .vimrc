@@ -1,15 +1,15 @@
 " Maintainer: Ryan M Sullivan
-" Last Change: February 5, 2018
+" Last Change: September 9, 2018
 " ------------------------------------------------------------------------------
 " Vim Configuration
-" ------------------------------------------------------------------------ " {{{
-" ========{ Plugins }===================================================== " {{{
+" ------------------------------------------------------------------------ " {{{1
+" ========{ Plugins }===================================================== " {{{2
 
 if has('nvim')
     runtime! python_setup.vim
 endif
 
-" --------[ Dein ]------------------------------------ {{{
+" ----[ Dein ]------------------------------------ {{{3
 
 if &compatible
     set nocompatible
@@ -21,7 +21,7 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#begin('/home/ryanm/.nvim/bundles')
     call dein#add('/home/ryanm/.nvim/bundles/repos/github.com/Shougo/dein.vim')
     call dein#add('Shougo/dein.vim')
-    call dein#add('Shougo/deoplete.nvim', {'on_ft':['cpp', 'c', 'java', 'rd', 'pl', ]})
+    call dein#add('Shougo/deoplete.nvim', {'on_ft':['cpp', 'c', 'java', 'rd', 'pl']})
     call dein#add('zchee/deoplete-clang', {'on_ft':['cpp', 'c']})
     call dein#add('zchee/libclang-python3')
     call dein#add('Shougo/neco-vim')
@@ -39,7 +39,6 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('radenling/vim-dispatch-neovim')
     call dein#add('tpope/vim-fugitive')
     call dein#add('tpope/vim-surround')
-    call dein#add('tpope/vim-sensible')
     call dein#add('jiangmiao/auto-pairs')
     call dein#add('neomake/neomake')
     call dein#add('godlygeek/tabular', {'on_cmd':['Tabularize']})
@@ -61,12 +60,11 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('chrisbra/NrrwRgn')
     call dein#add('tmhedberg/SimpylFold')
     call dein#add('tpope/vim-sleuth')
-    "call dein#add('vim-scripts/L9')
-    "call dein#add('sheerun/vim-polyglot')
+    call dein#add('vim-scripts/L9')
+    call dein#add('sheerun/vim-polyglot')
     call dein#add('dhruvasagar/vim-table-mode')
     call dein#add('vim-airline/vim-airline')
-    call dein#add('vim-airline/vim-airline-themes')
-    call dein#add('kien/ctrlp.vim')
+    call dein#add('ctrlpvim/ctrlp.vim')
     call dein#add('Shougo/vimproc.vim', {'build':['make']})
     call dein#add('mbbill/undotree', {'on_cmd':['UndotreeToggle']})
     call dein#add('scrooloose/nerdtree', {'on_cmd':['NERDTreeToggle','NERDTreeFind']})
@@ -96,8 +94,10 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     " Markdown
     call dein#add('vim-pandoc/vim-pandoc-syntax', {'on_ft':['markdown', 'pandoc.markdown', 'rmd']})
     call dein#add('vim-pandoc/vim-pantondoc', {'on_ft':['markdown', 'pandoc.markdown', 'rmd']})
-    call dein#add('shime/vim-livedown', {'on_ft':['markdown', 'pandoc.markdown', 'rmd']})
     call dein#add('PProvost/vim-markdown-jekyll', {'on_ft':['html', 'hbs', 'markdown', 'pandoc.markdown', 'rmd']})
+    call dein#add('shime/vim-livedown', {'on_ft':['markdown', 'pandoc.markdown', 'rmd']})
+    call dein#add('iamcco/mathjax-support-for-mkdp', {'on_ft':['markdown', 'pandoc.markdown', 'rmd']})
+    call dein#add('iamcco/markdown-preview.vim', {'on_ft':['markdown', 'pandoc.markdown', 'rmd']})
     " tex
     call dein#add('xuhdev/vim-latex-live-preview', {'on_ft':['tex', 'rmd']})
     " Perl
@@ -105,7 +105,9 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     " Python
     call dein#add('klen/python-mode', {'on_ft':['python', 'py']})
     " Ruby
-    call dein#add("tpope/vim-rails", {'on_ft':['ruby', 'rb']})
+    call dein#add('tpope/vim-rails', {'on_ft':['ruby', 'rb']})
+    call dein#add('c-brenn/phoenix.vim', {'on_ft':['rb', 'ex']})
+    call dein#add('tpope/vim-projectionist', {'on_ft':['rb', 'ex']})
     call dein#add("vim-ruby/vim-ruby", {'on_ft':['ruby', 'rb']})
     call dein#add("tpope/vim-rake", {'on_ft':['ruby', 'rb']})
     call dein#add("tpope/vim-bundler", {'on_ft':['ruby', 'rb']})
@@ -120,6 +122,13 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add("tpope/vim-haml", {'on_ft':['haml', 'hamlc', 'sass', 'scss']})
     call dein#add('jamessan/vim-gnupg', {'on_ft':['gpg', 'pgp', 'asc']})
     call dein#add('evidens/vim-twig', {'on_ft':['php']})
+    " erlang & elixir
+    call dein#add('vim-erlang/vim-erlang-skeletons', {'on_ft':['erl']})
+    call dein#add('vim-erlang/vim-erlang-omnicomplete', {'on_ft':['erl']})
+    call dein#add('vim-erlang/vim-erlang-runtime', {'on_ft':['erl']})
+    call dein#add('vim-erlang/vim-erlang-tags', {'on_ft':['erl']})
+    call dein#add('elixir-editors/vim-elixir', {'on_ft':['ex', 'exs', 'eex']})
+    call dein#add('slashmili/alchemist.vim', {'on_ft':['ex', 'esx', 'eex']})
 
     call dein#end()
     call dein#save_state()
@@ -127,9 +136,7 @@ endif
 
 filetype plugin indent on
 syntax enable
-
-" }}}
-" --------[ Plugin Settings ]----------------------------------------------- {{{
+" ----[ Plugin Settings ]----------------------------------------------- {{{3
 "
 " auto install new plugins
 if dein#check_install()
@@ -138,11 +145,10 @@ endi
 
 "set rtp+=/home/ryanm/.nvim/bundles/repos/github.com/dbgx/lldb.nvim
 
-" --------[ General Plugin Settings ]---------- {{{
+" ----[ General Plugin Settings ]---------- {{{4
 " Gitgutter setup
 let g:gitgutter_realtime=0
-" }}}
-" --------[ Language specific ]---------------- {{{
+" ----[ Language specific ]---------------- {{{4
 " C-support
 let  g:C_UseTool_cmake    = 'yes'
 let  g:C_UseTool_doxygen = 'yes'
@@ -154,20 +160,16 @@ let g:DoxygenToolkit_blockHeader="----------------------------------------------
 let g:DoxygenToolkit_blockFooter="--------------------------------------------------------------------------"
 let g:DoxygenToolkit_authorName="Ryan M Sullivan"
 let g:DoxygenToolkit_licenseTag="My license"
-" Markdown                                                                   \/ added this
-autocmd BufRead,BufNewFile md,markdown setlocal filetype=pandoc.markdown \" Automatically set filetype for Markdown files"
 " Python
 autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
 autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
-" }}}
-" --------[ Ctags ]---------------------------- {{{
+" ----[ Ctags ]---------------------------- {{{4
 let g:vim_tags_auto_generate = 1
 let g:vim_tags_use_language_field = 1
 let g:vim_tags_main_file = 'tags'
 " lh-tags
 "au BufWritePost *.c,*.cpp,*.h silent! !ctags -R &
-" }}}
-" --------[ Cscope ]--------------------------- {{{
+" ----[ Cscope ]--------------------------- {{{4
 " s: Find this C symbol
 nnoremap  <leader>fs :call cscope#find('s', expand('<cword>'))<CR>
 " g: Find this definition
@@ -184,8 +186,7 @@ nnoremap  <leader>fe :call cscope#find('e', expand('<cword>'))<CR>
 nnoremap  <leader>ff :call cscope#find('f', expand('<cword>'))<CR>
 " i: Find files #including this file
 nnoremap  <leader>fi :call cscope#find('i', expand('<cword>'))<CR>
-" }}}
-" --------[ Deoplete ]---------------------- {{{
+" ----[ Deoplete ]---------------------- {{{4
 set rtp+=/home/ryanm/repos/github.com/Shougo/deoplete.nvim/
 let g:deoplete#enable_at_startup = 1
 " c++
@@ -194,21 +195,18 @@ let g:deoplete#sources#clang#clang_header="/usr/lib/clang"
 " omnisharp
 let g:deoplete_omnisharp_exe_path   = get(g:, "deoplete_omnisharp_exe_path", '~/.nvim/bundles/repos/github.com/cyansprite/omnisharp.nvim/omnisharp-server/OmniSharp/bin/Debug/OmniSharp.exe')
 let g:deoplete_omnisharp_port   = get(g:, "deoplete_omnisharp_port", 9999)
-" }}}
-" --------[ Neomake ]-------------------------- {{{
+" ----[ Neomake ]-------------------------- {{{4
 " When writing a buffer.
 call neomake#configure#automake('w')
 " When writing a buffer, and on normal mode changes (after 1s).
 "call neomake#configure#automake('nw', 1000)
 " When reading a buffer (after 750ms), and when writing.
 "call neomake#configure#automake('rw', 750)
-" }}}
-" --------[ Undotree setup ]----------------------- {{{
+" ----[ Undotree setup ]----------------------- {{{4
 " let g:undotree_WindowLayout='botright'
 let g:undotree_SetFocusWhenToggle=1
 nnoremap <silent> <F5> :UndotreeToggle<CR>
-" }}}
-" --------[ NERDTree setup ]------------------------ {{{
+" ----[ NERDTree setup ]------------------------ {{{4
 let NERDTreeShowHidden=0
 let NERDTreeQuitOnOpen=0
 let g:NERDTreeUseSimpleIndicator=1
@@ -219,28 +217,24 @@ let NERDTreeIgnore=['\.hg', '.DS_Store']
 "let NERDTreeBookmarksFile=expand(g:vimDir.'/.cache/NERDTree/NERDTreeBookmarks')
 nnoremap <F2> :NERDTreeToggle<CR>
 "nnoremap <F3> :NERDTreeFind<CR>
-" }}}
-" --------[ GoldenView setup ]--------------------- {{{
+" ----[ GoldenView setup ]--------------------- {{{4
 let g:goldenview__enable_default_mapping=0
 nmap <F4> <Plug>ToggleGoldenViewAutoResize
-" }}}
-" --------[ UltiSnips setup ]---------------------- {{{
+" ----[ UltiSnips setup ]---------------------- {{{4
 let g:UltiSnipsExpandTrigger='<c-x>'
 let g:UltiSnipsJumpForwardTrigger='<c-l>'
 let g:UltiSnipsJumpBackwardTrigger='<c-h>'
-let g:UltiSnipsSnippetDirectorie=$HOME.'/.nvim/UltiSnips'
-" }}}
-" --------[ Tex Live Preview ]------------------------------- {{{
+let g:UltiSnipsSnippetDirectories=['~/.nvim/UltiSnips/', 'UltiSnips']
+
+" ----[ Tex Live Preview ]------------------------------- {{{4
 let g:livepreview_previewer = 'zathura'
-" }}}
-" --------[ RSpec.vim mappings ]----------------------- {{{
+" ----[ RSpec.vim mappings ]----------------------- {{{4
 map <Leader>rs :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 let g:rspec_command = "Dispatch rspec {spec}"
-" }}}
-"--------[ Startify Configuration ]---------------------- {{{
+" ----[ Startify Configuration ]---------------------- {{{4
 "|g:autoloaded_startify|
 "g:startify_bookmarks|
 "g:startify_change_to_dir|
@@ -268,10 +262,8 @@ let g:rspec_command = "Dispatch rspec {spec}"
 "let g:startify_change_to_vcs_root = 1
 "let g:startify_show_sessions = 1
 "nnoremap <F1> :Startify<cr>
-" }}}
-" ------- [ Rainbow setup ]-------------------------------- {{{
-syntax on
-let g:rainbow_active = 1
+" ----[ Rainbow setup ]-------------------------------- {{{4
+let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 
 let g:rainbow_load_separately = [
             \ [ '*' , [['(', ')'], ['\[', '\]'], ['{', '}']] ],
@@ -280,51 +272,53 @@ let g:rainbow_load_separately = [
             \ [ '*.{html,htm}' , [['(', ')'], ['\[', '\]'], ['{', '}'], ['<\a[^>]*>', '</[^>]*>']] ],
             \ ]
 
-"au FileType c,cpp,h,objc,objcpp,python,java,javascript call rainbow#load()
-au VimEnter call rainbow#load()
 let g:rainbow_conf = {
             \   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
-            \   'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+            \   'ctermfgs': ['6', '5', '14', '3', '13', '2', '9'],
             \   'operators': '_,_',
             \   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
             \   'separately': {
-            \       '*': {},
-            \       'tex': {
-            \           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
-            \       },
-            \       'lisp': {
-            \           'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
-            \       },
-            \       'vim': {
-            \           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
-            \       },
-            \       'html': {
-            \           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
-            \       },
-            \       'css': 0,
+            \           '*': {},
+            \           'tex': {
+            \                   'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+            \           },
+            \           'lisp': {
+            \                   'guifgs': ['6', '5', '14', '3', '13', '2', '12', '4', '11', '9', '8', '7'],
+            \           },
+            \           'vim': {
+            \                   'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+            \           },
+            \           'html': {
+            \                   'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+            \           },
+            \           'css': 0,
             \   }
             \}
-" }}}
-" --------[ Pandoc setup ]-------------------------- {{{
+" ----[ Pandoc setup ]-------------------------- {{{4
 let g:pandoc_use_conceal = 1
 let g:pandoc_syntax_dont_use_conceal_for_rules = ['block', 'codeblock_start', 'codeblock_delim']
 let g:pandoc_syntax_user_cchars = {'li': '*'}
 let g:pantondoc_use_pandoc_markdown = 1
 "let g:pandoc#formatting#equalprg = \"pandoc -t markdown --no-wrap --atx-headers"
-" }}}
-" --------[ Livedown setup ]----------------------- {{{
-let g:livedown_autorun = 0
+" ----[ Livedown setup ]----------------------- {{{4
 let g:livedown_open = 1
 let g:livedown_port = 1337
-" }}}
-" --------[ eclim ]-------------------------------- {{{
+let g:livedown_browser = "qutebrowser"
+" ----[ vim-markdown-preview ]----------------- {{{4
+let vim_markdown_preview_toggle=2
+let vim_markdown_preview_browser='qutebrowser'
+"---- [ markdown-preview ]--------------------- {{{4
+let g:mkdp_path_to_chrome = "qutebrowser"
+" ----[ eclim ]-------------------------------- {{{4
 "Run Checkstyle on open/write
 set rtp^=/usr/share/vim/vimfiles/
 autocmd BufWinEnter *.java :Checkstyle
 autocmd BufWritePost *.java :Checkstyle
 let g:EclimCompletionMethod = 'omnifunc'
-" }}}
-" --------[ Neogdb ]---------------------------------------- {{{
+" ----[ Neogdb ]---------------------------------------- {{{4
+let g:neobugger_leader = ';'
+nmap <Space>p :call neobugger#gdb#Send("print " . expand('<cword>'))<CR>
+
 function! NeogdbvimNmapCallback()
     " Let fzf.vim open files in the current window by default.
     " This is so that, when navigating files,
@@ -338,9 +332,8 @@ function! NeogdbvimUnmapCallback()
     let g:fzf_action = { 'enter': 'tabnew' }
 endfunc
 
-let g:neogdb_window = ['backtrace', 'breakpoint']
-" }}}
-" --------[ Fugitive setup ]-------------------- {{{
+let g:neogdb_window = ['breakpoint', 'backtrace']
+" ----[ Fugitive setup ]-------------------- {{{4
 nnoremap <silent> <leader>gs :Gstatus<CR>
 nnoremap <silent> <leader>gd :Gdiff<CR>
 nnoremap <silent> <leader>gc :Gcommit<CR>
@@ -351,8 +344,7 @@ nnoremap <silent> <leader>gw :Gwrite<CR>
 nnoremap <silent> <leader>gr :Gremove<CR>
 autocmd FileType gitcommit nmap <buffer> U :Git checkout -- <C-r><C-g><CR>
 autocmd BufReadPost fugitive://* set bufhidden=delete
-" }}}
-" --------[ Vim-Multiple-Cursors ]---------- {{{
+" ----[ Vim-Multiple-Cursors ]---------- {{{4
 " Default mapping
 "let g:multi_cursor_next_key='<C-n>'
 "let g:multi_cursor_prev_key='<C-p>'
@@ -373,55 +365,52 @@ endfunction
 " Default highlighting
 highlight multiple_cursors_cursor term=reverse cterm=reverse gui=reverse
 highlight link multiple_cursors_visual Visual
-" }}}
-" --------[ Airline ]---------------------- {{{
-let g:airline_theme='mine'
-
+" ----[ Airline ]---------------------- {{{4
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
-  endif
-  " unicode symbols
-  let g:airline_left_sep = '»'
-  let g:airline_left_sep = '▶'
-  let g:airline_right_sep = '«'
-  let g:airline_right_sep = '◀'
-  let g:airline_symbols.crypt = 'Ǣ'
-  let g:airline_symbols.linenr = 'ב'
-  let g:airline_symbols.linenr = 'ג'
-  let g:airline_symbols.linenr = '≓'
-  let g:airline_symbols.linenr = '¶'
-  let g:airline_symbols.maxlinenr = 'Ξ'
-  let g:airline_symbols.maxlinenr = '☰'
-  let g:airline_symbols.branch = '⎇'
-  let g:airline_symbols.paste = 'ρ'
-  let g:airline_symbols.paste = 'Þ'
-  let g:airline_symbols.paste = '∥'
-  let g:airline_symbols.spell = 'Ꞩ'
-  let g:airline_symbols.notexists = '∄'
+endif
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.crypt = 'Ǣ'
+let g:airline_symbols.linenr = 'ב'
+let g:airline_symbols.linenr = 'ג'
+let g:airline_symbols.linenr = '≓'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.maxlinenr = 'Ξ'
+let g:airline_symbols.maxlinenr = '☰'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.notexists = '∄'
 let g:airline_symbols.whitespace = '␣'
-" }}}
-" }}}
-" }}}
-" ========{ Formatting }================================================== " {{{
+" ========{ Formatting }================================================== " {{{2
 set backup
-set backupskip=/tmp/*,/private/tmp/*",*.gpg
-set backupdir=~/.nvim/tmp,/tmp
+"set backupskip=/tmp/*,/private/tmp/*",*.gpg
+set backupdir=~/.nvim/tmp/.backup//,/tmp
+set undodir=~/.nvim/tmp/.undo//,/tmp
+set directory=~/.nvim/tmp/.swp//,/tmp
 set browsedir=buffer
-set directory=~/.nvim/tmp,/tmp"
 set history=10000
 "set autochdir
 set mouse=a
 set number
 set ruler
 set showcmd
-set hlsearch
+set nohlsearch
 set ignorecase
-set smartcase
 set showmatch
 set autoindent
 set laststatus=2
+set tabstop=4
+set shiftwidth=4
+set expandtab
 set hidden
-set spelllang=en_us
+set nospell
 set encoding=utf-8
 set termencoding=big5
 set fileencoding=utf-8
@@ -438,6 +427,7 @@ set wildchar=<TAB>
 set wildmode=list:longest,list:full
 set wildignore=*.o,*.class,*.pyc
 set timeoutlen=1000 ttimeoutlen=0
+set list lcs=tab:▸\ ,eol:¬,extends:❯,precedes:❮
 set noshowmode
 set cmdheight=1
 set visualbell t_vb=".
@@ -445,14 +435,15 @@ set tags=tags;
 set fdm=marker
 set splitbelow
 set splitright
+set bs=2
+set backspace=indent,eol,start
 set shell=/bin/zsh
 set omnifunc=syntaxcomplete#Complete
-highlight LineNr ctermfg=grey " line number coloring
-let perl_include_pod = 1 " my perl includes pod
+highlight LineNr ctermfg=grey
+let perl_include_pod = 1
 let perl_extended_vars = 1 " syntax color complex things like @{${foo}}
-" }}}
-" ========{ Basic UI Configuration }====================================== " {{{
-" --------[ Leaders ]---------------------------------------- {{{
+" ========{ Basic UI Configuration }====================================== " {{{2
+" ----[ Leaders ]---------------------------------------- {{{3
 map Q gq " Don't use Ex mode, use Q for formatting
 let leader = "," " remap leader to z (from \)
 let g:leader = "," " remap leader to z (global)
@@ -468,8 +459,7 @@ nmap <silent> <leader>y :FSHere<cr>
 " Notes
 nnoremap <leader>N :Note
 nnoremap <leader>[ :Ngrep
-" }}}
-" --------[ Plugin Maps ]------------------------------------------------ {{{
+" ----[ Plugin Maps ]------------------------------------------------ {{{3
 "  Vim protodef
 "  pull defs to cursor <leader>PP
 "  vim livedown
@@ -505,142 +495,173 @@ autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
 " g:UltiSnipsExpandTrigger='<c-x>'
 " g:UltiSnipsJumpForwardTrigger='<c-j>'
 " g:UltiSnipsJumpBackwardTrigger='<c-k>'
-
-" }}}
-" --------[ Mappings ]---------------------------------------- {{{
+" ----[ Mappings ]---------------------------------------- {{{3
+"  smart tab complete
+au FileType erl inoremap <tab> <c-r>=Smart_TabComplete()<CR>
 " Navigate Vim Splits
 nnoremap <C-J> <C-W><C-J> "Ctrl-j to move down a split
 nnoremap <C-K> <C-W><C-K> "Ctrl-k to move up a split
 nnoremap <C-L> <C-W><C-L> "Ctrl-l to move    right a split
 nnoremap <C-H> <C-W><C-H> "Ctrl-h to move left a split
 " ,g generates the header guard
-map <leader>g :call IncludeGuard()<CR> " func in other section
 map <leader>h :call IncHeader()<CR>
 " new tab
 map <C-t><C-t> :tabnew<CR>
 " close tab
 map <C-t><C-z> :tabclose<CR>
 " Bash like keys for the command line
-cnoremap <C-A>      <Home>
-cnoremap <C-E>      <End>
+cnoremap <C-A> <Home>
+cnoremap <C-E> <End>
 cnoremap <C-K> <C-U>
 " allow multiple indentation/deindentation in visual mode
 vnoremap < <gv
 vnoremap > >gv
 " :cd. change working directory t6o that of the current file
 cmap cd. lcd %:p:h<cr>
+" spell lang
+nnoremap <F3> :call CycleLang()<CR>
 " Notes & Pandoc
-
-nnoremap 'ms :%norm A\<cr>
-nnoremap 'mn :%norm $x<cr>
-nnoremap 'mp :w!<cr>:exe "!pandoc --pdf-engine=lualatex -H ~/.config/pandoc/fonts.tex -o $HOME/" . fnameescape(expand('%:t:r')) . ".pdf " . fnameescape(expand('%:p'))<cr>
-nnoremap 'mm :w!<cr>:exe "!pandoc --pdf-engine=lualatex -H ~/.config/pandoc/fonts.tex -o /tmp/" . fnameescape(expand('%:t:r')) . ".pdf " . fnameescape(expand('%:p')) . " && xdg-open /tmp/" . fnameescape(expand('%:t:r')) . ".pdf"<cr>
-" Symbols ---------------------------------- {{{
-" Greek
-map! <C-s>A Α
-map! <C-s>a α
-map! <C-s>B Β
-map! <C-s>b β
-map! <C-s>G Γ
-map! <C-s>g γ
-map! <C-s>D Δ
-map! <C-s>d δ
-map! <C-s>E Ε
-map! <C-s>e ε
-map! <C-s>Z Ζ
-map! <C-s>z ζ
-map! <C-s>H Η
-map! <C-s>h η
-map! <C-s>T Θ
-map! <C-s>t θ
-map! <C-s>I Ι
-map! <C-s>i ι
-map! <C-s>K Κ
-map! <C-s>k κ
-map! <C-s>L Λ
-map! <C-s>l λ
-map! <C-s>M Μ
-map! <C-s>m μ
-map! <C-s>N Ν
-map! <C-s>n ν
-map! <C-s>C Ξ
-map! <C-s>c ξ
-map! <C-s>O Ο
-map! <C-s>o ο
-map! <C-s>P Π
-map! <C-s>p π
-map! <C-s>R Ρ
-map! <C-s>r ρ
-map! <C-s>S Σ
-map! <C-s>s σ
-map! <C-s>T Τ
-map! <C-s>t τ
-map! <C-s>U Υ
-map! <C-s>u υ
-map! <C-s>F Φ
-map! <C-s>f φ
-map! <C-s>X Χ
-map! <C-s>x χ
-map! <C-s>Y ψ
-map! <C-s>y ψ
-map! <C-s>W Ω
-map! <C-s>w ω
+nnoremap <C-n> :cnext<cr>
+nnoremap <C-N> :cprevious<cr>
+" Symbols ---------------------------------- {{{4
+" map! <C-v>ta τ
+" map! <C-v>ph ϕ
 " Math
-map! <C-s>fa ∀
-map! <C-s>te ∃
-map! <C-s>(- ∈
-map! <C-s>-) ∋
-map! <C-s>(u ∩
-map! <C-s>u) ∪
-map! <C-s>in ∫
-map! <C-s>di ∬
-map! <C-s>io ∮
-map! <C-s>tf ∴
-map! <C-s>bc ∵
-map! <C-s>ae ≅
-map! <C-s>ne ≠
-map! <C-s>>= ≥
-map! <C-s><= ≤
-map! <C-s><= ⇐
-map! <C-s>=> ⇒
-map! <C-s>== ⇔
-map! <C-s>ns ∅
-map! <C-s>pd ∂
-map! <C-s>00 ∞
+" map! <C-v>ll →
+" map! <C-v>hh ⇌
+" map! <C-v>kk ↑
+" map! <C-v>jj ↓
+" map! <C-v>= ∝
+" map! <C-v>~ ≈
+" map! <C-v>!= ≠
+" map! <C-v>!> ⇸
+" map! <C-v>~> ↝
+" map! <C-v>>= ≥
+" map! <C-v><= ≤
+" map! <C-v>0  °
+" map! <C-v>ce ¢
+" map! <C-v>*  •
+" map! <C-v>co ⌘
+
+" Greek
+map! <C-v>A Α
+map! <C-v>a α
+map! <C-v>B Β
+map! <C-v>b β
+map! <C-v>G Γ
+map! <C-v>g γ
+map! <C-v>D Δ
+map! <C-v>d δ
+map! <C-v>E Ε
+map! <C-v>e ε
+map! <C-v>Z Ζ
+map! <C-v>z ζ
+map! <C-v>H Η
+map! <C-v>h η
+map! <C-v>T Θ
+map! <C-v>t θ
+map! <C-v>I Ι
+map! <C-v>i ι
+map! <C-v>K Κ
+map! <C-v>k κ
+map! <C-v>L Λ
+map! <C-v>l λ
+map! <C-v>M Μ
+map! <C-v>m μ
+map! <C-v>N Ν
+map! <C-v>n ν
+map! <C-v>C Ξ
+map! <C-v>c ξ
+map! <C-v>O Ο
+map! <C-v>o ο
+map! <C-v>P Π
+map! <C-v>p π
+map! <C-v>R Ρ
+map! <C-v>r ρ
+map! <C-v>S Σ
+map! <C-v>s σ
+map! <C-v>T Τ
+map! <C-v>t τ
+map! <C-v>U Υ
+map! <C-v>u υ
+map! <C-v>F Φ
+map! <C-v>f φ
+map! <C-v>X Χ
+map! <C-v>x χ
+map! <C-v>Y ψ
+map! <C-v>y ψ
+map! <C-v>W Ω
+map! <C-v>w ω
+" Math
+map! <C-v>fa ∀
+map! <C-v>te ∃
+map! <C-v>(- ∈
+map! <C-v>-) ∋
+map! <C-v>(u ∩
+map! <C-v>u) ∪
+map! <C-v>in ∫
+map! <C-v>di ∬
+map! <C-v>io ∮
+map! <C-v>tf ∴
+map! <C-v>bc ∵
+map! <C-v>ae ≅
+map! <C-v>ne ≠
+map! <C-v>>= ≥
+map! <C-v><= ≤
+map! <C-v><= ⇐
+map! <C-v>=> ⇒
+map! <C-v>== ⇔
+map! <C-v>ns ∅
+map! <C-v>pd ∂
+map! <C-v>00 ∞
 " French
-map! <C-s>A> Â
-map! <C-s>a> â
-map! <C-s>A' Á
-map! <C-s>a' á
-map! <C-s>A` À
-map! <C-s>a` À
-map! <C-s>E> Ê
-map! <C-s>e> ê
-map! <C-s>E' É
-map! <C-s>e' é
-map! <C-s>E` È
-map! <C-s>e` è
-map! <C-s>O> Ô
-map! <C-s>o> ô
-map! <C-s>O' Ó
-map! <C-s>o' ó
-map! <C-s>O` Ò
-map! <C-s>o` ò
-map! <C-s>L' Ĺ
-map! <C-s>l' ĺ
-map! <C-s>C, Ç
-map! <C-s>c, ç
-map! <C-s>S, Ş
-map! <C-s>s, ş
+map! <C-v>A> Â
+map! <C-v>a> â
+map! <C-v>A' Á
+map! <C-v>a' á
+map! <C-v>A` À
+map! <C-v>a` À
+map! <C-v>E> Ê
+map! <C-v>e> ê
+map! <C-v>E' É
+map! <C-v>e' é
+map! <C-v>E` È
+map! <C-v>e` è
+map! <C-v>O> Ô
+map! <C-v>o> ô
+map! <C-v>O' Ó
+map! <C-v>o' ó
+map! <C-v>O! Ò
+map! <C-v>o! ò
+map! <C-v>L' Ĺ
+map! <C-v>l' ĺ
+map! <C-v>C, Ç
+map! <C-v>c, ç
+map! <C-v>S, Ş
+map! <C-v>s, ş
 " Misc
-map! <C-s>hh ←
-map! <C-s>jj ↓
-map! <C-s>kk ↑
-map! <C-s>ll →
-map! <C-s>hl ↔
-" }}}
-" }}}
-" --------[ Commands ]-------------------------------------{{{
+map! <C-v>hh ←
+map! <C-v>jj ↓
+map! <C-v>kk ↑
+map! <C-v>ll →
+map! <C-v>hl ↔
+" Subscript and Superscript
+map! <C-v>1 ~1~
+map! <C-v>2 ~2~
+map! <C-v>3 ~3~
+map! <C-v>4 ~4~
+map! <C-v>5 ~5~
+map! <C-v>6 ~6~
+map! <C-v>7 ~7~
+map! <C-v>8 ~8~
+map! <C-v>9 ~9~
+map! <C-v>== ^+^
+map! <C-v>=2 ^2+^
+map! <C-v>=3 ^3+^
+map! <C-v>-- ^-^
+map! <C-v>-2 ^2-^
+map! <C-v>-3 ^3-^
+" ----[ Commands ]-------------------------------------{{{3
 autocmd! bufwritepost init.vim source ~/.config/nvim/init.vim " auto reload vimrc when editing it
 " Enable omni completion. (Ctrl-X Ctrl-O)
 augroup omnifuncs
@@ -655,66 +676,57 @@ augroup omnifuncs
 augroup end
 " tern
 if exists('g:plugs["tern_for_vim"]')
-  let g:tern_show_argument_hints = 'on_hold'
-  let g:tern_show_signature_in_pum = 1
-  autocmd FileType javascript setlocal om6nifunc=tern#Complete
+    let g:tern_show_argument_hints = 'on_hold'
+    let g:tern_show_signature_in_pum = 1
+    autocmd FileType javascript setlocal om6nifunc=tern#Complete
 endif
 " make CSS omnicompletion work for SASS and SCSS
 autocmd BufNewFile,BufRead *.scss             set ft=scss.css
 autocmd BufNewFile,BufRead *.sass             set ft=sass.css
 autocmd FileType perl set autoindent|set smartindent|syntax on
 " turn on list chars for dotfiles and notes
-au FileType markdown,md,pandoc.markdown,txt,cvs set list lcs=tab:▸\ ,eol:¬,extends:❯,precedes:❮
-au BufEnter init.vim,.tmux.conf,.zshrc,*cards.csv set list lcs=tab:▸\ ,eol:¬,extends:❯,precedes:❮
 " folds
 command! -nargs=+ Foldsearch exe "normal /".<q-args>."^M" | setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\|\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2
 " Notes & Pandoc
 let g:semester = system('echo -n "$SEMESTER"')
-command! -nargs=1 Note exe "e! " . fnameescape($NOTES_DIR . "/" . g:semester . "/<args>.txt")
-command! -nargs=1 Ngrep lvimgrep "<args>" $NOTES_DIR/**/*.txt
-autocmd FileType tex  let b:deoplete_disable_auto_complete = 1
-autocmd FileType csv  let b:deoplete_disable_auto_complete = 1
-autocmd BufEnter *.csv let b:deoplete_disable_auto_complete = 1
-autocmd FileType txt  let b:deoplete_disable_auto_complete = 1
-autocmd FileType tex  let b:deoplete_disable_auto_complete = 1
+command! -nargs=1 Note exe "e! " . fnameescape($NOTES_DIR . "/" . $YEAR . "/" . $SEMESTER . "/<args>.md")
+command! -nargs=1 Ngrep lvimgrep "<args>" $NOTES_DIR/**/*.md
 augroup markdown
-   au!
-   au BufNewFile,BufRead,BufWrite *.txt,*.md,*.mkd,*.markdown,*.mdwn setl ft=rmd
-   au BufRead,BufNewFile,BufEnter   $NOTES_DIR/*/*.txt let &complete="$NOTES_DIR/**/*.txt"
-   au BufRead,BufNewFile,BufEnter   $NOTES_DIR/*/*.txt lcd %:h
-   "au BufRead,BufWrite,InsertChange $NOTES_DIR/*/*.txt syn match ErrorMsg '\%>79v.\+'
-   au Filetype rmd map <C-p> :!echo<space>"require(rmarkdown);<space>render('<c-r>%')"<space>\|<space>R<space>--vanilla<enter>
+    au!
+    au BufNewFile,BufRead,BufWrite   *.txt,*.md,*.mkd,*.markdown,*.mdwn setl ft=rmd
+    au BufRead,BufNewFile,BufEnter   $NOTES_DIR/*/*.txt let &complete="$NOTES_DIR/**/*.txt"
+    au BufRead,BufNewFile,BufEnter   $NOTES_DIR/*/*.txt lcd %:h
+    "au BufRead,BufWrite,InsertChange $NOTES_DIR/*/*.txt syn match ErrorMsg '\%>79v.\+'
+    au Filetype rmd map <C-c> :!echo<space>"require(rmarkdown);<space>render('<c-r>%')"<space>\|<space>R<space>--vanilla<enter>
 augroup end
+
+command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> -
+command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -csw78
 
 " augroup lLength
 "   autocmd BufEnter * highlight OverLength ctermbg=11 ctermfg=9 guibg=11
 "   autocmd BufEnter * match OverLength /\%79v.*/
 " augroup END
-" }}}
-" }}}
-" ========{ Vim Script Functions }======================================== " {{{
-" --------[ Make the 81st column stand out ]--------------------------- {{{
+" ========{ Vim Script Functions }======================================== " {{{2
+" ----[ Make the 81st column stand out ]--------------------------- {{{3
 "  " OR ELSE just the 81st column of wide lines...
 highlight ColorColumn ctermbg=9 ctermfg=7
 call matchadd('ColorColumn', '\%81v', 100)
-" }}}
-" --------[ Highlight matches when jumping to next ]------------------- {{{
-" This rewires n and N to do the highlighing...
+" ----[ Highlight matches when jumping to next ]------------------- {{{3
+" This rewires n to do the highlighing...
 "nnoremap <silent> n   n:call HLNext(0.4)<cr>
-"nnoremap <silent> N   N:call HLNext(0.4)<cr>
 " OR ELSE just highlight the match in gold...
-fun! HLNext (blinktime)
-    let [bufnum, lnum, col, off] = getpos('.')
-    let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
-    let target_pat = '\c\%#\%('.@/.'\)'
-    let ring = matchadd('WhiteOnRed', target_pat, 101)
-    redraw
-    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
-    call matchdelete(ring)
-    redraw
-endfun
-" }}}
-" --------[ Always turn on syntax highlighting for diffs ]------------------ {{{
+" fun! HLNext (blinktime)
+"     let [bufnum, lnum, col, off] = getpos('.')
+"     let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+"     let target_pat = '\c\%#\%('.@/.'\)'
+"     let ring = matchadd('WhiteOnRed', target_pat, 101)
+"     redraw
+"     exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+"     call matchdelete(ring)
+"     redraw
+" endfun
+" ----[ Always turn on syntax highlighting for diffs ]------------------ {{{3
 " EITHER select by the file-suffix directly...
 augroup PatchDiffHighlight
     autocmd!
@@ -726,8 +738,7 @@ augroup PatchDiffHighlight
     autocmd!
     autocmd FileType diff   syntax enable
 augroup END
-" }}}
-" --------[ Open file with existing swp in readonly mode ]--------- {{{
+" ----[ Open file with existing swp in readonly mode ]--------- {{{3
 augroup NoSimultaneousEdits
     autocmd!
     autocmd SwapExists * let v:swapchoice = 'o'
@@ -736,17 +747,7 @@ augroup NoSimultaneousEdits
     autocmd SwapExists * echohl None
     autocmd SwapExists * sleep 2
 augroup END
-" }}}
-" ------- [ generate header guard ]---------------------------------------- {{{
-fun! IncludeGuard()
-    let basename = substitute(bufname(""), '.*/', '', '')
-    let guard = '_' . substitute(toupper(basename), '\.', '_', "H")
-    call append(0, "#ifndef " . guard)
-    call append(1, "#define " . guard)
-    call append(line("$"), "#endif // for #ifndef " . guard)
-endfun
-" }}}
-" --------[ IncHeader ]-------------------------------------------------- {{{
+" ----[ IncHeader ]-------------------------------------------------- {{{3
 fun! IncHeader()
     let date = strftime("%B %d, %Y")
     call append(0, "" . "")
@@ -759,8 +760,23 @@ fun! IncHeader()
     call append(6, " * " . "Lab ")
     call append(7, " */" . "")
 endfun
-" }}}
-" ------- [ file Encoding ]-------------------------------------------- {{{
+" ----[ CycleLang ]------------------------------ {{{3
+fun! CycleLang()
+    let langs = ['', 'en_us', 'fr']
+
+    let i = index(langs, &spl)
+    let j = (i+1)%len(langs)
+    let &spl = langs[j]
+
+    if empty(&spl)
+        set nospell
+    else
+        set spell
+        hi clear SpellBad
+        hi SpellBad cterm=underline ctermfg=9
+    endif
+endfun
+" ----[ file Encoding ]-------------------------------------------- {{{3
 fun! ViewUTF8()
     set encoding=utf-8
     set termencoding=big5
@@ -777,6 +793,38 @@ fun! Big5()
     set encoding=big5
     set fileencoding=big5
 endfun
-" }}}
-" }}}
-" }}}
+" ----[ Extended Text Objects ]----------------------------------------- {{{3
+let s:items = [ "<bar>", "\\", "/", ":", ".", "*", "_" ]
+for item in s:items
+    exe "nnoremap yi".item." T".item."yt".item
+    exe "nnoremap ya".item." F".item."yf".item
+    exe "nnoremap ci".item." T".item."ct".item
+    exe "nnoremap ca".item." F".item."cf".item
+    exe "nnoremap di".item." T".item."dt".item
+    exe "nnoremap da".item." F".item."df".item
+    exe "nnoremap vi".item." T".item."vt".item
+    exe "nnoremap va".item." F".item."vf".item
+endfor
+" ----[ Smart Tab Complete ]--------------------------------------------{{{3
+function! Smart_TabComplete()
+  let line = getline('.')                         " current line
+
+  let substr = strpart(line, -1, col('.')+1)      " from the start of the current
+                                                  " line to one character right
+                                                  " of the cursor
+  let substr = matchstr(substr, "[^ \t]*$")       " word till cursor
+  if (strlen(substr)==0)                          " nothing to match on empty string
+    return "\<tab>"
+  endif
+  let has_period = match(substr, '\.') != -1      " position of period, if any
+  let has_slash = match(substr, '\/') != -1       " position of slash, if any
+  if (!has_period && !has_slash)
+    return "\<C-X>\<C-P>"                         " existing text matching
+  elseif ( has_slash )
+    return "\<C-X>\<C-F>"                         " file matching
+  else if
+    return "\<C-X>\<C-O>"                         " plugin matching
+  else
+      return "\<tab>"
+  endif
+endfunction

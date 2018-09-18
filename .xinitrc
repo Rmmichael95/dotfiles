@@ -57,15 +57,18 @@ fi
 #xscreensaver &
 #xsetroot -cursor_name left_ptr &
 #xcompmgr &
+#start-pulseaudio-x11 &
 
 # Default
-session=${1:-i3}
+session=${1:-dwm}
+
+/home/ryanm/Documents/batcave/dotfiles/dwm_status.sh &
+/home/ryanm/Documents/batcave/dotfiles/void_bg.sh &
 
 case $session in
-    i3|i3wm           ) exec i3;;
+    i3|i3wm           ) exec ck-launch-session i3;;
     awesome	      ) exec awesome;;
-    kde               ) exec startkde;;
-    xfce|xfce4        ) exec startxfce4;;
+    dwm               ) exec dwm;;
     # No known session, try to run it as command
     *                 ) exec $1;;
 esac
