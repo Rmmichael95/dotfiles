@@ -1,0 +1,3 @@
+#!/bin/env sh
+
+while true; do feh --bg-scale /home/ryanm/Pictures/zelda_arch.png; sleep 5; done

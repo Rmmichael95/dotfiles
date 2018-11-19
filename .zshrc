@@ -50,19 +50,8 @@ ZSH_THEME="ys"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-cargo
 colored-man-pages
 colorize
-gem
-git
-github
-perl
-pip
-python
-rails
-ruby
-rvm
-sudo
 thefuck
 tmux
 vi-mode
@@ -83,9 +72,10 @@ alias tmuxconf='nvim ~/.tmux.conf'
 alias i3conf='nvim ~/.config/i3/config'
 alias termconf='nvim ~/.config/termite/config'
 
-source /usr/share/doc/fzf/key-bindings.zsh
-source /usr/share/doc/fzf/completion.zsh
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
 source /home/ryanm/.rvm/scripts/rvm
+source /usr/share/nvm/init-nvm.sh
 
 # You can use whatever you want as an alias, like for Mondays:
 #eval "$(thefuck --alias FUCK)"
@@ -124,9 +114,11 @@ export SEMESTER=Fall
 export YEAR=2018
 export NOTES_DIR="/home/ryanm/Documents/Notes"
 export TODO_DIR='/home/ryanm/Documents/Notes'
+
+export PATH="${PATH}:${HOME}/.local/bin/"
 # }}}
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/texlive/2018/bin/x86_64-linux:$HOME/.rvm/gems/ruby-2.5.0/bin:$HOME/Documents/Notes/:$HOME/.sh:$HOME/.local/bin"
+export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/texlive/2018/bin/x86_64-linux:$HOME/.rvm/gems/ruby-2.5.0/bin:$HOME/Documents/Notes/:$HOME/.sh:$HOME/.local/bin"
 export MANPATH="/usr/local/man:$MANPATH:/opt/texlive/2017/texmf-dist/doc/man:"
 
 source $ZSH/oh-my-zsh.sh

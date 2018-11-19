@@ -63,7 +63,7 @@ fi
 session=${1:-dwm}
 
 /home/ryanm/Documents/batcave/dotfiles/dwm_status.sh &
-/home/ryanm/Documents/batcave/dotfiles/void_bg.sh &
+/home/ryanm/Documents/batcave/dotfiles/arch_bg &
 
 case $session in
     i3|i3wm           ) exec ck-launch-session i3;;

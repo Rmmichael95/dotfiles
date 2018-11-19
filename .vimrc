@@ -15,21 +15,25 @@ if &compatible
     set nocompatible
 endif
 
-set runtimepath+=/home/ryanm/.local/share/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=/home/ryanm/.nvim/bundles/repos/github.com/Shougo/dein.vim
 
 if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#begin('/home/ryanm/.nvim/bundles')
     call dein#add('/home/ryanm/.nvim/bundles/repos/github.com/Shougo/dein.vim')
     call dein#add('Shougo/dein.vim')
-    call dein#add('Shougo/deoplete.nvim', {'on_ft':['cpp', 'c', 'java', 'rd', 'pl']})
+    call dein#add('Shougo/deoplete.nvim', {'on_ft':['cpp', 'c', 'java', 'rb', 'pl', 'py']})
+    if !has('nvim')
+        call dein#add('roxma/nvim-yarp')
+        call dein#add('roxma/vim-hug-neovim-rpc')
+    endif
     call dein#add('zchee/deoplete-clang', {'on_ft':['cpp', 'c']})
     call dein#add('zchee/libclang-python3')
     call dein#add('Shougo/neco-vim')
     call dein#add('Shougo/neoinclude.vim')
     call dein#add('artur-shaik/vim-javacomplete2', {'on_ft':['java']})
-    call dein#add('zchee/deoplete-jedi', {'on_ft':['py']})
     call dein#add('davidhalter/jedi')
-    call dein#add('cyansprite/omnisharp.nvim', {'build':['./install.sh']})
+    call dein#add('zchee/deoplete-jedi', {'on_ft':['py']})
+    "call dein#add('cyansprite/omnisharp.nvim', {'build':['./install.sh']})
     call dein#add('ternjs/tern_for_vim', {'build':['npm install']})
     call dein#add('starcraftman/vim-eclim', {'on_ft':'java'})
     call dein#add('tpope/vim-endwise')
@@ -55,7 +59,7 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('qpkorr/vim-bufkill')
     call dein#add('mhinz/vim-startify')
     call dein#add('luochen1990/rainbow')
-    call dein#add('editorconfig/editorconfig-vim')
+    "call dein#add('editorconfig/editorconfig-vim')
     call dein#add('terryma/vim-multiple-cursors')
     call dein#add('chrisbra/NrrwRgn')
     call dein#add('tmhedberg/SimpylFold')
@@ -187,14 +191,25 @@ nnoremap  <leader>ff :call cscope#find('f', expand('<cword>'))<CR>
 " i: Find files #including this file
 nnoremap  <leader>fi :call cscope#find('i', expand('<cword>'))<CR>
 " ----[ Deoplete ]---------------------- {{{4
-set rtp+=/home/ryanm/repos/github.com/Shougo/deoplete.nvim/
+set rtp+=/home/ryanm/.nvim/bundles/repos/github.com/Shougo/deoplete.nvim/
 let g:deoplete#enable_at_startup = 1
 " c++
 let g:deoplete#sources#clang#libclang_path="/usr/lib/libclang.so"
 let g:deoplete#sources#clang#clang_header="/usr/lib/clang"
 " omnisharp
-let g:deoplete_omnisharp_exe_path   = get(g:, "deoplete_omnisharp_exe_path", '~/.nvim/bundles/repos/github.com/cyansprite/omnisharp.nvim/omnisharp-server/OmniSharp/bin/Debug/OmniSharp.exe')
-let g:deoplete_omnisharp_port   = get(g:, "deoplete_omnisharp_port", 9999)
+let g:deoplete#omni#functions = {}
+let g:deoplete#omni#functions.javascript = [
+  \ 'tern#Complete',
+  \ 'jspc#omni'
+\]
+let g:deoplete#omni#functions.python = ['jedi#complete']
+set completeopt=longest,menuone,preview
+let g:deoplete#sources = {}
+let g:deoplete#sources['javascript.jsx'] = ['file', 'ultisnips', 'ternjs']
+let g:tern#command = ['tern']
+let g:tern#arguments = ['--persistent']
+" let g:deoplete_omnisharp_exe_path   = get(g:, "deoplete_omnisharp_exe_path", 'home/ryanm/.nvim/bundles/repos/github.com/cyansprite/omnisharp.nvim/omnisharp-server/OmniSharp/bin/Debug/OmniSharp.exe')
+" let g:deoplete_omnisharp_port   = get(g:, "deoplete_omnisharp_port", 9999)
 " ----[ Neomake ]-------------------------- {{{4
 " When writing a buffer.
 call neomake#configure#automake('w')
@@ -664,16 +679,16 @@ map! <C-v>-3 ^3-^
 " ----[ Commands ]-------------------------------------{{{3
 autocmd! bufwritepost init.vim source ~/.config/nvim/init.vim " auto reload vimrc when editing it
 " Enable omni completion. (Ctrl-X Ctrl-O)
-augroup omnifuncs
-    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-    autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-    autocmd FileType c,cpp set omnifunc=ccomplete#Complete
-    autocmd FileType java set omnifunc=javacomplete#Complete
-    autocmd FileType java setlocal omnifunc=javacomplete#Complete
-augroup end
+" augroup omnifuncs
+"     autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+"     autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+"     autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"     autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+"     autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+"     autocmd FileType c,cpp set omnifunc=ccomplete#Complete
+"     autocmd FileType java set omnifunc=javacomplete#Complete
+"     autocmd FileType java setlocal omnifunc=javacomplete#Complete
+" augroup end
 " tern
 if exists('g:plugs["tern_for_vim"]')
     let g:tern_show_argument_hints = 'on_hold'
