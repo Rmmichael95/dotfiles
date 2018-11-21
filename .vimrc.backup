@@ -21,31 +21,41 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#begin('/home/ryanm/.nvim/bundles')
     call dein#add('/home/ryanm/.nvim/bundles/repos/github.com/Shougo/dein.vim')
     call dein#add('Shougo/dein.vim')
-    call dein#add('Shougo/deoplete.nvim', {'on_ft':['cpp', 'c', 'java', 'rb', 'pl', 'py']})
+    call dein#add('Shougo/deoplete.nvim', {'on_i': 1})
     if !has('nvim')
         call dein#add('roxma/nvim-yarp')
         call dein#add('roxma/vim-hug-neovim-rpc')
     endif
-    call dein#add('zchee/deoplete-clang', {'on_ft':['cpp', 'c']})
-    call dein#add('zchee/libclang-python3')
-    call dein#add('Shougo/neco-vim')
     call dein#add('Shougo/neoinclude.vim')
-    call dein#add('artur-shaik/vim-javacomplete2', {'on_ft':['java']})
-    call dein#add('davidhalter/jedi')
-    call dein#add('zchee/deoplete-jedi', {'on_ft':['py']})
-    "call dein#add('cyansprite/omnisharp.nvim', {'build':['./install.sh']})
-    call dein#add('ternjs/tern_for_vim', {'build':['npm install']})
+    call dein#add('Shougo/neco-syntax')
+    call dein#add('voldikss/vim-mma')
+    call dein#add('Shougo/neco-vim', {'on_ft': 'vim'})
+    call dein#add('zchee/deoplete-zsh', {'on_ft': 'sh'})
+    call dein#add('carlitux/deoplete-ternjs', {
+                \ 'build': 'npm install -g tern',
+                \ 'on_ft': 'java',
+                \ })
+    call dein#add('othree/jspc.vim')
+    call dein#add('autozimu/LanguageClient-neovim', {
+                \ 'rev': 'next',
+                \ 'build': 'bash install.sh',
+                \ 'on_ft': ['c', 'cpp', 'py', 'haskell', 'rust'],
+                \ })
+    call dein#add('ervandew/supertab')
+    call dein#add('/usr/bin/fzf')
+    call dein#add('junegunn/fzf')
     call dein#add('starcraftman/vim-eclim', {'on_ft':'java'})
     call dein#add('tpope/vim-endwise')
     call dein#add('tpope/vim-commentary')
     call dein#add('tpope/vim-repeat')
     call dein#add('tpope/vim-dispatch')
     call dein#add('radenling/vim-dispatch-neovim')
-    call dein#add('tpope/vim-fugitive')
+    call dein#add('tpope/vim-fugitive',
+                \ { 'on_cmd': ['Git', 'Gstatus', 'Gwrite', 'Glog', 'Gcommit', 'Gblame', 'Ggrep', 'Gdiff']})
     call dein#add('tpope/vim-surround')
     call dein#add('jiangmiao/auto-pairs')
     call dein#add('neomake/neomake')
-    call dein#add('godlygeek/tabular', {'on_cmd':['Tabularize']})
+    call dein#add('godlygeek/tabular', {'on_cmd':'Tabularize'})
     call dein#add('jeffkreeftmeijer/vim-numbertoggle')
     call dein#add('ntpeters/vim-better-whitespace')
     call dein#add('christoomey/vim-tmux-navigator')
@@ -59,7 +69,6 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('qpkorr/vim-bufkill')
     call dein#add('mhinz/vim-startify')
     call dein#add('luochen1990/rainbow')
-    "call dein#add('editorconfig/editorconfig-vim')
     call dein#add('terryma/vim-multiple-cursors')
     call dein#add('chrisbra/NrrwRgn')
     call dein#add('tmhedberg/SimpylFold')
@@ -69,32 +78,32 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('dhruvasagar/vim-table-mode')
     call dein#add('vim-airline/vim-airline')
     call dein#add('ctrlpvim/ctrlp.vim')
-    call dein#add('Shougo/vimproc.vim', {'build':['make']})
-    call dein#add('mbbill/undotree', {'on_cmd':['UndotreeToggle']})
+    call dein#add('Shougo/vimproc.vim', {'build':'make'})
+    call dein#add('mbbill/undotree', {'on_cmd':'UndotreeToggle'})
     call dein#add('scrooloose/nerdtree', {'on_cmd':['NERDTreeToggle','NERDTreeFind']})
     call dein#add('Xuyuanp/nerdtree-git-plugin', {'on_cmd':['<Plug>NERDTreeToggle','<Plug>NERDTreeFind']})
     call dein#add('zhaocai/GoldenView.Vim', {'on_cmd':'<Plug>ToggleGoldenViewAutoResize'})
     call dein#add('thoughtbot/vim-rspec', {'on_func':['RunCurrentSpecFile','RunNearestSpec', 'RunAllSpecs', 'RunLastSpec']})
     " Groovy
-    call dein#add('vim-scripts/groovy.vim', {'on_ft':['groovy']})
+    call dein#add('vim-scripts/groovy.vim', {'on_ft':'groovy'})
     " Gradle
-    call dein#add('tfnico/vim-gradle', {'on_ft':['gradle']})
+    call dein#add('tfnico/vim-gradle', {'on_ft':'gradle'})
     " Java
-    call dein#add('Dinduks/vim-java-get-set', {'on_ft':['java']})
+    call dein#add('Dinduks/vim-java-get-set', {'on_ft':'java'})
     " C++
-    call dein#add('octol/vim-cpp-enhanced-highlight', {'on_ft':['cpp', 'c', 'h']})
-    call dein#add('derekwyatt/vim-protodef', {'on_ft':['cpp', 'c', 'h']})
-    call dein#add('derekwyatt/vim-fswitch', {'on_ft':['cpp', 'c']})
-    call dein#add('vim-scripts/DoxygenToolkit.vim', {'on_ft':['cpp', 'c']})
-    call dein#add('majutsushi/tagbar', {'on_cmd':['TagbarToggle']})
-    call dein#add('szw/vim-tags', {'on_ft':['cpp', 'c']})
+    call dein#add('octol/vim-cpp-enhanced-highlight', {'on_ft':['c', 'cpp', 'h']})
+    call dein#add('derekwyatt/vim-protodef', {'on_ft':['c', 'cpp', 'h']})
+    call dein#add('derekwyatt/vim-fswitch', {'on_ft':['c', 'cpp']})
+    call dein#add('vim-scripts/DoxygenToolkit.vim', {'on_ft':['c', 'cpp']})
+    call dein#add('majutsushi/tagbar', {'on_cmd':'TagbarToggle'})
+    call dein#add('szw/vim-tags', {'on_ft':['c', 'cpp']})
     " general refactoring
-    call dein#add('derekwyatt/vim-protodef', {'on_ft':['cpp', 'c']})
-    call dein#add('huawenyu/neogdb.vim', {'on_ft':['cpp', 'c']})
-    "call dein#add('dbgx/lldb.nvim', {'on_ft':['cpp', 'c']})
+    call dein#add('derekwyatt/vim-protodef', {'on_ft':['c', 'cpp']})
+    call dein#add('huawenyu/neogdb.vim', {'on_ft':['c', 'cpp']})
+    "call dein#add('dbgx/lldb.nvim', {'on_ft':['c', 'cpp']})
     " Cscope
-    call dein#add('vim-scripts/cscope.vim', {'on_ft':['cpp', 'c']})
-    call dein#add('JCLiang/vim-cscope-utils', {'on_ft':['cpp', 'c']})
+    call dein#add('vim-scripts/cscope.vim', {'on_ft':['c', 'cpp']})
+    call dein#add('JCLiang/vim-cscope-utils', {'on_ft':['c', 'cpp']})
     " Markdown
     call dein#add('vim-pandoc/vim-pandoc-syntax', {'on_ft':['markdown', 'pandoc.markdown', 'rmd']})
     call dein#add('vim-pandoc/vim-pantondoc', {'on_ft':['markdown', 'pandoc.markdown', 'rmd']})
@@ -106,8 +115,6 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('xuhdev/vim-latex-live-preview', {'on_ft':['tex', 'rmd']})
     " Perl
     "call dein#add('vim-perl/vim-perl', {'build':['make clean carp dancer highlight-all-pragmas moose test-more try-tiny']})
-    " Python
-    call dein#add('klen/python-mode', {'on_ft':['python', 'py']})
     " Ruby
     call dein#add('tpope/vim-rails', {'on_ft':['ruby', 'rb']})
     call dein#add('c-brenn/phoenix.vim', {'on_ft':['rb', 'ex']})
@@ -193,23 +200,24 @@ nnoremap  <leader>fi :call cscope#find('i', expand('<cword>'))<CR>
 " ----[ Deoplete ]---------------------- {{{4
 set rtp+=/home/ryanm/.nvim/bundles/repos/github.com/Shougo/deoplete.nvim/
 let g:deoplete#enable_at_startup = 1
-" c++
-let g:deoplete#sources#clang#libclang_path="/usr/lib/libclang.so"
-let g:deoplete#sources#clang#clang_header="/usr/lib/clang"
-" omnisharp
-let g:deoplete#omni#functions = {}
-let g:deoplete#omni#functions.javascript = [
-  \ 'tern#Complete',
-  \ 'jspc#omni'
-\]
-let g:deoplete#omni#functions.python = ['jedi#complete']
-set completeopt=longest,menuone,preview
 let g:deoplete#sources = {}
-let g:deoplete#sources['javascript.jsx'] = ['file', 'ultisnips', 'ternjs']
-let g:tern#command = ['tern']
-let g:tern#arguments = ['--persistent']
-" let g:deoplete_omnisharp_exe_path   = get(g:, "deoplete_omnisharp_exe_path", 'home/ryanm/.nvim/bundles/repos/github.com/cyansprite/omnisharp.nvim/omnisharp-server/OmniSharp/bin/Debug/OmniSharp.exe')
-" let g:deoplete_omnisharp_port   = get(g:, "deoplete_omnisharp_port", 9999)
+
+" Disable the candidates in Comment/String syntaxes.
+call deoplete#custom#source('_',
+            \ 'disabled_syntaxes', ['Comment', 'String'])
+
+" language server commands
+let g:LanguageClient_serverCommands = {
+            \ 'cpp': ['cquery'],
+            \ 'c': ['cquery'],
+            \ 'python': ['/usr/bin/pyls'],
+            \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+            \ 'haskell': ['hie-wrapper']
+            \ }
+let g:LanguageClient_autoStart = 1
+
+set completefunc=LanguageClient#complete
+set formatexpr=LanguageClient_textDocument_rangeFormatting()
 " ----[ Neomake ]-------------------------- {{{4
 " When writing a buffer.
 call neomake#configure#automake('w')
@@ -450,7 +458,6 @@ set tags=tags;
 set fdm=marker
 set splitbelow
 set splitright
-set bs=2
 set backspace=indent,eol,start
 set shell=/bin/zsh
 set omnifunc=syntaxcomplete#Complete
@@ -501,6 +508,12 @@ nnoremap <F9> :Dispatch<CR>
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " tern
 autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
+" deoplete language client
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+" Or map each action separately
+nnoremap <silent> H :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> nn :call LanguageClient#textDocument_rename()<CR>
 
 " Ferret
 " |:Ack| search <leader>a
@@ -689,12 +702,16 @@ autocmd! bufwritepost init.vim source ~/.config/nvim/init.vim " auto reload vimr
 "     autocmd FileType java set omnifunc=javacomplete#Complete
 "     autocmd FileType java setlocal omnifunc=javacomplete#Complete
 " augroup end
+
 " tern
 if exists('g:plugs["tern_for_vim"]')
     let g:tern_show_argument_hints = 'on_hold'
     let g:tern_show_signature_in_pum = 1
     autocmd FileType javascript setlocal om6nifunc=tern#Complete
 endif
+" Recognize mathmatica files
+autocmd BufNewFile,BufRead *.wl set filetype=mma
+autocmd BufNewFile,BufRead *.wls set filetype=mma
 " make CSS omnicompletion work for SASS and SCSS
 autocmd BufNewFile,BufRead *.scss             set ft=scss.css
 autocmd BufNewFile,BufRead *.sass             set ft=sass.css
