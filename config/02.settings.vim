@@ -6,6 +6,8 @@ set undodir=~/.nvim/tmp/.undo//,/tmp
 set directory=~/.nvim/tmp/.swp//,/tmp
 set browsedir=buffer
 set history=10000
+" Copies using system clipboard
+set clipboard+=unnamedplus
 "set autochdir
 set mouse=a
 set number

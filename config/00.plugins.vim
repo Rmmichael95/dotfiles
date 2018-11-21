@@ -1,4 +1,4 @@
-" ========{ Formatting }================================================== " {{{1
+" ========{ Plugins }================================================== " {{{1
 
 if has('nvim')
     runtime! python_setup.vim
@@ -14,8 +14,8 @@ set runtimepath+=/home/ryanm/.nvim/bundles/repos/github.com/Shougo/dein.vim
 
 if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#begin('/home/ryanm/.nvim/bundles')
+
     call dein#add('/home/ryanm/.nvim/bundles/repos/github.com/Shougo/dein.vim')
-    call dein#add('Shougo/dein.vim')
     call dein#add('Shougo/deoplete.nvim', {'on_i': 1})
     if !has('nvim')
         call dein#add('roxma/nvim-yarp')
@@ -30,7 +30,7 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
                 \ 'build': 'npm install -g tern',
                 \ 'on_ft': 'java',
                 \ })
-    call dein#add('othree/jspc.vim')
+    call dein#add('othree/jspc.vim', {'on_ft': 'java'})
     call dein#add('autozimu/LanguageClient-neovim', {
                 \ 'rev': 'next',
                 \ 'build': 'bash install.sh',
@@ -41,30 +41,30 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('junegunn/fzf')
     call dein#add('starcraftman/vim-eclim', {'on_ft':'java'})
     call dein#add('tpope/vim-endwise')
-    call dein#add('tpope/vim-commentary')
-    call dein#add('tpope/vim-repeat')
+    call dein#add('tpope/vim-commentary', {'on_map': 'gc'})
+    call dein#add('tpope/vim-repeat', {'on_map' : '.'})
     call dein#add('tpope/vim-dispatch')
     call dein#add('radenling/vim-dispatch-neovim')
     call dein#add('tpope/vim-fugitive',
                 \ { 'on_cmd': ['Git', 'Gstatus', 'Gwrite', 'Glog', 'Gcommit', 'Gblame', 'Ggrep', 'Gdiff']})
-    call dein#add('tpope/vim-surround')
+    call dein#add('tpope/vim-surround', {'on_map': {'n' : ['cs', 'ds', 'ys'], 'x' : 'S'}, 'depends' : 'vim-repeat'})
     call dein#add('jiangmiao/auto-pairs')
     call dein#add('neomake/neomake')
-    call dein#add('godlygeek/tabular', {'on_cmd':'Tabularize'})
+    call dein#add('godlygeek/tabular', { 'on_cmd' : [ 'Tab', 'Tabularize' ] , 'augroup' : 'tabular' })
     call dein#add('jeffkreeftmeijer/vim-numbertoggle')
     call dein#add('ntpeters/vim-better-whitespace')
     call dein#add('christoomey/vim-tmux-navigator')
     call dein#add('easymotion/vim-easymotion')
     call dein#add('wincent/ferret')
     call dein#add('powerman/vim-plugin-viewdoc')
-    call dein#add('SirVer/ultisnips')
+    call dein#add('SirVer/ultisnips', {'on_map' : { 'i' : ['<TAB>'] }})
     call dein#add('honza/vim-snippets')
     call dein#add('jgdavey/tslime.vim')
     call dein#add('benmills/vimux')
     call dein#add('qpkorr/vim-bufkill')
     call dein#add('mhinz/vim-startify')
     call dein#add('luochen1990/rainbow')
-    call dein#add('terryma/vim-multiple-cursors')
+    call dein#add('terryma/vim-multiple-cursors', { 'on_map' : { 'n' : ['<C-n>', '<C-p>'], 'x' : '<C-n>'}})
     call dein#add('chrisbra/NrrwRgn')
     call dein#add('tmhedberg/SimpylFold')
     call dein#add('tpope/vim-sleuth')
@@ -72,7 +72,10 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('sheerun/vim-polyglot')
     call dein#add('dhruvasagar/vim-table-mode')
     call dein#add('vim-airline/vim-airline')
-    call dein#add('ctrlpvim/ctrlp.vim')
+    call dein#add('wincent/command-t', {
+        \ 'build': 'sh -c "cd ruby/command-t/ext/command-t && {make clean; ruby extconf.rb && make"}',
+        \ 'on_map': '<leader>t', : 'on_cmd': 'commandT',
+        \ })
     call dein#add('Shougo/vimproc.vim', {'build':'make'})
     call dein#add('mbbill/undotree', {'on_cmd':'UndotreeToggle'})
     call dein#add('scrooloose/nerdtree', {'on_cmd':['NERDTreeToggle','NERDTreeFind']})
