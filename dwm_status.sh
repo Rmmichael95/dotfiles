@@ -2,8 +2,9 @@
 
 print_volume() {
 	volume="$(amixer get Master | tail -n1 | sed -r 's/.*\[(.*)%\].*/\1/')"
-	if test "$volume" -gt 0
-	then
+	mute="$(amixer get Master | tail -n1 | sed -r 's/.*\[(.*)\].*/\1/')"
+
+	if [ "$mute" = "on" ]; then
 		echo -e "${volume}%"
 	else
 		echo -e "Mute"
@@ -22,7 +23,7 @@ print_bat(){
 	else
 		# On mains! no need to suspend
 		#systemctl --user start inhibit-lid-sleep-on-battery.service
-		echo -e "${charge}"
+		echo -e "${charge}⚡"
 	fi
 }
 
