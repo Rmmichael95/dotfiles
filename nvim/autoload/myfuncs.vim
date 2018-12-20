@@ -57,3 +57,17 @@ function myfuncs#IncludeGuard()
     call append(1, "#define " . guard)
     call append(line("$"), "#endif // for #ifndef " . guard)
 endfunction
+" ----[ Open unsupported files ]
+" What command to use
+function! myfuncs#OpenAll() abort
+    " Linux/BSD
+    if executable("xdg-open")
+        return "xdg-open"
+    endif
+    " MacOS
+    if executable("open")
+        return "open"
+    endif
+    " Windows
+    return "explorer"
+endfunction
