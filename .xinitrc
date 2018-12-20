@@ -57,12 +57,16 @@ fi
 #xscreensaver &
 #xsetroot -cursor_name left_ptr &
 #xcompmgr &
+compton &
+nm-applet &
+discord &
 #start-pulseaudio-x11 &
 
 # Default
 session=${1:-dwm}
 
 /home/ryanm/Documents/batcave/dotfiles/dwm_status.sh &
+#dwmstatus 2>&1 >/dev/null &
 /home/ryanm/Documents/batcave/dotfiles/arch_bg &
 
 case $session in

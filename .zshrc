@@ -66,11 +66,11 @@ alias tmux250='tmux -u new -s A250 -c /home/ryanm/batcave/C++/A250'
 alias tmux200='tmux -u new -s A200 -c /home/ryanm/batcave/C++/A200'
 alias tmux='tmux -u'
 alias vim='nvim'
-alias vimrc='nvim ~/.vimrc'
+alias vimrc='nvim ~/.config/nvim'
 alias zshrc='nvim ~/.zshrc'
 alias tmuxconf='nvim ~/.tmux.conf'
-alias i3conf='nvim ~/.config/i3/config'
-alias termconf='nvim ~/.config/termite/config'
+alias dwmconf='nvim ~/tmp/dwm/config.h'
+alias termconf='nvim ~/tmp/st/config.h'
 
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
@@ -112,13 +112,20 @@ export KEYTIMEOUT=1
 export EDITOR=nvim
 export SEMESTER=Fall
 export YEAR=2018
-export NOTES_DIR="/home/ryanm/Documents/Notes"
-export TODO_DIR='/home/ryanm/Documents/Notes'
+export NOTES_DIR="/home/ryanm/Documents/batcave/Notes"
+export TODO_DIR='/home/ryanm/Documents/batcave/Notes'
+export BROWSER="qutebrowser"
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm:$HOME/.rvm/bin"
 export PATH="${PATH}:${HOME}/.local/bin/"
+# ccache
+export PATH="/usr/lib/ccache/bin/:$PATH"
+export MAKEFLAGS="-j9 -l8"
 # }}}
 
-export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/texlive/2018/bin/x86_64-linux:$HOME/.rvm/gems/ruby-2.5.0/bin:$HOME/Documents/Notes/:$HOME/.scripts:$HOME/.local/bin"
+export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/texlive/2018/bin/x86_64-linux:$HOME/.rvm/gems/ruby-2.5.0/bin:$HOME/Documents/Notes/:$HOME/.sh:$HOME/.local/bin:$HOME/go/bin"
 export MANPATH="/usr/local/man:$MANPATH:/opt/texlive/2017/texmf-dist/doc/man:"
 
 source $ZSH/oh-my-zsh.sh
@@ -143,6 +150,3 @@ source $ZSH/oh-my-zsh.sh
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm:$HOME/.rvm/bin"

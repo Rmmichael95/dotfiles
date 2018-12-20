@@ -1,12 +1,11 @@
 " ========{ Mappings }====================================== " {{{1
-
 " ----[ Leaders ]---------------------------------------- {{{2
-map Q gq " Don't use Ex mode, use Q for formatting
 let leader = "," " remap leader to z (from \)
 let g:leader = "," " remap leader to z (global)
-let  mapleader = "," " remap leader to , (from \)
+let mapleader = "," " remap leader to , (from \)
 let g:mapleader = "," " remap leader to z (global)
-map <leader>r :source ~/.config/nvim/init.vim<cr>
+nnoremap <leader>r :source ~/.config/nvim/init.vim<cr>
+noremap <leader><space> :noh<cr>:call clearmatches()<cr>
 set pastetoggle=<leader>P
 nnoremap <leader>q :q!<cr>
 nnoremap <leader>w :w<cr>
@@ -16,11 +15,19 @@ nmap <silent> <leader>y :FSHere<cr>
 " Notes
 nnoremap <leader>N :Note
 nnoremap <leader>[ :Ngrep
+" Open quickfix for last search
+noremap <silent> <leader>/ :execute 'vimgrep/'.@/.'/g%'<cr>:copen<cr>
+" Ripgrep for next search
+noremap <silent> <leader>? :execute "!rg '" . substitute(substitute(substitute(@/, "\\\\<", "\\\\b", ""), "\\\\>", "\\\\b", ""), "\\\\v", "", "") . "'"<cr>
+" urlview
+nnoremap <leader>u :w<Home>silent <End> !urlview<CR>
+" header guard
+nnoremap <leader>g :call myfuncs#IncludeGuard()<CR>
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>F :Find .<CR>
 " ----[ Plugin Maps ]------------------------------------------------ {{{2
 "  Vim protodef
 "  pull defs to cursor <leader>PP
-"  vim livedown
-map <leader>gm :call LivedownPreview()<CR>
 " lldb mapping
 " map <leader>O :LLsession new<CR>
 " map <leader>P :LLmode debug<CR>
@@ -38,36 +45,39 @@ map <leader>gm :call LivedownPreview()<CR>
 " vnoremap <F9> :<C-U>LL print <C-R>=lldb#util#get_selection()<CR><CR>
 "  dispatch
 nnoremap <F9> :Dispatch<CR>
+" This is the default fzf extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" nnn
+let g:nnn#action = {
+      \ '<c-t>': 'tab split',
+      \ '<c-x>': 'split',
+      \ '<c-v>': 'vsplit' }
 
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-" tern
-autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
-" deoplete language client
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-" Or map each action separately
+" LanguageClient mappings
 nnoremap <silent> H :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> nn :call LanguageClient#textDocument_rename()<CR>
-
-" Ferret
-" |:Ack| search <leader>a
-" |:Ack| search wd under cursor <leader>s
 
 " Ultisnippts mapped in plugin settings
 " g:UltiSnipsExpandTrigger='<c-x>'
 " g:UltiSnipsJumpForwardTrigger='<c-j>'
 " g:UltiSnipsJumpBackwardTrigger='<c-k>'
 " ----[ Mappings ]---------------------------------------- {{{2
+" Don't use Ex mode, use Q for formatting
+nnoremap Q gq
 "  smart tab complete
-au FileType erl inoremap <tab> <c-r>=Smart_TabComplete()<CR>
+au FileType erl inoremap <tab> <c-r>=myfuncs#Smart_TabComplete()<CR>
 " Navigate Vim Splits
 nnoremap <C-J> <C-W><C-J> "Ctrl-j to move down a split
 nnoremap <C-K> <C-W><C-K> "Ctrl-k to move up a split
 nnoremap <C-L> <C-W><C-L> "Ctrl-l to move    right a split
 nnoremap <C-H> <C-W><C-H> "Ctrl-h to move left a split
-" ,g generates the header guard
-map <leader>h :call IncHeader()<CR>
 " new tab
 map <C-t><C-t> :tabnew<CR>
 " close tab
@@ -86,6 +96,21 @@ nnoremap <F3> :call CycleLang()<CR>
 " Notes & Pandoc
 nnoremap <C-n> :cnext<cr>
 nnoremap <C-N> :cprevious<cr>
+" keep search in center screen
+noremap n nzzzv
+noremap N Nzzzv
+noremap H ^
+noremap L g
+" Fix linewise visual selection of various text objects
+nnoremap VV V
+nnoremap Vit vitVkoj
+nnoremap Vat vatV
+nnoremap Vab vabV
+nnoremap VaB vaBV
+" gi already moves to "last place you exited insert mode", so we'll map gI to
+" something similar: move to last change
+nnoremap gI `.
+
 " Symbols ---------------------------------- {{{3
 " map! <C-v>ta τ
 " map! <C-v>ph ϕ

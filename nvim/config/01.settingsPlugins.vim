@@ -53,29 +53,86 @@ set rtp+=/home/ryanm/.nvim/bundles/repos/github.com/Shougo/deoplete.nvim/
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources = {}
 
+" Required for operations modifying multiple buffers like rename.
+set hidden
+
 " Disable the candidates in Comment/String syntaxes.
 call deoplete#custom#source('_',
             \ 'disabled_syntaxes', ['Comment', 'String'])
 
 " language server commands
 let g:LanguageClient_serverCommands = {
-            \ 'cpp': ['cquery'],
             \ 'c': ['cquery'],
-            \ 'python': ['/usr/bin/pyls'],
+            \ 'cpp': ['cquery'],
+            \ 'python': ['pyls'],
+            \ 'go': ['go-langserver', 'gocodecomplete', 'freeosmemory', 'false'],
+            \ 'ruby': ['solargraph', 'stdio'],
+            \ 'java': ['jdtls'],
+            \ 'javascript': ['javascript-typescript-stdio'],
+            \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
             \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-            \ 'haskell': ['hie-wrapper']
+            \ 'haskell': ['hie-wrapper'],
+            \ 'php': ['php-language-server'],
+            \ 'html': ['html-languageserver'],
+            \ 'css': ['css-languageserver'],
+            \ 'json': ['json-languageserver'],
+            \ 'yaml': ['yaml-language-server'],
             \ }
 let g:LanguageClient_autoStart = 1
+let g:LanguageClient_rootMarkers = {
+            \ 'cpp': ['compile_commands.json', 'make'],
+            \ 'c': ['compile_commands.json', 'make'],
+            \ 'haskell': ['*.cabal', 'stack.yaml'],
+            \ }
 
 set completefunc=LanguageClient#complete
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
+
+let g:LanguageClient_loadSettings = 1
+let g:LanguageClient_settingsPath = '/home/ryanm/.config/nvim/settings.json'
 " ----[ Neomake ]-------------------------- {{{2
-" When writing a buffer.
-call neomake#configure#automake('w')
-" When writing a buffer, and on normal mode changes (after 1s).
-"call neomake#configure#automake('nw', 1000)
-" When reading a buffer (after 750ms), and when writing.
-"call neomake#configure#automake('rw', 750)
+" Desktop setup
+call neomake#configure#automake({
+\ 'TextChanged': {},
+\ 'InsertLeave': {},
+\ 'BufWritePost': {'delay': 0},
+\ 'BufWinEnter': {},
+\ }, 500)
+" laptop setup
+" if myfuncs#MyOnBattery()
+"   call neomake#configure#automake('w')
+" else
+"   call neomake#configure#automake('nw', 1000)
+" endif
+" ----[ nnn ]------------------------------ {{{2
+" Opens the nnn window in a split
+let g:nnn#layout = 'vsplit' " or vertical split, tabedit etc.
+" Or pass a dictionary with window size
+let g:nnn#layout = { 'left': '~20%' } " or right, up, down
+" ----[ fzf ]------------------------------ {{{2
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+" Enable per-command history.
+" CTRL-N and CTRL-P will be automatically bound to next-history and
+" previous-history instead of down and up. If you don't like the change,
+" explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+" ----[ vim-tags ]------------------------- {{{2
+let g:vim_tags_auto_generate = 1
 " ----[ Undotree setup ]----------------------- {{{4
 " let g:undotree_WindowLayout='botright'
 let g:undotree_SetFocusWhenToggle=1
@@ -91,15 +148,26 @@ let NERDTreeIgnore=['\.hg', '.DS_Store']
 "let NERDTreeBookmarksFile=expand(g:vimDir.'/.cache/NERDTree/NERDTreeBookmarks')
 nnoremap <F2> :NERDTreeToggle<CR>
 "nnoremap <F3> :NERDTreeFind<CR>
+" NERDtree git
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : '☒',
+    \ "Unknown"   : "?"
+    \ }
 " ----[ GoldenView setup ]--------------------- {{{2
 let g:goldenview__enable_default_mapping=0
 nmap <F4> <Plug>ToggleGoldenViewAutoResize
 " ----[ UltiSnips setup ]---------------------- {{{2
-let g:UltiSnipsExpandTrigger='<c-x>'
-let g:UltiSnipsJumpForwardTrigger='<c-l>'
-let g:UltiSnipsJumpBackwardTrigger='<c-h>'
-let g:UltiSnipsSnippetDirectories=['~/.nvim/UltiSnips/', 'UltiSnips']
-
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " ----[ Tex Live Preview ]------------------------------- {{{2
 let g:livepreview_previewer = 'zathura'
 " ----[ RSpec.vim mappings ]----------------------- {{{2

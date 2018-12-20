@@ -1,41 +1,47 @@
-#!/bin/bash
+#!/bin/env zsh
+
+print_time(){
+    echo $(date "+%a %H:%M")
+}
 
 print_volume() {
-	volume="$(amixer get Master | tail -n1 | sed -r 's/.*\[(.*)%\].*/\1/')"
-	mute="$(amixer get Master | tail -n1 | sed -r 's/.*\[(.*)\].*/\1/')"
+    AUDIO="$(amixer get Master | tail -n1 | sed -r 's/.*\[(.*)%\].*/\1/')"
+    NOTMUTED="$(amixer get Master | tail -n1 | sed -r 's/.*\[(.*)\].*/\1/')"
 
-	if [ "$mute" = "on" ]; then
-		echo -e "${volume}%"
-	else
-		echo -e "Mute"
-	fi
+    if [ "$NOTMUTED" = "on" ]; then
+        case "$AUDIO" in
+            0) echo " 🔇    $AUDIO%" ;;
+            [1-9]) echo " 🔈    $AUDIO%" ;;
+            1?|2?|3?) echo "🔈  $AUDIO%" ;;
+            4?|5?|6?) echo "🔉  $AUDIO%" ;;
+            7?|8?|9?) echo "🔊  $AUDIO%" ;;
+            *) echo "🔊$AUDIO%" ;;
+        esac
+    else
+        echo -e "🔇 Mute"
+    fi
 }
 
 print_bat(){
-	hash acpi || return 0
-	onl="$(grep "on-line" <(acpi -V))"
-	charge="$(awk '{ sum += $1 } END { print sum }' /sys/class/power_supply/BAT*/capacity)"
-	if test -z "$onl"
-	then
-		# suspend when we close the lid
-		#systemctl --user stop inhibit-lid-sleep-on-battery.service
-		echo -e "${charge}"
-	else
-		# On mains! no need to suspend
-		#systemctl --user start inhibit-lid-sleep-on-battery.service
-		echo -e "${charge}⚡"
-	fi
+    battery_status=$(cat /sys/class/power_supply/BAT0/status)
+    battery_percent=$(cat /sys/class/power_supply/BAT0/capacity)
+    case "$battery_status" in
+        Charging)
+            # On mains! no need to suspend
+            # systemctl --user start inhibit-lid-sleep-on-battery.service
+            # echo -e "${charge}⚡"
+            echo "🔋 ${battery_percent}% ⚡";;
+        Discharging)
+            # suspend when we close the lid
+            # systemctl --user stop inhibit-lid-sleep-on-battery.service
+            # echo -e "${charge}"
+            echo "🔋 ${battery_percent}%"
+    esac
 }
 
-print_date(){
-	date "+%a %m-%d-%Y %T"
-}
 
-while true
-do
 
-	xsetroot -name "| VOL: $(print_volume) | BAT: $(print_bat)% | $(print_date) |"
-
-	sleep 1
-
+while true; do
+    xsetroot -name " $(print_time)                                                                                                                                                        $(print_bat) $(print_volume)        "
+    sleep 1
 done

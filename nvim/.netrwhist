@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/data'
+let g:netrw_dirhist_2='/data/Internet Explorer'
+let g:netrw_dirhist_3='/data/Internet Explorer/Videos'
+let g:netrw_dirhist_4='/data/Internet Explorer/Videos/Web Cam Captures'
+let g:netrw_dirhist_5='/data/Internet Explorer/Videos/Web Cam Captures/Anal'
