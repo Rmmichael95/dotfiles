@@ -51,12 +51,6 @@ let g:fzf_action = {
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
 
-" nnn
-let g:nnn#action = {
-      \ '<c-t>': 'tab split',
-      \ '<c-x>': 'split',
-      \ '<c-v>': 'vsplit' }
-
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " LanguageClient mappings
@@ -73,6 +67,11 @@ nnoremap <silent> nn :call LanguageClient#textDocument_rename()<CR>
 nnoremap Q gq
 "  smart tab complete
 au FileType erl inoremap <tab> <c-r>=myfuncs#Smart_TabComplete()<CR>
+" Easy buffer navigation
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
 " Navigate Vim Splits
 nnoremap <C-J> <C-W><C-J> "Ctrl-j to move down a split
 nnoremap <C-K> <C-W><C-K> "Ctrl-k to move up a split

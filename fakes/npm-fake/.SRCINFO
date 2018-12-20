@@ -1,0 +1,9 @@
+pkgbase = npm-fake
+	pkgdesc = npm pseudo package to be used when using nvm
+	pkgver = 6.5.0
+	pkgrel = 1
+	arch = any
+	provides = npm
+	conflicts = npm
+
+pkgname = npm-fake

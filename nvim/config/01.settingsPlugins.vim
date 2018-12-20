@@ -104,11 +104,6 @@ call neomake#configure#automake({
 " else
 "   call neomake#configure#automake('nw', 1000)
 " endif
-" ----[ nnn ]------------------------------ {{{2
-" Opens the nnn window in a split
-let g:nnn#layout = 'vsplit' " or vertical split, tabedit etc.
-" Or pass a dictionary with window size
-let g:nnn#layout = { 'left': '~20%' } " or right, up, down
 " ----[ fzf ]------------------------------ {{{2
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =

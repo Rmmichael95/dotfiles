@@ -1,0 +1,22 @@
+# Static information about the filesystems.
+# See fstab(5) for details.
+
+# <file system> <dir> <type> <options> <dump> <pass>
+# /dev/sdb3 LABEL=root
+UUID=d14043b6-e61e-4295-b6f5-89606080ef23 / btrfs rw,relatime,compress=lzo,ssd,space_cache=v2,subvolid=257,subvol=@ 0 0
+
+# /dev/sdb3 LABEL=root
+UUID=d14043b6-e61e-4295-b6f5-89606080ef23 /.snapshots btrfs rw,relatime,compress=lzo,ssd,space_cache=v2,subvolid=258,subvol=@snapshots 0 0
+
+# /dev/sdb3
+UUID=f88ae5bb-64ea-4f82-a1fb-930aa02ad2de /home xfs rw,relatime,attr2,inode64,noquota 0 2
+
+# /dev/sdc1
+UUID=3e962bc2-db3e-4bc7-930e-55ad28b72c1f /data xfs rw,relatime,attr2,inode64,noquota 0 2
+
+# /dev/sdb1
+UUID=C9CC-56C7 /boot vfat rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro 0 2
+
+# /dev/sdb2
+UUID=b2adb6a3-0c8a-4022-91d3-0e63251934ad swap swap defaults,pri=-2 0 0
+

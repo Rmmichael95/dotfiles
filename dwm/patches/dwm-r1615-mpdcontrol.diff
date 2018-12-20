@@ -1,0 +1,196 @@
+# HG changeset patch
+# Date 1353796988 -7200
+# User Barbu Paul - Gheorghe <barbu.paul.gheorghe@gmail.com>
+# Parent 9cace08dcb7e57f76a2206bada6fc3b9557c63dc
+Control MPD via keybinds
+
+diff -r 9cace08dcb7e Makefile
+--- a/Makefile	Sun Nov 18 17:52:42 2012 +0100
++++ b/Makefile	Sun Nov 25 00:43:08 2012 +0200
+@@ -18,7 +18,7 @@
+ 	@echo CC $<
+ 	@${CC} -c ${CFLAGS} $<
+ 
+-${OBJ}: config.h config.mk
++${OBJ}: config.h config.mk mpdcontrol.c
+ 
+ config.h:
+ 	@echo creating $@ from config.def.h
+diff -r 9cace08dcb7e config.def.h
+--- a/config.def.h	Sun Nov 18 17:52:42 2012 +0100
++++ b/config.def.h	Sun Nov 25 00:43:08 2012 +0200
+@@ -53,6 +53,8 @@
+ static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+ static const char *termcmd[]  = { "uxterm", NULL };
+ 
++#include "mpdcontrol.c"
++
+ static Key keys[] = {
+ 	/* modifier                     key        function        argument */
+ 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+@@ -88,6 +90,9 @@
+ 	TAGKEYS(                        XK_8,                      7)
+ 	TAGKEYS(                        XK_9,                      8)
+ 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
++	{ MODKEY,                       XK_F1,     mpdchange,      {.i = -1} },
++	{ MODKEY,                       XK_F2,     mpdchange,      {.i = +1} },
++	{ MODKEY,                       XK_Escape, mpdcontrol,     {0} },
+ };
+ 
+ /* button definitions */
+diff -r 9cace08dcb7e config.mk
+--- a/config.mk	Sun Nov 18 17:52:42 2012 +0100
++++ b/config.mk	Sun Nov 25 00:43:08 2012 +0200
+@@ -16,7 +16,7 @@
+ 
+ # includes and libs
+ INCS = -I${X11INC}
+-LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS}
++LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS} -lmpdclient
+ 
+ # flags
+ CPPFLAGS = -D_BSD_SOURCE -D_POSIX_C_SOURCE=2 -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS}
+diff -r 9cace08dcb7e mpdcontrol.c
+--- /dev/null	Thu Jan 01 00:00:00 1970 +0000
++++ b/mpdcontrol.c	Sun Nov 25 00:43:08 2012 +0200
+@@ -0,0 +1,140 @@
++#include <stdlib.h>
++#include <string.h>
++#include <stdio.h>
++#include <regex.h>
++
++#include <mpd/client.h>
++
++#define MPDHOST "localhost"
++#define MPDPORT 6600
++
++struct mpd_connection *get_conn(){
++    struct mpd_connection *conn;
++
++    conn = mpd_connection_new(MPDHOST, MPDPORT, 1000);
++
++    if(mpd_connection_get_error(conn) != MPD_ERROR_SUCCESS){
++        fprintf(stderr, "Could not connect to mpd: %s\n", mpd_connection_get_error_message(conn));
++
++        mpd_connection_free(conn);
++        return NULL;
++    }
++
++    return conn;
++}
++
++void mpdchange(const Arg *direction){
++    struct mpd_connection *conn;
++
++    conn = get_conn();
++
++    if(conn == NULL){
++        return;
++    }
++
++    if(direction->i > 0){
++        mpd_run_next(conn);
++    }
++    else{
++        mpd_run_previous(conn);
++    }
++
++    mpd_connection_free(conn);
++}
++
++char *get_regerror(int errcode, regex_t *compiled){
++    size_t length = regerror(errcode, compiled, NULL, 0);
++    char *buffer = malloc(length);
++    (void) regerror(errcode, compiled, buffer, length);
++
++    return buffer;
++}
++
++void mpdcontrol(){
++    struct mpd_connection *conn;
++    struct mpd_status *status;
++    struct mpd_song *song;
++    enum mpd_state state;
++
++    const char *filename;
++
++    regex_t expr;
++
++    conn = get_conn();
++
++    if(conn == NULL){
++        return;
++    }
++
++    status = mpd_run_status(conn);
++
++    if(status == NULL){
++        fprintf(stderr, "Could not get mpd status: %s\n", mpd_status_get_error(status));
++
++        mpd_status_free(status);
++        mpd_connection_free(conn);
++        return;
++    }
++
++    state = mpd_status_get_state(status);
++
++    if(state == MPD_STATE_STOP || state == MPD_STATE_PAUSE){
++        mpd_run_play(conn);
++        mpd_status_free(status);
++        mpd_connection_free(conn);
++    }
++    else if(state != MPD_STATE_UNKNOWN){ //playing some music
++        song = mpd_run_current_song(conn);
++
++        if(song == NULL){
++            fprintf(stderr, "Error fetching current song!\n");
++
++            mpd_song_free(song);
++            mpd_status_free(status);
++            mpd_connection_free(conn);
++            return;
++        }
++
++        filename = mpd_song_get_uri(song);
++
++        int errcode = regcomp(&expr, "^[[:alnum:]]+://", REG_EXTENDED|REG_NOSUB);
++        if(errcode != 0){
++            char *err = get_regerror(errcode, &expr);
++            fprintf(stderr, "Could not compile regexp: %s\n", err);
++
++            mpd_song_free(song);
++            mpd_status_free(status);
++            mpd_connection_free(conn);
++            free(err);
++            regfree(&expr);
++            return;
++        }
++
++        int matchcode = regexec(&expr, filename, 0, NULL, 0);
++
++        if(matchcode == 0){
++            if(strstr(filename, "file://") == filename){ //match just at the start of the filename
++                //this means that mpd is playing a file outside the music_dir,
++                //but on disk, so we can safely pause
++                mpd_run_toggle_pause(conn);
++            }
++            else{
++                mpd_run_stop(conn);
++            }
++        }
++        else if(matchcode == REG_NOMATCH){
++            mpd_run_toggle_pause(conn);
++        }
++        else{
++            char *err = get_regerror(matchcode, &expr);
++            fprintf(stderr, "Error while matching regexp: %s\n", err);
++
++            free(err);
++        }
++
++        regfree(&expr);
++        mpd_song_free(song);
++        mpd_status_free(status);
++        mpd_connection_free(conn);
++    }
++}
