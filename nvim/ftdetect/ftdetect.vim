@@ -1,8 +1,10 @@
 augroup filetypedetect
     " Video
-    autocmd BufRead,BufNewFile *.avi,*.mp4,*.mkv,*.mov,*.mpg set filetype=video
+    autocmd BufRead,BufNewFile *.avi,*.wmv,*.flv,*.mp4,*.mkv,*.mov,*.mpg set filetype=video
     " Audio
     autocmd BufRead,BufNewFile *.mp3,*.flac,*.wav,*.ogg set filetype=audio
+    " Image
+    autocmd BufRead,BufNewFile *.png,*.jpg,*.jpeg set filetype=image
     " Mail
     autocmd BufRead,BufNewFile *mutt-* set ft=mail
     " calcurse

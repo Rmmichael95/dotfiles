@@ -1,12 +1,12 @@
 " ===={ My Functions }============================================= {{{1
 " ----[ Make the 81st column stand out ]--------------------------- {{{2
 " OR ELSE just the 81st column of wide lines...
-function myfuncs#81colcolumn()
+function! myfuncs#81colcolumn()
   highlight ColorColumn ctermbg=9 ctermfg=7
   call matchadd('ColorColumn', '\%81v', 100)
 endfunction
 " ----[ CycleLang ]------------------------------ {{{2
-function myfuncs#CycleLang()
+function! myfuncs#CycleLang()
     let langs = ['', 'en_us', 'fr']
 
     let i = index(langs, &spl)
@@ -22,7 +22,7 @@ function myfuncs#CycleLang()
     endif
 endfun
 " ----[ Smart Tab Complete ]--------------------------------------------{{{2
-function myfuncs#Smart_TabComplete()
+function! myfuncs#Smart_TabComplete()
   let line = getline('.')                         " current line
 
   let substr = strpart(line, -1, col('.')+1)      " from the start of the current
@@ -44,20 +44,20 @@ function myfuncs#Smart_TabComplete()
       return "\<tab>"
   endif
 endfunction
-" ---[ Neomake battery check ]-
-function myfuncs#MyOnBattery()
+" ---[ Neomake battery check ]-------------------------------------{{{2
+function! myfuncs#MyOnBattery()
   return readfile('/sys/class/power_supply/AC/online') == ['0']
 endfunction
 " ----[ Include Guard ]--------------------------------------------{{{2
 " function to generate c++ header guard, map in other section
-function myfuncs#IncludeGuard()
+function! myfuncs#IncludeGuard()
     let basename = substitute(bufname(""), '.*/', '', '')
     let guard = '_' . substitute(toupper(basename), '\.', '_', "H")
     call append(0, "#ifndef " . guard)
     call append(1, "#define " . guard)
     call append(line("$"), "#endif // for #ifndef " . guard)
 endfunction
-" ----[ Open unsupported files ]
+" ----[ Open unsupported files ]-----------------------------------{{{2
 " What command to use
 function! myfuncs#OpenAll() abort
     " Linux/BSD
