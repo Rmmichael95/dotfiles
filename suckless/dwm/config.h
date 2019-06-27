@@ -31,7 +31,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -67,6 +67,7 @@ static const Layout layouts[] = {
  * Mod5Mask == Alt Gr
  */
 #define MODKEY Mod4Mask
+#define XF86PowerOff 0x1008ff2a
 #define XF86AudioRaiseVolume 0x1008ff13
 #define XF86AudioLowerVolume 0x1008ff11
 #define XF86AudioMute 0x1008ff12
@@ -92,8 +93,9 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+/* static const char *fzfcmd[] = { "fzf_dmenu", "fzf_cmd", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; */
 static const char *termcmd[]  = { "st", NULL };
-/* static const char *cmdlogout[] = { "prompt", "Do you want to logout?", "", NULL }; */
+static const char *cmdpower[] = {"dmenu_power", "Do you want to poweroff?", "poweroff", "reboot", NULL};
 static const char *cmdinfo[] = { "sysinfo", NULL };
 static const char *cmdsoundup[]  = { "amixer", "-q", "sset", "Master", "1%+", NULL };
 static const char *cmdsounddown[]  = { "amixer", "-q", "sset", "Master", "1%-", NULL };
@@ -102,8 +104,6 @@ static const char *cmdbrightnessup[]  = { "sudo", "brightness", "up", NULL  };
 static const char *cmdbrightnessdown[]  = { "sudo", "brightness", "down", NULL  };
 static const char *cmdmail[]       = { "st", "-c", "neomutt", "-e", "neomutt", NULL};
 static const char *cmdnewsboat[] = { "st", "-c", "newsboat", "-e", "newsboat", NULL };
-static const char *cmdnnn[]     = { "st", "-c", "nnn", "-e", "nnn", NULL};
-static const char *cmdsudonnn[] = { "st", "-c", "nnn", "-e", "sudo", "nnn", NULL};
 /* static const char *cmdlock[]       = { "amixer", "-q", "sset", "Master", "mute", "&&", "locki3.sh", NULL}; */
 
 #include "mpdcontrol.c"
@@ -120,9 +120,7 @@ static Key keys[] = {
 	{ 0,                            XF86AudioStop,        mpdcontrol,    {.i = -1} },
 	{ 0,                            XF86AudioPlay,        mpdcontrol,    {.i = +1} },
 	{ 0,                            XF86Mail,             spawn,         {.v = cmdmail } },
-	{ 0,                            XF86Explorer,         spawn,         {.v = cmdnnn } },
 	{ MODKEY,                       XK_n,                 spawn,         {.v = cmdnewsboat } },
-	{ MODKEY|ShiftMask,             XK_n,                 spawn,         {.v = cmdsudonnn } },
 	{ MODKEY,                       XK_r,                 spawn,         {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return,            spawn,         {.v = termcmd } },
 	{ MODKEY,                       XK_b,                 togglebar,     {0} },
@@ -155,7 +153,8 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_z,                 quit,          {0} },
+	{ MODKEY|ShiftMask,             XK_z,                 dmenu_logout,  {0} },
+	{ 0,                            XF86PowerOff,         spawn,         {.v = cmdpower } },
 };
 
 /* button definitions */

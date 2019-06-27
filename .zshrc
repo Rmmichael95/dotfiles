@@ -62,15 +62,12 @@ fast-syntax-highlighting)
 
 #screenfetch # Display system/terminal info
 
-alias tmux250='tmux -u new -s A250 -c /home/ryanm/batcave/C++/A250'
-alias tmux200='tmux -u new -s A200 -c /home/ryanm/batcave/C++/A200'
 alias tmux='tmux -u'
 alias vim='nvim'
 alias vimrc='nvim ~/.config/nvim'
 alias zshrc='nvim ~/.zshrc'
 alias tmuxconf='nvim ~/.tmux.conf'
-alias dwmconf='nvim ~/tmp/dwm/config.h'
-alias termconf='nvim ~/tmp/st/config.h'
+alias ls='lsd'
 
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
@@ -109,11 +106,25 @@ zle -N zle-line-init
 zle -N zle-keymap-select
 export KEYTIMEOUT=1
 
+export YEAR=`date +%Y`
+
+if [[ `date +%m` =~ [0][1-5] ]]; then
+    if [ `date +%m` = '01' ]; then
+        export SEMESTER=Intersession
+    else
+        export SEMESTER=Spring
+    fi
+elif [[ `date +%m` =~ [0][6-8] ]]; then
+    export SEMESTER=Summer
+else
+    export SEMESTER=Fall
+fi
+
 export EDITOR=nvim
-export SEMESTER=Fall
-export YEAR=2018
-export NOTES_DIR="/home/ryanm/Documents/batcave/Notes"
-export TODO_DIR='/home/ryanm/Documents/batcave/Notes'
+export DIR_DOTS="/home/ryanm/Documents/batcave/dotfiles"
+export DIR_NOTES="/home/ryanm/Documents/batcave/Notes"
+export DIR_TODO='/home/ryanm/Documents/batcave/Notes'
+export DIR_PYTHON='/home/ryanm/Documents/batcave/python/csA131'
 export BROWSER="qutebrowser"
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 

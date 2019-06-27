@@ -216,6 +216,7 @@ static Client *nexttiled(Client *c);
 static void pop(Client *);
 static void propertynotify(XEvent *e);
 static void quit(const Arg *arg);
+static void dmenu_logout(const Arg *arg);
 static Monitor *recttomon(int x, int y, int w, int h);
 static void removesystrayicon(Client *i);
 static void resize(Client *c, int x, int y, int w, int h, int interact);
@@ -1460,6 +1461,27 @@ void
 quit(const Arg *arg)
 {
 	running = 0;
+}
+
+void
+dmenu_logout(const Arg *arg)
+{
+	FILE *fp;
+	char path[PATH_MAX];
+
+	/* Open command for reading */
+	fp = popen("echo 'Yes' | dmenu -i -p 'Would you like to logout?'", "r");
+	if (fp == NULL) {
+		printf("Failed to run command\n" );
+	}
+
+	while (fgets(path, PATH_MAX, fp) != NULL) {
+		if (strcmp(path, "Yes")) {
+			pclose(fp);
+			quit(0);
+		}
+	}
+	pclose(fp);
 }
 
 Monitor *

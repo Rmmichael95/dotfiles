@@ -65,4 +65,6 @@ highlight LineNr ctermfg=grey
 set grepprg=rg\ --vimgrep
 let perl_include_pod = 1
 let perl_extended_vars = 1 " syntax color complex things like @{${foo}}
-
+" terminal settings
+autocmd BufWinEnter,WinEnter term://* startinsert
+autocmd BufLeave term://* stopinsert

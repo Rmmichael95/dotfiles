@@ -30,7 +30,7 @@ print_bat(){
             # On mains! no need to suspend
             # systemctl --user start inhibit-lid-sleep-on-battery.service
             # echo -e "${charge}⚡"
-            echo "🔋 ${battery_percent}% ⚡";;
+            echo "⚡ ${battery_percent}%";;
         Discharging)
             # suspend when we close the lid
             # systemctl --user stop inhibit-lid-sleep-on-battery.service

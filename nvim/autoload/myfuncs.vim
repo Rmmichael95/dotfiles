@@ -44,7 +44,7 @@ function! myfuncs#Smart_TabComplete()
       return "\<tab>"
   endif
 endfunction
-" ---[ Neomake battery check ]-------------------------------------{{{2
+" ----[ Neomake battery check ]-------------------------------------{{{2
 function! myfuncs#MyOnBattery()
   return readfile('/sys/class/power_supply/AC/online') == ['0']
 endfunction

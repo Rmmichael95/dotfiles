@@ -4,8 +4,7 @@
 
 [[ -f ~/.zshrc ]] && . ~/.zshrc
 
-exec startx
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+  XKB_DEFAULT_LAYOUT=us exec sway
+fi
 
-PATH="$HOME/.nvm/.node_modules/bin:$PATH"
-export npm_config_prefix=~/.nvm/.node_modules
-export TERM=st

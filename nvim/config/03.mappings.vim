@@ -28,23 +28,9 @@ nnoremap <leader>F :Find .<CR>
 " ----[ Plugin Maps ]------------------------------------------------ {{{2
 "  Vim protodef
 "  pull defs to cursor <leader>PP
-" lldb mapping
-" map <leader>O :LLsession new<CR>
-" map <leader>P :LLmode debug<CR>
-" map <leader>L :LLmode code<CR>
-" nmap <leader>F  <Plug>LLBreakSwitch
-" map <leader>C :LL continue<CR>
-" map <leader>M :LL step<CR>
-" map <leader>N :LL next<CR>
-" color break symbol
-"hi LLBreakpointSign ctermfg=cyan
-" vmap <F2> <Plug>LLStdInSelected
-" nnoremap <F4> :LLstdin<CR>
-" nnoremap <S-F8> :LL process interrupt<CR>
-" nnoremap <F9> :LL print <C-R>=expand('<cword>')<CR>
-" vnoremap <F9> :<C-U>LL print <C-R>=lldb#util#get_selection()<CR><CR>
 "  dispatch
 nnoremap <F9> :Dispatch<CR>
+
 " This is the default fzf extra key bindings
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
@@ -53,62 +39,129 @@ let g:fzf_action = {
 
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
 " LanguageClient mappings
 nnoremap <silent> H :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> nn :call LanguageClient#textDocument_rename()<CR>
+nnoremap <silent> gr :call LanguageClient_textDocument_references()<CR>
+nnoremap <silent> gs :call LanguageClient_textDocument_documentSymbol()<CR>
+nnoremap <silent> <F12> :call LanguageClient_textDocument_rename()<CR>
+nnoremap <silent> gf :call LanguageClient_textDocument_codeAction()<CR>
 
-" Ultisnippts mapped in plugin settings
-" g:UltiSnipsExpandTrigger='<c-x>'
-" g:UltiSnipsJumpForwardTrigger='<c-j>'
-" g:UltiSnipsJumpBackwardTrigger='<c-k>'
+" ALE
+nmap <F8> <Plug>(ale_fix)
+
+" File explorer
+nnoremap <F2> :Lexplore<CR>
+
+" Plugin key-mappings.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" Expands or completes the selected snippet/item in the popup menu
+" imap <expr><silent><CR> pumvisible() ? deoplete#mappings#close_popup() .
+"       \ "\<Plug>(neosnippet_jump_or_expand)" : "\<CR>"
+" smap <silent><CR> <Plug>(neosnippet_jump_or_expand)
+
+" neosnippets
+" imap <expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+" imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+" inoremap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
+" neovim visor
+let g:neovim_visor_key = '<C-a>'
 " ----[ Mappings ]---------------------------------------- {{{2
+" Use ; for commands
+nnoremap ; :
+
 " Don't use Ex mode, use Q for formatting
 nnoremap Q gq
+
 "  smart tab complete
 au FileType erl inoremap <tab> <c-r>=myfuncs#Smart_TabComplete()<CR>
+
+" Delete trailing whitespace with <C-D>
+":nnoremap <silent> <C-D> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+
 " Easy buffer navigation
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
+
 " Navigate Vim Splits
 nnoremap <C-J> <C-W><C-J> "Ctrl-j to move down a split
 nnoremap <C-K> <C-W><C-K> "Ctrl-k to move up a split
 nnoremap <C-L> <C-W><C-L> "Ctrl-l to move    right a split
 nnoremap <C-H> <C-W><C-H> "Ctrl-h to move left a split
+
 " new tab
 map <C-t><C-t> :tabnew<CR>
+
 " close tab
 map <C-t><C-z> :tabclose<CR>
+
 " Bash like keys for the command line
 cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
 cnoremap <C-K> <C-U>
+
 " allow multiple indentation/deindentation in visual mode
 vnoremap < <gv
 vnoremap > >gv
+
 " :cd. change working directory t6o that of the current file
 cmap cd. lcd %:p:h<cr>
+
+" change working directory to where the file in the buffer is located
+" if user types `,cd`
+nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
+
 " spell lang
-nnoremap <F3> :call CycleLang()<CR>
+nnoremap <F3> :call myfuncs#CycleLang()<CR>
+
 " Notes & Pandoc
 nnoremap <C-n> :cnext<cr>
 nnoremap <C-N> :cprevious<cr>
+
 " keep search in center screen
 noremap n nzzzv
 noremap N Nzzzv
 noremap H ^
 noremap L g
+
 " Fix linewise visual selection of various text objects
 nnoremap VV V
 nnoremap Vit vitVkoj
 nnoremap Vat vatV
 nnoremap Vab vabV
 nnoremap VaB vaBV
+
 " gi already moves to "last place you exited insert mode", so we'll map gI to
 " something similar: move to last change
 nnoremap gI `.
+
+" <ESC> exits in terminal mode
+tnoremap <ESC> <C-\><C-n><C-w><C-p>
+
+" Easy most-recent-buffer switching
+nnoremap <Tab> :buffers<CR>:buffer<Space>
 
 " Symbols ---------------------------------- {{{3
 " map! <C-v>ta τ

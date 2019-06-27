@@ -59,13 +59,14 @@ fi
 #xcompmgr &
 compton &
 nm-applet &
-discord &
+#discord &
 #start-pulseaudio-x11 &
 
 # Default
 session=${1:-dwm}
 
-/home/ryanm/Documents/batcave/dotfiles/dwm_status.sh &
+~/Documents/batcave/dotfiles/dwm_status.sh &
+~/.sh/watcher &
 #dwmstatus 2>&1 >/dev/null &
 /home/ryanm/Documents/batcave/dotfiles/arch_bg &
 

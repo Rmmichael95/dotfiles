@@ -16,27 +16,30 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#begin('/home/ryanm/.nvim/bundles')
 
     call dein#add('/home/ryanm/.nvim/bundles/repos/github.com/Shougo/dein.vim')
-    call dein#add('Shougo/deoplete.nvim', {'on_i': 1})
+    call dein#add('Shougo/deoplete.nvim')
     if !has('nvim')
         call dein#add('roxma/nvim-yarp')
         call dein#add('roxma/vim-hug-neovim-rpc')
     endif
+    call dein#add('Rmmichael95/nvim-docg-wrapper')
     call dein#add('Shougo/neoinclude.vim')
     call dein#add('Shougo/neco-syntax')
-    call dein#add('voldikss/vim-mma')
+    call dein#add('Shougo/deol.nvim')
+    call dein#add('Shougo/neosnippet')
+    call dein#add('Shougo/neosnippet-snippets')
     call dein#add('Shougo/neco-vim')
     call dein#add('zchee/deoplete-zsh')
     call dein#add('othree/jspc.vim', {'on_ft': 'java'})
     call dein#add('autozimu/LanguageClient-neovim', {
-                \ 'on_ft': ['c', 'cpp', 'py', 'haskell', 'rust'],
                 \ 'rev': 'next',
                 \ 'build': 'bash install.sh',
                 \ })
+    call dein#add('w0rp/ale')
     call dein#add('ervandew/supertab')
     call dein#add('junegunn/fzf.vim')
     call dein#add('starcraftman/vim-eclim', {'on_ft': 'java'})
     call dein#add('tpope/vim-endwise')
-    call dein#add('tpope/vim-commentary', {'on_map': {'n': ['gc']}})
+    call dein#add('tpope/vim-commentary')
     call dein#add('tpope/vim-repeat', {'on_map': {'n': ['.']}})
     call dein#add('tpope/vim-dispatch')
     call dein#add('radenling/vim-dispatch-neovim')
@@ -48,7 +51,6 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
                 \ 'depends': 'vim-repeat',
                 \ })
     call dein#add('jiangmiao/auto-pairs')
-    call dein#add('neomake/neomake')
     call dein#add('godlygeek/tabular', {
                 \ 'on_cmd': [ 'Tab', 'Tabularize' ],
                 \ 'augroup': 'tabular',
@@ -58,8 +60,6 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('christoomey/vim-tmux-navigator')
     call dein#add('easymotion/vim-easymotion')
     call dein#add('powerman/vim-plugin-viewdoc')
-    call dein#add('SirVer/ultisnips', {'on_map' : {'i': ['<TAB>']}})
-    call dein#add('honza/vim-snippets')
     call dein#add('jgdavey/tslime.vim')
     call dein#add('benmills/vimux')
     call dein#add('qpkorr/vim-bufkill')
@@ -68,6 +68,7 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('terryma/vim-multiple-cursors', {'on_map': {'n': ['<C-n>', '<C-p>'], 'x': '<C-n>'}})
     call dein#add('chrisbra/NrrwRgn')
     call dein#add('tmhedberg/SimpylFold')
+    call dein#add('Konfekt/FastFold')
     call dein#add('tpope/vim-sleuth')
     call dein#add('vim-scripts/L9')
     call dein#add('sheerun/vim-polyglot')
@@ -76,10 +77,11 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('vim-airline/vim-airline')
     call dein#add('Shougo/vimproc.vim', {'build': 'make'})
     call dein#add('mbbill/undotree', {'on_cmd': 'UndotreeToggle'})
-    call dein#add('scrooloose/nerdtree', {'on_cmd': ['NERDTreeToggle','NERDTreeFind']})
-    call dein#add('Xuyuanp/nerdtree-git-plugin', {'on_cmd': ['<Plug>NERDTreeToggle','<Plug>NERDTreeFind']})
     call dein#add('zhaocai/GoldenView.Vim', {'on_cmd': '<Plug>ToggleGoldenViewAutoResize'})
     call dein#add('rhysd/vim-grammarous')
+    " Python
+    call dein#add('vim-scripts/indentpython.vim')
+    call dein#add('nvie/vim-flake8')
     " Java
     call dein#add('Dinduks/vim-java-get-set', {'on_ft':'java'})
     call dein#add('tfnico/vim-gradle', {'on_ft': 'gradle'})
@@ -97,11 +99,11 @@ if dein#load_state('/home/ryanm/.nvim/bundles')
     call dein#add('vim-scripts/cscope.vim', {'on_ft': ['c', 'cpp']})
     call dein#add('JCLiang/vim-cscope-utils', {'on_ft': ['c', 'cpp']})
     " Markdown
+    call dein#add('plasticboy/vim-markdown')
     call dein#add('vim-pandoc/vim-pantondoc', {'on_ft': ['markdown', 'pandoc.markdown', 'rmd']})
     call dein#add('vim-pandoc/vim-pandoc-syntax', {'on_ft': ['markdown', 'pandoc.markdown', 'rmd']})
     call dein#add('PProvost/vim-markdown-jekyll', {'on_ft': ['html', 'hbs', 'markdown', 'pandoc.markdown', 'rmd']})
     call dein#add('iamcco/mathjax-support-for-mkdp', {'on_ft': ['markdown', 'pandoc.markdown', 'rmd']})
-    call dein#add('iamcco/markdown-preview.vim', {'on_ft': ['markdown', 'pandoc.markdown', 'rmd']})
     " Ruby
     call dein#add("tpope/vim-cucumber", {'on_ft': ['ruby', 'rb']})
     call dein#add("slim-template/vim-slim", {'on_ft': 'slim'})
@@ -122,4 +124,3 @@ endif
 
 filetype plugin indent on
 syntax enable
-
