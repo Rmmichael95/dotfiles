@@ -56,7 +56,8 @@ thefuck
 tmux
 vi-mode
 zsh_reload
-fast-syntax-highlighting)
+zsh-syntax-highlighting
+)
 
 # ===========[ User configuration ]========================================= {{{
 
@@ -67,12 +68,15 @@ alias vim='nvim'
 alias vimrc='nvim ~/.config/nvim'
 alias zshrc='nvim ~/.zshrc'
 alias tmuxconf='nvim ~/.tmux.conf'
-alias ls='lsd'
+#alias ls='lsd'
 
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
+source /usr/share/doc/fzf/key-bindings.zsh
+source /usr/share/doc/fzf/completion.zsh
 source /home/ryanm/.rvm/scripts/rvm
-source /usr/share/nvm/init-nvm.sh
+#source /usr/share/nvm/init-nvm.sh
+
+export NVM_DIR="${XDG_CONFIG_HOME/:-$HOME/.}nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 # You can use whatever you want as an alias, like for Mondays:
 #eval "$(thefuck --alias FUCK)"
@@ -132,8 +136,8 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.g
 export PATH="$PATH:$HOME/.rvm:$HOME/.rvm/bin"
 export PATH="${PATH}:${HOME}/.local/bin/"
 # ccache
-export PATH="/usr/lib/ccache/bin/:$PATH"
-export MAKEFLAGS="-j9 -l8"
+#export PATH="/usr/lib/ccache/bin/:$PATH"
+#export MAKEFLAGS="-j9 -l8"
 # }}}
 
 export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/texlive/2018/bin/x86_64-linux:$HOME/.rvm/gems/ruby-2.5.0/bin:$HOME/Documents/Notes/:$HOME/.sh:$HOME/.local/bin:$HOME/go/bin"

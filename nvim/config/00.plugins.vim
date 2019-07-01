@@ -10,12 +10,12 @@ if &compatible
     set nocompatible
 endif
 
-set runtimepath+=/home/ryanm/.nvim/bundles/repos/github.com/Shougo/dein.vim
+set runtimepath+=/home/ryanm/.vim/bundles/repos/github.com/Shougo/dein.vim
 
-if dein#load_state('/home/ryanm/.nvim/bundles')
-    call dein#begin('/home/ryanm/.nvim/bundles')
+if dein#load_state('/home/ryanm/.vim/bundles')
+    call dein#begin('/home/ryanm/.vim/bundles')
 
-    call dein#add('/home/ryanm/.nvim/bundles/repos/github.com/Shougo/dein.vim')
+    call dein#add('/home/ryanm/.vim/bundles/repos/github.com/Shougo/dein.vim')
     call dein#add('Shougo/deoplete.nvim')
     if !has('nvim')
         call dein#add('roxma/nvim-yarp')

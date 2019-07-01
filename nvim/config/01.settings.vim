@@ -1,8 +1,8 @@
 " ========{ Settings }================================================== " {{{1
 set backupskip=/tmp/*,/private/tmp/*",*.gpg
-set backupdir=~/.nvim/tmp/.backup//,/tmp
-set undodir=~/.nvim/tmp/.undo//,/tmp
-set directory=~/.nvim/tmp/.swp//,/tmp
+set backupdir=~/.vim/tmp/.backup//,/tmp
+set undodir=~/.vim/tmp/.undo//,/tmp
+set directory=~/.vim/tmp/.swp//,/tmp
 set backup
 set noswapfile
 set browsedir=buffer

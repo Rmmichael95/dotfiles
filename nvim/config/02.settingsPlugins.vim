@@ -5,7 +5,7 @@ if dein#check_install()
     call dein#install()
 endi
 
-"set rtp+=/home/ryanm/.nvim/bundles/repos/github.com/dbgx/lldb.nvim
+"set rtp+=/home/ryanm/.vim/bundles/repos/github.com/dbgx/lldb.nvim
 
 " ----[ General Plugin Settings ]---------- {{{2
 " Gitgutter setup
