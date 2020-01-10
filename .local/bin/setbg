@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+[ ! -z "$1" ] && cp "$1" ~/.config/wall && notify-send -i "$HOME/.config/wall" "Wallpaper changed."
+xwallpaper --zoom ~/.config/wall
