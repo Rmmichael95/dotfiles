@@ -4,8 +4,8 @@
 # If you use startx/xinit like a Chad, this file will also be sourced.
 
 compton &		#run the compton copmpositing manager
-~/Documents/batcave/dotfiles/dwm_status.sh & # start statusbar
-#remaps &		# run the remaps script, switching caps/esc and more; check it for more info
+~/.local/bin/dwm_status & # start statusbar
+remaps &		# run the remaps script, switching caps/esc and more; check it for more info
 setbg &			# set the background with the `setbg` script
 # $STATUSBAR &		# script for updating the status bar
 dunst &			# dunst for notifications

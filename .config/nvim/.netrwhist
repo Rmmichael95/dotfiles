@@ -1,5 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =3
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/home/ryanm/Documents/batcave/suckless/dwm/rmp/dwm/patches'
+let g:netrw_dirhist_6='/home/ryanm/Documents/batcave/suckless/dwm/tmp'
+let g:netrw_dirhist_5='/home/ryanm/Documents/batcave/suckless/dwm/tmp/dwm'
+let g:netrw_dirhist_4='/home/ryanm/.config/zsh'
 let g:netrw_dirhist_3='/var'
 let g:netrw_dirhist_2='/var/lock'
 let g:netrw_dirhist_1='/etc/runit/sv'
