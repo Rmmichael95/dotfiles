@@ -6,7 +6,7 @@ export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$
 export PATH="$PATH:$HOME/Documents/Notes/"
 # ccache
 export PATH="/usr/lib/ccache/bin/:$PATH"
-export MAKEFLAGS="-j5 -l4"
+export MAKEFLAGS="-j9 -l8"
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm:$HOME/.rvm/bin"
 # MANPATH

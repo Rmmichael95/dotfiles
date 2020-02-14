@@ -18,7 +18,7 @@ for config_file ($HOME/.config/zsh/lib/*.zsh); do
   source $config_file
 done
 source ~/.config/zsh/themes/ys.zsh-theme
-#source ~/.config/zsh/plugins/tmux/tmux.plugin.zsh
+source ~/.config/zsh/plugins/tmux/tmux.plugin.zsh
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 source /home/ryanm/.rvm/scripts/rvm
@@ -92,6 +92,7 @@ alias poweroff='sudo poweroff'
 alias reboot='sudo reboot'
 alias startx='ssh-agent startx'
 alias ls='lsd'
+alias gzip='pigz'
 
 export NVM_DIR="${XDG_CONFIG_HOME/:-$HOME/.}nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm

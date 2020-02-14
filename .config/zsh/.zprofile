@@ -2,7 +2,7 @@
 
 #[ ! -f ~/.config/shortcutrc ] && shortcuts >/dev/null 2>&1
 
-export STATUSBAR="${WM}blocks"
+#export STATUSBAR="${WM}blocks"
 
 # Switch escape and caps if tty and no passwd required:
 sudo -n loadkeys ~/.local/share/ttymaps.kmap 2>/dev/null
