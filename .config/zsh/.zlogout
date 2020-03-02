@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
 
-kill $SSH_AGENT_PID
+kill -9 $SSH_AGENT_PID

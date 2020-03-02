@@ -9,10 +9,13 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
     unset f
 fi
 
-xrandr --setprovideroutputsource modesetting NVIDIA-0
-xrandr --auto
+eval $(ssh-agent)
+
+#xrandr --setprovideroutputsource modesetting NVIDIA-0
+#xrandr --auto
 
 case $WM in
     dwm) exec $STARTUP dwm;;
+#    dwm) exec dbus-launch --exit-with-session dwm;;
     bspwm) exec $STARTUP bspwm;;
 esac

@@ -6,7 +6,7 @@ export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$
 export PATH="$PATH:$HOME/Documents/Notes/"
 # ccache
 export PATH="/usr/lib/ccache/bin/:$PATH"
-export MAKEFLAGS="-j9 -l8"
+export MAKEFLAGS="-j5 -l4"
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm:$HOME/.rvm/bin"
 # MANPATH
@@ -49,7 +49,7 @@ export LESS_TERMCAP_se="$(printf '%b' '[0m')"
 export LESS_TERMCAP_so="$(printf '%b' '[01;44;33m')"
 export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
 export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"
-export PAGER="${commands[less]:-$PAGER}"  \
-  _NROFF_U=1 \
-  PATH="$HOME/bin:$PATH" \
-    "$@"
+#export PAGER="${commands[less]:-$PAGER}"  \
+#  _NROFF_U=1 \
+#  PATH="$HOME/bin:$PATH" \
+#    "$@"

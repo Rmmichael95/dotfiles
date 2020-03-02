@@ -90,11 +90,10 @@ alias zshrc='nvim ~/.zshrc'
 alias tmuxconf='nvim ~/.tmux.conf'
 alias poweroff='sudo poweroff'
 alias reboot='sudo reboot'
-alias startx='ssh-agent startx'
 alias ls='lsd'
 alias gzip='pigz'
 
-export NVM_DIR="${XDG_CONFIG_HOME/:-$HOME/.}nvm"
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 # You can use whatever you want as an alias, like for Mondays:
@@ -145,3 +144,6 @@ export DIR_PYTHON='/home/ryanm/Documents/batcave/python/csA131'
 
 # Load zsh-syntax-highlighting; should be last.
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
