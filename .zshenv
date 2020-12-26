@@ -6,26 +6,34 @@ export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$
 export PATH="$PATH:$HOME/Documents/Notes/"
 # ccache
 export PATH="/usr/lib/ccache/bin/:$PATH"
-export MAKEFLAGS="-j5 -l4"
+export MAKEFLAGS="-j9 -l8"
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm:$HOME/.rvm/bin"
 # MANPATH
 export MANPATH="$MANPATH:/usr/local/man:"
+
+# Set $PATH if ~/.local/bin exist
+if [ -d "$HOME/.local/bin" ]; then
+    export PATH=$HOME/.local/bin:$PATH
+fi
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
 # Default programs:
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='nvim'
-fi
-export TERMINAL="st"
-export BROWSER="brave"
-export READER="zathura"
-export FILE="cfiles"
+#if [[ -n $SSH_CONNECTION ]]; then
+#  export EDITOR='vim'
+#else
+#  export EDITOR='nvim'
+#fi
+export EDITOR=/usr/bin/micro
+export TERMINAL=alacritty
+export BROWSER=brave
+export READER=zathura
+export FILE=cfiles
+export QT_QPA_PLATFORMTHEME="qt5ct"
+export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 
 # ~/ Clean-up:
 export NOTMUCH_CONFIG="$HOME/.config/notmuch-config"
