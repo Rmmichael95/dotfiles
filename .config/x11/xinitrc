@@ -4,7 +4,7 @@
 #
 # Executed by startx (run your window manager from here)
 
-[ -f ~/.xprofile ] && . ~/.xprofile
+[ -f ~/.profile ] && . ~/.profile
 
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap

@@ -22,16 +22,21 @@ export LANG=en_US.UTF-8
 
 # Default programs:
 # Preferred editor for local and remote sessions
-#if [[ -n $SSH_CONNECTION ]]; then
-#  export EDITOR='vim'
-#else
-#  export EDITOR='nvim'
-#fi
-export EDITOR=/usr/bin/micro
-export TERMINAL=alacritty
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
+fi
+export SHELL=/bin/zsh
+export PAGER=less
+export TERM=alacritty
 export BROWSER=brave
+export BROWSERCLI=w3m
 export READER=zathura
+export IMAGEVIEWER=sxiv
+export VIDEOPLAYER=mpv
 export FILE=cfiles
+export GPG_TTY=$(tty)
 export QT_QPA_PLATFORMTHEME="qt5ct"
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 

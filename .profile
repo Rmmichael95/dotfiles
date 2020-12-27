@@ -1,1 +1,1 @@
-.config/x11/xprofile
+source /home/ryanm/.config/x11/xprofile

@@ -1,1 +1,1 @@
-.config/x11/xinitrc
+source /home/ryanm/.config/x11/xinitrc
