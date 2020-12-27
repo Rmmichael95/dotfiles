@@ -8,7 +8,7 @@
 xsetroot -cursor_name left_ptr &
 ibus-daemon -d -x &
 killall xfwm4 &
-$WM &
+bspwm &
 picom &		#run the compton copmpositing manager
 #~/.local/bin/dwm_status & # start statusbar
 remaps &		# run the remaps script, switching caps/esc and more; check it for more info
