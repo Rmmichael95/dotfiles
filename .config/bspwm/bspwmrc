@@ -1,0 +1,40 @@
+#! /bin/sh
+# ~/.config/bspwm/bspwmrc
+
+# Article followed for hybrid setup w/ XFCE: https://github.com/bgdawes/bspwm-xfce-dotfiles/wiki
+
+sxhkd &
+
+. "${HOME}/.config/bspwm/colors.sh"
+
+bspc monitor -d 1 2 3 4 5 6 7 8 9 10
+
+bspc config normal_border_color "$color1"
+bspc config active_border_color "$color2"
+bspc config focused_border_color "$color15"
+bspc config presel_feedback_color "$color1"
+
+bspc config border_width 0
+bspc config window_gap 8
+
+bspc config top_padding 30
+bspc config left_padding 0
+bspc config right_padding 0
+bspc config bottom_padding 0
+
+bspc config split_ratio 0.5b
+bspc config borderless_monocle true
+bspc config gapless_monocle false
+bspc config single_monocle true
+bspc config click_to_focus any
+
+bspc config pointer_modifier mod4
+bspc config pointer_action3 resize_side
+bspc config pointer_action3 resize_corner
+bspc config pointer_action1 moveasd
+
+bspc rule -a \* node=focused
+bspc rule -a xfce4-popup-whiskermenu state=floating border=off layer=normal
+bspc rule -a Yad state=floating border=off layer=normal
+bspc rule -a xfce4-notes floating=on
+

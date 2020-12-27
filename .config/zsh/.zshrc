@@ -218,7 +218,5 @@ alias upd='sudo reflector --latest 5 --age 2 --fastest 5 --protocol https --sort
 
 echo $(lsb_release -is) $(uname -srm)
 
+# start starship prompt
 eval "$(starship init zsh)"
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-#[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

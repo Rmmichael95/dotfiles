@@ -1,8 +1,76 @@
+! #####################
+! #         st        #
+! #####################
+! General settings ================{{{
+! These are all possible options, presented with default values.
+! xst will fallback to *.option if st.option is not present.
+! see src/config.h for more information about option meanings.
+
+! These options only take effect on startup.
+alacritty.termname:          screen-256color
+! if you do not set shell, precedence is: -e arg, utmp option, SHELL env var, /etc/passwd shell
+! alacritty.shell:            /bin/zsh
+
 !! Transparency (0-1):
 *.alpha: 0.8
 
 !! Set a default font and font size as below:
 *.font: monospace:size=12
+
+#define self0 #3A4B52
+#define self1 #e15443
+#define self2 #A3BE8C
+#define self3 #e6b800
+#define self4 #458588
+#define self5 #B69D8A
+#define self6 #689d6a
+#define self7 #ffffff
+#define self8 #35444b
+#define self9 #cc241d
+#define self10 #004d00
+#define self11 #cca300
+#define self12 #566976
+#define self13 #b09682
+#define self14 #71828e
+#define self15 #ebdbb2
+
+#define nord0 #2E3440
+#define nord1 #3B4252
+#define nord2 #434C5E
+#define nord3 #4C566A
+#define nord4 #D8DEE9
+#define nord5 #E5E9F0
+#define nord6 #ECEFF4
+#define nord7 #8FBCBB
+#define nord8 #88C0D0
+#define nord9 #81A1C1
+#define nord10 #5E81AC
+#define nord11 #BF616A
+#define nord12 #D08770
+#define nord13 #EBCB8B
+#define nord14 #A3BE8C
+#define nord15 #B48EAD
+
+*.foreground:   self7
+*.background:   #3B4252
+*.cursorColor:  self4
+
+*.color0: #3A4B52
+*.color1: nord11
+*.color2: nord14
+*.color3: nord13
+*.color4: nord9
+*.color5: nord15
+*.color6: nord8
+*.color7: nord5
+*.color8: nord3
+*.color9: nord11
+*.color10: nord14
+*.color11: nord13
+*.color12: nord9
+*.color13: nord15
+*.color14: nord7
+*.color15: nord6
 
 /* name		dark	light */
 /* black	0	8 */
