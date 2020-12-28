@@ -1,1 +1,1 @@
-source /home/ryanm/.profile
+source $HOME/.config/shell/profile

@@ -3,12 +3,12 @@
 # This file runs when a DM logs you into a graphical session.
 # If you use startx/xinit like a Chad, this file will also be sourced.
 
-[[ -f ~/.zshenv ]] && source ~/.zshenv
+[[ -f ~/.config/shell/profile ]] && source ~/.config/shell/profile
 
 xsetroot -cursor_name left_ptr &
 ibus-daemon -d -x &
 killall xfwm4 &
-bspwm &
+$WM &
 picom &		#run the compton copmpositing manager
 #~/.local/bin/dwm_status & # start statusbar
 remaps &		# run the remaps script, switching caps/esc and more; check it for more info

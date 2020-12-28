@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/env sh
 # ~/.config/bspwm/bspwmrc
 
 # Article followed for hybrid setup w/ XFCE: https://github.com/bgdawes/bspwm-xfce-dotfiles/wiki
@@ -38,3 +38,4 @@ bspc rule -a xfce4-popup-whiskermenu state=floating border=off layer=normal
 bspc rule -a Yad state=floating border=off layer=normal
 bspc rule -a xfce4-notes floating=on
 
+bspc rule -a \*:"fzfmenu" state=floating center=on sticky=on

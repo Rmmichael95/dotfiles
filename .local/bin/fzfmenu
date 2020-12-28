@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+compgen -c | sort -u | fzf | (nohup ${SHELL:-"/bin/sh"} &) >/dev/null 2>&1

@@ -4,15 +4,15 @@
 
 ####User Application ####
 alt + {b,w,p,f}
-	{firefox,garuda-welcome,pamac-manager,thunar}
+	{brave,garuda-welcome,pamac-manager,neomutt}
 
 # terminal emulator
 super + Return
 	$TERM
 
 # program launcher
-super + d
-	rofi -modi drun -show drun 
+super + r
+	alacritty --class "fzfmenu" -d 400 200  -e fzfmenu
 
 super + Escape
 	pkill -USR1 -x sxhkd
