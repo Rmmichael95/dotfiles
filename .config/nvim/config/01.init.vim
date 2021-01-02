@@ -1,12 +1,12 @@
 " init.vim contains all of the initialization plugins for vim note that this
 " has to be sourced second since dein needs to run its scripts first. This
 " contains misc startup settings for vim
-let g:python3_host_prog = '~/.local/share/nvim/.venv/bin/python3'
+let g:python3_host_prog = '~/.local/share/nvim/.venv/bin/python'
+let g:python2_host_prog = '~/.local/share/nvim/.venv2/bin/python'
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set shell=/bin/sh
-
-" Enable syntax highlighting
+set shell="/bin/env sh"
+"Enable syntax highlighting
 syntax on
 
 " Fixes backspace
@@ -61,8 +61,8 @@ set grepprg=rg\ --vimgrep
 " Set colors in terminal
 " Solarized, dark, with true color support
 set termguicolors
-"set background=dark
-colorscheme NeoSolarized
+" set background=dark
+" colorscheme NeoSolarized
 
 " crontab filetype tweak (the way vim normally saves files confuses crontab
 " so this workaround allows for editing

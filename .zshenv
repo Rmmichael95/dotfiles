@@ -1,19 +1,22 @@
 # PATH
 export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-# MANPATH
-export MANPATH="$MANPATH:/usr/local/man:"
 # Set $PATH if ~/.local/bin exist
-if [ -d "$HOME/.local/bin" ]; then
+if [ -e "$HOME/.local/bin" ]; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
+# MANPATH
+export MANPATH="$MANPATH:/usr/local/man:"
 # ccache
 export PATH="/usr/lib/ccache/bin/:$PATH"
-export MAKEFLAGS="-j9 -l8"
 # Notes
 export PATH="$PATH:$HOME/Documents/Notes/"
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
+# Compilation flags
+export ARCHFLAGS="-arch x86_64"
+# makeflags
+export MAKEFLAGS="-j9 -l8"
 
 # Default programs:
 # Preferred editor for local and remote sessions
