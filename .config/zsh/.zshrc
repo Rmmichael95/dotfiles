@@ -12,6 +12,13 @@ source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 
+# perl
+PATH="/home/ryanm/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/ryanm/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/ryanm/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/ryanm/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/ryanm/perl5"; export PERL_MM_OPT;
+
 # rvm
 source /usr/share/rvm/scripts/rvm
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
