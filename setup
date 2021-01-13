@@ -1,0 +1,29 @@
+#!/usr/bin/env sh
+
+rm -rf $HOME/.makepkg.conf && ln -sv $HOME/Documents/batcave/dotfiles/.makepkg.conf $HOME
+rm -rf $HOME/.gitconfig && ln -sv $HOME/Documents/batcave/dotfiles/.gitconfig $HOME
+rm -rf $HOME/.profile && ln -sv $HOME/Documents/batcave/dotfiles/.profile $HOME
+rm -rf $HOME/.xinitrc  && ln -sv $HOME/Documents/batcave/dotfiles/.xinitrc $HOME
+rm -rf $HOME/.xserverrc && ln -sv $HOME/Documents/batcave/dotfiles/.xserverrc $HOME
+rm -rf $HOME/.zshenv && ln -sv $HOME/Documents/batcave/dotfiles/.zshenv $HOME
+rm -rf $HOME/.config/alacritty && ln -sv $HOME/Documents/batcave/dotfiles/.config/alacritty/ $HOME/.config/
+rm -rf $HOME/.config/bspwm && ln -sv $HOME/Documents/batcave/dotfiles/.config/bspwm/ $HOME/.config/
+rm -rf $HOME/.config/calcurse && ln -sv $HOME/Documents/batcave/dotfiles/.config/calcurse/ $HOME/.config/
+rm -rf $HOME/.config/dunst && ln -sv $HOME/Documents/batcave/dotfiles/.config/dunst/ $HOME/.config/
+rm -rf $HOME/.config/fontconfig && ln -sv $HOME/Documents/batcave/dotfiles/.config/fontconfig/ $HOME/.config/
+rm -rf $HOME/.config/ncmpcpp && ln -sv $HOME/Documents/batcave/dotfiles/.config/ncmpcpp/ $HOME/.config/
+rm -rf $HOME/.config/newsboat && ln -sv $HOME/Documents/batcave/dotfiles/.config/newsboat/ $HOME/.config/
+rm -rf $HOME/.config/nvim && ln -sv $HOME/Documents/batcave/dotfiles/.config/nvim/ $HOME/.config/
+rm -rf $HOME/.config/picom && ln -sv $HOME/Documents/batcave/dotfiles/.config/picom/ $HOME/.config/
+rm -rf $HOME/.config/redshift && ln -sv $HOME/Documents/batcave/dotfiles/.config/redshift/ $HOME/.config/
+rm -rf $HOME/.config/shell && ln -sv $HOME/Documents/batcave/dotfiles/.config/shell/ $HOME/.config/
+rm -rf $HOME/.config/sway && ln -sv $HOME/Documents/batcave/dotfiles/.config/sway/ $HOME/.config/
+rm -rf $HOME/.config/sxhkd && ln -sv $HOME/Documents/batcave/dotfiles/.config/sxhkd/ $HOME/.config/
+rm -rf $HOME/.config/tmux && ln -sv $HOME/Documents/batcave/dotfiles/.config/tmux/ $HOME/.config/
+rm -rf $HOME/.config/waybar && ln -sv $HOME/Documents/batcave/dotfiles/.config/waybar/ $HOME/.config
+rm -rf $HOME/.config/x11 && ln -sv $HOME/Documents/batcave/dotfiles/.config/x11/ $HOME/.config/
+rm -rf $HOME/.config/zsh && ln -sv $HOME/Documents/batcave/dotfiles/.config/zsh/ $HOME/.config/
+rm -rf $HOME/.local/bin && ln -sv $HOME/Documents/batcave/dotfiles/.local/bin/ $HOME/.local/
+rm -rf $HOME/.local/share/wm && echo bspwm > $HOME/.local/share/wm
+rm -rf $HOME/.zshrc
+rm -rf $HOME/.p10k.zsh
