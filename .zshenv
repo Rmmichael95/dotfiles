@@ -1,15 +1,9 @@
 # PATH
-export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-# Set $PATH if ~/.local/bin exist
-if [ -e "$HOME/.local/bin" ]; then
-    export PATH="$HOME/.local/bin:$PATH"
-fi
+typeset -U PATH path
+path=("$PATH" "/usr/local/sbin" "/usr/local/bin/" "/usr/sbin/" "/usr/bin" "/sbin" "/bin" "/usr/lib/ccache/bin/" "$HOME/.local/bin" "$HOME/Documents/Notes/" "$path[@]")
+export PATH
 # MANPATH
 export MANPATH="$MANPATH:/usr/local/man:"
-# ccache
-export PATH="/usr/lib/ccache/bin/:$PATH"
-# Notes
-export PATH="$PATH:$HOME/Documents/Notes/"
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8

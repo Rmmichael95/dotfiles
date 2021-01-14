@@ -1,0 +1,121 @@
+Garuda:
+
+100M /boot/efi
+
+1.5x ram size for swap if hibernation 
+
+Install and run through setup script 
+
+sudo chsh -s /bin/zsh
+
+chsh -s /usr/bin/zsh
+
+mkdir -p ~/Documents/batcave/tmp
+
+cd ~/Documents/batcave
+
+git clone https://github.com/Rmmichael95/dotfiles.git
+
+Run setup
+
+sudo pacman -S lzop lz4 pigz pbzip2 ccache rustup
+
+# set up rustup default toolchail
+rustup update stable
+rustup self upgrade-data
+
+yay -S upd72020x-fw aic94xx-firmware wd719x-firmware libxft-bgra-git neovim-git nerd-fonts-complete ffmpeg-full-git transset-df starship-git
+
+# nvidia
+yay -S nvidia-dkms libglvnd-git nvidia-utils opencl-nvidia lib32-nvidia-utils lib32-opencl-nvidia nvidia-settings
+
+sudo pacman -R vulkan-mesa-layers lib32-vulkan-mesa-layers
+
+sudo pacman -Sy mesa-tkg-git lib32-mesa-tkg-git mesa-demos
+
+# vulkan
+sudo pacman -Sy vulkan-icd-loader lib32-vulkan-icd-loader vulkan-tools
+# radeon
+sudo pacman -Sy vulkan-radeon-git lib32-vulkan-radeon-git
+# intel
+sudo pacman -Sy xf86-video-intel intel-ucode opengl-man-pages
+
+sudo pacman -S gdb  ctags cscope cmake python python2 python-pip python2-pip python2-virtualenv python-sphinx tmux lua zathura zathura-pdf-mupdf zathura-ps zathura-cb zathura-djvu git sxiv lib32-sdl2 lib32-sdl_image zip unzip unrar zsh-completions zsh-syntax-highlighting zsh-autosuggestions zsh-history-substring-search zsh-doc lib32-openal mercurial go cargo mono jdk-openjdk ghostscript gsfonts ttf-ubuntu-font-family ttf-liberation enscript w3m calcurse mpd mpv ncmpcpp fzf ripgrep cpanminus xf86-video-fbdev xf86-video-vesa xf86-input-libinput thefuck lsd sl opencl-headers texlive-latexextra java-rhino
+
+yay -S rvm nvm-git
+
+# run command and yes through defaults
+cpan
+
+# neovim peel support
+cpanm -f Term::ReadLine Log::Log4perl::Perl Archive::Zip Neovim::Ext
+
+# set up pyvenv for nvim
+mkdir -p ~/.local/share/nvim/
+
+python -m venv ~/.local/share/nvim/.venv
+
+virtualenv2 ~/.local/share/nvim/.venv2
+
+source ~/.local/share/nvim/.venv2/bin/activate
+
+pip install pynvim
+
+source ~/.local/share/nvim/.venv/bin/activate
+
+pip install pynvim
+
+# rvm
+mkdir -p ~/.rvm/{rubies,archives,src,user}
+rvm install ruby
+gem install neovim
+
+# neovim node supportg gu g
+nvm install --latest-npm
+nvm install node
+npm install -g neovim
+
+# dein
+cd ~/Documents/batcave/tmp
+
+curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+
+#use ~/.vim/bundles for vim backwards compatibility
+sh ./installer.sh ~/.vim/bundles
+
+# open nvim and run :call dein#install() and run UpdareRemotePlugns
+# run checkhealth to make sure everything is ok
+
+sudo pacman -S wine-staging winetricks
+
+sudo pacman -S giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse alsa-plugins lib32-alsa-plugins alsa-lib lib32-alsa-lib libjpeg-turbo lib32-libjpeg-turbo libxcomposite lib32-libxcomposite libxinerama lib32-libxinerama ncurses lib32-ncurses opencl-icd-loader lib32-opencl-icd-loader libxslt lib32-libxslt libva lib32-libva gtk3 lib32-gtk3 gst-plugins-base-libs lib32-gst-plugins-base-libs vulkan-icd-loader lib32-vulkan-icd-loader cups samba dosbox
+
+yay -S ninja meson glslang mingw-w64-gcc git
+
+git clone https://github.com/doitsujin/dxvk.git
+
+cd dxvk
+
+sudo ./package-release.sh master /opt --no-package
+
+#How to add custom DXVK to Proton:
+Your DXVK dlls will be in whatever folder you specified for /some/destination/path. You can drag/drop them into your Proton folder like this example:
+
+For x32 dlls:
+Proton 3.7/dist/lib/wine/dxk
+
+For x64 dlls:
+Proton 3.7/dist/lib64/wine/dxk
+The Proton folder is usually located in your default steam library folder under steamapps/common/
+
+yay -S pam-gnupg-git
+
+# uncomment lines in /etc/pam.d/lightdm*
+
+yay -S neomutt isync msmtp pass lynx notmuch abook urlview-git cronie
+
+yay -S mutt-wizard-git
+
+sudo mkdir /opt/games
+
+sudo chmod 777 /opt/games
