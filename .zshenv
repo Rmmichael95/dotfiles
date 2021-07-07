@@ -21,7 +21,11 @@ else
 fi
 export SHELL=/bin/zsh
 export PAGER=less
-export TERM=alacritty
+if [ "$wm" = "sway" ]; then 
+	export TERM=alacritty
+else
+	export TERM=st
+fi
 export BROWSER=brave
 export BROWSERCLI=w3m
 export READER=zathura
