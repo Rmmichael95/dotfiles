@@ -24,6 +24,6 @@ rm -rf $HOME/.config/waybar && ln -sv $HOME/Documents/batcave/dotfiles/.config/w
 rm -rf $HOME/.config/x11 && ln -sv $HOME/Documents/batcave/dotfiles/.config/x11/ $HOME/.config/
 rm -rf $HOME/.config/zsh && ln -sv $HOME/Documents/batcave/dotfiles/.config/zsh/ $HOME/.config/
 rm -rf $HOME/.local/bin && ln -sv $HOME/Documents/batcave/dotfiles/.local/bin/ $HOME/.local/
-rm -rf $HOME/.local/share/wm && echo bspwm > $HOME/.local/share/wm
+rm -rf $HOME/.local/share/wm && echo dwm > $HOME/.local/share/wm
 rm -rf $HOME/.zshrc
 rm -rf $HOME/.p10k.zsh

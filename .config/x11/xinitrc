@@ -14,8 +14,8 @@ sysmodmap=/etc/X11/xinit/.Xmodmap
 #SESSION=${1:-xfce}
 
 # use nvidia
-xrandr --setprovideroutputsource modesetting NVIDIA-0
-xrandr --auto
+#xrandr --setprovideroutputsource modesetting NVIDIA-0
+#xrandr --auto
 
 # merge in defaults and keymaps
 
