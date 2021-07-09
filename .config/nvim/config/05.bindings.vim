@@ -11,7 +11,7 @@ let g:leader = "," " remap leader (global)
 let mapleader = "," " remap leader (from \)
 let g:mapleader = "," " remap leader (global)
 
-"set pastetoggle=<leader>P
+set pastetoggle=<leader>P
 
 nnoremap <leader>r :source ~/.config/nvim/init.vim<cr>
 noremap <leader><space> :noh<cr>:call clearmatches()<cr>
