@@ -10,7 +10,7 @@ augroup filetypedetect
     " calcurse
     autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set ft=markdown
     " Markdown
-    autocmd BufWrite,BufNewFile *.md,*.md.html set ft=markdown
+    autocmd BufWrite,BufNewFile,BufReadPost *.md,*.md.html set ft=markdown
     " mathmatica
     autocmd BufNewFile,BufRead *.wl,*.wls set ft=mma
     " CSS

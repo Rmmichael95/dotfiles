@@ -1,58 +1,9 @@
 " ========{ Mappings }====================================== " {{{1
 " ----[ Leaders ]---------------------------------------- {{{2
-let leader = "," " remap leader to z (from \)
-let g:leader = "," " remap leader to z (global)
-let mapleader = "," " remap leader to , (from \)
-let g:mapleader = "," " remap leader to z (global)
-nnoremap <leader>r :source ~/.config/nvim/init.vim<cr>
-noremap <leader><space> :noh<cr>:call clearmatches()<cr>
 set pastetoggle=<leader>P
-nnoremap <leader>q :q!<cr>
-nnoremap <leader>w :w<cr>
-nnoremap <leader>z :wq!<cr>
-nnoremap <leader>\ :TagbarToggle<CR>
-nmap <silent> <leader>y :FSHere<cr>
-" Notes
-nnoremap <leader>N :Note
-nnoremap <leader>[ :Ngrep
-" Open quickfix for last search
-noremap <silent> <leader>/ :execute 'vimgrep/'.@/.'/g%'<cr>:copen<cr>
-" Ripgrep for next search
-noremap <silent> <leader>? :execute "!rg '" . substitute(substitute(substitute(@/, "\\\\<", "\\\\b", ""), "\\\\>", "\\\\b", ""), "\\\\v", "", "") . "'"<cr>
-" urlview
-nnoremap <leader>u :w<Home>silent <End> !urlview<CR>
 " header guard
 nnoremap <leader>g :call myfuncs#IncludeGuard()<CR>
-nnoremap <leader>f :Files<CR>
-nnoremap <leader>F :Find .<CR>
 " ----[ Plugin Maps ]------------------------------------------------ {{{2
-"  Vim protodef
-"  pull defs to cursor <leader>PP
-"  dispatch
-nnoremap <F9> :Dispatch<CR>
-
-" This is the default fzf extra key bindings
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
-
-" deoplete tab-complete
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
-" LanguageClient mappings
-nnoremap <silent> H :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> gr :call LanguageClient_textDocument_references()<CR>
-nnoremap <silent> gs :call LanguageClient_textDocument_documentSymbol()<CR>
-nnoremap <silent> <F12> :call LanguageClient_textDocument_rename()<CR>
-nnoremap <silent> gf :call LanguageClient_textDocument_codeAction()<CR>
-
-" ALE
-nmap <F8> <Plug>(ale_fix)
-
-" File explorer
-nnoremap <F2> :Lexplore<CR>
 
 " Plugin key-mappings.
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
@@ -87,29 +38,9 @@ endif
 " neovim visor
 let g:neovim_visor_key = '<C-a>'
 " ----[ Mappings ]---------------------------------------- {{{2
-" Use ; for commands
-nnoremap ; :
-
-" Don't use Ex mode, use Q for formatting
-nnoremap Q gq
 
 "  smart tab complete
 au FileType erl inoremap <tab> <c-r>=myfuncs#Smart_TabComplete()<CR>
-
-" Delete trailing whitespace with <C-D>
-":nnoremap <silent> <C-D> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
-
-" Easy buffer navigation
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
-
-" Navigate Vim Splits
-nnoremap <C-J> <C-W><C-J> "Ctrl-j to move down a split
-nnoremap <C-K> <C-W><C-K> "Ctrl-k to move up a split
-nnoremap <C-L> <C-W><C-L> "Ctrl-l to move    right a split
-nnoremap <C-H> <C-W><C-H> "Ctrl-h to move left a split
 
 " new tab
 map <C-t><C-t> :tabnew<CR>
@@ -164,24 +95,21 @@ tnoremap <ESC> <C-\><C-n><C-w><C-p>
 nnoremap <Tab> :buffers<CR>:buffer<Space>
 
 " Symbols ---------------------------------- {{{3
-" map! <C-v>ta τ
-" map! <C-v>ph ϕ
+ map! <C-v>ta τ
+ map! <C-v>ph ϕ
 " Math
-" map! <C-v>ll →
-" map! <C-v>hh ⇌
-" map! <C-v>kk ↑
-" map! <C-v>jj ↓
-" map! <C-v>= ∝
-" map! <C-v>~ ≈
-" map! <C-v>!= ≠
-" map! <C-v>!> ⇸
-" map! <C-v>~> ↝
-" map! <C-v>>= ≥
-" map! <C-v><= ≤
-" map! <C-v>0  °
-" map! <C-v>ce ¢
-" map! <C-v>*  •
-" map! <C-v>co ⌘
+ map! <C-v>ll →
+ map! <C-v>hh ⇌
+ map! <C-v>kk ↑
+ map! <C-v>jj ↓
+ map! <C-v>= ∝
+ map! <C-v>~ ≈
+ map! <C-v>!= ≠
+ map! <C-v>>= ≥
+ map! <C-v><= ≤
+ map! <C-v>0  °
+ map! <C-v>ce ¢
+ map! <C-v>*  •
 
 " Greek
 map! <C-v>A Α

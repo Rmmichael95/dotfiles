@@ -26,15 +26,15 @@ nnoremap <C-s> :RG<CR>
 nnoremap <C-m> :Marks<CR>
 
 " neosnippets
-imap <C-l> <Plug>(coc-snippets-expand)
-imap <C-k> <Plug>(coc-snippets-expand-jump)
-inoremap <silent><expr> <TAB>
-    \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+"imap <C-l> <Plug>(coc-snippets-expand)
+"imap <C-k> <Plug>(coc-snippets-expand-jump)
+"inoremap <silent><expr> <TAB>
+"    \ pumvisible() ? "\<C-n>" :
+"      \ <SID>check_back_space() ? "\<TAB>" :
+"      \ coc#refresh()
+"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"nnoremap <silent> K :call <SID>show_documentation()<CR>
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 nmap <silent> [g <Plug>(coc-diagnostic-prev)

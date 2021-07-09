@@ -38,7 +38,7 @@ function! myfuncs#Smart_TabComplete()
     return "\<C-X>\<C-P>"                         " existing text matching
   elseif ( has_slash )
     return "\<C-X>\<C-F>"                         " file matching
-  else if
+  elseif
     return "\<C-X>\<C-O>"                         " plugin matching
   else
       return "\<tab>"
@@ -70,4 +70,38 @@ function! myfuncs#OpenAll() abort
     endif
     " Windows
     return "explorer"
+endfunction
+" ----[ ]-----------------------------------{{{2
+function! s:myfuncs#GrepArgs(...)
+  let list = ['-S', '-smartcase', '-i', '-ignorecase', '-w', '-word',
+        \ '-e', '-regex', '-u', '-skip-vcs-ignores', '-t', '-extension']
+  return join(list, "\n")
+endfunction
+" ----[ ]-----------------------------------{{{2
+function! s:myfuncs#GrepFromSelected(type)
+  let saved_unnamed_register = @@
+  if a:type ==# 'v'
+    normal! `<v`>y
+  elseif a:type ==# 'char'
+    normal! `[v`]y
+  else
+    return
+  endif
+  let word = substitute(@@, '\n$', '', 'g')
+  let word = escape(word, '| ')
+  let @@ = saved_unnamed_register
+  execute 'CocList grep '.word
+endfunction
+" ----[ ]-----------------------------------{{{2
+function! s:myfuncs#check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+" ----[ ]-----------------------------------{{{2
+function! s:myfuncs#show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
 endfunction

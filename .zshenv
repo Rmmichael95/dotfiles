@@ -10,7 +10,7 @@ export LANG=en_US.UTF-8
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
 # makeflags
-export MAKEFLAGS="-j9 -l8"
+export MAKEFLAGS="-j5 -l4"
 
 # Default programs:
 # Preferred editor for local and remote sessions
@@ -21,7 +21,7 @@ else
 fi
 export SHELL=/bin/zsh
 export PAGER=less
-if [ "$wm" = "sway" ]; then 
+if [ "$wm" = "sway" ]; then
 	export TERM=alacritty
 else
 	export TERM=st

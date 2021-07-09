@@ -6,3 +6,5 @@ set expandtab
 set autoindent
 set fileformat=unix
 let python_highlight_all=1
+setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
+autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<

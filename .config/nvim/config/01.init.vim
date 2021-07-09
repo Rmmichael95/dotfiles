@@ -2,12 +2,25 @@
 " has to be sourced second since dein needs to run its scripts first. This
 " contains misc startup settings for vim
 let g:python3_host_prog = '~/.local/share/nvim/.venv/bin/python'
-let g:python_host_prog = '~/.local/share/nvim/.venv2/bin/python'
+"let g:python_host_prog = '~/.local/share/nvim/.venv2/bin/python'
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set shell=/bin/zsh
 "Enable syntax highlighting
 syntax on
+
+"misc
+set browsedir=buffer
+set history=10000
+"set autochdir
+set showcmd
+set nohlsearch
+set ignorecase
+set showmatch
+set autoindent
+set laststatus=2
+set nospell
+set nowrap
 
 " Fixes backspace
 set backspace=indent,eol,start
@@ -37,17 +50,14 @@ set shiftwidth=4
 " set sta
 set expandtab
 set softtabstop=4 " softtabstop, makes spaces feel like tabs when deleting
-set cursorline
+"set cursorline
 
 " This will set folds disabled by default, but they can be toggled with zi
 set nofoldenable
+set fdm=marker
 
 " enable mouse support
 set mouse=a mousemodel=popup
-
-" markdown file recognition
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-autocmd BufNewFile,BufReadPost *.md.html set filetype=markdown
 
 " relative line numbers
 " Sets relative line numbers in normal mode, absolute line numbers in insert
@@ -75,15 +85,26 @@ set nomodeline  " the modeline is a well-known security risk
 autocmd BufWinEnter,WinEnter term://* startinsert
 autocmd BufLeave term://* stopinsert
 
+" encoding
+set encoding=utf-8
+set termencoding=utf-8
+set fileencodings=utf-8
+set fileformats=unix,dos,mac
+set formatprg=par
+
 " markdown settings
 let g:vim_markdown_conceal = 0
 let g:vim_markdown_math = 0
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_no_default_key_mappings = 1
 
-" some language servers have problems with backup files
-set nobackup
-set nowritebackup
+" backup dir
+set backupskip=/tmp/*,/private/tmp/*",*.gpg
+set backupdir=~/.vim/tmp/.backup//,/tmp
+set undodir=~/.vim/tmp/.undo//,/tmp
+set directory=~/.vim/tmp/.swp//,/tmp
+set backup
+set noswapfile
 
 " more natural splits
 set splitbelow
@@ -91,6 +112,15 @@ set splitright
 
 " live substitution for text edits
 set inccommand=nosplit
+
+" Special chars
+set list lcs=tab:▸\ ,eol:¬,extends:❯,precedes:❮
+
+highlight LineNr ctermfg=grey
+
+set visualbell t_vb=".
+
+set tags=tags;
 
 " ripgrep
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
@@ -143,3 +173,6 @@ function! Fzf_dev(qargs)
 endfunction
 
 let g:suda_smart_edit = 1
+
+let perl_include_pod = 1
+let perl_extended_vars = 1 " syntax color complex things like @{${foo}}

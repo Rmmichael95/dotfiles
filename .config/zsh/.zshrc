@@ -58,7 +58,7 @@ zstyle ':completion:*' menu select
 zmodload zsh/complist
 compinit
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # Case insensitive tab completion
-zstyle ':completion:*' rehash true                              # automatically find new executables in path 
+zstyle ':completion:*' rehash true                              # automatically find new executables in path
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"         # Colored completion (different colors for dirs/files/etc)
 zstyle ':completion:*' completer _expand _complete _ignored _approximate
 zstyle ':completion:*' menu select=2
@@ -194,7 +194,7 @@ lfcd () {
 
 bindkey -s '^o' 'lfcd\n'  # zsh
 
-# Add useful aliases 
+# Add useful aliases
 alias aup="pamac upgrade --aur"
 alias grubup="sudo update-grub"
 alias orphaned="sudo pacman -Rns $(pacman -Qtdq)"

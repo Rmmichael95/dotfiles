@@ -4,6 +4,6 @@ if [ "$WM" = "sway" ]; then
 	fi
 else
 	if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-		exec startx
+        exec sx $HOME/.config/x11/xinitrc
 	fi
 fi
