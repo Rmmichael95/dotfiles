@@ -99,8 +99,8 @@ if dein#load_state('/home/ryanm/.vim/bundles')
     call dein#add('JCLiang/vim-cscope-utils', {'on_ft': ['c', 'cpp']})
     " C++
     call dein#add('octol/vim-cpp-enhanced-highlight', {'on_ft': ['c', 'cpp', 'h']})
+    call dein#add('derekwyatt/vim-protodef', {'on_ft': ['c', 'cpp', 'h']})
     "call dein#add('vim-scripts/DoxygenToolkit.vim', {'on_ft': ['c', 'cpp']})
-    "call dein#add('derekwyatt/vim-protodef', {'on_ft': ['c', 'cpp', 'h']})
     " Markdown
     call dein#add('cespare/vim-toml')
     call dein#add('rhysd/vim-gfm-syntax')
@@ -112,7 +112,7 @@ if dein#load_state('/home/ryanm/.vim/bundles')
     call dein#add('iamcco/mathjax-support-for-mkdp', {'on_ft': ['markdown', 'pandoc.markdown', 'rmd']})
     " Java
     call dein#add('othree/jspc.vim', {'on_ft': 'java'})
-    "call dein#add('Dinduks/vim-java-get-set', {'on_ft':'java'})
+    call dein#add('Dinduks/vim-java-get-set', {'on_ft':'java'})
     "call dein#add('tfnico/vim-gradle', {'on_ft': 'gradle'})
     "call dein#add('vim-scripts/groovy.vim', {'on_ft': 'groovy'})
     " Web
@@ -121,12 +121,6 @@ if dein#load_state('/home/ryanm/.vim/bundles')
     " Ruby
     "call dein#add('tpope/vim-cucumber', {'on_ft': ['ruby', 'rb']})
     "call dein#add('slim-template/vim-slim', {'on_ft': 'slim'})
-    " erlang & elixir
-    "call dein#add('vim-erlang/vim-erlang-skeletons', {'on_ft': 'erl'})
-    "call dein#add('vim-erlang/vim-erlang-runtime', {'on_ft': 'erl'})
-    "call dein#add('vim-erlang/vim-erlang-tags', {'on_ft': 'erl'})
-    "call dein#add('elixir-editors/vim-elixir', {'on_ft': ['ex', 'exs', 'eex']})
-    "call dein#add('slashmili/alchemist.vim', {'on_ft': ['ex', 'esx', 'eex']})
 
     call dein#end()
     call dein#save_state()

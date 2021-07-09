@@ -46,7 +46,23 @@ augroup NoSimultaneousEdits
     autocmd SwapExists * sleep 2
 augroup END
 
+" grep word under cursor
+command! -nargs=+ -complete=custom,s:GrepArgs Rg exe 'CocList grep '.<q-args>
+
 " augroup lLength
 "   autocmd BufEnter * highlight OverLength ctermbg=11 ctermfg=9 guibg=11
 "   autocmd BufEnter * match OverLength /\%79v.*/
 " augroup END
+
+command! -nargs=0 Format :call CocAction('format')
+
+"  smart tab complete
+au FileType erl inoremap <tab> <c-r>=myfuncs#Smart_TabComplete()<CR>
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json,cpp,c,python,rust,go setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end

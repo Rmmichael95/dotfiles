@@ -48,7 +48,3 @@ let airline#extensions#coc#error_symbol = 'E:'
 let airline#extensions#coc#warning_symbol = 'W:'
 let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
 let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
-
-"let g:airline#extensions#neomake#enabled = 1
-"let airline#extensions#neomake#error_symbol = 'E:'
-"let airline#extensions#neomake#warning_symbol = 'W:'
