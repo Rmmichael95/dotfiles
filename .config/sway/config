@@ -8,15 +8,15 @@ default_border none
 set $term --no-startup-id $TERMINAL
 set $mod Mod4
 # function keys
-# XF86PowerOff
-# XF86AudioPrev
-# XF86AudioStop
-# XF86AudioPlay
-# XF86AudioNext
-# XF86Explorer
-# XF86HomePage
-# XF86Mail
-# XF86Calculator
+#XF86PowerOff
+#XF86AudioPrev
+#XF86AudioStop
+#XF86AudioPlay
+#XF86AudioNext
+#XF86Explorer
+#XF86HomePage
+#XF86Mail
+#XF86Calculator
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
 set $menu dmenu_path | dmenu | xargs swaymsg exec --
@@ -26,10 +26,12 @@ set $down j
 set $up k
 set $right l
 
+gaps inner 8
+
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /home/ryanm/Pictures/Wallpaper/FF-Void.png fill
+output * bg /home/ryanm/.config/wall fill
 #
 # Example configuration:
 #
@@ -99,6 +101,8 @@ output * bg /home/ryanm/Pictures/Wallpaper/FF-Void.png fill
 
     # exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
+exec wl-paste -t text --watch clipman store
 #
 # Moving around:
 #

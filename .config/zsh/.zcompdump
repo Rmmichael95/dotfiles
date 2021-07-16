@@ -842,7 +842,6 @@ _comps=(
 'mpc' '_mpc'
 'mplayer' '_mplayer'
 'mpstat' '_sysstat'
-'mpv' '_mpv'
 'mr' '_myrepos'
 'mrd' '_mtools'
 'mread' '_mtools'
@@ -906,7 +905,6 @@ _comps=(
 'node' '_node'
 'noglob' '_precommand'
 'nohup' '_precommand'
-'notmuch' '_notmuch'
 'nova' '_openstack'
 'npm' '_npm'
 'ns' '_hosts'
@@ -950,7 +948,6 @@ _comps=(
 'parec' '_pulseaudio'
 'parecord' '_pulseaudio'
 'paru' '_paru'
-'pass' '_pass'
 'passwd' '_users'
 'paste' '_paste'
 'pasuspender' '_pulseaudio'
@@ -1027,8 +1024,6 @@ _comps=(
 'podtoc' '_perl_modules'
 'poff' '_pon'
 'policytool' '_java'
-'polybar' '_polybar'
-'polybar-msg' '_polybar_msg'
 'pon' '_pon'
 'popd' '_directory_stack'
 'port' '_port'
@@ -1082,6 +1077,7 @@ _comps=(
 'pyhtmlizer' '_twisted'
 'qdbus' '_qdbus'
 'qiv' '_qiv'
+'qpdf' '_qpdf'
 'quilt' '_quilt'
 'r' '_fc'
 'rails' '_rails'
@@ -1292,6 +1288,10 @@ _comps=(
 'svnlite' '_subversion'
 'swaks' '_swaks'
 'swanctl' '_swanctl'
+'sway' '_sway'
+'swayidle' '_swayidle'
+'swaylock' '_swaylock'
+'swaymsg' '_swaymsg'
 'swift' '_swift'
 'swiftc' '_swift'
 'sync' '_nothing'
@@ -1512,6 +1512,8 @@ _comps=(
 'whom' '_mh'
 'wiggle' '_wiggle'
 'wipefs' '_wipefs'
+'wl-copy' '_wl-copy'
+'wl-paste' '_wl-paste'
 'wodim' '_cdrecord'
 'wpa_cli' '_wpa_cli'
 'write' '_users_on'
@@ -1563,7 +1565,6 @@ _comps=(
 'xview' '_xloadimage'
 'xvnc4viewer' '_vnc'
 'xvncviewer' '_vnc'
-'xwallpaper' '_xwallpaper'
 'xwd' '_x_utils'
 'xwininfo' '_x_utils'
 'xwit' '_xwit'
@@ -1687,7 +1688,6 @@ _services=(
 
 _patcomps=(
 '*/(init|rc[0-9S]#).d/*' '_init_d'
-'notmuch-*' '_notmuch'
 )
 
 _postpatcomps=(
@@ -1759,32 +1759,32 @@ autoload -Uz _afew _alacritty _android _archlinux-java _artisan \
             _cheat _choc _chromium _cmake _coffee \
             _composer _conan _concourse _console _cppcheck \
             _curl _dad _debuild _dget _dhcpcd \
-            _diana _docpad _drush _ecdsautil _email-notmuch \
-            _emulator _envdir _exportfs _fab _fail2ban-client \
-            _ffind _fleetctl _flutter _force _fwupdmgr \
-            _gas _ghc _gist _git-flow _git-journal \
-            _git-pulls _git-revise _git-wtf _glances _golang \
-            _google _gpgconf _gtk-launch _hg _hledger \
-            _homestead _httpie _ibus _include-what-you-use _inxi \
-            _jmeter _jmeter-plugins _jonas _jrnl _kak \
-            _kitchen _knife _language_codes _libinput _lilypond \
-            _loginctl _lsd _lunchy _mc _middleman \
-            _mina _mix _mpv _mssh _mussh \
-            _mvn _nano _nanoc _nftables _node \
-            _notmuch _nvm _openssl _optirun _opustools \
-            _pacman _paru _pass _patool _perf \
-            _periscope _pgsql_utils _phing _pixz _pkcon \
-            _play _pm2 _polybar _polybar_msg _port \
-            _protoc _pulseaudio _pygmentize _rails _ralio \
+            _diana _docpad _drush _ecdsautil _emulator \
+            _envdir _exportfs _fab _fail2ban-client _ffind \
+            _fleetctl _flutter _force _fwupdmgr _gas \
+            _ghc _gist _git-flow _git-journal _git-pulls \
+            _git-revise _git-wtf _glances _golang _google \
+            _gpgconf _gtk-launch _hg _hledger _homestead \
+            _httpie _ibus _include-what-you-use _inxi _jmeter \
+            _jmeter-plugins _jonas _jrnl _kak _kitchen \
+            _knife _language_codes _libinput _lilypond _loginctl \
+            _lsd _lunchy _mc _middleman _mina \
+            _mix _mssh _mussh _mvn _nano \
+            _nanoc _nftables _node _nvm _openssl \
+            _optirun _opustools _pacman _paru _patool \
+            _perf _periscope _pgsql_utils _phing _pixz \
+            _pkcon _play _pm2 _port _protoc \
+            _pulseaudio _pygmentize _qpdf _rails _ralio \
             _redis-cli _rfkill _rg _rkt _rslsync \
             _rspec _rsvm _rubocop _rustup _sbt \
             _scala _scrub _sdd _setcap _setup.py \
             _sfdx _shellcheck _showoff _srm _stack \
             _starship _subl _subliminal _supervisorctl _svm \
-            _tarsnap _teamocil _thor _tmuxinator _tmuxp \
-            _tox _trash-empty _trash-list _trash-put _trash-restore \
-            _udisksctl _ufw _vagrant _virtualbox _vnstat \
-            _wemux _wg-quick _xinput _xsel _xwallpaper \
+            _sway _swayidle _swaylock _swaymsg _tarsnap \
+            _teamocil _thor _tmuxinator _tmuxp _tox \
+            _trash-empty _trash-list _trash-put _trash-restore _udisksctl \
+            _ufw _vagrant _virtualbox _vnstat _wemux \
+            _wg-quick _wl-copy _wl-paste _xinput _xsel \
             _yaourt _yarn _zathura _zcash-cli _cdr \
             _all_labels _all_matches _alternative _approximate _arg_compile \
             _arguments _bash_completions _cache_invalid _call_function _combination \
