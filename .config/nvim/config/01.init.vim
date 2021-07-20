@@ -165,12 +165,19 @@ function! Fzf_dev(qargs)
     endfor
   endfunction
 
-  call fzf#run({
+  call skim#run({
         \ 'source': <sid>files(a:qargs),
         \ 'sink*':   function('s:edit_file'),
-        \ 'options': '-m ' . l:fzf_files_options,
+        \ 'options': '-m ' . l:skim_files_options,
         \ 'down':    '40%' })
 endfunction
+
+" netrw
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+"let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
 
 let g:suda_smart_edit = 1
 

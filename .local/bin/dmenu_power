@@ -1,6 +1,7 @@
-#!/usr/bin/env sh
+#!/bin/env sh
 
-CHOICE="$(printf "Yes\\nReboot" | dmenu -i -p "$1")"
+#CHOICE="$(printf "Yes\\nReboot" | dmenu -i -p "$1")"
+CHOICE="$(printf "Yes\\nReboot" | dmenu -p "$1")"
 
 if [ "$CHOICE" = "Yes" ]; then
    $2

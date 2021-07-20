@@ -1,3 +1,3 @@
-#!/usr/bin/env sh
-# trim all mounted filesystems which support it
-/sbin/fstrim --all || true
+#!/bin/env sh
+# trim all filesystems in fstab which support it
+/sbin/fstrim --fstab || true

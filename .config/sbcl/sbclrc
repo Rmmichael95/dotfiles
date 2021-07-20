@@ -1,0 +1,9 @@
+
+;;; The following lines added by ql:add-to-init-file:
+#-quicklisp
+(let ((quicklisp-init "/home/ryanm/.local/share/common-lisp/source/quicklisp/setup.lisp"))
+  (when (probe-file quicklisp-init)
+    (load quicklisp-init)))
+
+;(ql:quickload :cffi)
+;(pushnew "/home/ryanm/.local/share/common-lisp/cl-webengine/" cffi:*foreign-library-directories* :test #'equal)

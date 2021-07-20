@@ -1,0 +1,8 @@
+{
+ "languageserver": {
+  "zig": {
+    "command": "zls",
+    "filetypes": ["zig"]
+  }
+ }
+}

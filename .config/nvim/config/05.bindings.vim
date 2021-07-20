@@ -16,6 +16,9 @@ set pastetoggle=<leader>P
 nnoremap <leader>r :source ~/.config/nvim/init.vim<cr>
 noremap <leader><space> :noh<cr>:call clearmatches()<cr>
 
+" File explorer
+nnoremap <F2> :Lexplore<CR>
+
 " new tab
 map <C-t><C-t> :tabnew<CR>
 " close tab
@@ -70,7 +73,7 @@ cmap cd. lcd %:p:h<cr>
 nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 
 " spell lang
-nnoremap <F3> :call myfuncs#CycleLang()<CR>
+nnoremap <F9> :call myfuncs#CycleLang()<CR>
 
 " Notes & Pandoc
 nnoremap <C-n> :cnext<cr>
@@ -114,9 +117,6 @@ nnoremap <leader>u :w<Home>silent <End> !urlview<CR>
 
 nnoremap <leader>f :Files<CR>
 nnoremap <leader>F :Find .<CR>
-
-" File explorer
-nnoremap <F2> :Lexplore<CR>
 
 "vnoremap <leader>g :<C-u>call <SID>GrepFromSelected(visualmode())<CR>
 "nnoremap <leader>g :<C-u>set operatorfunc=<SID>GrepFromSelected<CR>g@
