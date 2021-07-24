@@ -7,7 +7,7 @@ export MANPATH="$MANPATH:/usr/local/man:"
 
 # You may need to manually set your language environment
 export LANG="en_US.UTF-8"
-export LC_COLLATE=C
+export LC_COLLATE="C"
 
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
@@ -22,7 +22,7 @@ if [[ -n $SSH_CONNECTION ]]; then
 else
   export EDITOR="nvim"
 fi
-export SHELL=/usr/bin/zsh
+#export SHELL=/usr/bin/zsh
 export PAGER=less
 export TERMINAL=alacritty
 export BROWSER=librewolf
@@ -44,7 +44,10 @@ export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:="$HOME/.config"}
 export XDG_STATE_HOME=${XDG_STATE_HOME:="$HOME/.local/state"}
 
 #needs user-authority-in-system-dir=true in lightdm.conf, pam-systemd starts rtd
-#export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
+#export XAUTHORITY="$XDG_STATE_HOME"/Xauthority
+
+#doesnt seem to work with dxvk
+#export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
 
 export RBENV_ROOT="$XDG_DATA_HOME"/ruby/rbenv
 #if not using rbenv
@@ -67,7 +70,6 @@ export ZDOTDIR=$XDG_CONFIG_HOME/zsh
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
 #export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME"/ripgrep/ripgreprc
-#export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
 export WGETRC="$XDG_CONFIG_HOME/wgetrc"
 export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch-config"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0"

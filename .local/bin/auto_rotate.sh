@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 # Auto rotate screen based on device orientation
 
 # Receives input from monitor-sensor (part of iio-sensor-proxy package)

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 filter() { mpc | sed "/^volume:/d;s/\\&/&amp;/g;s/\\[paused\\].*/⏸/g;/\\[playing\\].*/d;/^ERROR/Q" | paste -sd ' ' -;}
 

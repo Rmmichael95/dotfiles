@@ -78,9 +78,6 @@ if dein#load_state('/home/ryanm/.cache/dein')
     call dein#add('dhruvasagar/vim-table-mode')
     call dein#add('Konfekt/FastFold')
     call dein#add('lervag/wiki.vim')
-        " Thux
-    call dein#add('benmills/vimux')
-    call dein#add('christoomey/vim-tmux-navigator')
     " ctags / cscope
     call dein#add('preservim/tagbar', {'on_cmd': 'TagbarToggle'})
     call dein#add('jsfaint/gen_tags.vim', {'on_cmd': ['GenCtags', 'GenGtags']})

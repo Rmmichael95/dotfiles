@@ -1,4 +1,4 @@
-#!/bin/env sh
+#!/usr/bin/env sh
 
 #CHOICE="$(printf "Yes\\nReboot" | dmenu -i -p "$1")"
 CHOICE="$(printf "Yes\\nReboot" | dmenu -p "$1")"

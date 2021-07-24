@@ -65,7 +65,7 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 
 " let g:undotree_WindowLayout='botright'
 let g:undotree_SetFocusWhenToggle=1
-"nnoremap <silent> <F1> :UndotreeToggle<CR>
+nnoremap <silent> <F3> :UndotreeToggle<CR>
 
 " Golden view
 let g:goldenview__enable_default_mapping=0

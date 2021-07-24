@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 # Displays number of unread mail and an loading icon if updating.
 # When clicked, brings up `neomutt`.
@@ -13,7 +13,7 @@ case $BLOCK_BUTTON in
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-unread="$(find "${XDG_DATA_HOME:-$HOME/.local/share}"/mail/*/[Ii][Nn][Bb][Oo][Xx]/new/* -type f | wc -l 2>/dev/null)"
+unread="$(find "$XDG_DATA_HOME"/mail/*/[Ii][Nn][Bb][Oo][Xx]/new/ -type f | wc -l 2>/dev/null)"
 
 pidof mbsync >/dev/null 2>&1 && icon="🔃"
 

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 # Displays number of upgradeable packages.
 # For this to work, have a `pacman -Sy` command run in the background as a

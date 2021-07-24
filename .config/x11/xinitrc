@@ -4,7 +4,7 @@
 #
 # Executed by startx (run your window manager from here)
 
-[ -f $HOME/documents/batcave/dotfiles/.zshenv ] && source $HOME/documents/batcave/dotfiles/.zshenv
+[ -f $HOME/documents/batcave/dotfiles/zshenv ] && . $HOME/documents/batcave/dotfiles/zshenv
 [ -f $XDG_CONFIG_HOME/x11/xprofile ] && . $XDG_CONFIG_HOME/x11/xprofile
 
 #dont seem to work
@@ -45,33 +45,20 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
     unset f
 fi
 
-#eval $(/usr/bin/gpg-agent --daemon)
-#eval $(ssh-agent)
+eval $(/usr/bin/gpg-agent --daemon)
+eval $(ssh-agent)
 
 get_session(){
 	local dbus_args=(--sh-syntax --exit-with-session)
-	case "$WM" in
-		awesome) dbus_args+=(awesome) ;;
+	case "dwm" in
 		bspwm) dbus_args+=(bspwm-session) ;;
-		budgie) dbus_args+=(budgie-desktop) ;;
-		cinnamon) dbus_args+=(cinnamon-session) ;;
-		deepin) dbus_args+=(startdde) ;;
 		dwm) dbus_args+=(dwm) ;;
-		enlightenment) dbus_args+=(enlightenment_start) ;;
-		fluxbox) dbus_args+=(startfluxbox) ;;
-		gnome) dbus_args+=(gnome-session) ;;
-		i3|i3wm) dbus_args+=(i3 --shmlog-size 0) ;;
-		jwm) dbus_args+=(jwm) ;;
-		kde) dbus_args+=(startkde) ;;
-		lxde) dbus_args+=(startlxde) ;;
-		lxqt) dbus_args+=(lxqt-session) ;;
-		mate) dbus_args+=(mate-session) ;;
 		xfce) dbus_args+=(xfce4-session) ;;
-		openbox) dbus_args+=(openbox-session) ;;
-		*) dbus_args+=("$SESSION") ;;
+		*) dbus_args+=("$WM") ;;
 	esac
 
 	echo "dbus-launch ${dbus_args[*]}"
 }
 
+#ssh-agent $(get_session)
 exec $(get_session)
