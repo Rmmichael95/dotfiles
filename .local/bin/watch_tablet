@@ -1,0 +1,40 @@
+#!/usr/bin/env ruby
+require 'yaml'
+
+def die(msg); puts msg; exit 1; end
+
+def load_config!
+  @config = YAML.load(File.read("/home/ryanm/.config/watch_tablet.yml"))
+  unless @config['input_device']
+    die "Please specify input_device in the config file"
+  end
+end
+
+def config
+  load_config! unless @config
+  @config
+end
+
+def activate_mode(mode)
+  puts "Switching to #{mode} mode"
+  if cmds = config['modes'][mode]
+    cmds.each{|cmd| system cmd }
+  end
+end
+
+def run_watcher
+  cmd = "stdbuf -oL -eL libinput debug-events --device #{config['input_device']}"
+  io = IO.popen(cmd,"r")
+  while s=io.gets
+    if m=s.match(/switch tablet-mode state (\d+)/)
+      case d=m[1].to_i
+      when 0 then activate_mode "laptop"
+      when 1 then activate_mode "tablet"
+      end
+    end
+  end
+rescue Interrupt
+  io.close
+end
+
+run_watcher

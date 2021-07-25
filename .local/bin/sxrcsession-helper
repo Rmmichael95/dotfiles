@@ -1,0 +1,4 @@
+#!/bin/env sh
+source /home/ryanm/documents/batcave/dotfiles/zshenv
+: "${SX:=$XDG_CONFIG_HOME/x11/xinitrc}"
+exec "${SX}"

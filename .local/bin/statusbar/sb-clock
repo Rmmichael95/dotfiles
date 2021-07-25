@@ -1,6 +1,2 @@
 #!/usr/bin/env sh
-
-clock=$(date '+%I')
-
-#date "+%Y %b %d (%a) $icon%I:%M%p"
 date "+%a %H:%M"
