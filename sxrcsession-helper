@@ -1,0 +1,8 @@
+#!/bin/env sh
+. /home/ryanm/documents/batcave/dotfiles/zshenv
+USERXSESSION="$XDG_CACHE_HOME/X11/xsession"
+USERXSESSIONRC="$XDG_CACHE_HOME/X11/xsessionrc"
+ALTUSERXSESSION="$XDG_CACHE_HOME/X11/Xsession"
+ERRFILE="$XDG_CACHE_HOME/X11/xsession-errors"
+: "${SX:=$XDG_CONFIG_HOME/x11/xinitrc}"
+exec "${SX}"

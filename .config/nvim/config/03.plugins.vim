@@ -1,9 +1,9 @@
 " Maintainer: Ryan M Sullivan
-" Last Change: December 20, 2018
+" Last Change: July 30, 2021
 " ------------------------------------------------------------------------------
 " Vim Plugins
 " ------------------------------------------------------------------------ " {{{1
 
-for f in split(glob('~/.config/nvim/plugin/*.vim'), '\n')
+for f in split(glob('$XDG_CONFIG_HOME/nvim/plugin/*.vim'), '\n')
     exe 'source' f
 endfor

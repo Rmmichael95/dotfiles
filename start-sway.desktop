@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=Start-Sway
+Comment=An i3-compatible Wayland compositor
+Exec=start-sway
+Type=Application

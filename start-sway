@@ -1,0 +1,4 @@
+#/usr/env sh
+. /home/ryanm/documents/batcave/dotfiles/zshenv
+export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
+XKB_DEFAULT_LAYOUT=us exec sway
