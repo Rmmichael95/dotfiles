@@ -1,9 +1,9 @@
 #!/bin/env sh
 
-rm -rf $HOME/.makepkg.conf && ln -sv $HOME/documents/batcave/dotfiles/.makepkg.conf $HOME
-rm -rf $HOME/.gitconfig && ln -sv $HOME/documents/batcave/dotfiles/.gitconfig $HOME
-rm -rf $HOME/.profile && ln -sv $HOME/documents/batcave/dotfiles/.profile $HOME
-rm -rf $HOME/.zshenv && ln -sv $HOME/documents/batcave/dotfiles/.zshenv $HOME
+mkdir $HOME/.config
+mkdir -p $HOME/.local/share
+rm -rf $HOME/config/pacman/makepkg.conf && ln -sv $HOME/documents/batcave/dotfiles/.config/pacman/ $HOME/.config/
+rm -rf $HOME/.config/git && ln -sv $HOME/documents/batcave/dotfiles/.config/git $HOME/.config/
 rm -rf $HOME/.config/alacritty && ln -sv $HOME/documents/batcave/dotfiles/.config/alacritty/ $HOME/.config/
 rm -rf $HOME/.config/calcurse && ln -sv $HOME/documents/batcave/dotfiles/.config/calcurse/ $HOME/.config/
 rm -rf $HOME/.config/dunst && ln -sv $HOME/documents/batcave/dotfiles/.config/dunst/ $HOME/.config/

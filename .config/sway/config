@@ -8,17 +8,17 @@ default_border none
 set $term --no-startup-id $TERMINAL
 set $mod Mod4
 # function keys
-XF86PowerOff 0x1008ff2a
-XF86Calculator 0x1008ff1d
-XF86RFKill 0x1008ffb5
-XF86WakeUp 0x1008ff2b
-XF86MonBrightnessUp 0x1008ff02
-XF86MonBrightnessDown 0x1008ff03
-XF86AudioMute 0x1008ff12
-XF86AudioMicMute 0x1008ffb2
-XF86AudioLowerVolume 0x1008ff11
-XF86AudioRaiseVolume 0x1008ff13
-XF86AudioMute 0x1008ff12
+#XF86PowerOff 0x1008ff2a
+#XF86Calculator 0x1008ff1d
+#XF86RFKill 0x1008ffb5
+#XF86WakeUp 0x1008ff2b
+#XF86MonBrightnessUp 0x1008ff02
+#XF86MonBrightnessDown 0x1008ff03
+#XF86AudioMute 0x1008ff12
+#XF86AudioMicMute 0x1008ffb2
+#XF86AudioLowerVolume 0x1008ff11
+#XF86AudioRaiseVolume 0x1008ff13
+#XF86AudioMute 0x1008ff12
 #XF86AudioPlay 0x1008ff14
 #XF86AudioStop 0x1008ff15
 #XF86AudioPrev 0x1008ff16

@@ -16,7 +16,7 @@ nnoremap <leader>r :source ~/.config/nvim/init.vim<cr>
 noremap <leader><space> :noh<cr>:call clearmatches()<cr>
 
 " File explorer
-nnoremap <F2> :Lexplore<CR>
+"nnoremap <F2> :Lexplore<CR>
 
 " new tab
 map <C-t><C-t> :tabnew<CR>

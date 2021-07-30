@@ -14,5 +14,5 @@ redshift &
 polkit-dumb-agent &
 xss-lock -- slock &
 $HOME/.local/bin/setbg &	# set the background with the `setbg` script
-#dwmblocks &
+dwmblocks &
 #sh ~/.config/autostart-scripts/tty-color.sh &

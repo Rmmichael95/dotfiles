@@ -228,7 +228,5 @@ eval "$(thefuck --alias)":
 # Set your countries like --country France --country Germany -- or more.
 alias upd='sudo reflector --latest 5 --age 2 --fastest 5 --protocol https --sort rate --save /etc/pacman.d/mirrorlist && cat /etc/pacman.d/mirrorlist && sudo pacman -Syu'
 
-echo $(lsb_release -is) $(uname -srm)
-
 # start starship prompt
 eval "$(starship init zsh)"

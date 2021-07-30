@@ -1,6 +1,0 @@
-[Desktop Entry]
-Name=sxrc
-Comment=Executes the xinitrc script in the x11 directory
-Exec=sxrcsession-helper
-TryExec=sxrcsession-helper
-Type=Application

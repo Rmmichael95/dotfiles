@@ -1,6 +1,7 @@
 # PATH
-typeset -U PATH path
-path=("$PATH" "/usr/local/sbin/" "/usr/local/bin/" "/usr/sbin/" "/usr/bin/" "/sbin/" "/bin/" "/usr/lib/ccache/bin/" "$HOME/.local/bin/" "$HOME/Documents/Notes/" "$HOME/.local/bin/statusbar/" "$HOME/.local/share/skim/bin/" "$path[@]")
+#typeset -U PATH path
+#path=("$PATH" "/usr/local/sbin/" "/usr/local/bin/" "/usr/sbin/" "/usr/bin/" "/sbin/" "/bin/" "/usr/lib/ccache/bin/" "$HOME/.local/bin/" "$HOME/Documents/Notes/" "$HOME/.local/bin/statusbar/" "$HOME/.local/share/skim/bin/" "$path[@]")
+export PATH="$PATH:/usr/local/sbin/:/usr/local/bin/:/usr/sbin/:/usr/bin/:/sbin/:/bin/:/usr/lib/ccache/bin/:$HOME/.local/bin/:$HOME/Documents/Notes/::$HOME/.local/share/skim/bin/:"
 export PATH
 # MANPATH
 export MANPATH="$MANPATH:/usr/local/man:"
@@ -17,20 +18,20 @@ export MAKEFLAGS="-j9 -l8"
 
 # Default programs:
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR="vim"
-else
+#if [ -n $SSH_CONNECTION ]; then
+#  export EDITOR="vim"
+#else
   export EDITOR="nvim"
-fi
+#fi
 #export SHELL=/usr/bin/zsh
 export PAGER=less
 export TERMINAL=alacritty
-export BROWSER=librewolf
+export BROWSER=chrome
 export BROWSERCLI=w3m
 export READER=zathura
 export IMAGEVIEWER=sxiv
 export VIDEOPLAYER=mpv
-export FILE=cfiles
+export FILE=lf
 export COLORTERM="truecolor"
 export OPENER="xdg-open"
 export GPG_TTY=$(tty)
@@ -42,12 +43,13 @@ export XDG_DATA_HOME=${XDG_DATA_HOME:="$HOME/.local/share"}
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:="$HOME/.cache"}
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:="$HOME/.config"}
 export XDG_STATE_HOME=${XDG_STATE_HOME:="$HOME/.local/state"}
+export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:="run/user/$UID"}
 
-#needs user-authority-in-system-dir=true in lightdm.conf, pam-systemd starts rtd
-#export XAUTHORITY="$XDG_STATE_HOME"/Xauthority
+#dwm doesnt need, breaks; source for start in sway
+#export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 
-#doesnt seem to work with dxvk
-#export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
+#doesnt seem to work with dxvk; got working
+export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
 
 export RBENV_ROOT="$XDG_DATA_HOME"/ruby/rbenv
 #if not using rbenv
@@ -69,7 +71,7 @@ export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 export ZDOTDIR=$XDG_CONFIG_HOME/zsh
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
-#export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME"/ripgrep/ripgreprc
+export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME"/ripgrep/ripgreprc
 export WGETRC="$XDG_CONFIG_HOME/wgetrc"
 export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch-config"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0"
@@ -91,7 +93,7 @@ export LESS_TERMCAP_se="$(printf '%b' '[0m')"
 export LESS_TERMCAP_so="$(printf '%b' '[01;44;33m')"
 export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
 export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"
-export PAGER="${commands[less]:-$PAGER}"  \
-  _NROFF_U=1 \
-  PATH="$HOME/bin:$PATH" \
-    "$@"
+#export PAGER="${commands[less]:-$PAGER}"  \
+#  _NROFF_U=1 \
+#  PATH="$HOME/bin:$PATH" \
+#    "$@"
