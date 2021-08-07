@@ -89,14 +89,14 @@ o.backup        = true  -- make backup before overwriting files
 o.swapfile      = false -- its 2012, just do backups
 
 -- make dirs for backup
-cmd([[
-if !isdirectory(expand(&undodir))
-    call mkdir(expand(&undodir), "p")
-endif
-if !isdirectory(expand(&backupdir))
-    call mkdir(expand(&backupdir), "p")
-endif
-if !isdirectory(expand(&directory))
-    call mkdir(expand(&directory), "p")
-endif
-]])
+--cmd([[
+--if !isdirectory(expand(&undodir))
+--    call mkdir(expand(&undodir), "p")
+--endif
+--if !isdirectory(expand(&backupdir))
+--    call mkdir(expand(&backupdir), "p")
+--endif
+--if !isdirectory(expand(&directory))
+--    call mkdir(expand(&directory), "p")
+--endif
+--]])

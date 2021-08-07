@@ -1,11 +1,11 @@
 local cmd = vim.cmd -- vim command
 
-cmd([[
-if empty(glob('~/.cache/dein'))
-    silent !git clone --depth=1 https://github.com/savq/paq-nvim.git
-     \\ "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/pack/paqs/start/paq-nvim
-endif
-]])
+--cmd([[
+--if empty(glob('~/.cache/dein'))
+--    silent !git clone --depth=1 https://github.com/savq/paq-nvim.git
+--     \\ "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/pack/paqs/start/paq-nvim
+--endif
+--]])
 
 require "paq" {
     "savq/paq-nvim";                  -- Let Paq manage itself
