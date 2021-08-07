@@ -25,14 +25,14 @@ map <C-t><C-t> :tabnew<CR>
 map <C-t><C-z> :tabclose<CR>
 
 " split
-nnoremap <Leader>v :vsplit<CR>
-nnoremap <Leader>h :split<CR>
+nnoremap <leader>v :vsplit<CR>
+nnoremap <leader>h :split<CR>
 
 " Navigate Vim Splits
-nnoremap <C-J> <C-W><C-J> "Ctrl-j to move down a split
-nnoremap <C-K> <C-W><C-K> "Ctrl-k to move up a split
-nnoremap <C-L> <C-W><C-L> "Ctrl-l to move    right a split
-nnoremap <C-H> <C-W><C-H> "Ctrl-h to move left a split
+nnoremap <C-J> <C-W><C-J> "ctrl-j to move down a split
+nnoremap <C-K> <C-W><C-K> "ctrl-k to move up a split
+nnoremap <C-L> <C-W><C-L> "ctrl-l to move    right a split
+nnoremap <C-H> <C-W><C-H> "ctrl-h to move left a split
 
 " Easy buffer navigation
 noremap <C-h> <C-w>h
@@ -54,7 +54,7 @@ nnoremap ,z :wq!<cr>
 nnoremap <leader>\ :TagbarToggle<CR>
 nmap <silent> <leader>y :FSHere<cr>
 
-" Bash like keys for the command line
+" bash like keys for the command line
 cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
 cnoremap <C-K> <C-U>
@@ -96,7 +96,7 @@ nnoremap g; g;zz
 nnoremap g, g,zz
 nnoremap <c-o> <c-o>zz
 
-" Fix linewise visual selection of various text objects
+" fix linewise visual selection of various text objects
 nnoremap Vit vitVkoj
 nnoremap Vat vatV
 nnoremap Vab vabV
@@ -106,7 +106,7 @@ nnoremap VaB vaBV
 nnoremap vaa ggvGg_
 nnoremap Vaa ggVG
 
-" gi already moves to "last place you exited insert mode", so we'll map gI to
+" gi already moves to 'last place you exited insert mode', so we'll map gI to
 " something similar: move to last change
 nnoremap gI `.
 
