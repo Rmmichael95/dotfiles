@@ -1,0 +1,13 @@
+{
+ "languageserver": {
+   "sql": {
+    "command": "$XDG_DATA_HOME/npm/bin/sql-language-server",
+    "args" : ["up", "--method", "stdio"],
+    "filetypes": ["sql", "mysql"]
+    },
+   "zig": {
+    "command": "zls",
+    "filetypes": ["zig"]
+    }
+  }
+}

@@ -49,10 +49,9 @@ eval $(/usr/bin/gpg-agent --daemon)
 
 get_session(){
 	local dbus_args=(--sh-syntax --exit-with-session)
-	case "dwm" in
-		bspwm) dbus_args+=(ssh-agent bspwm-session) ;;
+	case "awesome" in
 		dwm) dbus_args+=(ssh-agent dwm) ;;
-		xfce) dbus_args+=(ssh-agent xfce4-session) ;;
+		awesome) dbus_args+=(ssh-agent awesome) ;;
 		*) dbus_args+=("ssh-agent $WM") ;;
 	esac
 

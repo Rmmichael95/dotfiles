@@ -1,10 +1,15 @@
-"set completeopt=noinsert,menuone,noselect
+set winblend=0
+set pumblend=5
+" Set up completion
 set omnifunc=syntaxcomplete#Complete
-set completeopt=longest,menuone
-set cot -=preview
+set complete=.,w,b,u,t
+set completeopt=menuone,noinsert,noselect
+set completeopt -=preview
+set wildoptions=pum
+set wildmode=longest:full,full
 set wildmenu
-set wildchar=<TAB>
-set wildmode=list:longest,list:full
+set wildchar=<Tab>
+" Ignore these
 set wildignore=*.hg,*.git,*.svn                          " Version control
 set wildignore+=*.aux,*.out*.toc                         " LaTex intermediate files
 set wildignore+=*.jpg,*.png,*.gif,*.png,*.jpeg           " Binary images
@@ -22,3 +27,7 @@ set timeoutlen=1000 ttimeoutlen=0
 set noshowmode
 set cmdheight=1
 set shortmess+=c
+
+" Use <Tab> and <S-Tab> to navigate through popup menu
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"

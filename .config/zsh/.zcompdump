@@ -1,4 +1,4 @@
-#files: 907	version: 5.8
+#files: 912	version: 5.8
 
 _comps=(
 '-' '_precommand'
@@ -422,6 +422,7 @@ _comps=(
 'fc' '_fc'
 'fc-list' '_xft_fonts'
 'fc-match' '_xft_fonts'
+'fd' '_fd'
 'feh' '_feh'
 'fetchmail' '_fetchmail'
 'ffind' '_ffind'
@@ -791,7 +792,6 @@ _comps=(
 'ldd' '_ldd'
 'less' '_less'
 'let' '_math'
-'lf' '_lf'
 'lftp' '_ncftp'
 'lha' '_lha'
 'libinput' '_libinput'
@@ -872,6 +872,7 @@ _comps=(
 'mencal' '_mencal'
 'mere' '_mere'
 'merge' '_rcs'
+'meson' '_meson'
 'metaflac' '_flac'
 'mformat' '_mtools'
 'mgv' '_pspdf'
@@ -972,6 +973,7 @@ _comps=(
 'nginx' '_nginx'
 'ngrep' '_ngrep'
 'nice' '_nice'
+'ninja' '_ninja'
 'nkf' '_nkf'
 'nl' '_nl'
 'nm' '_nm'
@@ -1078,6 +1080,7 @@ _comps=(
 'pkcon' '_pkcon'
 'pkg-config' '_pkg-config'
 'pkgadd' '_pkgadd'
+'pkgfile' '_pkgfile'
 'pkginfo' '_pkginfo'
 'pkgrm' '_pkgrm'
 'pkill' '_pgrep'
@@ -1350,6 +1353,8 @@ _comps=(
 'svnlite' '_subversion'
 'swaks' '_swaks'
 'swanctl' '_swanctl'
+'sway' '_sway'
+'swaymsg' '_swaymsg'
 'swift' '_swift'
 'swiftc' '_swift'
 'sync' '_nothing'
@@ -1764,26 +1769,27 @@ autoload -Uz _afew _alacritty _android _archlinux-java _artisan \
             _cppcheck _curl _dad _debuild _dget \
             _dhcpcd _diana _docpad _drush _ecdsautil \
             _emulator _envdir _exportfs _fab _fail2ban-client \
-            _ffind _fleetctl _flutter _force _fwupdmgr \
-            _gas _ghc _gist _git-flow _git-journal \
-            _git-pulls _git-revise _git-wtf _glances _golang \
-            _google _gpgconf _gtk-launch _hg _hledger \
-            _homestead _httpie _ibus _img2sixel _include-what-you-use \
-            _inxi _jmeter _jmeter-plugins _jonas _jrnl \
-            _kak _kitchen _knife _language_codes _lf \
+            _fd _ffind _fleetctl _flutter _force \
+            _fwupdmgr _gas _ghc _gist _git-flow \
+            _git-journal _git-pulls _git-revise _git-wtf _glances \
+            _golang _google _gpgconf _gtk-launch _hg \
+            _hledger _homestead _httpie _ibus _img2sixel \
+            _include-what-you-use _inxi _jmeter _jmeter-plugins _jonas \
+            _jrnl _kak _kitchen _knife _language_codes \
             _libinput _lilypond _loginctl _lsd _lunchy \
-            _mc _middleman _mina _mix _mpv \
-            _mssh _mussh _mvn _nano _nanoc \
-            _nftables _node _nvm _nvme _openssl \
-            _optirun _opustools _pacman _paru _patool \
-            _perf _periscope _pgsql_utils _phing _pixz \
-            _pkcon _play _pm2 _port _protoc \
-            _pulseaudio _pygmentize _qpdf _rails _ralio \
-            _redis-cli _rfkill _rg _rkt _rslsync \
-            _rspec _rsvm _rubocop _rustup _sbt \
-            _scala _scrub _sdd _setcap _setup.py \
-            _sfdx _shellcheck _showoff _srm _stack \
-            _starship _subl _subliminal _supervisorctl _svm \
+            _mc _meson _middleman _mina _mix \
+            _mpv _mssh _mussh _mvn _nano \
+            _nanoc _nftables _ninja _node _nvm \
+            _nvme _openssl _optirun _opustools _pacman \
+            _paru _patool _perf _periscope _pgsql_utils \
+            _phing _pixz _pkcon _pkgfile _play \
+            _pm2 _port _protoc _pulseaudio _pygmentize \
+            _qpdf _rails _ralio _redis-cli _rfkill \
+            _rg _rkt _rslsync _rspec _rsvm \
+            _rubocop _rustup _sbt _scala _scrub \
+            _sdd _setcap _setup.py _sfdx _shellcheck \
+            _showoff _srm _stack _starship _subl \
+            _subliminal _supervisorctl _svm _sway _swaymsg \
             _tarsnap _teamocil _thor _tmuxinator _tmuxp \
             _tox _trash-empty _trash-list _trash-put _trash-restore \
             _udisksctl _ufw _vagrant _virtualbox _vnstat \

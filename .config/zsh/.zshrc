@@ -1,16 +1,26 @@
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
 ## Plugins section: Enable fish style features
 # Use syntax highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 # Use autosuggestion
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-
 # Use history substring search
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
+# Arch Linux command-not-found support, you must have package pkgfile installed
+# https://wiki.archlinux.org/index.php/Pkgfile#.22Command_not_found.22_hook
+[[ -e /usr/share/doc/pkgfile/command-not-found.zsh ]] && source /usr/share/doc/pkgfile/command-not-found.zsh
+
 # Use skim
-source $HOME/.local/share/skim/shell/key-bindings.zsh
-source $HOME/.local/share/skim/shell/completion.zsh
+source $XDG_DATA_HOME/skim/shell/key-bindings.zsh
+source $XDG_DATA_HOME/skim/shell/completion.zsh
+
+# rvm
+eval "$(rbenv init -)"
+#nvm
+source /usr/share/nvm/init-nvm.sh
 
 # perl
 PATH="$XDG_DATA_HOME/perl5/bin${PATH:+:${PATH}}"; export PATH;
@@ -19,34 +29,22 @@ PERL_LOCAL_LIB_ROOT="$XDG_DATA_HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LI
 PERL_MB_OPT="--install_base \"$XDG_DATA_HOME/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=$XDG_DATA_HOME/perl5"; export PERL_MM_OPT;
 
-# rvm
-eval "$(rbenv init -)"
-
-#nvm
-source /usr/share/nvm/init-nvm.sh
-
-
-# load neofetch on initial tmux terminal
-#if [[ -n "$TMUX" ]] && [[ -z $ALREADY_RAN_TMUX_STARTUP ]]; then
-#    export ALREADY_RAN_TMUX_STARTUP=true;
-#    neofetch
-#fi
-
-# Arch Linux command-not-found support, you must have package pkgfile installed
-# https://wiki.archlinux.org/index.php/Pkgfile#.22Command_not_found.22_hook
-[[ -e /usr/share/doc/pkgfile/command-not-found.zsh ]] && source /usr/share/doc/pkgfile/command-not-found.zsh
+# Load aliases and shortcuts if existent.
+#[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc"
+#[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"
+#[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc"
 
 ## Options section
-setopt correct                                                  # Auto correct mistakes
-setopt extendedglob                                             # Extended globbing. Allows using regular expressions with *
-setopt nocaseglob                                               # Case insensitive globbing
-setopt rcexpandparam                                            # Array expension with parameters
-setopt nocheckjobs                                              # Don't warn about running processes when exiting
-setopt numericglobsort                                          # Sort filenames numerically when it makes sense
-setopt nobeep                                                   # No beep
-setopt appendhistory                                            # Immediately append history instead of overwriting
-setopt histignorealldups                                        # If a new command is a duplicate, remove the older one
-setopt autocd                                                   # if only directory path is entered, cd there.
+setopt correct               # Auto correct mistakes
+setopt extendedglob          # Extended globbing. Allows using regular expressions with *
+setopt nocaseglob            # Case insensitive globbing
+setopt rcexpandparam         # Array expension with parameters
+setopt nocheckjobs           # Don't warn about running processes when exiting
+setopt numericglobsort       # Sort filenames numerically when it makes sense
+setopt nobeep                # No beep
+setopt appendhistory         # Immediately append history instead of overwriting
+setopt histignorealldups     # If a new command is a duplicate, remove the older one
+setopt autocd                # if only directory path is entered, cd there.
 setopt auto_pushd
 setopt pushd_ignore_dups
 setopt pushdminus
@@ -63,7 +61,6 @@ zstyle ':completion:*' completer _expand _complete _ignored _approximate
 zstyle ':completion:*' menu select=2
 zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
 zstyle ':completion:*:descriptions' format '%U%F{cyan}%d%f%u'
-
 # Speed up completions
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' use-cache on
@@ -85,23 +82,19 @@ bindkey -v
 
 # [PageUp] - Up a line of history
 if [[ -n "${terminfo[kpp]}" ]]; then
-  bindkey -M emacs "${terminfo[kpp]}" up-line-or-history
   bindkey -M viins "${terminfo[kpp]}" up-line-or-history
   bindkey -M vicmd "${terminfo[kpp]}" up-line-or-history
 fi
 # [PageDown] - Down a line of history
 if [[ -n "${terminfo[knp]}" ]]; then
-  bindkey -M emacs "${terminfo[knp]}" down-line-or-history
   bindkey -M viins "${terminfo[knp]}" down-line-or-history
   bindkey -M vicmd "${terminfo[knp]}" down-line-or-history
 fi
-
 # Start typing + [Up-Arrow] - fuzzy find history forward
 if [[ -n "${terminfo[kcuu1]}" ]]; then
   autoload -U up-line-or-beginning-search
   zle -N up-line-or-beginning-search
 
-  bindkey -M emacs "${terminfo[kcuu1]}" up-line-or-beginning-search
   bindkey -M viins "${terminfo[kcuu1]}" up-line-or-beginning-search
   bindkey -M vicmd "${terminfo[kcuu1]}" up-line-or-beginning-search
 fi
@@ -110,49 +103,63 @@ if [[ -n "${terminfo[kcud1]}" ]]; then
   autoload -U down-line-or-beginning-search
   zle -N down-line-or-beginning-search
 
-  bindkey -M emacs "${terminfo[kcud1]}" down-line-or-beginning-search
   bindkey -M viins "${terminfo[kcud1]}" down-line-or-beginning-search
   bindkey -M vicmd "${terminfo[kcud1]}" down-line-or-beginning-search
 fi
-
 # [Home] - Go to beginning of line
 if [[ -n "${terminfo[khome]}" ]]; then
-  bindkey -M emacs "${terminfo[khome]}" beginning-of-line
   bindkey -M viins "${terminfo[khome]}" beginning-of-line
   bindkey -M vicmd "${terminfo[khome]}" beginning-of-line
 fi
 # [End] - Go to end of line
 if [[ -n "${terminfo[kend]}" ]]; then
-  bindkey -M emacs "${terminfo[kend]}"  end-of-line
   bindkey -M viins "${terminfo[kend]}"  end-of-line
   bindkey -M vicmd "${terminfo[kend]}"  end-of-line
 fi
-
 # [Shift-Tab] - move through the completion menu backwards
 if [[ -n "${terminfo[kcbt]}" ]]; then
-  bindkey -M emacs "${terminfo[kcbt]}" reverse-menu-complete
   bindkey -M viins "${terminfo[kcbt]}" reverse-menu-complete
   bindkey -M vicmd "${terminfo[kcbt]}" reverse-menu-complete
 fi
-
 # [Backspace] - delete backward
-bindkey -M emacs '^?' backward-delete-char
 bindkey -M viins '^?' backward-delete-char
 bindkey -M vicmd '^?' backward-delete-char
 # [Delete] - delete forward
 if [[ -n "${terminfo[kdch1]}" ]]; then
-  bindkey -M emacs "${terminfo[kdch1]}" delete-char
   bindkey -M viins "${terminfo[kdch1]}" delete-char
   bindkey -M vicmd "${terminfo[kdch1]}" delete-char
 else
-  bindkey -M emacs "^[[3~" delete-char
   bindkey -M viins "^[[3~" delete-char
   bindkey -M vicmd "^[[3~" delete-char
 
-  bindkey -M emacs "^[3;5~" delete-char
   bindkey -M viins "^[3;5~" delete-char
   bindkey -M vicmd "^[3;5~" delete-char
 fi
+
+#Functions
+cd_with_skim() {
+  cd "$(fd -t d | sk --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden)" && clear
+}
+
+open_with_skim() {
+  file="$(fd -t f -H | sk --preview="head -$LINES {}")"
+  if [ -n "$file" ]; then
+      mimetype="$(xdg-mime query filetype $file)"
+      default="$(xdg-mime query default $mimetype)"
+      if [[ "$default" == "vim.desktop" ]]; then
+          nvim "$file"
+      else
+          &>/dev/null xdg-open "$file" & disown
+      fi
+  fi
+}
+
+zle -N cd_with_skim
+zle -N open_with_skim
+
+bindkey '^o' cd_with_skim
+bindkey '^f' open_with_skim
+bindkey '^v' nvim
 
 # Change cursor shape for different vi modes.
 function zle-keymap-select {
@@ -175,58 +182,34 @@ zle-line-init() {
 }
 zle -N zle-line-init
 
-# Use lf to switch directories and bind it to ctrl-o
-lfcd () {
-    tmp="$(mktemp)"
-    lf -last-dir-path="$tmp" "$@"
-    if [ -f "$tmp" ]; then
-        dir="$(cat "$tmp")"
-        rm -f "$tmp"
-        if [ -d "$dir" ]; then
-            if [ "$dir" != "$(pwd)" ]; then
-                cd "$dir"
-            fi
-        fi
-    fi
-}
-
-bindkey -s '^o' 'lfcd\n'  # zsh
-
 # Add useful aliases
-alias aup="pamac upgrade --aur"
-alias grubup="sudo update-grub"
 alias orphaned="sudo pacman -Rns $(pacman -Qtdq)"
-alias fixpacman="sudo rm /var/lib/pacman/db.lck"
+alias fixpac="sudo rm /var/lib/pacman/db.lck"
+alias ugtar='tar -zxvf '
 alias untar='tar -zxvf '
 alias wget='wget -c '
-alias speed='speedtest-cli --server 2406 --simple'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
-alias ls='ls --color=auto'
+alias ls='lsd'
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
 alias path='echo -e ${PATH//:/\\n}'
-#MINE
-alias tmux='tmux -u'
 alias vim='nvim'
-alias vimrc='nvim ~/.config/nvim'
-alias zshrc='nvim ~/.zshrc'
-alias tmuxconf='nvim ~/.tmux.conf'
+alias nv='nvim'
+alias virc='nvim $XDG_CONFIG_HOME/nvim'
+alias zshrc='nvim $XDG_CONFIG_HOME/zsh/zshrc'
 alias poweroff='sudo poweroff'
 alias reboot='sudo reboot'
-alias ls='lsd'
 alias gzip='pigz'
+alias find='fd'
+#alias upd="sudo reflector --verbose --threads 6 --country 'US,CA' --protocol https --sort rate --save /etc/pacman.d/mirrorlist && sudo pacman -Syu"
+alias upda="sudo reflector --verbose --threads 6 --country 'US,CA' --protocol https --sort rate --save /etc/pacman.d/mirrorlist-arch && sudo pacman -Syu"
 # You can use whatever you want as an alias, like for Mondays:
 #eval "$(thefuck --alias FUCK)"
 eval "$(thefuck --alias)":
-# Set your countries like --country France --country Germany -- or more.
-alias upd='sudo reflector --latest 5 --age 2 --fastest 5 --protocol https --sort rate --save /etc/pacman.d/mirrorlist && cat /etc/pacman.d/mirrorlist && sudo pacman -Syu'
 
 # start starship prompt
 eval "$(starship init zsh)"

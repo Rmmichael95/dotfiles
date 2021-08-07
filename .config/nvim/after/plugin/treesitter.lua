@@ -1,0 +1,34 @@
+local ts =require 'nvim-treesitter.configs'
+ts.setup {ensure_installed = 'maintained', highlight = {enable = true}}
+--require'nvim-treesitter.configs'.setup {
+--  highlight = {
+--    enable = true,
+--    disable = {},
+--  },
+--  indent = {
+--    enable = false,
+--    disable = {},
+--  },
+--  ensure_installed = {
+--    "bash",
+--    "javascript",
+--    "toml",
+--    "json",
+--    "yaml",
+--    "latex",
+--    "regex",
+--    "typescript",
+--    "lua",
+--    "commonlisp",
+--    "r",
+--    "python",
+--    "go",
+--    "rust",
+--    "c",
+--    "cpp",
+--    "zig"
+--  },
+--}
+--
+--local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+--parser_config.tsx.used_by = { "javascript", "typescript.tsx" }
