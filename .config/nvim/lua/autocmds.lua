@@ -15,7 +15,7 @@ cmd('autocmd bufwritepost init.lua source ~/.config/nvim/init.lua')
 
 -- open file with existing swp in readonly mode
 u.create_augroup({
-    { 'SwapExists', '*', 'let', 'v:swapchoice = 'o'' },
+    { 'SwapExists', '*', 'let', 'v:swapchoice = "o"' },
     { 'SwapExists', '*', 'echomsg', '' },
     { 'SwapExists', '*', 'echo', 'Duplicate edit session (readonly)' },
     { 'SwapExists', '*', 'echohl', 'None' },
@@ -27,4 +27,4 @@ cmd('autocmd InsertEnter * norm zz')
 
 -- highlight whitespace before tabs and eol in darkred
 cmd('highlight ExtraWhitespace guibg=darkred')
-cmd('autocmd BufEnter * match ExtraWhitespace /\\s\\+$\\| \\+\\ze\\t/')
+cmd([[autocmd BufEnter * match ExtraWhitespace /\s\+$\| \+\ze\t/]])

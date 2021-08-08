@@ -1,7 +1,7 @@
 local nvim_lsp = require('lspconfig')
 local protocol = require'vim.lsp.protocol'
 
--- Use an on_attach function to only map the following keys 
+-- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -72,14 +72,22 @@ local on_attach = function(client, bufnr)
   }
 end
 
-nvim_lsp.flow.setup {
-  on_attach = on_attach
+require'lspconfig'.sumneko_lua.setup{
+	cmd = {'/usr/bin/lua-language-server', '-E', '/usr/share/lua-language-serverr/main.lua'},
+    on_attach = require'completion'.on_attach,
 }
 
-nvim_lsp.tsserver.setup {
-  on_attach = on_attach,
-  filetypes = { "typescript", "typescriptreact", "typescript.tsx" }
-}
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+local servers = { "pyright", "rust_analyzer", "tsserver", "clangd" }
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+    on_attach = require'completion'.on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    }
+  }
+end
 
 nvim_lsp.diagnosticls.setup {
   on_attach = on_attach,
@@ -150,15 +158,3 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     }
   }
 )
-
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-local servers = { "pyright", "rust_analyzer", "tsserver" }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = require'completion'.on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    }
-  }
-end

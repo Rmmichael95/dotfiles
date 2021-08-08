@@ -2,6 +2,7 @@
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 
+
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -190,7 +191,7 @@ awful.screen.connect_for_each_screen(function(s)
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist {
         screen  = s,
-        filter  = awful.widget.taglist.filter.all,
+        filter  = awful.widget.taglist.filter.noempty,
         buttons = taglist_buttons
     }
 
@@ -213,12 +214,15 @@ awful.screen.connect_for_each_screen(function(s)
             s.mytaglist,
             s.mypromptbox,
         },
-        s.mytasklist, -- Middle widget
+		{
+--        wordclock(), -- Middle widget
+          layout = wibox.layout.fixed.horizontal,
+          mytextclock,
+	    },
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
             wibox.widget.systray(),
-            mytextclock,
             s.mylayoutbox,
         },
     }
@@ -545,6 +549,7 @@ client.connect_signal("manage", function (c)
     end
 end)
 
+
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
 client.connect_signal("request::titlebars", function(c)
     -- buttons for the titlebar
@@ -566,12 +571,10 @@ client.connect_signal("request::titlebars", function(c)
             layout  = wibox.layout.fixed.horizontal
         },
         { -- Middle
-            { -- Title
+            { -- time
                 align  = "center",
-                widget = awful.titlebar.widget.titlewidget(c)
+                widget = word-clock
             },
-            buttons = buttons,
-            layout  = wibox.layout.flex.horizontal
         },
         { -- Right
             awful.titlebar.widget.floatingbutton (c),
@@ -593,3 +596,40 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
+-- swallow
+function is_terminal(c)
+    return (c.class and c.class:match("Alacritty")) and true or false
+end
+
+function copy_size(c, parent_client)
+    if not c or not parent_client then
+        return
+    end
+    if not c.valid or not parent_client.valid then
+        return
+    end
+    c.x=parent_client.x;
+    c.y=parent_client.y;
+    c.width=parent_client.width;
+    c.height=parent_client.height;
+end
+function check_resize_client(c)
+    if(c.child_resize) then
+        copy_size(c.child_resize, c)
+    end
+end
+
+client.connect_signal("property::size", check_resize_client)
+client.connect_signal("property::position", check_resize_client)
+client.connect_signal("manage", function(c)
+    if is_terminal(c) then
+        return
+    end
+    local parent_client=awful.client.focus.history.get(c.screen, 1)
+    if parent_client and is_terminal(parent_client) then
+        parent_client.child_resize=c
+        c.floating=true
+        copy_size(c, parent_client)
+    end
+end)

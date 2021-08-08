@@ -1,25 +1,23 @@
 set winblend=0
 set pumblend=5
 " Set up completion
-set omnifunc=syntaxcomplete#Complete
-set complete=.,w,b,u,t
-set completeopt=longest,menuone
+set completeopt=menuone,noinsert,noselect
 set completeopt -=preview
 set wildoptions=pum
-set wildmode=list:longest,list:full
+set wildmode=longest:full,full
 set wildmenu
 set wildchar=<Tab>
 " Ignore these
-set wildignore=*.hg,*.git,*.svn                          " Version control
-set wildignore+=*.aux,*.out*.toc                         " LaTex intermediate files
-set wildignore+=*.jpg,*.png,*.gif,*.png,*.jpeg           " Binary images
-set wildignore+=*.o,*.obj,*.exe,*.class,*.dll,*.manifest " Compiled object files
-set wildignore+=*.spl                                    " Compiled spelling word list
-set wildignore+=*.sw?                                    " Vim swap files
-set wildignore+=*.luac                                   " Lua byte code
-set wildignore+=migrations                               " Django migrations
-set wildignore+=*.pyc                                    " Python byte code
-set wildignore+=*.orig                                   " Merge resolution files
+set wildignore=*.hg,*.git,*.svn                          " version control
+set wildignore+=*.aux,*.out*.toc                         " latex intermediate files
+set wildignore+=*.jpg,*.png,*.gif,,*.jpeg                " binary images
+set wildignore+=*.o,*.obj,*.exe,*.class,*.dll,*.manifest " compiled object files
+set wildignore+=*.spl                                    " compiled spelling word list
+set wildignore+=*.sw?                                    " vim swap files
+set wildignore+=*.luac                                   " lua byte code
+set wildignore+=migrations                               " django migrations
+set wildignore+=*.pyc                                    " python byte code
+set wildignore+=*.orig                                   " merge resolution files
 " Clojure/Leiningen
 set wildignore+=classes
 set wildignore+=lib

@@ -1,17 +1,15 @@
-local o = vim.o     -- global options
-local wo = vim.wo   -- window options
 local opt = vim.opt -- set options
 local map = vim.api.nvim_set_keymap
 
-wo.winblend = 5     -- sudo transparency floating windows
-wo.pumblend = 10    -- sudo transparency fo pop up menus
+opt.winblend = 8    -- sudo transparency floating windows
+opt.pumblend = 8    -- sudo transparency fo pop up menus
 
-o.completeopt = { 'menuone', 'noinsert', 'noselect' } --show menu but dont insert/select; breaks flow
-o.wildoptions = 'pum' -- show wild options in pop-up menu
-o.wildmode    = { 'longest:full', 'full' }
-o.wildmenu    = true  -- enable addvnaced tab completion
+opt.completeopt = { 'menuone', 'noinsert', 'noselect' }    --show menu but dont insert/select; breaks flow
+opt.wildoptions = 'pum'                                    -- show wild options in pop-up menu
+opt.wildmode    = { 'longest:full', 'full' }
+opt.wildmenu    = true  -- enable addvnaced tab completion
 -- ignore these
-o.wildignore  = [[
+opt.wildignore  = [[
 .git,.hg,.svn                                                    -- version control
 *.aux,*.out,*.toc                                                -- latex intermediate files
 *.rej,*.so'                                                      -- patterns to ignore during file-navigation
@@ -31,17 +29,16 @@ migrations                                                       --django migrat
 classes,lib                                                      -- Clojure/Leiningen
 ]]
 
-o.shortmess = o.shortmess .. 'A' -- ignore annoying swapfile messages
-o.shortmess = o.shortmess .. 'I' -- no splash screen
-o.shortmess = o.shortmess .. 'O' -- file-read message overwrites previous
-o.shortmess = o.shortmess .. 'T' -- truncate non-file messages in middle
-o.shortmess = o.shortmess .. 'W' -- don't echo "[w]"/"[written]" when writing
-o.shortmess = o.shortmess .. 'a' -- use abbreviations in messages eg. `[RO]` instead of `[readonly]`
-o.shortmess = o.shortmess .. 'c' -- completion messages
-o.shortmess = o.shortmess .. 'o' -- overwrite file-written messages
-o.shortmess = o.shortmess .. 't' -- truncate file messages at start
+opt.shortmess = opt.shortmess + 'A' -- ignore annoying swapfile messages
+opt.shortmess = opt.shortmess + 'I' -- no splash screen
+opt.shortmess = opt.shortmess + 'O' -- file-read message overwrites previous
+opt.shortmess = opt.shortmess + 'T' -- truncate non-file messages in middle
+opt.shortmess = opt.shortmess + 'W' -- don't echo "[w]"/"[written]" when writing
+opt.shortmess = opt.shortmess + 'a' -- use abbreviations in messages eg. `[RO]` instead of `[readonly]`
+opt.shortmess = opt.shortmess + 'c' -- completion messages
+opt.shortmess = opt.shortmess + 'o' -- overwrite file-written messages
+opt.shortmess = opt.shortmess + 't' -- truncate file messages at start
 
 -- Use <Tab> and <S-Tab> to navigate through popup menu
-options = { noremap = true }
-map('i', '<expr> <Tab>', 'pumvisible() ? "\\<C-n>" : "\\<Tab>"', options)
-map('i', '<expr> <S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<S-Tab>"', options)
+map('i', '<S-Tab>', [[pumvisible() ? "\<C-p>" : "\<Tab>"]], {expr = true})
+map('i', '<Tab>', [[pumvisible() ? "\<C-n>" : "\<Tab>"]], {expr = true})

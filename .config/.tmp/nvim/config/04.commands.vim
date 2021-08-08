@@ -1,7 +1,6 @@
 " ========{ Commands }================================================== " {{{1
 autocmd! bufwritepost init.vim source ~/.config/nvim/init.vim " auto reload vimrc when editing it
 
-" turn on list chars for dotfiles and notes
 " folds
 command! -nargs=+ Foldsearch exe "normal /".<q-args>."^M" | setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\|\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2
 

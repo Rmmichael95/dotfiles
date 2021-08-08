@@ -3,10 +3,9 @@
 " contains misc startup settings for vim
 let g:python3_host_prog = '~/.local/share/nvim/.venv/bin/python'
 
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set shell=/usr/bin/zsh
 "Enable syntax highlighting
 syntax on
+filetype indent plugin on
 
 "misc
 set browsedir=buffer
@@ -29,16 +28,13 @@ set ruler
 set scrolloff=10
 set updatetime=300
 
-" Autoindentation
-set autoindent
-filetype indent plugin on
 
 " Copies using system clipboard
 set clipboard+=unnamedplus
 
 " Tab = 4 spaces
 set tabstop=4
-set shiftwidth=4
+" set shiftwidth=4
 set expandtab
 set softtabstop=4 " softtabstop, makes spaces feel like tabs when deleting
 
@@ -82,7 +78,6 @@ autocmd BufWinEnter,WinEnter term://* startinsert
 autocmd BufLeave term://* stopinsert
 
 " encoding
-set encoding=utf-8
 set termencoding=utf-8
 set fileencodings=utf-8
 set fileformats=unix,dos,mac

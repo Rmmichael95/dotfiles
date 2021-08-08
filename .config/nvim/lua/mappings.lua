@@ -11,8 +11,8 @@ options_f = { noremap = false }
 
 -- extended text objects
 cmd([[
-let s:items = [ "<bar>", "\\", "/", ":", ".", "*", "_" ]
-for item in s:items
+let items = [ "<bar>", "\\", "/", ":", ".", "*", "_" ]
+for item in items
   exe "nnoremap yi".item." T".item."yt".item
   exe "nnoremap ya".item." F".item."yf".item
   exe "nnoremap ci".item." T".item."ct".item
@@ -26,20 +26,19 @@ endfor
 
 -- cmap
 map('c', 'w!!', 'w !sudo tee > /dev/null %', options_f)
-map('c', '', '', options_f)
 -- noremap
-map('*', '<C-t><C-t>', ':tabnew<CR>', options)       -- easy new tab
-map('*', '<C-t><C-z>', ':tabclose<CR>', options)     -- easy close tab
-map('*', '<C-9>', ':bp<CR>', options)                -- easy switch buffers
-map('*', '<C-0>', ':bn<CR>', options)                -- easy switch buffers
-map('*', '<C-h>', '<C-w>h', options)                 -- easy buffer navigation
-map('*', '<C-j>', '<C-w>j', options)                 -- easy buffer navigation
-map('*', '<C-k>', '<C-w>k', options)                 -- easy buffer navigation
-map('*', '<C-l>', '<C-w>l', options)                 -- easy buffer navigation
-map('*', 'n', 'nzzzv', options)                      -- keep search in center screen
-map('*', 'N', 'Nzzzv', options)                      -- keep search in center screen
-map('*', 'H', '^', options)                          -- keep search in center screen
-map('*', 'L', 'g', options)                          -- keep search in center screen
+map('n', '<C-t><C-t>', ':tabnew<CR>', options)       -- easy new tab
+map('n', '<C-t><C-z>', ':tabclose<CR>', options)     -- easy close tab
+map('n', '<C-9>', ':bp<CR>', options)                -- easy switch buffers
+map('n', '<C-0>', ':bn<CR>', options)                -- easy switch buffers
+map('n', '<C-h>', '<C-w>h', options)                 -- easy buffer navigation
+map('n', '<C-j>', '<C-w>j', options)                 -- easy buffer navigation
+map('n', '<C-k>', '<C-w>k', options)                 -- easy buffer navigation
+map('n', '<C-l>', '<C-w>l', options)                 -- easy buffer navigation
+map('n', 'n', 'nzzzv', options)                      -- keep search in center screen
+map('n', 'N', 'Nzzzv', options)                      -- keep search in center screen
+map('n', 'H', '^', options)                          -- keep search in center screen
+map('n', 'L', 'g', options)                          -- keep search in center screen
 -- cnoremap
 map('c', '<C-A>', '<Home>', options)                -- bash like keys for the command line
 map('c', '<C-E>', '<End>', options)                 -- bash like keys for the command line
@@ -56,11 +55,11 @@ map('n', '<C-L>', '<C-W><C-L>', options)            -- ctrl-l to move    right a
 map('n', '<C-H>', '<C-W><C-H>', options)            -- ctrl-h to move left a split
 map('n', ',q', ':q!<cr>', options)                  -- easy quit
 map('n', ',w', ':w!<cr>', options)                  -- easy write
-map('n', ',W', ':w!!<cr>', options)                 -- 
+map('n', ',W', ':w!!<cr>', options)                 --
 map('n', ',z', ':wq!<cr>', options)                 --
-map('n', '<leader>\', ':TagbarToggle<CR>', options) --
+map('n', '<leader>\\', ':TagbarToggle<CR>', options) --
 map('n', '<leader>y', ':FSHere<cr>', options)       --
-map('n', '/', '/\v', options)                       -- use sane regexes
+--map('n', '/', '/\v', options)                       -- use sane regexes
 map('n', 'Y', 'y$', options)                        -- fix Y behaviour
 map('n', 'D', 'd$', options)                        -- fix D behaviour
 map('n', ',cd', ':cd %:p:h<CR>:pwd<CR>', options)   -- change wd to where the file in the buffer is located w/ `,cd`
@@ -77,10 +76,10 @@ map('n', 'Vaa', 'ggVG', options)                    -- select entire buffer
 map('n', 'gI', '``.', options)                      -- gi moves to "last place you exited insert mode", map gI to move to last change
 map('n', ',T', ':let _s=@/<Bar>:%s/\\s\\+$//e<Bar>%s/ \\+\\ze\\t//e<Bar>:let @/=_s<Bar>:unlet _s<CR>', options) -- trim whitespace before tabs and eol
 -- inoremap
-map('i', '', '', options)
+--map('i', '', '', options)
 -- vnoremap
 map('v', '<', '<gv', options)                       -- allow multiple indentation in visual mode
 map('v', '>', '>gv', options)                       -- allow multiple deindentation in visual mode
-map('v', '/', '/\v', options)                       -- use sane regexes
+--map('v', '/', '/\v', options)                       -- use sane regexes
 -- tnoremap
-map('t', '<ESC>', '<C-\><C-n><C-w><C-p>', options)  -- <ESC> exits in terminal mode
+map('t', '<ESC>', '<C-\\><C-n><C-w><C-p>', options)  -- <ESC> exits in terminal mode
