@@ -5,6 +5,8 @@ export PATH="$PATH:/usr/local/sbin/:/usr/local/bin/:/usr/sbin/:/usr/bin/:/sbin/:
 export PATH
 # MANPATH
 export MANPATH="$MANPATH:/usr/local/man:"
+# CDPATH
+export CDPATH="$CDPATH:.:$HOME/documents/"
 
 # You may need to manually set your language environment
 export LANG="en_US.UTF-8"
@@ -26,7 +28,7 @@ export MAKEFLAGS="-j9 -l8"
 #export SHELL=/usr/bin/zsh
 export PAGER=less
 export TERMINAL=alacritty
-export BROWSER=chrome
+export BROWSER=librewolf
 export BROWSERCLI=w3m
 export READER=zathura
 export IMAGEVIEWER=sxiv
@@ -37,6 +39,8 @@ export OPENER="xdg-open"
 export GPG_TTY=$(tty)
 export QT_QPA_PLATFORMTHEME="qt5ct"
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+export WINEFSYNC=1
+export LIBVA_DRIVER_NAME="radeonsi"
 
 # Other XDG paths
 export XDG_DATA_HOME=${XDG_DATA_HOME:="$HOME/.local/share"}

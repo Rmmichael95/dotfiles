@@ -25,7 +25,7 @@ endfor
 ]])
 
 -- cmap
-map('c', 'w!!', 'w !sudo tee > /dev/null %', options_f)
+map('c', 'w!!', 'w !doas tee > /dev/null %', options_f)
 -- noremap
 map('n', '<C-t><C-t>', ':tabnew<CR>', options)       -- easy new tab
 map('n', '<C-t><C-z>', ':tabclose<CR>', options)     -- easy close tab

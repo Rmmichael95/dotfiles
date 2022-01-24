@@ -26,7 +26,7 @@ opt.splitbelow    = true      -- make hsplit below current window
 opt.splitright    = true      -- make vsplit to right of current window
 opt.inccommand    = 'nosplit' -- show affects of commands incrimentally
 opt.visualbell    = true      -- show visual bell instead of beeping
---opt.virtualedit   = opt.virtualedit + 'block' -- allow virual editing in visual block
+opt.virtualedit   = 'block'   -- allow virual editing in visual block
 -- window options
 opt.spell        = false     -- don't check spelling
 opt.wrap         = false     -- don't wrap text lines
@@ -44,37 +44,38 @@ opt.shiftwidth  = 4         -- read help to set up later
 g.browsedir     = 'buffer'  -- put up directory requestor
 opt.hlsearch    = false     -- don't highlight for searching
 opt.ignorecase  = true      -- ignore case for pattern matching
---opt.clipboard   = opt.clipboard + 'unnamedplus' -- copy with system clipboard
+opt.clipboard   = 'unnamedplus' -- copy with system clipboard
 opt.modeline    = false     -- the modeline is a well-known security risk
 
 -- set colorscheme
 opt.termguicolors = true      -- enable 24bit colors in TUI, uses guibg/guifg
 opt.background    = 'dark'    -- set background dark/light
-cmd('colorscheme everforest')      -- use everforest colorscheme; plays nice with redshift
-cmd('highlight Normal guibg=NONE') -- keep transparent guibg
+g.everforest_transparent_background = 1 -- keep transparent guibg
+cmd('colorscheme everforest') -- use everforest colorscheme; plays nice with redshift
 -- highlight 81st column darkred on lines that run long
 cmd([[autocmd BufEnter,FocusGained,BufWinEnter,WinEnter * match ColorColumn "\%81v."]])
+cmd("highlight ColorColumn guibg=darkred")
 
-opt.showbreak        = '↪'            -- str to put at begining of wrapped lines
---opt.list            = true           -- show whitesoace chars
---opt.listchars      = {
---  nbsp             = '␣',           -- CIRCLED REVERSE SOLIDUS (U+29B8, UTF-8: E2 A6 B8)
---  extends          = '❯',           -- RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK (U+00BB, UTF-8: C2 BB)
---  precedes         = '❮',           -- LEFT-POINTING DOUBLE ANGLE QUOTATION MARK (U+00AB, UTF-8: C2 AB)
---  tab              = '▷',           -- WHITE RIGHT-POINTING TRIANGLE (U+25B7, UTF-8: E2 96 B7) + MIDLINE HORIZONTAL ELLIPSIS (U+22EF, UTF-8: E2 8B AF)
---  eol              = '¬',           -- BULLET (U+2022, UTF-8: E2 80 A2)
---}
+opt.showbreak       = '↪'            -- str to put at begining of wrapped lines
+opt.list            = true           -- show whitesoace chars
+opt.listchars     = {
+   nbsp = '␣',
+   extends = '❯',
+   precedes = '❮',
+   tab = '▷⋯',
+   eol = '¬'
+}
 
---opt.fillchars      = {
---  diff             = '∙',           -- BULLET OPERATOR (U+2219, UTF-8: E2 88 99)
---  eob              = ' ',           -- NO-BREAK SPACE (U+00A0, UTF-8: C2 A0) to suppress ~ at EndOfBuffer
---  fold             = '·',           -- MIDDLE DOT (U+00B7, UTF-8: C2 B7)
---  vert             = '┃',           -- BOX DRAWINGS HEAVY VERTICAL (U+2503, UTF-8: E2 94 83)
---}
+opt.fillchars      = {
+  diff             = '∙',           -- BULLET OPERATOR (U+2219, UTF-8: E2 88 99)
+  eob              = ' ',           -- NO-BREAK SPACE (U+00A0, UTF-8: C2 A0) to suppress ~ at EndOfBuffer
+  fold             = '·',           -- MIDDLE DOT (U+00B7, UTF-8: C2 B7)
+  vert             = '┃',           -- BOX DRAWINGS HEAVY VERTICAL (U+2503, UTF-8: E2 94 83)
+}
 -- file encoding
 opt.fileencoding = 'utf-8'  -- file content encoding for current buffer
 opt.fileencodings = 'utf-8'  -- list of encoding considered when starting a file
---opt.fileformats   = {'unix', 'dos', 'mac'} -- gives eol formats
+opt.fileformats   = {'unix', 'dos', 'mac'} -- gives eol formats
 --opt.formatpgr     = 'par'    -- name of external program used to format lines
 
 -- backups

@@ -2,6 +2,9 @@
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 
+--local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
+local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
+local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
 
 -- Standard awesome library
 local gears = require("gears")
@@ -18,6 +21,9 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
+-- test extra libraries
+--local vicious = require('vicious')
+--local shifty = require('shifty')
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -52,11 +58,11 @@ end
 beautiful.init("/home/ryanm/.config/awesome/themes/default/theme.lua")
 
 -- useless gaps
-beautiful.useless_gap = 7
+beautiful.useless_gap = 5
 
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
-editor = os.getenv("EDITOR") or "nvim"
+editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -68,8 +74,8 @@ modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-    awful.layout.suit.floating,
     awful.layout.suit.tile,
+    awful.layout.suit.floating,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
@@ -114,7 +120,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+mytextclock = wibox.widget.textclock([[%a %H:%M]])
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -195,15 +201,9 @@ awful.screen.connect_for_each_screen(function(s)
         buttons = taglist_buttons
     }
 
-    -- Create a tasklist widget
-    s.mytasklist = awful.widget.tasklist {
-        screen  = s,
-        filter  = awful.widget.tasklist.filter.currenttags,
-        buttons = tasklist_buttons
-    }
-
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+    s.useless_wibar = awful.wibar({ position = beautiful.wibar_position, screen = s, height = 2, width = 4, opacity = 0 })
+    s.mywibox = awful.wibar({ position = "top", screen = s, opacity = 0.7 })
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -212,18 +212,24 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             mylauncher,
             s.mytaglist,
-            s.mypromptbox,
+            s.mylayoutbox,
         },
-		{
---        wordclock(), -- Middle widget
-          layout = wibox.layout.fixed.horizontal,
+        {
           mytextclock,
-	    },
+          valign = 'center',
+          halign = 'center',
+          layout = wibox.container.place,
+        },
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
+            spacing = 8,
+            volume_widget{
+                widget_type = 'icon-and-text'
+            },
+            battery_widget{
+                show_current_level = 'true'
+            },
             wibox.widget.systray(),
-            s.mylayoutbox,
         },
     }
 end)
@@ -239,7 +245,7 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
-    awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
+    awful.key({ modkey, "Shift"   }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
               {description = "view previous", group = "tag"}),
@@ -288,8 +294,28 @@ globalkeys = gears.table.join(
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
-    awful.key({ modkey, "Shift"   }, "q", awesome.quit,
-              {description = "quit awesome", group = "awesome"}),
+
+--    awful.key({ modkey, "Shift"   }, "q", awesome.quit,
+--              {description = "quit awesome", group = "awesome"}),
+
+    -- ask to quit awesome
+    awful.key({ modkey, "Shift"   }, "q",
+        function ()
+            local handle = io.popen("echo 'Yes' | dmenu -p 'Would you like to logout?'")
+            local result = handle:read(3)
+            handle:close()
+            if result == "Yes" then
+                os.execute("pkill awesome")
+            end
+        end,
+              {description = "ask to quit awesome", group = "awesome"}),
+
+        -- ask to poweroff/reboot
+        awful.key({  }, "XF86_PowerOff",
+        function ()
+            io.popen("$HOME/.local/bin/dmenu_power 'Do you want to poweroff?' 'poweroff' 'reboot'")
+        end,
+              {description = "ask to poweroff/reboot", group = "awesome"}),
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
@@ -321,8 +347,8 @@ globalkeys = gears.table.join(
               {description = "restore minimized", group = "client"}),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
-              {description = "run prompt", group = "launcher"}),
+    awful.key({ modkey },            "r",     function () awful.util.spawn("dmenu_run") end,
+              {description = "run dmenu", group = "launcher"}),
 
     awful.key({ modkey }, "x",
               function ()
@@ -346,7 +372,11 @@ clientkeys = gears.table.join(
             c:raise()
         end,
         {description = "toggle fullscreen", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end,
+
+    -- make window sticky
+    awful.key({ modkey,           }, "s",      function (c) c.sticky = not c.sticky  end),
+
+    awful.key({ modkey, "Shift"   }, "x",      function (c) c:kill()                         end,
               {description = "close", group = "client"}),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
               {description = "toggle floating", group = "client"}),
@@ -390,26 +420,26 @@ clientkeys = gears.table.join(
 globalkeys = awful.util.table.join(globalkeys,
 
 awful.key({ modkey }, "#19",
-	  function ()
-		local screen = awful.screen.focused()
-		local tag = screen.tags[10]
-		if tag then
-		   tag:view_only()
-		end
-	  end,
-	  {description = "view tag #10", group = "tag"}),
+      function ()
+        local screen = awful.screen.focused()
+        local tag = screen.tags[10]
+        if tag then
+           tag:view_only()
+        end
+      end,
+      {description = "view tag #10", group = "tag"}),
 
 awful.key({ modkey, "Shift" }, "#19",
-	  function ()
-	      if client.focus then
-		  local tag = client.focus.screen.tags[10]
-		  if tag then
-		      client.focus:move_to_tag(tag)
-		  end
-	     end
-	  end,
-	  {description = "move focused client to tag #19", group = "tag"})
-	  )
+      function ()
+          if client.focus then
+          local tag = client.focus.screen.tags[10]
+          if tag then
+              client.focus:move_to_tag(tag)
+          end
+         end
+      end,
+      {description = "move focused client to tag #10", group = "tag"})
+      )
 
 for i = 1, 9 do
     globalkeys = gears.table.join(globalkeys,
@@ -528,9 +558,16 @@ awful.rules.rules = {
       }, properties = { titlebars_enabled = false }
     },
 
-    -- Set Firefox to always map on the tag named "2" on screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { screen = 1, tag = "2" } },
+    -- Set skim_dmenu props
+     { rule = { name = "SkimDmenu" },
+       properties = {
+           screen = 1,
+           floating = true,
+           sticky = true,
+           placement = awful.placement.top,
+       }},
+
+       { rule = { name = "video0 - mpv" }, properties = { sticky = true } },
 }
 -- }}}
 
@@ -572,8 +609,6 @@ client.connect_signal("request::titlebars", function(c)
         },
         { -- Middle
             { -- time
-                align  = "center",
-                widget = word-clock
             },
         },
         { -- Right
