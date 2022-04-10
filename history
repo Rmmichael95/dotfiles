@@ -814,7 +814,6 @@ paru -S linux-zen
 mpv outputs.mp4
 mpv outputs0.mp4
 mpv outputsmax0.mp4
-ls /run/runit/service
 mpv videos/untitled.webm
 rm -rf mpv-shot0001.jpg videos/untitled.webm
 convert -geometry 98x98
@@ -1885,7 +1884,6 @@ cat init.lua
 doas pacman -S nano
 cd documents/batcave/dotfiles/.config/nvim
 nv config/00.dein.vim
-cd documents/batcave/dotfiles/
 nvim setup.txt
 nv plugins.lua
 nano init.lua
@@ -2025,9 +2023,7 @@ mv nvim/ .tmp/
 mv lua/nvim/ .
 rm -rf lua
 rm -rf .config/awesome/awesome-wm-widgets
-git add .
 git commit -m "switched to init.lua"
-git push origin master
 rm -rf .config/nvim
 ln -sv /home/ryanm/documents/batcave/dotfiles/.config/nvim/ /home/ryanm/.config/
 rm -rf .cache/dein/
@@ -2431,7 +2427,6 @@ paru -S discord
 paru -R pulsemixer
 connman-gtk
 doas pacman -Qtdq | pacman -Rns -
-doas pacman -Qtdq | doas pacman -Rns -
 paru -R arc-icon-theme-full-git
 sudo rm -rf /usr/share/icons/Arc-ICONS 
 sudo rm -rf /usr/share/icons/Arc
@@ -3273,7 +3268,6 @@ mpv 4shoeO.mp4
 ls FGFreeCineLUTsPackv2/FGLUTsDavinciResolve
 ls 35FreeLUTs
 bat .local/bin/dmenurecord.sh
-lsblk
 cd videos/luts
 unzip IWLTBAP_-_Aspen_\(Free_LUT\).zip && rm IWLTBAP_-_Aspen_\(Free_LUT\).zip
 mv IWLTBAP\ -\ Aspen\ \(Free\ LUT\) Aspen
@@ -3422,7 +3416,6 @@ doas dmesg | grep si
 doas dmesg | grep amd
 doas nvim /etc/dracut.conf.d/01-artix.conf
 doas nvim /etc/X11/xorg.conf.d/20-amdgpu.conf
-bpytop
 zig --help
 zig -v
 zig --version'
@@ -3436,7 +3429,6 @@ lfrun
 df -H
 cd nn
 cd learn
-xbacklight acklight -set 100
 al
 ffmpeg -y -probesize 42M -hwaccel vaapi -vaapi_device /dev/dri/renderD128 -hwaccel_output_format vaapi -f x11grab -thread_queue_size 512 -s 1920x1080 -r 60 -i :0.0 -vf 'format=nv12,hwupload' -c:v hevc_vaapi test.mp4
 mv .local/share/nvim/site/pack/paqs/start/nvim-lspconfig/ .
@@ -3480,7 +3472,6 @@ cd Nov_30/Exercise
 cd week_3/Sep_9/Exercise
 cd week_4/Sep_16/Lecture/
 cd Sep_14/Exercise
-..
 cd Sep_14/Lecture/review_3_files
 cd review_3_pair_class/Project
 nvim Pair.cpp
@@ -3497,24 +3488,16 @@ paru -S zls-git
 cd .config/nvim
 rm -rf ~/.local/share/nvim/site/pack/paqs/start/nvim-lspconfig
 nvim lua/plugins.lua
-cd
 cd documents/batcave/python/nn/learn
 python Fnn.py
 nv Fnn.py
 doas poweroff
 paru -Sc
-clear
-ls
 nvim ~/.local/state/zsh/history
-exit
-doas pacman -Syu
-reboot
 pdflatex resume.tex
 zathura resume.pdf
 cd documents/resume
 nvim resume.tex
-paru -Syu
-poweroff
 xrandr
 xrandr --output HDMI-1 --auto
 xrandr --output HDMI-1 --scale 1920x1080
@@ -3522,16 +3505,198 @@ paru -R jack2
 paru -R jack libjack jack2
 paru -R pipewire-jack
 paru -R pipewire-jack lib32-pipewire-jack
-clear
-doas pacman -Syu
 poweroff
 doas pacman -Syu
 paru -Syu
 doas pacman -Qtdq | doas pacman -Rns -
 pacman -Qtdq | doas pacman -Rns -
-clear
-reboot
-pacman -Qtdq | doas pacman -Rns -
 nv .config/alacritty/alacritty.yml 
-clear
 reboot
+pacman -Qe > pacman.txt
+bat pacman.txt
+pacman -Q > paru.txt
+bat paru.txt
+cd .config/awesome/awesome-wm-widgets
+ls
+rm -rf .git*
+..
+cd
+bpytop
+ls /run/un/runit/service
+ls /etc/runit/sv/
+ls /run/runit/service
+cp .local/state/zsh/history ~/documents/batcave/dotfiles/
+cd documents/batcave/dotfiles/
+git add .
+git commit -m "pre-reformatting"
+git push origin master
+clear
+xbacklight acklight -set 100
+cat artix-base-runit-20220121-x86_64.iso | pv > /dev/sda
+lsblk
+exit
+doas pacman -S pv
+man sync
+man te
+man tee
+cd videos
+ls /dev
+doas mount /dev/mmcblk0p1 /media/sd
+wipefs -a /dev/sda
+doas wipefs -a /dev/sda
+doas mount /dev/sda /media/sd
+doas umount /media/sd
+lsblk
+cd 
+cd downloads
+ls
+doas cat artix-base-runit-20220121-x86_64.iso | pv > /dev/sda
+cat artix-base-runit-20220121-x86_64.iso | doas pv > /dev/sda
+doas sgdisk --zap-all /dev/sda
+doas cat artix-base-runit-20220121-x86_64.iso | doas pv > /dev/sda
+wipefs --all /dev/sda
+doas wipefs --all /dev/sda
+cat artix-base-runit-20220121-x86_64.iso | pv > /dev/sda
+su
+doas fdisk /dev/sda
+doas gdisk /dev/sda
+clear
+poweroff
+reboot
+clear
+xbacklight acklight -set 100
+doas pacman -R lutris-git
+doas pacman -Syu
+doas pacman -S lutris-git
+cd videos/black
+ls
+mpv GH010036.MP4
+paru -Sua
+poweroff
+reboot
+cd documents/resume
+ls
+nvim resume.tex
+cp resumeR.tex 
+cp resume.tex resumeR.tex 
+clear
+nv resumeR.tex
+pdflatex resumeR.tex
+zathura resumeR.pdf
+doas pacman -Syu
+reboot
+doas pacman -Syu
+paru -Sua
+poweroff
+pidof redshift
+kill 1757
+clear
+xbacklight acklight -set 100\\
+
+sudo pacman -S chromium
+doas pacman -Syu
+clear
+paru -S chromium
+pidof redshift
+kill 1739
+chromium
+paru -S brave-bin
+xbacklight acklight -set 100\\
+
+pidof redshift
+kill 1729
+xbacklight acklight -set 100
+nvim clear
+clear
+clear\
+\
+
+pulsemixer
+doas pacman -Syu
+poweroff
+nvim /usr/share/pipewire/pipewire-pulse.conf
+nano /usr/share/pipewire/pipewire-pulse.conf
+nano /usr/share/pipewire/pipewire.conf
+clear
+nv\
+\
+
+poweroff
+nv /usr/share/pipewire/pipewire-pulse.conf
+nv /usr/share/pipewire/pipewire-pulse.confp
+doas pacman -Syu
+doas pacman -S ffmpeg
+doas pacman -Syu
+paru -Syu
+clear
+nv
+doas pacman -S nano
+mkdir .config/pipewire
+ls .config/pipewire
+cp /usr/share/pipewire/* .config/pipewire
+cd .config/pipewire
+nano pipewire-pulse.conf
+nano pipewire.conf
+alsamixer
+pulsemixer
+reboot
+pidof redshift
+kill 1732
+clear
+pulsemixer
+xrandr --output HDMI-1 --auto
+reboot
+pidof redshift
+kill 1739
+xbacklight acklight -set 100
+xrandr --output HDMI-1 --auto
+pulsemixer
+xrandr --output HDMI-1 --scale 1920x1080
+reboot
+pidof redshift
+kill 1850
+xrandr --output HDMI-1 --scale 1920x1080
+pidof redshift
+kill 1733
+xrandr --output HDMI-1 --auto
+pulsemixer
+poweroff
+xbacklight acklight -set 100
+xrandr --output HDMI-1 --scale 1280x720
+pidof redshift\
+pidof redshift
+kill 1730
+pulsemixer
+xrandr --output HDMI-1 --auto
+reboot
+pidof redshift\
+pidof redshift
+kill 1737
+pidof redshift\
+pidof redshift
+kill 1743
+xrandr --output HDMI-1 --auto
+pulsemixer
+xrandr --output HDMI-1 --auto
+xrandr --output LVDS1 --primary --auto HDMI1 --auto  --same-as LVDS1
+xrandr --output LVDS1 --primary --auto --output HDMI1 --auto  --same-as LVDS1
+xrandr
+xrandr --output HDMI-1 --scale 1360x780
+pidof redshift\
+pidof redshift
+kill 1746
+xrandr --output HDMI1 --auto
+xrandr --output HDMI-1 --auto
+pidof redshift\
+pidof redshift
+kill 1738
+xrandr --output HDMI1 --auto
+xrandr --output HDMI-1 --auto
+pulsemixer
+poweroff
+pulsemixer
+xbacklight acklight -set 100
+pavucontrol
+nano .config/x11/xinitrc
+xbacklight acklight -set 100
+nano /etc/X11/xinit/xinitrc.d/80-dbus.sh 

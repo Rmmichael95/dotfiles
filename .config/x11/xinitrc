@@ -48,14 +48,12 @@ fi
 eval $(/usr/bin/gpg-agent --daemon)
 
 get_session(){
-	local dbus_args=(--sh-syntax --exit-with-session)
 	case "awesome" in
-		dwm) dbus_args+=(ssh-agent dwm) ;;
-		awesome) dbus_args+=(ssh-agent awesome) ;;
-		*) dbus_args+=("ssh-agent $WM") ;;
+		dwm) ssh-agent dwm dbuslaunch ;;
+		awesome) ssh-agent awesome dbuslaunch ;;
+		xmonad) ssh-agent xmonad dbuslaunch ;;
+                *) ssh-agent $WM dbuslaunch ;;
 	esac
-
-	echo "dbus-launch ${dbus_args[*]}"
 }
 
 exec $(get_session)
