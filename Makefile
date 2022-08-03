@@ -1,4 +1,4 @@
-CXX=g++
+CXX=clang++
 RM=rm -rf
 # flags
 CXXFLAGS=-std=c++17 -pthread
@@ -13,8 +13,10 @@ TARGET=main
 MKDIR=@mkdir -p
 dir_guard=$(MKDIR) $(@D)
 
-REC_T=*.txt
+SRCT=*.cpp *.h
 RECT=txt
+SRC_T=*.$(SRCT)
+REC_T=*.$(RECT)
 
 DEBUG ?= 1
 
@@ -32,6 +34,7 @@ RECS=$(wildcard $(REC_T))
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
+
 	@echo [INFO] Creating executable [$(TARGET)]
 	@$(CXX) $(CXXFLAGS) $(CPPFLAGS) -o $(TARGET) $(OBJS)
 
@@ -39,6 +42,16 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	$(dir_guard)
 	@echo [CC] $<
 	@$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c -o $@ $<
+
+rt: $(SRCDIR) $(RECDIR)
+
+$(SRCDIR):
+ifeq ($(SRC_T),)
+else
+	@echo [INFO] Handling SAUCE [$(SRCT)]
+	@$(MKDIR) $(SRCDIR)
+	@mv $(SRCT) $(SRCDIR)
+endif
 
 $(RECDIR):
 ifeq ($(RECS),)

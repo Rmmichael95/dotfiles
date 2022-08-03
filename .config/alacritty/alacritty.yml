@@ -31,6 +31,30 @@ colors:
     white:   '0xebdbb2'
 
 
+  everforest: &everforest
+    primary:
+      background: '#15191c'
+      foreground: '#d3c6aa'
+    normal:
+      black:   '#4b565c'
+      red:     '#e67e80'
+      green:   '#a7c080'
+      yellow:  '#dbbc7f'
+      blue:    '#7fbbb3'
+      magenta: '#d699b6'
+      cyan:    '#83c092'
+      white:   '#d3c6aa'
+    bright:
+      black:   '#4b565c'
+      red:     '#e67e80'
+      green:   '#a7c080'
+      yellow:  '#dbbc7f'
+      blue:    '#7fbbb3'
+      magenta: '#d699b6'
+      cyan:    '#83c092'
+      white:   '#d3c6aa'
+
+colors: *everforest
 env:
     TERM: alacritty
 
@@ -50,6 +74,8 @@ window:
   dynamic_padding: false
 
   decorations: full
+
+  dynamic_title: false
 
   startup_mode: Windowed
 
@@ -112,7 +138,7 @@ font:
   #
   # This is a global setting and will require a log out or restart to take
   # effect.
-  use_thin_strokes: true
+  #use_thin_strokes: false
 
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
@@ -121,7 +147,8 @@ draw_bold_text_with_bright_colors: true
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-window.opacity: 0.8
+window:
+  opacity: 0.8
 
 # Mouse bindings
 #

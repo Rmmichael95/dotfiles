@@ -19,8 +19,8 @@ end
 -- open unsupported files
 vim.cmd([[
 function! myfuncs#OpenAll() abort
-  if executable("xdg-open")
-    return "xdg-open"
+  if executable("handlr")
+    return "handlr"
   endif
 endfunction
 ]])

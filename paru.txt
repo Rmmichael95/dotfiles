@@ -3,7 +3,7 @@ abduco
 acpi
 acpi_call-dkms
 acpica
-acpid-runit
+acpid-dinit
 acpilight
 aic94xx-firmware
 alacritty
@@ -12,7 +12,7 @@ alsa-utils
 amd-ucode
 amdvlk
 amf-headers
-ananicy-runit
+ananicy-dinit
 arc-icon-theme
 artix-archlinux-support
 autoconf
@@ -38,11 +38,11 @@ clang
 clipman
 cmake
 connman-gtk
-connman-runit
+connman-dinit
 cozette-otb
 cpanminus
-cpupower-runit
-cronie-runit
+cpupower-dinit
+cronie-dinit
 cscope
 ctags
 cups
@@ -58,7 +58,6 @@ dracut
 dunst
 dxvk-bin
 efibootmgr
-elogind-runit
 emulationstation
 enscript
 epub-thumbnailer-git
@@ -136,7 +135,7 @@ librewolf
 libtool
 libva-utils
 libxft-bgra-git
-lightdm-runit
+lightdm-dinit
 lightdm-webkit-theme-aether
 linux-firmware
 linux-tkg-muqss
@@ -168,7 +167,7 @@ neofetch
 neovim-git
 net-tools
 notify-send.sh
-ntp-runit
+ntp-dinit
 nvm-git
 nvme-cli
 nyxt
@@ -223,18 +222,17 @@ refind
 refind-theme-regular-git
 reflector
 ripgrep
-rng-tools-runit
+rng-tools-dinit
 rocm-dev
 rocm-libs
 rocm-utils
 rsync
 ruby-build-git
 ruby-rdoc
-runit
 rust-analyzer
 rustup
 samba
-samba-runit
+samba-dinit
 sane-airscan
 sc-im
 seatd
@@ -280,8 +278,6 @@ upd72020x-fw
 vapoursynth-git
 vdpauinfo
 vicious
-virtualbox
-virtualbox-host-dkms
 vkd3d-proton-tkg-git
 vulkan-headers-tkg-git
 vulkan-tools
@@ -293,7 +289,7 @@ wine-tkg-fsync-git
 winetricks
 wireless_tools
 wkhtmltopdf
-wpa_supplicant-runit
+wpa_supplicant-dinit
 xclip
 xdg-user-dirs
 xdotool
@@ -359,7 +355,7 @@ zeromq
 zig-git
 zip
 zls-git
-zramen-runit
+zramen-dinit
 zsh
 zsh-autosuggestions
 zsh-completions

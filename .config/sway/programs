@@ -1,0 +1,4 @@
+exec_always polkit-dumb-agent
+exec_always /usr/bin/pipewire
+exec_always /usr/bin/pipewire-pulse
+exec_always /usr/bin/wireplumber

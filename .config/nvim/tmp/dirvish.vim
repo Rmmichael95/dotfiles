@@ -23,6 +23,7 @@ function! s:letExplore()
   else
     let g:loaded_netrwPlugin = 0
     :Lexplore<CR>
+  endif
 endfunction
 
 " File explorer

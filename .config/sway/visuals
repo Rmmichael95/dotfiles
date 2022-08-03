@@ -1,0 +1,16 @@
+#window borders
+default_border pixel 1
+smart_borders on
+output * bg #246B94 solid_color
+
+#unclutter
+seat * hide_cursor 10000
+
+#useless gaps
+gaps inner 8
+
+#autotiling
+exec_always --no-startup-id autotiling
+
+# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+output * bg /home/ryanm/.config/wall fill

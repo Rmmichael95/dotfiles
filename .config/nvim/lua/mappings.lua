@@ -57,8 +57,7 @@ map('n', ',q', ':q!<cr>', options)                  -- easy quit
 map('n', ',w', ':w!<cr>', options)                  -- easy write
 map('n', ',W', ':w!!<cr>', options)                 --
 map('n', ',z', ':wq!<cr>', options)                 --
-map('n', '<leader>\\', ':TagbarToggle<CR>', options) --
-map('n', '<leader>y', ':FSHere<cr>', options)       --
+map('n', '<leader>y', ':if expand("%:e") == "h" | e %:r.cpp | else | e %:r.h | endif<CR>', options)       -- switch between cpp/h files
 --map('n', '/', '/\v', options)                       -- use sane regexes
 map('n', 'Y', 'y$', options)                        -- fix Y behaviour
 map('n', 'D', 'd$', options)                        -- fix D behaviour

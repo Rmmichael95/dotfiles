@@ -3,8 +3,6 @@
 # Read `man 5 sway` for a complete reference.
 
  #---Basic Definitions---# #
-for_window [class="^.*"] border pixel 1
-default_border none
 set $term --no-startup-id $TERMINAL
 set $mod Mod4
 # function keys
@@ -28,19 +26,15 @@ set $mod Mod4
 #XF86Mail 0x1008ff19
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
-set $menu dmenu_path | dmenu | xargs swaymsg exec --
+set $menu bemenu-run | xargs swaymsg exec --
 # Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
 
-gaps inner 8
-
 ### Output configuration
 #
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /home/ryanm/.config/wall fill
 #
 # Example configuration:
 #
@@ -94,7 +88,7 @@ output * bg /home/ryanm/.config/wall fill
     # brightness down
     bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
 
-
+    bindsym $mod+n layout toggle tabbed split
 
 
 
@@ -246,4 +240,11 @@ bar {
     swaybar_command waybar
 }
 
+xwayland disable
+
+font pango:monospace 0
 include /etc/sway/config.d/*
+include rules
+include visuals
+include programs
+include themes/everforest.conf

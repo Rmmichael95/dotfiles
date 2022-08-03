@@ -12,6 +12,9 @@ export CDPATH="$CDPATH:.:$HOME/documents/"
 export LANG="en_US.UTF-8"
 export LC_COLLATE="C"
 
+#wm
+export WM="$(cat /home/ryanm/.local/share/wm 2>/dev/null)"
+
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
 
@@ -31,7 +34,7 @@ export TERMINAL=alacritty
 export BROWSER=librewolf
 export BROWSERCLI=w3m
 export READER=zathura
-export IMAGEVIEWER=sxiv
+export IMAGEVIEWER=nsxiv
 export VIDEOPLAYER=mpv
 export FILE=lf
 export COLORTERM="truecolor"
@@ -72,7 +75,7 @@ export NVM_DIR="$XDG_DATA_HOME"/nvm
 export GOPATH="$XDG_DATA_HOME"/go
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
-export ZDOTDIR=$XDG_CONFIG_HOME/zsh
+#export ZDOTDIR=$XDG_CONFIG_HOME/zsh
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME"/ripgrep/ripgreprc

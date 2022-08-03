@@ -27,6 +27,8 @@ opt.splitright    = true      -- make vsplit to right of current window
 opt.inccommand    = 'nosplit' -- show affects of commands incrimentally
 opt.visualbell    = true      -- show visual bell instead of beeping
 opt.virtualedit   = 'block'   -- allow virual editing in visual block
+opt.laststatus    = 3         -- only one statusline
+opt.winhl='LineNr:white'      -- make line number of inctive window white
 -- window options
 opt.spell        = false     -- don't check spelling
 opt.wrap         = false     -- don't wrap text lines
@@ -51,6 +53,8 @@ opt.modeline    = false     -- the modeline is a well-known security risk
 opt.termguicolors = true      -- enable 24bit colors in TUI, uses guibg/guifg
 opt.background    = 'dark'    -- set background dark/light
 g.everforest_transparent_background = 1 -- keep transparent guibg
+cmd('let g:everforest_background = "medium"') -- use everforest colorscheme; plays nice with redshift
+cmd('let g:everforest_better_performance = 1') -- use everforest colorscheme; plays nice with redshift
 cmd('colorscheme everforest') -- use everforest colorscheme; plays nice with redshift
 -- highlight 81st column darkred on lines that run long
 cmd([[autocmd BufEnter,FocusGained,BufWinEnter,WinEnter * match ColorColumn "\%81v."]])
@@ -80,11 +84,11 @@ opt.fileformats   = {'unix', 'dos', 'mac'} -- gives eol formats
 
 -- backups
 opt.backupskip    = '/tmp/*,/private/tmp/*",*.gpg' -- don't backup filename with these patterns
-opt.backupdir     = '$XDG_CONFIG_HOME/nvim/tmp/.backup//,/tmp' -- where to store backup files
-opt.undodir       = '$XDG_CONFIG_HOME/nvim/tmp/.undo//,/tmp' -- where to store undo files
-opt.directory     = '$XDG_CONFIG_HOME/nvim/tmp/.swp//,/tmp' -- where to store swap files
+opt.backupdir     = '~/.config/nvim/tmp/.backup/' -- where to store backup files
+opt.undodir       = '~/.config/nvim/tmp/.undo/' -- where to store undo files
+opt.directory     = '~/.config/nvim/tmp/.swp/' -- where to store swap files
 opt.backup        = true  -- make backup before overwriting files
-opt.swapfile      = false -- its 2012, just do backups
+opt.swapfile      = false -- its 2014, just do backups
 
 -- make dirs for backup
 cmd([[

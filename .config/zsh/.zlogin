@@ -1,9 +1,9 @@
-if [ "$WM" = "sway" ]; then
-	if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-		XKB_DEFAULT_LAYOUT=us exec sway
-	fi
+if [ "$WM" = "sway" || "$WM" = dwl ]; then
+    if [ -z "${DISPLAY}" ] && [ "$(tty)" = "/dev/tty1" ]; then
+        sh $HOME/documents/batcave/dotfiles/start-wayland
+    fi
 else
-	if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-        exec sx $HOME/.config/x11/xinitrc
-	fi
+    if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+        sh $HOME/documents/batcave/dotfiles/sxrcsession-helper
+    fi
 fi

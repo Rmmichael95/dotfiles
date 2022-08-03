@@ -205,8 +205,9 @@ alias poweroff='sudo poweroff'
 alias reboot='sudo reboot'
 alias gzip='pigz'
 alias find='fd'
-#alias upd="sudo reflector --verbose --threads 6 --country 'US,CA' --protocol https --sort rate --save /etc/pacman.d/mirrorlist && sudo pacman -Syu"
-alias upda="sudo reflector --verbose --threads 6 --country 'US,CA' --protocol https --sort rate --save /etc/pacman.d/mirrorlist-arch && sudo pacman -Syu"
+alias scron='su -c "crontab -e"'
+#alias upd="sudo reflector --verbose --threads 8 --country 'US,CA' --protocol https --sort rate --save /etc/pacman.d/mirrorlist && doas pacman -Syu"
+alias upda="sudo reflector --verbose --threads 8 --country 'US,CA' --protocol https --sort rate --save /etc/pacman.d/mirrorlist-arch && doas pacman -Syu"
 # You can use whatever you want as an alias, like for Mondays:
 #eval "$(thefuck --alias FUCK)"
 eval "$(thefuck --alias)":

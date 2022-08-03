@@ -1,1 +1,2 @@
-source $HOME/.config/shell/profile
+sh $HOME/.profile
+

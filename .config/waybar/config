@@ -64,7 +64,7 @@
         "spacing": 10
     },
     "clock": {
-        "format-alt": "{:+%a %H:%M}"
+        "format-alt": "{:%a %H:%M}"
     },
     "cpu": {
         "format": "{usage}% ",

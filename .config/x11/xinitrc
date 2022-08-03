@@ -1,10 +1,9 @@
-#!/bin/env bash
+#!/bin/env zsh
 #
 # ~/.xinitrc
 #
 # Executed by startx (run your window manager from here)
 
-[ -f $HOME/documents/batcave/dotfiles/zshenv ] && . $HOME/documents/batcave/dotfiles/zshenv
 [ -f $XDG_CONFIG_HOME/x11/xprofile ] && . $XDG_CONFIG_HOME/x11/xprofile
 
 #dont seem to work
@@ -48,12 +47,15 @@ fi
 eval $(/usr/bin/gpg-agent --daemon)
 
 get_session(){
-	case "awesome" in
-		dwm) ssh-agent dwm dbuslaunch ;;
-		awesome) ssh-agent awesome dbuslaunch ;;
-		xmonad) ssh-agent xmonad dbuslaunch ;;
+    local dbus_args=(--sh-syntax --exit-with-session)
+    case "$WM" in
+        dwm) ssh-agent dwm dbuslaunch ;;
+        awesome) dbus_args+=(ssh-agent awesome) ;;
+        xmonad) dbus_args+=(ssh-agent xmonad) ;;
                 *) ssh-agent $WM dbuslaunch ;;
-	esac
+    esac
+
+    echo "dbus-launch ${dbus_args[*]}"
 }
 
 exec $(get_session)

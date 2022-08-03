@@ -23,8 +23,13 @@
       { name = 'buffer' },
     }),
     formatting = {
-      format = lspkind.cmp_format({with_text = false, maxwidth = 50})
+      format = lspkind.cmp_format({
+          mode = 'symbol',
+          with_text = false,
+          maxwidth = 50})
     }
+      -- The function below will be called before any actual modifications from lspkind
+      -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
   })
 
   vim.cmd [[highlight! default link CmpItemKind CmpItemMenuDefault]]
