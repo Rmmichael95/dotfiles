@@ -84,10 +84,10 @@ myTerminal :: String
 myTerminal = "alacritty"    -- Sets default terminal
 
 myBrowser :: String
-myBrowser = "librewolf"   -- Sets browser
+myBrowser = "librewolf "   -- Sets browser
 
 myEditor :: String
-myEditor = myTerminal ++ " -e nvim"    -- Sets vim as editor
+ myEditor = myTerminal ++ " -e vim "    -- Sets vim as editor
 
 myBorderWidth :: Dimension
 myBorderWidth = 2           -- Sets border width for windows
@@ -275,7 +275,9 @@ gsSystem =
   ]
 
 gsUtilities =
-   [ ("Vim", (myTerminal ++ " -e vim")) ]
+   ("Nitrogen", "nitrogen")
+  , ("Vim", (myTerminal ++ " -e vim"))
+  ]
 
 myScratchPads :: [NamedScratchpad]
 myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm

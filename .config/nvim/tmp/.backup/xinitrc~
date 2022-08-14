@@ -49,7 +49,7 @@ eval $(/usr/bin/gpg-agent --daemon)
 get_session(){
     local dbus_args=(--sh-syntax --exit-with-session)
     case "$WM" in
-        dwm) dbus_args+=(ssh-agent dwm) ;;
+        dwm) ssh-agent dwm dbuslaunch ;;
         awesome) dbus_args+=(ssh-agent awesome) ;;
         xmonad) dbus_args+=(ssh-agent xmonad) ;;
                 *) ssh-agent $WM dbuslaunch ;;

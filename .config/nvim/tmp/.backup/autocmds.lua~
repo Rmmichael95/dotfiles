@@ -16,8 +16,6 @@ u.create_augroup({
 aucmd('bufwritepost', { command = "source " .. home .. "/.config/nvim/init.lua", pattern = "init.lua" })
 
 -- open file with existing swp in readonly mode
-----augroup()
-
 u.create_augroup({
     { 'SwapExists', '*', 'let', 'v:swapchoice = "o"' },
     { 'SwapExists', '*', 'echomsg', '' },

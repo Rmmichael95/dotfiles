@@ -74,11 +74,6 @@ _G.packer_plugins = {
     path = "/home/ryanm/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
-  ["Shade.nvim"] = {
-    loaded = true,
-    path = "/home/ryanm/.local/share/nvim/site/pack/packer/start/Shade.nvim",
-    url = "https://github.com/sunjon/Shade.nvim"
-  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/home/ryanm/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -190,6 +185,11 @@ _G.packer_plugins = {
     path = "/home/ryanm/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
   },
+  ["plenary.nvim"] = {
+    loaded = true,
+    path = "/home/ryanm/.local/share/nvim/site/pack/packer/start/plenary.nvim",
+    url = "https://github.com/nvim-lua/plenary.nvim"
+  },
   ["remote-viewer"] = {
     loaded = true,
     path = "/home/ryanm/.local/share/nvim/site/pack/packer/start/remote-viewer",
@@ -204,6 +204,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/ryanm/.local/share/nvim/site/pack/packer/start/tagbar",
     url = "https://github.com/preservim/tagbar"
+  },
+  ["telescope.nvim"] = {
+    loaded = true,
+    path = "/home/ryanm/.local/share/nvim/site/pack/packer/start/telescope.nvim",
+    url = "https://github.com/nvim-telescope/telescope.nvim"
   },
   undotree = {
     loaded = true,

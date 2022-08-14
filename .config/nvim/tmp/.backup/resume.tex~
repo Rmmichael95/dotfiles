@@ -1,0 +1,111 @@
+\documentclass{article}
+
+\usepackage{titlesec}
+\usepackage{titling}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{varwidth}
+\usepackage{multicol}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=cyan,
+    pdfpagemode=FullScreen,
+    }
+\setlength{\columnsep}{1cm}
+
+\renewcommand{\maketitle}{
+\begin{flushleft}
+{\Huge\bfseries
+\theauthor}
+
+\vspace{.25em}
+
+Energetic team leader excited to get back to work
+
+\end{flushleft}[\titlerule]
+}
+
+\pagestyle{fancy}
+\lhead{\textsc{\Huge Ryan M Sullivan\\ \small Github: \url{https://github.com/Rmmichael95}}}
+\rhead{%
+  \begin{varwidth}[b]{10cm}
+  \raggedright
+  \textsc{13122 Magnolia St J7\\ Garden Grove, CA 92844\\ (949) 514-5329\\ Rmmichael95@gmail.com}%
+  \end{varwidth}
+}
+\setlength{\headheight}{80pt}
+\fancyfoot[C]{}
+
+\titleformat{\section}{\Large\bfseries}{}{0em}{}
+\titleformat{\subsection}[runin]{\large\bfseries}{}{0em}{}
+\titleformat{\subsubsection}[runin]{}{}{0em}{}
+
+\titlespacing{\section}{0em}{1em}{.5em}
+\titlespacing{\subsection}{0em}{1em}{.5em}
+\titlespacing{\subsubsection}{0em}{0em}{.5em}
+
+\begin{document}
+
+\begin{multicols}{2}
+\title{R\'esum\'e}
+\author{Ryan M Sullivan}
+
+\section{Experience}
+\subsection{June Mountain} -- June Lake, CA
+\subsubsection{Lift Operator:} December 2021 -- Current
+\begin{itemize}
+\item{Opening and closing lift/ maintaining area}
+\item{Ensure guests reach the top of the lift both safe and excited}
+\item{Assist small children safely on/off the lift}
+\item{Assist guests with questions/concerns and luggage}
+\item{Interact with first timer skiers with an infectously confident attitude}
+\end{itemize}
+
+\subsection{Five Crowns} -- Corona Del Mar, CA
+\subsubsection{Host, Busser, Barback:} October 2019 -- October 2020
+\begin{itemize}
+\item{Assisted guests over the phone with reservations, orders, and general questions}
+\item{Assisted servers with guests in their sections, including: refilling drinks, running food, clearing dishes}
+\item{Assisted bartenders with their stations, including: dishes, fetching alcohol bottles, pouring beer/wine}
+\end{itemize}
+
+\subsection{Muscle Maker Grill} -- Irvine, CA
+\subsubsection{Shift Lead:} April 2019 -- October 2019
+\begin{itemize}
+\item{Managed store opening and closing procedures}
+\item{Established effective employee schedules and delegated tasks to take
+    advantage of individual abilities and to meet expected demands}
+\item{Applied security, safety, and loss-prevention strategies during shifts—including key holding, tip distribution, and properly securing the restaurant during closing}
+\item{Trained new employees and leveraged individual strengths to maximize efficiency}
+\end{itemize}
+
+\columnbreak
+
+\section{Skills}
+\begin{itemize}
+\item{Linux}
+\item{Python}
+\item{C++}
+\item{Json}
+\item{Conflict resolution}
+\item{Customer service}
+\end{itemize}
+
+\section{Credentials}
+\subsubsection{California Food Handlers Card} -- Current
+
+\section{Awards}
+\subsubsection{Panera Employee of the Month} -- April 2019
+
+\section{Education}
+\subsection{Orange Coast College} -- Costa Mesa, CA
+\subsubsection{I attended OCC for Mathematics and Computer Science}
+
+\subsection{Laguna Beach High} -- Laguna Beach, CA
+\subsubsection{High School Diploma from Laguna Beach High School}
+
+\end{multicols}
+
+\end{document}

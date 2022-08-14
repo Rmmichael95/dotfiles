@@ -17,6 +17,6 @@ dunst &     # dunst for notifications
 /usr/bin/wireplumber &
 polkit-dumb-agent &
 $HOME/.local/bin/setbg &       # set the background with the `setbg` script
-dwmblocks &
+#dwmblocks &
 #blockbar &
 #sh ~/.config/autostart-scripts/tty-color.sh &

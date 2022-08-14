@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =0
+let g:netrw_dirhist_0='/home/ryanm/documents/batcave/dotfiles/.config/picom'
+let g:netrw_dirhist_9='/home/ryanm/documents/batcave/python/datastruct/stack'
+let g:netrw_dirhist_8='/home/ryanm/documents/batcave/dotfiles/.config/nvim/after'
+let g:netrw_dirhist_7='/home/ryanm/.config'
+let g:netrw_dirhist_6='/home/ryanm/documents/batcave/dotfiles/.config/nvim/plugin'
+let g:netrw_dirhist_5='/home/ryanm/.config/x11'
+let g:netrw_dirhist_4='/home/ryanm/documents/batcave/python/fileexpolorer/curses/tmp'
+let g:netrw_dirhist_3='/home/ryanm/.config/alacritty'
+let g:netrw_dirhist_2='/home/ryanm/.config/blockbar'
+let g:netrw_dirhist_1='/home/ryanm/documents/batcave/python/fileexpolorer/curses/tmp/menu.py'
