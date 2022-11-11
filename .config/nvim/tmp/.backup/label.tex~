@@ -1,0 +1,13 @@
+\documentclass{article}
+\usepackage{stackengine}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{graphicx}
+\graphicspath{ {./img/} }
+\begin{document}
+
+\setstackEOL{\cr}%
+\fbox{\Centerstack{\includegraphics{obozS.png}
+\cr \cr \textbf{\Large \fontfamily{phv}\selectfont Jeanette Low}
+\cr \cr \textbf{\Large \fontfamily{phv}\selectfont Women's}
+\cr \cr \textbf{\Large \fontfamily{phv}\selectfont \$130}}}
+\end{document}

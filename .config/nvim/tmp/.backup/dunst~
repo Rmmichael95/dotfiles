@@ -1,0 +1,4 @@
+type            = process
+command         = /usr/bin/dunst
+smooth-recovery = true
+logfile         = /var/log/dinit/dunst.log

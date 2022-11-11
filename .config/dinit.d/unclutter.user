@@ -1,0 +1,6 @@
+type            = process
+load-options    = sub-vars
+command         = /usr/bin/unclutter
+restart         = true
+smooth-recovery = true
+logfile         = $HOME/.local/share/dinit/unclutter.log

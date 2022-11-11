@@ -1,0 +1,4 @@
+type            = process
+command         = /usr/bin/unclutter
+smooth-recovery = true
+logfile         = /var/log/dinit/unclutter.log

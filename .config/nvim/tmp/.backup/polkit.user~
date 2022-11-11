@@ -1,0 +1,6 @@
+type            = process
+load-options    = sub-vars
+socket-listen   = /run/user/1000/gnupg/S.gpg-agent
+command         = /usr/bin/polkit-dumb-agent
+smooth-recovery = true
+logfile         = $HOME/.local/share/dinit/polkit-dumb-agent.log

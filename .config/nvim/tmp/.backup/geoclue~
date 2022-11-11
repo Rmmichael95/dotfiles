@@ -1,0 +1,4 @@
+type            = process
+command         = /usr/lib/geoclue-2.0/demos/agent
+smooth-recovery = true
+logfile         = /var/log/dinit/geoclue.log

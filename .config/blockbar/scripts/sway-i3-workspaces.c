@@ -275,12 +275,15 @@ int main(int argc, char *argv[])
     if (!sock_path) {
         sock_path = getenv("I3SOCK");
     }
+    if (!sock_path) {
+        sock_path = getenv("WLRSOCK");
+    }
     bar_output = getenv("BAR_OUTPUT");
     getintenv(block_button, "BLOCK_BUTTON");
     getintenv(subblock, "SUBBLOCK");
 
     if (!sock_path) {
-        fprintf(stderr, "SWAYSOCK/I3SOCK not set\n");
+        fprintf(stderr, "SWAYSOCK/I3SOCK/WLRSOCK not set\n");
         return 1;
     }
 

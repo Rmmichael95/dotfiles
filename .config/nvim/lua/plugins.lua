@@ -53,6 +53,10 @@ return require('packer').startup(function(use)
     'pianocomposer321/yabs.nvim',
     requires = { 'nvim-lua/plenary.nvim' }
   }
+  use {'akinsho/bufferline.nvim',
+    tag = "v2.*",
+    requires = 'kyazdani42/nvim-web-devicons'
+  }
   use 'ojroques/nvim-lspfuzzy'                             -- use skim for quickfix list
   use 'hoob3rt/lualine.nvim'                               -- statusline in lua
   use 'kyazdani42/nvim-web-devicons'                       -- icon bloat for lualine
@@ -66,13 +70,10 @@ return require('packer').startup(function(use)
   use 'neomutt/neomutt.vim'                                -- helpful setting for mail ft
   use 'easymotion/vim-easymotion'                          -- visualize text motions
   use 'tpope/vim-commentary'                               -- easy comments in vim style
-  use 'tpope/vim-endwise'                                  -- help end some programing structures
   use 'tpope/vim-surround'                                 -- change surrounding grouping symbol
   use 'tpope/vim-repeat'                                   -- repeat full plugin actions
   use 'rhysd/vim-grammarous'                               -- all in one grammar checker for vim
   use 'mbbill/undotree'                                    -- undo visualizer for vim
-  use 'preservim/tagbar'                                   -- visualize ctags in vim
-  use 'jsfaint/gen_tags.vim'                               -- easy gtags/ctags
   use 'dhruvasagar/vim-table-mode'                         -- make table structures right in vim
   use 'RRethy/vim-hexokinase'
 

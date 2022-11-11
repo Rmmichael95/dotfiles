@@ -1,0 +1,5 @@
+type            = process
+command         = /usr/bin/redshift
+smooth-recovery = true
+logfile         = /var/log/dinit/redshift.log
+waits-for       = geoclue

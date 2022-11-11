@@ -236,6 +236,20 @@ static const Layout layouts[] = {
 
 /* key definitions */
 #define MODKEY Mod4Mask
+#define XF86Calculator 0x1008ff1d
+#define XF86PowerOff 0x1008ff2a
+#define XF86Explorer 0x1008ff5d
+#define XF86MonBrightnessUp 0x1008ff05
+#define XF86MonBrightnessDown 0x1008ff06
+#define XF86AudioLowerVolume 0x1008ff11
+#define XF86AudioMute 0x1008ff12
+#define XF86AudioRaiseVolume 0x1008ff13
+#define XF86AudioPlay 0x1008ff14
+#define XF86AudioStop 0x1008ff15
+#define XF86AudioPrev 0x1008ff16
+#define XF86AudioNext 0x1008ff17
+#define XF86HomePage 0x1008ff18
+#define XF86Mail 0x1008ff19
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      comboview,      {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -256,6 +270,18 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
+static const char *cmdpower[] = {"dmenu_power", "Do you want to poweroff?", "sudo poweroff", "sudo reboot", NULL};
+static const char *cmdinfo[] = { "sysinfo", NULL };
+static const char *cmdsoundup[]  = { "amixer", "-q", "sset", "Master", "1%+", NULL };
+static const char *cmdsounddown[]  = { "amixer", "-q", "sset", "Master", "1%-", NULL };
+static const char *cmdsoundtoggle[]  = { "amixer", "-q", "sset", "Master", "toggle", NULL };
+static const char *cmdbrightnessup[]  = { "sudo", "brightness", "up", NULL  };
+static const char *cmdbrightnessdown[]  = { "sudo", "brightness", "down", NULL  };
+static const char *cmdmail[]       = { "st", "-c", "neomutt", "-e", "neomutt", NULL};
+static const char *cmdnewsboat[] = { "st", "-c", "newsboat", "-e", "newsboat", NULL };
+/* static const char *cmdlock[]       = { "amixer", "-q", "sset", "Master", "mute", "&&", "locki3.sh", NULL}; */
+
+
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = {
 	"dmenu_run",
@@ -345,7 +371,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_y,          togglefullscreen,       {0} },
 	{ MODKEY|ShiftMask,             XK_f,          fullscreen,             {0} },
 	{ MODKEY|ShiftMask,             XK_s,          togglesticky,           {0} },
-	{ MODKEY,                       XK_0,          view,                   {.ui = ~0 } },
+	{ MODKEY|ControlMask            XK_0,          view,                   {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,          tag,                    {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,      focusmon,               {.i = -1 } },
 	{ MODKEY,                       XK_period,     focusmon,               {.i = +1 } },
@@ -392,6 +418,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                                  7)
 	TAGKEYS(                        XK_9,                                  8)
 	TAGKEYS(                        XK_0,                                  9)
+	{ 0,                            XF86PowerOff, spawn,       {.v = cmdpower } },
 };
 
 

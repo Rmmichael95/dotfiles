@@ -1,7 +1,9 @@
+#echo "/zsh/zshenv"
+
 # PATH
 #typeset -U PATH path
 #path=("$PATH" "/usr/local/sbin/" "/usr/local/bin/" "/usr/sbin/" "/usr/bin/" "/sbin/" "/bin/" "/usr/lib/ccache/bin/" "$HOME/.local/bin/" "$HOME/Documents/Notes/" "$HOME/.local/bin/statusbar/" "$HOME/.local/share/skim/bin/" "$path[@]")
-export PATH="$PATH:/usr/local/sbin/:/usr/local/bin/:/usr/sbin/:/usr/bin/:/sbin/:/bin/:/usr/lib/ccache/bin/:$HOME/.local/bin/:$HOME/Documents/Notes/:$HOME/.local/share/skim/bin/:$HOME/.local/share/npm/bin/:$HOME/.local/share/go/bin/:"$HOME/.local/bin/statusbar/""
+export PATH="$PATH:/usr/local/sbin/:/usr/local/bin/:/usr/sbin/:/usr/bin/:/sbin/:/bin/:/usr/lib/ccache/bin/:$HOME/.local/bin/:$HOME/Documents/Notes/:$HOME/.local/share/skim/bin/:$HOME/.local/share/npm/bin/:$HOME/.local/share/go/bin/:$HOME/.local/bin/statusbar/:$HOME/.local/bin/doas/:$HOME/.local/bin/menu/:"
 export PATH
 # MANPATH
 export MANPATH="$MANPATH:/usr/local/man:"
@@ -12,6 +14,8 @@ export CDPATH="$CDPATH:.:$HOME/documents/"
 export LANG="en_US.UTF-8"
 export LC_COLLATE="C"
 
+#ds
+export DS="$(cat /home/ryanm/.local/share/ds 2>/dev/null)"
 #wm
 export WM="$(cat /home/ryanm/.local/share/wm 2>/dev/null)"
 
@@ -52,8 +56,10 @@ export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:="$HOME/.config"}
 export XDG_STATE_HOME=${XDG_STATE_HOME:="$HOME/.local/state"}
 export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:="run/user/$UID"}
 
-#dwm doesnt need, breaks; source for start in sway
-export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
+#startx
+#export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
+#sx
+export XAUTHORITY="$XDG_DATA_HOME"/sx/xauthority
 
 #doesnt seem to work with dxvk; got working
 export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
@@ -63,6 +69,8 @@ export RBENV_ROOT="$XDG_DATA_HOME"/ruby/rbenv
 #export GEM_PATH="$XDG_DATA_HOME/ruby/gems"
 #export GEM_SPEC_CACHE="$XDG_DATA_HOME/ruby/specs"
 #export GEM_HOME="$XDG_DATA_HOME/ruby/gems"
+
+export PYTHONSTARTUP="/etc/python/pythonrc"
 
 # ~/ Clean-up: Fixing Paths
 export XINITRC="$XDG_CONFIG_HOME"/x11/xinitrc
@@ -105,3 +113,9 @@ export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"
 #  _NROFF_U=1 \
 #  PATH="$HOME/bin:$PATH" \
 #    "$@"
+
+GPG_TTY=$(tty)
+export GPG_TTY
+
+#doas-askpass
+export DOAS_ASKPASS="dmenu -b -P -p password:"

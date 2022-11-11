@@ -1,6 +1,8 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+#echo "/zsh/zshrc"
+
 ## Plugins section: Enable fish style features
 # Use syntax highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -197,14 +199,15 @@ alias ls='lsd'
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
 alias path='echo -e ${PATH//:/\\n}'
-alias vim='nvim'
-alias nv='nvim'
-alias virc='nvim $XDG_CONFIG_HOME/nvim'
-alias zshrc='nvim $XDG_CONFIG_HOME/zsh/zshrc'
-alias poweroff='sudo poweroff'
-alias reboot='sudo reboot'
+alias vim='source ~/.local/share/nvim/.venv/bin/activate && nvim'
+alias nv='source ~/.local/share/nvim/.venv/bin/activate && nvim'
+alias virc='nv $XDG_CONFIG_HOME/nvim'
+alias zshrc='nv $XDG_CONFIG_HOME/zsh/zshrc'
+alias poweroff='dinitctl shutdown && doas-askpass poweroff'
+alias reboot='dinitctl shutdown && doas-askpass reboot'
 alias gzip='pigz'
 alias find='fd'
+alias mbsync='mbsync -c "$XDG_CONFIG_HOME"/isync/mbsyncrc'
 alias scron='su -c "crontab -e"'
 #alias upd="sudo reflector --verbose --threads 8 --country 'US,CA' --protocol https --sort rate --save /etc/pacman.d/mirrorlist && doas pacman -Syu"
 alias upda="sudo reflector --verbose --threads 8 --country 'US,CA' --protocol https --sort rate --save /etc/pacman.d/mirrorlist-arch && doas pacman -Syu"

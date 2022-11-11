@@ -1,0 +1,135 @@
+%-------------------------
+% Entry-level Cover-letter Template in LaTeX
+% Made to go with "Entry-level Resume in laTeX" - here
+% Version - v1.0
+% Last Edits - October 5, 2021
+% Author : Jayesh Sanwal
+% Reach out to me on LinkedIn(/in/jsanwal), with any suggestions, ideas, issues, etc.
+%------------------------
+
+
+%%%%%%% --------------------------------------------------------------------------------------
+%%%%%%%  STARTING HERE, DO NOT TOUCH ANYTHING
+%%%%%%% --------------------------------------------------------------------------------------
+
+%%%% Define Document type
+\documentclass[11pt,a4]{article}
+
+%%%% Include Packages
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+ \usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage{csquotes}
+\usepackage{tabularx}
+\hypersetup{colorlinks=true,urlcolor=black}
+\usepackage[11pt]{moresize}
+\usepackage{setspace}
+\usepackage{fontspec}
+\usepackage[inline]{enumitem}
+\usepackage{ragged2e}
+\usepackage{anyfontsize}
+
+%%%% Set Margins
+\usepackage[margin=1cm]{geometry}
+
+%%%% Set Fonts
+\setmainfont[
+BoldFont=SourceSansPro-Semibold.otf,
+ItalicFont=SourceSansPro-RegularIt.otf
+]{SourceSansPro-Regular.otf}
+
+%%%% Set Page Style
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%%%% Set URL Style
+\urlstyle{same}
+
+%%%% Set Indentation
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+%%%% Set Secondary Color, Page Number Color, Footer Text
+\definecolor{UI_blue}{RGB}{32, 64, 151}
+\definecolor{HF_color}{RGB}{179, 179, 179}
+\rfoot{{\color{HF_color} \thepage \ of \ 1, Updated \today}}
+
+%%%% Set Heading Format
+\titleformat{\section}{
+\color{UI_blue} \scshape \raggedright \large
+}{}{0em}{}[\vspace{-0.7cm} \hrulefill \vspace{-0.2cm}]
+%%%%%%% --------------------------------------------------------------------------------------
+%%%%%%% --------------------------------------------------------------------------------------
+%%%%%%%  END OF "DO NOT TOUCH" REGION
+%%%%%%% --------------------------------------------------------------------------------------
+%%%%%%% --------------------------------------------------------------------------------------
+
+
+
+\begin{document}
+%%%%%%% --------------------------------------------------------------------------------------
+%%%%%%%  HEADER
+%%%%%%% --------------------------------------------------------------------------------------
+\begin{center}
+    \begin{minipage}[b]{0.24\textwidth}
+            \large (949) 514-5329 \\
+            \large \href{mailto:Rmmichael95@gmail.com}{Rmmichael95@gmail.com}
+    \end{minipage}%
+    \begin{minipage}[b]{0.5\textwidth}
+            \centering
+            {\Huge Ryan Sullivan} \\ %
+            \vspace{0.1cm}
+            {\color{UI_blue} \Large{Outdoor Retail Sales}} \\
+    \end{minipage}%
+    \begin{minipage}[b]{0.24\textwidth}
+            \flushright \large
+            {\href{https://www.linkedin.com/in/ryan-sullivan-94544188/}{linkedin.com/ln/Rmmichael95} }
+    \end{minipage}
+
+\vspace{-0.15cm}
+{\color{UI_blue} \hrulefill}
+\end{center}
+
+\justify
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{12pt}
+\vspace{0.2cm}
+\begin{center}
+    {\color{UI_blue} \Large{COVER LETTER}}
+\end{center}
+
+
+%%%%%%% --------------------------------------------------------------------------------------
+%%%%%%%  First 2 Lines
+%%%%%%% --------------------------------------------------------------------------------------
+
+Date: \today \par \vspace{-0.1cm}
+To whom this may concern,
+
+I am an avid Linux user and have used it as my main OS since 2012. I used Linux
+with the terminal and Vim for my Computer Science program in Community College.
+I would love a job that lets me work with my passion and further develop my
+Linux skills.
+
+
+%%%%%%% --------------------------------------------------------------------------------------
+%%%%%%%  SIGNATURE
+%%%%%%% --------------------------------------------------------------------------------------
+
+\vspace{0.5cm}
+\raggedright
+Sincerely \\ Ryan Sullivan \\ (949) 514-5329 \\
+\href{mailto:Rmmichael95@gmail.com}{Rmmichael95@gmail.com}
+
+\end{document}

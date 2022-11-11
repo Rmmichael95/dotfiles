@@ -1,0 +1,35 @@
+#!/usr/bin/expect --
+
+# askpass implementation for doas
+# export DOAS_ASKPASS="dmenu -b -P -p password:" and run with doas-askpass [cmd "options"]
+
+# do
+log_user 0
+
+# no command, then nothing to do
+if { $argc == 0 } { exit 0 }
+
+# treat all arguments as command input
+set cmd [lrange $argv 0 end];
+
+# read askpass from env or fallback to dmanu_pass ()
+if {[info exists ::env(DOAS_ASKPASS)]} {
+    set askpass "$::env(DOAS_ASKPASS)"
+} else {
+    set askpass "dmenu_pass password:"
+}
+
+# read password from user
+set pwd [exec {*}$askpass]
+
+# spawn doas operation
+spawn doas {*}$cmd
+
+# send password and execute command
+expect "doas*password:" {
+    send -- "$pwd\r"
+    expect \r
+    log_user 1
+    expect eof
+}
+

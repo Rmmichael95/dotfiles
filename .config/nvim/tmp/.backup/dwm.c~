@@ -329,6 +329,7 @@ static void detach(Client *c);
 static void detachstack(Client *c);
 static Monitor *dirtomon(int dir);
 static void dmenu_logout(const Arg *arg);
+static void dmenu_power(const Arg *arg);
 static void drawbar(Monitor *m);
 static void drawbars(void);
 static void drawbarwin(Bar *bar);
@@ -466,6 +467,7 @@ dmenu_logout(const Arg *arg)
 {
     FILE *fp;
     char path[PATH_MAX];
+    const char* cmndDinit = "dinitctl shutdown";
 
     /* Open command for reading */
     fp = popen("echo 'Yes' | dmenu -p 'Would you like to logout?'", "r");
@@ -476,7 +478,9 @@ dmenu_logout(const Arg *arg)
     while (fgets(path, PATH_MAX, fp) != NULL) {
         if (strcmp(path, "Yes")) {
             pclose(fp);
-            quit(0);
+            FILE* pipe = popen(cmndDinit, "r");
+            if (pipe != NULL) quit(0);
+            else printf("Failed to shutdown dinit\n" );
         }
     }
     pclose(fp);

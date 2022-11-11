@@ -1,0 +1,6 @@
+type            = process
+socket-listen   = $XDG_RUNTIME_DIR/gnupg/S.gpg-agent
+command         = /usr/bin/gpg-agent --supervised
+smooth-recovery = true
+logfile         = $HOME/.local/share/dinit/gpg-agent-sup.log
+waits-for       = gpg-agent.user

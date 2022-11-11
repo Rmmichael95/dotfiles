@@ -1,0 +1,42 @@
+#!/usr/bin/env python
+
+import zmq
+import sys
+import cmd
+
+class ZMQ_ffmpeg(cmd.Cmd):
+    prompt = 'ffmpeg> '
+
+    def __init__(self, bind_address) -> None:
+        context = zmq.Context()
+        self.requester = context.socket(zmq.REQ)
+        self.requester.connect(bind_address)
+        cmd.Cmd.__init__(self)
+
+    def onecmd(self, cmd) -> None:
+        if cmd == 'EOF':
+            sys.exit(0)
+        print(f'Sending command:[%s]' % cmd)
+        self.requester.send(cmd)
+        message = self.requester.recv()
+        print(f'Received reply:[%s]' % message)
+
+try:
+    bind_address = sys.argv[1] if len(sys.argv) > 1 else "tcp://localhost:5555"
+    ZMQ_ffmpeg(bind_address).cmdloop('FFmpeg libavfilter interactive shell')
+except KeyboardInterrupt:
+    pass
+
+
+class App:
+    prompt = 'ffmpeg> '
+
+    def __init__(self) -> None:
+        self.gstrm = input('Which stream to manipulate(A/V)? ')
+
+    def scon(self) -> None:
+        self.sstrm = 1236 if self.gstrm == 'V' else 1235
+        ZMQ_ffmpeg(f'tcp://127.0.0.1:%d' % self.sstrm)
+
+if __name__.__eq__('__main__'):
+    App()
