@@ -1,0 +1,184 @@
+#!/bin/env sh
+
+workspaces() {
+
+if [ "workspace>>" = "$(echo $line | cut -c1-11)" ];then
+
+	ws1="1 "
+	ws2="2"
+	ws3="3"
+	ws4="4"
+	ws5="5"
+	ws6="6"
+	ws7="7"
+	ws8="8"
+	ws9="9"
+	ws10="10"
+
+	# Unoccupied
+	un="0"
+
+	o1=""
+	o2=""
+	o3=""
+	o4=""
+	o5=""
+	o6=""
+	o7=""
+	o8=""
+	o9=""
+	o10=""
+
+	f1=""
+	f2=""
+	f3=""
+	f4=""
+	f5=""
+	f6=""
+	f7=""
+	f8=""
+	f9=""
+	f10=""
+
+
+	# check if Occupied
+	o1=$(hyprctl workspaces | grep "ID $ws1" | cut -c14,15 )
+	o2=$(hyprctl workspaces | grep "ID $ws2" | cut -c14,15 )
+	o3=$(hyprctl workspaces | grep "ID $ws3" | cut -c14,15 )
+	o4=$(hyprctl workspaces | grep "ID $ws4" | cut -c14,15 )
+	o5=$(hyprctl workspaces | grep "ID $ws5" | cut -c14,15 )
+	o6=$(hyprctl workspaces | grep "ID $ws6" | cut -c14,15 )
+	o7=$(hyprctl workspaces | grep "ID $ws7" | cut -c14,15 )
+	o8=$(hyprctl workspaces | grep "ID $ws8" | cut -c14,15 )
+	o9=$(hyprctl workspaces | grep "ID $ws9" | cut -c14,15 )
+	o10=$(hyprctl workspaces | grep "ID $ws10" | cut -c14,15 )
+
+	# check if Focused
+	f1=$(hyprctl activeworkspace | grep "ID $ws1" | cut -c14,15 )
+	f2=$(hyprctl activeworkspace | grep "ID $ws2" | cut -c14,15 )
+	f3=$(hyprctl activeworkspace | grep "ID $ws3" | cut -c14,15 )
+	f4=$(hyprctl activeworkspace | grep "ID $ws4" | cut -c14,15 )
+	f5=$(hyprctl activeworkspace | grep "ID $ws5" | cut -c14,15 )
+	f6=$(hyprctl activeworkspace | grep "ID $ws6" | cut -c14,15 )
+	f7=$(hyprctl activeworkspace | grep "ID $ws7" | cut -c14,15 )
+	f8=$(hyprctl activeworkspace | grep "ID $ws8" | cut -c14,15 )
+	f9=$(hyprctl activeworkspace | grep "ID $ws9" | cut -c14,15 )
+	f10=$(hyprctl activeworkspace | grep "ID $ws10" | cut -c14,15 )
+
+	ic_1=""
+	ic_2=""
+	ic_3=""
+	ic_4=""
+	ic_5=""
+	ic_6=""
+	ic_7=""
+	ic_8=""
+	ic_9=""
+	ic_10=""
+
+	ws1=""
+	ws2=""
+	ws3=""
+	ws4=""
+	ws5=""
+	ws6=""
+	ws7=""
+	ws8=""
+	ws9=""
+	ws10=""
+
+	[ -n $o1 ] && \
+		ws1=" (button :onclick \"hyprctl dispatch workspace 1\"	:class	\"01\"	\"󱂈\")"
+	[ -n $o2 ] && \
+		ws2=" (button :onclick \"hyprctl dispatch workspace 2\"	:class \"02\"	 \"󱂉\")"
+	[ -n $o3 ] && \
+		ws3=" (button :onclick \"hyprctl dispatch workspace 3\"	:class \"03\"	 \"󱂊\")"
+	[ $o4 ] && \
+		ws4=" (button :onclick \"hyprctl dispatch workspace 4\"	:class \"04\"	 \"󱂋\")"
+	[ -n $o5 ] && \
+		ws5=" (button :onclick \"hyprctl dispatch workspace 5\"	:class \"05\"	 \"󱂌\")"
+	[ -n $o6 ] && \
+		ws6=" (button :onclick \"hyprctl dispatch workspace 6\"	:class \"06\"	 \"󱂍\")"
+	[ -n $o7 ] && \
+		ws7=" (button :onclick \"hyprctl dispatch workspace 7\"	:class \"07\"	 \"󱂎\")"
+	[ -n $o8 ] && \
+		ws8=" (button :onclick \"hyprctl dispatch workspace 8\"	:class \"08\"	 \"󱂏\")"
+	[ -n $o9 ] && \
+		ws9=" (button :onclick \"hyprctl dispatch workspace 9\"	:class \"09\"	 \"󱂐\")"
+	[ -n $o10 ] && \
+		ws10=" (button :onclick \"hyprctl dispatch workspace 10\"	:class \"010\"	 \"󱂑\")"
+
+	if [ $f1 ]; then
+		ic_1="I"
+		ws1=" (button :onclick \"hyprctl dispatch workspace 1\"	:class	\"011\"	\"$ic_1\")"
+#		f1="f"
+	elif [ $f2 ]; then
+		ic_2="II"
+		ws2=" (button :onclick \"hyprctl dispatch workspace 2\"	:class \"022\"	 \"$ic_2\")"
+#		f2="f"
+	elif [ $f3 ]; then
+		ic_3="III"
+		ws3=" (button :onclick \"hyprctl dispatch workspace 3\"	:class \"033\"	 \"$ic_3\")"
+#		f3="f"
+	elif [ $f4 ]; then
+		ic_4="IV"
+		ws4=" (button :onclick \"hyprctl dispatch workspace 4\"	:class \"044\"	 \"$ic_4\")"
+#		f4="f"
+	elif [ $f5 ]; then
+		ic_5="V"
+		ws5=" (button :onclick \"hyprctl dispatch workspace 5\"	:class \"055\"	 \"$ic_5\")"
+#		f5="f"
+	elif [ $f6 ]; then
+		ic_6="VI"
+		ws6=" (button :onclick \"hyprctl dispatch workspace 6\"	:class \"066\"	 \"$ic_6\")"
+#		f6="f"
+	elif [ $f7 ]; then
+		ic_7="VII"
+		ws7=" (button :onclick \"hyprctl dispatch workspace 7\"	:class \"077\"	 \"$ic_7\")"
+#		f7="f"
+	elif [ $f8 ]; then
+		ic_8="VIII"
+		ws8=" (button :onclick \"hyprctl dispatch workspace 8\"	:class \"088\"	 \"$ic_8\")"
+#		f8="f"
+	elif [ $f9 ]; then
+		ic_9="IX"
+		ws9=" (button :onclick \"hyprctl dispatch workspace 9\"	:class \"099\"	 \"$ic_9\")"
+#		f9="f"
+	elif [ $f10 ]; then
+		ic_10="X"
+		ws10=" (button :onclick \"hyprctl dispatch workspace 10\"	:class \"01010\"	 \"$ic_10\")"
+#		f10="f"
+	fi
+
+	wss="(box	:class \"works\"	:orientation \"h\" :spacing 8 :space-evenly \"false\""
+	wse=")"
+
+
+	ws+=$wss
+	[ -n $ws1 ] && ws+=$ws1
+	[ -n $ws2 ] && ws+=$ws2
+	[ -n $ws3 ] && ws+=$ws3
+	[ -n $ws4 ] && ws+=$ws4
+	[ -n $ws5 ] && ws+=$ws5
+	[ -n $ws6 ] && ws+=$ws6
+	[ -n $ws7 ] && ws+=$ws7
+	[ -n $ws8 ] && ws+=$ws8
+	[ -n $ws9 ] && ws+=$ws9
+	[ -n $ws10 ] && ws+=$ws10
+	ws+=$wse
+
+	echo $ws
+	ws=""
+
+#echo	"(box	:class \"works\"	:orientation \"h\" :spacing 5 :space-evenly \"false\" (button :onclick \"hyprctl dispatch workspace $ws1\"	:class	\"$un$o1$f1\"	\"$ic_1\") (button :onclick \"hyprctl dispatch workspace $ws2\"	:class \"$un$o2$f2\"	 \"$ic_2\") (button :onclick \"hyprctl dispatch workspace $ws3\"	:class \"$un$o3$f3\" \"$ic_3\") (button :onclick \"hyprctl dispatch workspace $ws4\"	:class \"$un$o4$f4\"	\"$ic_4\") (button :onclick \"hyprctl dispatch workspace $ws5\"	:class \"$un$o5$f5\" \"$ic_5\")  (button :onclick \"hyprctl dispatch workspace $ws6\"	:class \"$un$o6$f6\" \"$ic_6\") (button :onclick \"hyprctl dispatch workspace $ws7\"	:class \"$un$o7$f7\" \"$ic_7\") (button :onclick \"hyprctl dispatch workspace $ws8\"	:class \"$un$o8$f8\" \"$ic_8\") (button :onclick \"hyprctl dispatch workspace $ws9\"	:class \"$un$o9$f9\" \"$ic_9\")  (button :onclick \"hyprctl dispatch workspace $ws10\"	:class \"$un$o10$f10\" \"$ic_10\"))"
+
+fi
+
+}
+
+line="workspace>>" && workspaces
+while true; do
+	socat - "UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" | while IFS="\n" read -r line ; do
+		workspaces
+	done
+done

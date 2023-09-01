@@ -1,0 +1,26 @@
+
+IMAPStore Rmmichael95@gmail.com-remote
+Host imap.gmail.com
+Port 993
+User Rmmichael95@gmail.com
+PassCmd "pass Rmmichael95@gmail.com"
+AuthMechs LOGIN
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+MaildirStore Rmmichael95@gmail.com-local
+Subfolders Verbatim
+Path /home/ryanm/.local/share/mail/Rmmichael95@gmail.com/
+Inbox /home/ryanm/.local/share/mail/Rmmichael95@gmail.com/INBOX
+
+Channel Rmmichael95@gmail.com
+Expunge Both
+Far :Rmmichael95@gmail.com-remote:
+Near :Rmmichael95@gmail.com-local:
+Patterns * !"[Gmail]/All Mail"
+Create Both
+SyncState *
+MaxMessages 0
+ExpireUnread no
+# End profile
+

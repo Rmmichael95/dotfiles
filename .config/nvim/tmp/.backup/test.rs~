@@ -1,0 +1,13 @@
+use polars_core::prelude::*;
+use polars_io::prelude::*;
+use std::io::Cursor;
+
+let file = Cursor::new("openbeta-routes-ca.tar.xz");
+let df = JsonReader::new(file)
+        .with_json_format(JsonFormat::JsonLines)
+        .infer_schema_len(some(3))
+        .with_batch_size(3)
+        .finish()
+        .unwrap();
+
+println!("{:?}", df);

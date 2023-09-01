@@ -1,0 +1,7 @@
+import pandas as pd
+
+# load the zip file directly
+# 'lines=True' indicates jsonlines format
+df = pd.read_json("/home/ryanm/documents/batcave/climbing/climbing-data/openbeta-routes-ca.tar.xz", lines=True)
+
+df.sample(5)

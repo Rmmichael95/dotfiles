@@ -1,0 +1,6 @@
+# See: /usr/share/doc/mpd/mpdconf.example
+
+db_file "/var/lib/mpd/mpd.db"
+#playlist_directory "/var/lib/mpd/playlists"
+
+/home/ryanm/.config/mpd/mpd.conf

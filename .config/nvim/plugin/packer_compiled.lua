@@ -9,23 +9,26 @@ vim.api.nvim_command('packadd packer.nvim')
 
 local no_errors, error_msg = pcall(function()
 
-  local time
-  local profile_info
-  local should_profile = false
-  if should_profile then
-    local hrtime = vim.loop.hrtime
-    profile_info = {}
-    time = function(chunk, start)
-      if start then
-        profile_info[chunk] = hrtime()
-      else
-        profile_info[chunk] = (hrtime() - profile_info[chunk]) / 1e6
-      end
+_G._packer = _G._packer or {}
+_G._packer.inside_compile = true
+
+local time
+local profile_info
+local should_profile = false
+if should_profile then
+  local hrtime = vim.loop.hrtime
+  profile_info = {}
+  time = function(chunk, start)
+    if start then
+      profile_info[chunk] = hrtime()
+    else
+      profile_info[chunk] = (hrtime() - profile_info[chunk]) / 1e6
     end
-  else
-    time = function(chunk, start) end
   end
-  
+else
+  time = function(chunk, start) end
+end
+
 local function save_profiles(threshold)
   local sorted_times = {}
   for chunk_name, time_taken in pairs(profile_info) do
@@ -38,8 +41,10 @@ local function save_profiles(threshold)
       results[i] = elem[1] .. ' took ' .. elem[2] .. 'ms'
     end
   end
+  if threshold then
+    table.insert(results, '(Only showing plugins that took longer than ' .. threshold .. ' ms ' .. 'to load)')
+  end
 
-  _G._packer = _G._packer or {}
   _G._packer.profile_output = results
 end
 
@@ -114,11 +119,6 @@ _G.packer_plugins = {
     path = "/home/ryanm/.local/share/nvim/site/pack/packer/start/everforest",
     url = "https://github.com/sainnhe/everforest"
   },
-  ["gen_tags.vim"] = {
-    loaded = true,
-    path = "/home/ryanm/.local/share/nvim/site/pack/packer/start/gen_tags.vim",
-    url = "https://github.com/jsfaint/gen_tags.vim"
-  },
   ["lsp-colors.nvim"] = {
     loaded = true,
     path = "/home/ryanm/.local/share/nvim/site/pack/packer/start/lsp-colors.nvim",
@@ -144,6 +144,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/ryanm/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/hoob3rt/lualine.nvim"
+  },
+  ["magma-nvim"] = {
+    loaded = true,
+    path = "/home/ryanm/.local/share/nvim/site/pack/packer/start/magma-nvim",
+    url = "https://github.com/dccsillag/magma-nvim"
   },
   ["neomutt.vim"] = {
     loaded = true,
@@ -200,15 +205,20 @@ _G.packer_plugins = {
     path = "/home/ryanm/.local/share/nvim/site/pack/packer/start/remote-viewer",
     url = "https://github.com/bounceme/remote-viewer"
   },
+  skim = {
+    loaded = true,
+    path = "/home/ryanm/.local/share/nvim/site/pack/packer/start/skim",
+    url = "https://github.com/lotabout/skim"
+  },
   ["skim.vim"] = {
     loaded = true,
     path = "/home/ryanm/.local/share/nvim/site/pack/packer/start/skim.vim",
     url = "https://github.com/lotabout/skim.vim"
   },
-  tagbar = {
+  ["telescope-fzf-native.nvim"] = {
     loaded = true,
-    path = "/home/ryanm/.local/share/nvim/site/pack/packer/start/tagbar",
-    url = "https://github.com/preservim/tagbar"
+    path = "/home/ryanm/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim",
+    url = "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,
@@ -239,11 +249,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/ryanm/.local/share/nvim/site/pack/packer/start/vim-easymotion",
     url = "https://github.com/easymotion/vim-easymotion"
-  },
-  ["vim-endwise"] = {
-    loaded = true,
-    path = "/home/ryanm/.local/share/nvim/site/pack/packer/start/vim-endwise",
-    url = "https://github.com/tpope/vim-endwise"
   },
   ["vim-eunuch"] = {
     loaded = true,
@@ -294,11 +299,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/ryanm/.local/share/nvim/site/pack/packer/start/yabs.nvim",
     url = "https://github.com/pianocomposer321/yabs.nvim"
-  },
-  ["~/.local/share/skim"] = {
-    loaded = true,
-    path = "/home/ryanm/.local/share/nvim/site/pack/packer/start/~/.local/share/skim",
-    url = "https://github.com/lotabout/skim"
   }
 }
 
@@ -307,6 +307,13 @@ time([[Defining packer_plugins]], false)
 time([[Config for lsp_lines.nvim]], true)
 try_loadstring("\27LJ\2\n7\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\14lsp_lines\frequire\0", "config", "lsp_lines.nvim")
 time([[Config for lsp_lines.nvim]], false)
+
+_G._packer.inside_compile = false
+if _G._packer.needs_bufread == true then
+  vim.cmd("doautocmd BufRead")
+end
+_G._packer.needs_bufread = false
+
 if should_profile then save_profiles() end
 
 end)

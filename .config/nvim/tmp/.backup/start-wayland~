@@ -1,5 +1,7 @@
 #/usr/env sh
-echo "start-wayland-helper"
+#echo "start-wayland-helper"
+
+# setup enviernment
 XDG_SESSION_TYPE=wayland
 export QT_QPA_PLATFORM="wayland;xcb"
 #export QT_QPA_PLATFORM=wayland-egl
@@ -7,4 +9,6 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 QT_WAYLAND_FORCE_DPI=physical
 export CLUTTER_BACKEND=wayland
 SDL_VIDEODRIVER=wayland
-dbus-run-session $WM
+
+# start compositor
+dbus-run-session $WM && export $(dbus-launch)

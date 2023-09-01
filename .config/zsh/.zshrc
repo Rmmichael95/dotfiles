@@ -199,8 +199,8 @@ alias ls='lsd'
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
 alias path='echo -e ${PATH//:/\\n}'
-alias vim='source ~/.local/share/nvim/.venv/bin/activate && nvim'
-alias nv='source ~/.local/share/nvim/.venv/bin/activate && nvim'
+alias vim='nvim'
+alias nv='nvim'
 alias virc='nv $XDG_CONFIG_HOME/nvim'
 alias zshrc='nv $XDG_CONFIG_HOME/zsh/zshrc'
 alias poweroff='dinitctl shutdown && doas-askpass poweroff'
@@ -210,7 +210,11 @@ alias find='fd'
 alias mbsync='mbsync -c "$XDG_CONFIG_HOME"/isync/mbsyncrc'
 alias scron='su -c "crontab -e"'
 #alias upd="sudo reflector --verbose --threads 8 --country 'US,CA' --protocol https --sort rate --save /etc/pacman.d/mirrorlist && doas pacman -Syu"
-alias upda="sudo reflector --verbose --threads 8 --country 'US,CA' --protocol https --sort rate --save /etc/pacman.d/mirrorlist-arch && doas pacman -Syu"
+alias upda="doas reflector --verbose --threads 8 --country 'US,CA' --protocol https --sort rate --save /etc/pacman.d/mirrorlist-arch && doas pacman -Syu"
+
+# alacritty completions
+fpath+=${ZDOTDIR:-~}/.zsh_functions
+
 # You can use whatever you want as an alias, like for Mondays:
 #eval "$(thefuck --alias FUCK)"
 eval "$(thefuck --alias)":

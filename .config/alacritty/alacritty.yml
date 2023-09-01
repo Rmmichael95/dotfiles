@@ -1,37 +1,5 @@
 colors:
   # Default colors
-  primary:
-    # hard contrast: background = '0x1d2021'
-    #background: '0x282828'
-    background: '0x222222'
-    # soft contrast: background = '0x32302f'
-    #foreground: '0xebdbb2'
-    foreground: '0xbbbbbb'
-
-  # Normal colors
-  normal:
-    black:   '0x282828'
-    red:     '0xcc241d'
-    green:   '0x98971a'
-    yellow:  '0xd79921'
-    blue:    '0x458588'
-    magenta: '0xb16286'
-    cyan:    '0x689d6a'
-    white:   '0xa89984'
-
-  # Bright colors
-  bright:
-    black:   '0x928374'
-    red:     '0xfb4934'
-    green:   '0xb8bb26'
-    yellow:  '0xfabd2f'
-    blue:    '0x83a598'
-    magenta: '0xd3869b'
-    cyan:    '0x8ec07c'
-    white:   '0xebdbb2'
-
-
-  everforest: &everforest
     primary:
       background: '#15191c'
       foreground: '#d3c6aa'
@@ -54,7 +22,6 @@ colors:
       cyan:    '#83c092'
       white:   '#d3c6aa'
 
-colors: *everforest
 env:
     TERM: alacritty
 
@@ -64,6 +31,14 @@ window:
   dimensions:
     columns: 0
     lines: 0
+
+# Background opacity
+#
+# Window opacity as a floating point number from `0.0` to `1.0`.
+# The value `0.0` is completely transparent and `1.0` is opaque.
+  opacity: 0.8
+
+
 
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
@@ -97,15 +72,15 @@ scrolling:
 
 font:
   normal:
-    family: Hack
+    family: Hack Nerd Font
     style: Regular
 
   bold:
-    family: Hack
+    family: Hack Nerd Font
     style: Bold
 
   italic:
-    family: Hack
+    family: Hack Nerd Font
     style: Italic
 
   # Point size
@@ -141,14 +116,7 @@ font:
   #use_thin_strokes: false
 
 # If `true`, bold text is drawn using the bright color variants.
-draw_bold_text_with_bright_colors: true
-
-# Background opacity
-#
-# Window opacity as a floating point number from `0.0` to `1.0`.
-# The value `0.0` is completely transparent and `1.0` is opaque.
-window:
-  opacity: 0.8
+colors.draw_bold_text_with_bright_colors: true
 
 # Mouse bindings
 #
@@ -165,7 +133,7 @@ window:
 #
 # All available `mods` and `action` values are documented in the key binding
 # section.
-mouse_bindings:
+mouse.bindings:
   - { mouse: Middle, action: PasteSelection }
 
 mouse:
@@ -235,7 +203,7 @@ working_directory: None
 enable_experimental_conpty_backend: false
 
 # Send ESC (\x1b) before characters when alt is pressed.
-alt_send_esc: true
+#alt_send_esc: true
 
 debug:
   # Display the time it takes to redraw each frame.
@@ -353,7 +321,7 @@ debug:
 #   - AppCursor
 #   - ~AppKeypad
 #   - AppKeypad
-key_bindings:
+keyboaed.bindings:
   # (Windows/Linux only)
   #- { key: V,        mods: Control|Shift, action: Paste            }
   #- { key: C,        mods: Control|Shift, action: Copy             }

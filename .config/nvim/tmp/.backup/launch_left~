@@ -1,8 +1,8 @@
-#!/bin/bash
+#!/bin/env sh
 
 ## Files and cmd
 FILE="$HOME/.cache/eww_launch_side.xyz"
-EWW="/usr/bin/eww-c $HOME/.config/eww/eww-bar1/leftbar"
+EWW="/usr/bin/eww --config $HOME/.config/eww/leftbar"
 
 # windows not in use
 # separ
@@ -22,8 +22,8 @@ w_ls="
 "
 ## Run eww daemon if not running already
 if [[ ! `pidof eww` ]]; then
-	${EWW} daemon
-	sleep 1
+    ${EWW} daemon
+    sleep 1
 fi
 
 # widgets not in use
@@ -32,16 +32,16 @@ fi
 # volume
 # fetch
 
-## Open widgets 
+## Open widgets
 run_eww() {
     ${EWW} open-many $w_ls
 }
 
 ## Launch or close widgets accordingly
 if [[ ! -f "$FILE" ]]; then
-	touch "$FILE"
-	run_eww 
+    touch "$FILE"
+    run_eww
 else
-    ${EWW} close $w_ls 
-	rm "$FILE"
+    ${EWW} close $w_ls
+    rm "$FILE"
 fi

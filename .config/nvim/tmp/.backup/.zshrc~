@@ -203,17 +203,19 @@ alias vim='source ~/.local/share/nvim/.venv/bin/activate && nvim'
 alias nv='source ~/.local/share/nvim/.venv/bin/activate && nvim'
 alias virc='nv $XDG_CONFIG_HOME/nvim'
 alias zshrc='nv $XDG_CONFIG_HOME/zsh/zshrc'
-alias poweroff='dinitctl shutdown && doas /sbin/poweroff'
-alias reboot='dinitctl shutdown && doas /sbin/reboot'
+alias poweroff='dinitctl shutdown && doas-askpass poweroff'
+alias reboot='dinitctl shutdown && doas-askpass reboot'
 alias gzip='pigz'
 alias find='fd'
 alias mbsync='mbsync -c "$XDG_CONFIG_HOME"/isync/mbsyncrc'
 alias scron='su -c "crontab -e"'
 #alias upd="sudo reflector --verbose --threads 8 --country 'US,CA' --protocol https --sort rate --save /etc/pacman.d/mirrorlist && doas pacman -Syu"
-alias upda="sudo reflector --verbose --threads 8 --country 'US,CA' --protocol https --sort rate --save /etc/pacman.d/mirrorlist-arch && doas pacman -Syu"
+alias upda="doas reflector --verbose --threads 8 --country 'US,CA' --protocol https --sort rate --save /etc/pacman.d/mirrorlist-arch && doas pacman -Syu"
 # You can use whatever you want as an alias, like for Mondays:
 #eval "$(thefuck --alias FUCK)"
 eval "$(thefuck --alias)":
 
 # start starship prompt
 eval "$(starship init zsh)"
+
+fpath+=${ZDOTDIR:-~}/.zsh_functions

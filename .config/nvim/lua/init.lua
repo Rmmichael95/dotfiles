@@ -6,7 +6,7 @@ local opt = vim.opt -- set options
 local cmd = vim.cmd -- vim command
 
 -- set system python3
-g.python3_host_prog = '/home/ryanm/.local/share/nvim/.venv/bin/python'
+g.python3_host_prog = '/usr/bin/python3'
 --cmd([[let g:python3_host_prog '/home/ryanm/.local/share/nvim/.venv/bin/python3']])
 -- set system ruby
 g.ruby_host_prog = '/home/ryanm/.local/share/ruby/rbenv/versions/3.1.2/bin/neovim-ruby-host'

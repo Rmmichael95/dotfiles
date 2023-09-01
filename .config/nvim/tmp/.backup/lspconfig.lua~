@@ -72,7 +72,7 @@ local custom_attach = function(client, bufnr)
     }
 end
 
-require 'lspconfig'.sumneko_lua.setup {
+require 'lspconfig'.lua_ls.setup {
     cmd = { '/usr/bin/lua-language-server', '-E', '/usr/share/lua-language-server/main.lua' },
     on_attach = custom_attach,
 }

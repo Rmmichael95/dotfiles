@@ -1,0 +1,5 @@
+type            = process
+command         = /usr/bin/rsyslogd
+smooth-recovery = true
+options         = starts-log
+depends-ms      = klog

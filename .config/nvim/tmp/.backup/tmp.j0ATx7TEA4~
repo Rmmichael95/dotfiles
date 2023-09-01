@@ -1,0 +1,5 @@
+type            = process
+command         = /etc/dinit.d/scripts/clamd
+smooth-recovery = true
+logfile         = /var/log/dinit/clamd.log
+waits-for       = pseudofs

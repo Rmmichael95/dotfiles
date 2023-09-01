@@ -1,0 +1,4 @@
+#!/bin/env sh
+
+#[ -e /var/lib/fangfrisch/db.sqlite ] && /usr/bin/fangfrisch --conf /etc/fangfrisch/fangfrisch.conf refresh
+/usr/bin/fangfrisch --conf /etc/fangfrisch/fangfrisch.conf refresh

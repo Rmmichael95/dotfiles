@@ -1,0 +1,97 @@
+#!/bin/bash
+# Default acpi script that takes an entry for all actions
+
+case "$1" in
+    button/power)
+        case "$2" in
+            PBTN|PWRF)
+                logger 'PowerButton pressed'
+                ;;
+            *)
+                logger "ACPI action undefined: $2"
+                ;;
+        esac
+        ;;
+    button/sleep)
+        case "$2" in
+            SLPB|SBTN)
+                logger 'SleepButton pressed'
+                ;;
+            *)
+                logger "ACPI action undefined: $2"
+                ;;
+        esac
+        ;;
+    ac_adapter)
+        case "$2" in
+            logger "$2 $4"
+            AC|ACAD|ADP0)
+                case "$4" in
+                    00000000)
+                        logger 'AC unpluged'
+                        rm /home/ryanm/.local/state/on_ac
+                        ;;
+                    00000001)
+                        logger 'AC pluged'
+                        touch /home/ryanm/.local/state/on_ac
+                        ;;
+                esac
+                ;;
+            *)
+                logger "ACPI action undefined: $2"
+                ;;
+        esac
+        ;;
+    battery)
+        case "$2" in
+            logger "$2 $4"
+            BAT0)
+                case "$4" in
+                    00000000)
+                        logger 'Battery online'
+                        ;;
+                    00000001)
+                        logger 'Battery offline'
+                        ;;
+                esac
+                ;;
+            CPU0)
+                ;;
+            *)  logger "ACPI action undefined: $2" ;;
+        esac
+        ;;
+    button/lid)
+        case "$3" in
+            close)
+                if [[ -z /home/ryanm/.local/state/on_ac ]]; then
+                    logger 'LID closed'
+                    sleep 8 && ZZZ
+                else
+                    logger 'LID closed'
+                    wait 8 && zzz
+                fi
+                ;;
+            *)
+                logger "ACPI action undefined: $2"
+                ;;
+            open)
+                if [[ -z /home/ryanm/.local/state/on_ac ]]; then
+                    logger 'LID opened'
+                    wait 10 && swapoff /dev/nvme0n1p2
+                    wait 30 && swapon --priority 0 /dev/nvme0n1p2
+                fi
+                ;;
+                *)
+                    logger "ACPI action undefined: $2"
+                    ;;
+            *)
+                logger "ACPI action undefined: $3"
+                ;;
+    esac
+    ;;
+    *)
+        logger "ACPI group/action undefined: $1 / $2"
+        ;;
+esac
+
+# vim:set ts=4 sw=4 ft=sh et:

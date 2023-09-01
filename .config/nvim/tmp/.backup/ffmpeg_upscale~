@@ -1,0 +1,82 @@
+#!/bin/env sh
+
+upscale_4kpro_169() {
+    ffmpeg \
+    -hwaccel vaapi -hwaccel_output_format vaapi -hwaccel_device /dev/dri/renderD128 \
+    -thread_queue_size 512 -i "$1" \
+    -vf 'format=nv12|vaapi,hwupload,scale_vaapi=w=4096:h=2304:format=nv12' \
+    -c:v hevc_vaapi -qp 24 \
+    -c:a copy \
+    -strict -2 \
+    "$HOME/videos/upscale/upscaled-$(echo $1 | awk -F/ '{print $(NF-0)}')"
+    notify-send "[$1 DONE UPSCALING]"
+}
+
+upscale_4kpro() {
+    ffmpeg \
+    -hwaccel vaapi -hwaccel_output_format vaapi -hwaccel_device /dev/dri/renderD128 \
+    -thread_queue_size 512 -i "$1" \
+    -vf 'format=nv12|vaapi,hwupload,scale_vaapi=w=4096:h=2160:format=nv12' \
+    -c:v hevc_vaapi -qp 24 \
+    -c:a copy \
+    -strict -2 \
+    "$HOME/videos/upscale/upscaled-$(echo $1 | awk -F/ '{print $(NF-0)}')"
+    notify-send "[$1 DONE UPSCALING]"
+}
+
+upscale_4k() {
+    ffmpeg \
+    -hwaccel vaapi -hwaccel_output_format vaapi -hwaccel_device /dev/dri/renderD128 \
+    -thread_queue_size 512 -i "$1" \
+    -vf 'format=nv12|vaapi,hwupload,scale_vaapi=w=3840:h=2160:format=nv12' \
+    -c:v hevc_vaapi -qp 24 \
+    -c:a copy \
+    -strict -2 \
+    "$HOME/videos/upscale/upscaled-$(echo $1 | awk -F/ '{print $(NF-0)}')"
+    notify-send "[$1 DONE UPSCALING]"
+}
+
+upscale_1440p() {
+    ffmpeg \
+    -hwaccel vaapi -hwaccel_output_format vaapi -hwaccel_device /dev/dri/renderD128 \
+    -thread_queue_size 512 -i "$1" \
+    -vf 'format=nv12|vaapi,hwupload,scale_vaapi=w=2560:h=1440:format=nv12' \
+    -c:v hevc_vaapi -qp 24 \
+    -c:a copy \
+    -strict -2 \
+    "$HOME/videos/upscale/upscaled-$(echo $1 | awk -F/ '{print $(NF-0)}')"
+    notify-send "[$1 DONE UPSCALING]"
+}
+
+upscale_2k() {
+    ffmpeg \
+    -hwaccel vaapi -hwaccel_output_format vaapi -hwaccel_device /dev/dri/renderD128 \
+    -thread_queue_size 512 -i "$1" \
+    -vf 'format=nv12|vaapi,hwupload,scale_vaapi=w=2048:h=1080:format=nv12' \
+    -c:v hevc_vaapi -qp 24 \
+    -c:a copy \
+    -strict -2 \
+    "$HOME/videos/upscale/upscaled-$(echo $1 | awk -F/ '{print $(NF-0)}')"
+    notify-send "[$1 DONE UPSCALING]"
+}
+
+ask_upscale() {
+    choice=$(printf "upscale_4kpro_169\\nupscale_4kpro\\nupscale_4k\\nupscale_1440p\\nupscale_2k" | dmenu -i -p "Select upscale quality:")
+    input=$(fd -t f . "$HOME/videos/" | dmenu -i -p "Which file:")
+    case "$choice" in
+        upscale_4kpro_169) upscale_4kpro_169 "$input";;
+        upscale_4kpro) upscale_4kpro "$input";;
+        upscale_4k) upscale_4k "$input";;
+        upscale_1440p) upscale_1440p "$input";;
+        upscale_2k) upscale_2k "$input";;
+    esac
+}
+
+case "$1" in
+    upscale_4kpro_169) upscale_4kpro_169;;
+    upscale_4kpro) upscale_4kpro;;
+    upscale_4k) upscale_4k;;
+    upscale_1440p) upscale_1440p;;
+    upscale_2k) upscale_2k;;
+    *) ask_upscale;;
+esac

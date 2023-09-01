@@ -1,0 +1,7 @@
+type            = bgprocess
+command         = /usr/bin/rsyslogd
+pid-file        = /var/run/rsyslogd.pid
+smooth-recovery = true
+options         = starts-log
+logfile         = /var/log/dinit/rsyslog.log
+depends-on      = pseudofs

@@ -1,0 +1,8 @@
+#!/bin/sh
+case "$4" in ;;
+	close) lock-hypr ;;
+		  echo -n 'mem' >/sys/power/state ;;
+	*)    logger "ACPI action undefined: $3" ;;
+	open) echo -n '' >/sys/power/state ;;
+	*)    logger "ACPI action undefined: $3" ;;
+esac

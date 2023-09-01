@@ -36,12 +36,13 @@ return require('packer').startup(function(use)
     }                                                    -- VSCode style debugging
   use {
   'nvim-telescope/telescope.nvim', tag = '0.1.0',
-  requires = { {'nvim-lua/plenary.nvim'} }
-    }
-  use {'lotabout/skim',
-       as='~/.local/share/skim',
-       run='~/.local/share/skim/install'
-    }                                                    -- local file
+       requires = { {'nvim-lua/plenary.nvim'} }
+  }
+  use {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+  }
+  use 'lotabout/skim'
   use 'lotabout/skim.vim'                                -- drop in replacement for fzf in rust
   use({
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
@@ -76,6 +77,9 @@ return require('packer').startup(function(use)
   use 'mbbill/undotree'                                    -- undo visualizer for vim
   use 'dhruvasagar/vim-table-mode'                         -- make table structures right in vim
   use 'RRethy/vim-hexokinase'
+  use 'elkowar/yuck.vim'
+  use 'ntpeters/vim-better-whitespace'
+  use { 'dccsillag/magma-nvim', run = ':UpdateRemotePlugins' } -- visualizer for python
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

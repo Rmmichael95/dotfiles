@@ -1,0 +1,14 @@
+#!/bin/zsh
+
+## Files and cmd
+FILE="$HOME/.cache/eww_launch.cal"
+CFG="$HOME/.config/eww/cal"
+
+
+if [[ ! -f "$FILE" ]]; then
+    touch "$FILE"
+    eww --config "$CFG" open dashboard
+ else
+    eww --config "$CFG" close dashboard
+    rm "$FILE"
+ fi

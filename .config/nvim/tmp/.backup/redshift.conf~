@@ -1,0 +1,20 @@
+[redshift]
+; Set the day and night screen temperatures
+temp-day=5000
+temp-night=2000
+
+; Set fade: 0 to disable, 1 to gradually apply over a few seconds
+fade=1
+
+; Set the location-provider: 'geoclue2', 'manual'
+; type 'redshift -l list' to see possible values.
+; The location provider settings are in a different section.
+location-provider=geoclue2
+
+; Set adjustment-method: 'randr', 'vidmode'
+; 'randr'preferred, 'vidmode' is and older api but workswhen 'randr' won't
+adjustment-method=drm
+
+; Configuration of the adjustment-method
+[randr]
+screen=0

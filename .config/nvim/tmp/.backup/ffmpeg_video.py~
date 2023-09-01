@@ -1,0 +1,6 @@
+import ffmpeg
+
+video = ffmpeg.input("/home/ryanm/videos/dinit.mp4")
+video = ffmpeg.output(video, "pipe:")
+
+ffmpeg.run(video)

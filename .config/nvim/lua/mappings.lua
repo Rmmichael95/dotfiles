@@ -73,7 +73,7 @@ map('n', 'VaB', 'vaBV', options)                    -- fix linewise visual selec
 map('n', 'vaa', 'ggvGg_', options)                  -- select entire buffer
 map('n', 'Vaa', 'ggVG', options)                    -- select entire buffer
 map('n', 'gI', '``.', options)                      -- gi moves to "last place you exited insert mode", map gI to move to last change
-map('n', ',T', ':let _s=@/<Bar>:%s/\\s\\+$//e<Bar>%s/ \\+\\ze\\t//e<Bar>:let @/=_s<Bar>:unlet _s<CR>', options) -- trim whitespace before tabs and eol
+--map('n', ',T', ':let _s=@/<Bar>:%s/\\s\\+$//e<Bar>%s/ \\+\\ze\\t//e<Bar>:let @/=_s<Bar>:unlet _s<CR>', options) -- trim whitespace before tabs and eol
 -- inoremap
 --map('i', '', '', options)
 -- vnoremap

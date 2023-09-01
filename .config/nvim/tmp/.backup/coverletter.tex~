@@ -1,17 +1,3 @@
-%-------------------------
-% Entry-level Cover-letter Template in LaTeX
-% Made to go with "Entry-level Resume in laTeX" - here
-% Version - v1.0
-% Last Edits - October 5, 2021
-% Author : Jayesh Sanwal
-% Reach out to me on LinkedIn(/in/jsanwal), with any suggestions, ideas, issues, etc.
-%------------------------
-
-
-%%%%%%% --------------------------------------------------------------------------------------
-%%%%%%%  STARTING HERE, DO NOT TOUCH ANYTHING
-%%%%%%% --------------------------------------------------------------------------------------
-
 %%%% Define Document type
 \documentclass[11pt,a4]{article}
 
@@ -22,19 +8,18 @@
  \usepackage{marvosym}
 \usepackage[usenames,dvipsnames]{color}
 \usepackage{verbatim}
-\usepackage[hidelinks]{hyperref}
 \usepackage{fancyhdr}
 \usepackage{multicol}
-\usepackage{hyperref}
 \usepackage{csquotes}
 \usepackage{tabularx}
-\hypersetup{colorlinks=true,urlcolor=black}
 \usepackage[11pt]{moresize}
 \usepackage{setspace}
 \usepackage{fontspec}
 \usepackage[inline]{enumitem}
 \usepackage{ragged2e}
 \usepackage{anyfontsize}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{colorlinks=true,urlcolor=blue}
 
 %%%% Set Margins
 \usepackage[margin=1cm]{geometry}
@@ -69,12 +54,6 @@ ItalicFont=SourceSansPro-RegularIt.otf
 \titleformat{\section}{
 \color{UI_blue} \scshape \raggedright \large
 }{}{0em}{}[\vspace{-0.7cm} \hrulefill \vspace{-0.2cm}]
-%%%%%%% --------------------------------------------------------------------------------------
-%%%%%%% --------------------------------------------------------------------------------------
-%%%%%%%  END OF "DO NOT TOUCH" REGION
-%%%%%%% --------------------------------------------------------------------------------------
-%%%%%%% --------------------------------------------------------------------------------------
-
 
 
 \begin{document}
@@ -90,11 +69,11 @@ ItalicFont=SourceSansPro-RegularIt.otf
             \centering
             {\Huge Ryan Sullivan} \\ %
             \vspace{0.1cm}
-            {\color{UI_blue} \Large{Outdoor Retail Sales}} \\
+            {\color{UI_blue} \Large{Linux Support}} \\
     \end{minipage}%
     \begin{minipage}[b]{0.24\textwidth}
             \flushright \large
-            {\href{https://www.linkedin.com/in/ryan-sullivan-94544188/}{linkedin.com/ln/Rmmichael95} }
+            {linkedin: \href{https://www.linkedin.com/in/Rmmichael95/}{Rmmichael95} }
     \end{minipage}
 
 \vspace{-0.15cm}
@@ -117,11 +96,10 @@ ItalicFont=SourceSansPro-RegularIt.otf
 Date: \today \par \vspace{-0.1cm}
 To whom this may concern,
 
-I am an avid Linux user and have used it as my main OS since 2012. I used Linux
+I am an experienced Linux user and have used it as my main OS since 2012. I used Linux
 with the terminal and Vim for my Computer Science program in Community College.
-I would love a job that lets me work with my passion and further develop my
-Linux skills.
-
+I am certified with Linux through {\href{https://cs.lpi.org/caf/Xamman/certification/verify/LPI000569076/avmxtz9g5n}{LPIC-1} }
+and have experience working with and leading teams in past jobs as well as instructing adults.
 
 %%%%%%% --------------------------------------------------------------------------------------
 %%%%%%%  SIGNATURE

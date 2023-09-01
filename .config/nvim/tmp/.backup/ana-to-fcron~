@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cd /var/spool/cron && (
+  for ctab in *; doab
+    fcrontab ${ctab} -u ${ctab}
+  done
+)

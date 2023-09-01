@@ -1,3 +1,0 @@
-type          = process
-socket-listen = /run/usr/1000/gnupg/S.gpg-agent
-command       = gpg-agent --supervised

@@ -1,0 +1,8 @@
+import polars as pl
+import zipfile
+import zstandard as zstd
+import tarfile
+
+
+with zipfile.ZipFile("openbeta-routes-ca.zip", mode="w") as zip:
+    zip.write("file.ext")

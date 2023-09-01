@@ -3,23 +3,15 @@
 # This file runs when a DM logs you into a graphical session.
 # If you use startx/xinit like a Chad, this file will also be sourced.
 
-echo "/zsh/xprofile"
+#echo "/zsh/xprofile"
 
 [ ! -f $HOME/.config/shell/profile ] && . $HOME/.config/shell/profile
 
-#picom --experimental-backends &     #run the compton copmpositing manager
 xset r rate 300 50 &        # Speed xrate up
 xss-lock -- slock &
-# unclutter &     # Remove mouse when idle
-# /usr/lib/geoclue-2.0/demos/agent &
-# redshift &
-# dunst &     # dunst for notifications
-# /usr/bin/pipewire &
-# /usr/bin/pipewire-pulse &
-# /usr/bin/wireplumber &
-# polkit-dumb-agent &
 $HOME/.local/bin/setbg &       # set the background with the `setbg` script
-#dwmblocks &
-#blockbar &
 #sh ~/.config/autostart-scripts/tty-color.sh &
-dinit &
+dinit -u &
+dinitctl enable picom.user
+dinitctl disable waybar.user
+dinitctl disable hyprpaper.user

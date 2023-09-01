@@ -1,0 +1,8 @@
+#!/bin/sh
+case "$3" in ;;
+    close) #su ryanm /home/ryanm/.local/bin/lock-hypr
+           #echo -n 'mem' >/sys/power/state
+           ;;
+    open) echo -n '' >/sys/power/state ;;
+    *)    logger "ACPI action undefined: $1 $2 $3 $4" ;;
+esac

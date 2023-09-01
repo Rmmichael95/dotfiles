@@ -1,0 +1,16 @@
+---
+title: Linux  Perfesional Institute 101-500
+author: Ryan Michael Sullivan
+output: pdf_document
+---
+
+# *101 System Architecture*
+
+# 101.1 Determine and configure hardware settings
+
+## Commands for Inspection: Identify connected devices
+  * lspci (Periferal Component Interconnect):
+    - PCI devices can be components attached to the motherboard, like a disk controller,
+      or expansion cards fitted into PCI slots, like discrete graphics
+
+  * lsusb (Universal Serial Bus):

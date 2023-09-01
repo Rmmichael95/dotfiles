@@ -1,0 +1,80 @@
+---
+title: GDA - Prepare Data for Exploration - Week 1
+author: Ryan M Sullivan
+output: pdf_document
+---
+
+# Types of Data
+
+## Quantitative:
+* Can be counted or measured and express as number certain quantity, amount, or range
+* Can be either Discrete or Continous
+
+### Discrete:
+* Can be counted and has limited values
+
+### Continous:
+* Can be measured & have almost any value
+
+## Qualitative:
+* Can't be counted or measured, i.e. Names
+* Can be Nominal or Oridnal
+
+### Nominal:
+* Can be categorized without set order
+
+### Ordinal:
+* Has a set order or scale
+
+## Internal:
+* Lives within a company's own systems
+* Can be more reliable and easier to collect
+
+## External:
+* Lives and is generated outside an organization
+* Valuable when needing most data possible structured
+
+## Structured:
+* Organized into a certain format, i.e. rows/columns
+* **Ex**: spreadsheets or databases
+
+## Unstructured:
+* Not Organized in any easily identifiable manner
+
+
+# Data Model:
+* Model used for Organizing elements and how they relate
+
+## Data Modeling:
+* Process of creating diagrams that visually represent how data is organized/structured
+
+### Levels of Data Modeling:
+* Conceptual: high-level view of data structure
+* Logical: focuses on technical details of databases: relationships, attributes, and entities 
+* Physical: depicts how a database operates, defines all entities and attributes used
+
+### Data-modeling techniques:
+* Entity Relationship Diagram (ERD): Visual way to understand relationship between entities in data model
+* Unified Modeling Language (UML): are very detailed diagrams describing the structure of a system by 
+								   showing the system's entities, attributes, operations, and their relationships
+
+## Data Elements:
+* Information such as names, account numbers, and addresses
+
+### Data Types in Spreadsheets
+* Number
+* Text/string
+* Boolean
+* Rows in spreadsheets generalize to records in data tables
+* Colums in spreadsheets generalize to fields in data tables, fields could also
+  be data in cell
+
+
+# Data Types
+* Specific kind of data attribute that tells what kind of value data is
+
+## Wide data
+* every data subject has single row w/multi columns to hold values of various attribute
+
+## Long data
+* each row is ons time point per subject, i.e. each subject has multiple rows

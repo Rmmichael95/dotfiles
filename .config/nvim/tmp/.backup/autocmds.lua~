@@ -3,7 +3,7 @@ local u = require('utils')
 local home = os.getenv('HOME')
 
 local aucmd = vim.api.nvim_create_autocmd
-local augroup = vim.api.nvim_create_augroup
+-- local augroup = vim.api.nvim_create_augroup
 
 -- toggle relative number off insert/on normal
 u.create_augroup({
@@ -16,6 +16,8 @@ u.create_augroup({
 aucmd('bufwritepost', { command = "source " .. home .. "/.config/nvim/init.lua", pattern = "init.lua" })
 
 -- open file with existing swp in readonly mode
+----augroup()
+
 u.create_augroup({
     { 'SwapExists', '*', 'let', 'v:swapchoice = "o"' },
     { 'SwapExists', '*', 'echomsg', '' },
@@ -24,15 +26,9 @@ u.create_augroup({
     { 'SwapExists', '*', 'sleep', '2' },
 }, 'NoSimultaneousEdits')
 
---aucmd('SwapExists', { group = swap })
+-- aucmd('SwapExists', { group = swap })
 
--- vertically center document when entering insert mode
-cmd('autocmd InsertEnter * norm zz')
---aucmd('InsertEnter', {command = 'norm zz'})
+aucmd('InsertEnter', {command = 'norm zz'})
 
--- highlight whitespace before tabs and eol in darkred
-cmd('highlight ExtraWhitespace guibg=darkred')
-cmd([[autocmd BufEnter * match ExtraWhitespace /\s\+$\| \+\ze\t/]])
-cmd('autocmd FileType dashboard highlight ExtraWhitespace guibg=0')
--- aucmd('BufEnter', {command = 'match ExtraWhitespace /\\s\\+$\\| \\+\\ze\\t/'})
--- aucmd('FileType dashboard', {command = 'highlight ExtraWhitespace guibg=0'})
+aucmd('BufEnter', {command = 'match ExtraWhitespace /\\s\\+$\\| \\+\\ze\\t/'})
+aucmd('FileType dashboard', {command = 'highlight ExtraWhitespace guibg=0'})

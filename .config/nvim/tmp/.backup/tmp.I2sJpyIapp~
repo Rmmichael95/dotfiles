@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+su -c ryanm - /home/ryanm/.local/bin/lock-hypr

@@ -36,12 +36,13 @@ return require('packer').startup(function(use)
     }                                                    -- VSCode style debugging
   use {
   'nvim-telescope/telescope.nvim', tag = '0.1.0',
-  requires = { {'nvim-lua/plenary.nvim'} }
-    }
-  use {'lotabout/skim',
-       as='~/.local/share/skim',
-       run='~/.local/share/skim/install'
-    }                                                    -- local file
+       requires = { {'nvim-lua/plenary.nvim'} }
+  }
+  use {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+  }
+  use 'lotabout/skim'
   use 'lotabout/skim.vim'                                -- drop in replacement for fzf in rust
   use({
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
@@ -70,15 +71,13 @@ return require('packer').startup(function(use)
   use 'neomutt/neomutt.vim'                                -- helpful setting for mail ft
   use 'easymotion/vim-easymotion'                          -- visualize text motions
   use 'tpope/vim-commentary'                               -- easy comments in vim style
-  use 'tpope/vim-endwise'                                  -- help end some programing structures
   use 'tpope/vim-surround'                                 -- change surrounding grouping symbol
   use 'tpope/vim-repeat'                                   -- repeat full plugin actions
   use 'rhysd/vim-grammarous'                               -- all in one grammar checker for vim
   use 'mbbill/undotree'                                    -- undo visualizer for vim
-  use 'preservim/tagbar'                                   -- visualize ctags in vim
-  use 'jsfaint/gen_tags.vim'                               -- easy gtags/ctags
   use 'dhruvasagar/vim-table-mode'                         -- make table structures right in vim
   use 'RRethy/vim-hexokinase'
+  use { 'dccsillag/magma-nvim', run = ':UpdateRemotePlugins' } -- visualizer for python
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

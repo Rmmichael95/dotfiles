@@ -1,0 +1,7 @@
+type            = bgprocess
+load-options    = sub-vars
+logfile         = $HOME/.local/share/dinit/eww.log
+command         = /usr/bin/eww -c $HOME/.config/eww/bar/ open-many bar
+stop-command    = /usr/bin/eww close-all
+smooth-recovery = true
+depends-on      = eww-pre.user

@@ -1,0 +1,14 @@
+import pandas as pd
+import gspread
+
+#gc = gspread.service_account(filename="pysheets-368800-40297ac2a382.json")
+
+gc = gspread.service_account()
+sh = gc.open("EntertainmentExpenses ").sheet1
+
+df = pd.DataFrame(sh.get_all_records())
+jan_sum = df['Jan'][0:4]
+feb_sum = df['Feb'][0:4]
+
+sh.update('B7', jan_sum.sum())
+sh.update('C7', feb_sum.sum())

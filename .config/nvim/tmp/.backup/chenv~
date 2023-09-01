@@ -1,0 +1,97 @@
+#!/bin/env sh
+
+hypr() {
+    echo "w" > $HOME/.local/share/ds
+    echo "Hyprland" > $HOME/.local/share/wm
+
+    # set up dinit
+    dinitctl disable dunst.user
+    dinitctl disable redshift.user
+    dinitctl disable unclutter.user
+    dinitctl disable dwmblocks.user
+    dinitctl disable picom.user
+
+    dinitctl enable waybar.user
+    dinitctl enable hyprpaper.user
+}
+
+dwm() {
+    echo "x" > $HOME/.local/share/ds
+    echo "dwm" > $HOME/.local/share/wm
+
+    # set up dinit
+    dinitctl enable dunst.user
+    dinitctl enable redshift.user
+    dinitctl enable unclutter.user
+    dinitctl enable dwmblocks.user
+    dinitctl enable picom.user
+
+    dinitctl disable waybar.user
+    dinitctl disable hyprpaper.user
+}
+
+awesome() {
+    echo "x" > $HOME/.local/share/ds
+    echo "awesome" > $HOME/.local/share/wm
+
+    # set up dinit
+    dinitctl enable dunst.user
+    dinitctl enable redshift.user
+    dinitctl enable unclutter.user
+    dinitctl enable polybar.user
+    dinitctl enable picom.user
+
+    dinitctl disable dwmblocks.user
+    dinitctl disable waybar.user
+    dinitctl disable hyprpaper.user
+}
+
+awesome() {
+    echo "x" > $HOME/.local/share/ds
+    echo "awesome" > $HOME/.local/share/wm
+
+    # set up dinit
+    dinitctl enable dunst.user
+    dinitctl enable redshift.user
+    dinitctl enable unclutter.user
+    dinitctl enable polybar.user
+    dinitctl enable picom.user
+
+    dinitctl disable dwmblocks.user
+    dinitctl disable waybar.user
+    dinitctl disable hyprpaper.user
+}
+
+xmonad() {
+    echo "x" > $HOME/.local/share/ds
+    echo "xmonad" > $HOME/.local/share/wm
+
+    # set up dinit
+    dinitctl enable dunst.user
+    dinitctl enable redshift.user
+    dinitctl enable unclutter.user
+    dinitctl enable xmobar.user
+    dinitctl enable picom.user
+
+    dinitctl disable polybar.user
+    dinitctl disable dwmblocks.user
+    dinitctl disable waybar.user
+    dinitctl disable hyprpaper.user
+}
+
+help() {
+    print "chenv [CMD] -- set compositor to user
+          hypr
+          dmw
+          awesome
+          xmonad"
+}
+
+case "$1" in
+    "hypr") hypr;;
+    "dwm") dwm;;
+    "awesome") awesome;;
+    "xmonad") xmonad;;
+    "--help") help;;
+    "*") print "chenv --help -- list available options"
+esac

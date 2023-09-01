@@ -1,0 +1,470 @@
+---
+title: Linux  Perfesional Institute 102-500
+author: Ryan Michael Sullivan
+output: pdf_document
+---
+
+# Toptic 105: Shells and Shell Scripting
+
+## 105.1 Customize and Use The Shell Environment
+
+### Shell Types: Interactive vs. Non-Interactive and Login vs. Non-Login
+  * Interactive Shell:
+    - interaction between user & Shell
+    - user inputs commands, termonal prints to screen
+
+  * Non-Interactive Shell:
+    - shell does processing in background
+    - processes independant of user input
+
+  * Login Shell:
+    - Shell that sets user enviernment on login
+
+  * Non-Login Shell:
+    - Any shell not spawned at user login
+
+  * Both Interactive/Non-Interactive can be Login/Non-Login
+
+  * Interactive Login Shell:
+    - common shell executed at user login
+
+  * Non-Interactive Login Shell:
+    - less prevailant, scripts run from login shell with */bin/<sh> --login <script>*
+    - or piping stdout of cmd into stdin of ssh connection
+    - script called by login shell
+
+  * terminal:
+    - Can be *pst* shell when opened in GUI
+    - Can be *tty* when opened from console
+
+### Launching Shells with su and sudo
+  * su:
+    - opens new session with new context params (uid, gid, env...) to become user,
+      inherits concepts from original session (tty, cgroup, audit), emularing old
+      behavior from mainframe w/one computer connecred to multiple terminals
+    - *su - <user>*, *su -l <user>*, or *su --login <user>* will start interactive login shell
+    - *su <user>* will start interactive non-login shell as user
+    - *su - root* or *su -* will start interactive login shell as root
+    - *su root* or *su* will start interactive non-login sell as root
+
+  * sudo:
+    - execute commands as another user (including superuser)
+    - maining used to elevate privileges temporarily
+    - running user must be in sudoers file
+    - *sudo su - <user>*, *sudo su -l <user>*, *sudo su --login <user>* start interactive login shell as user
+    - *sudo su <user>* or *sudo -u <user>* start interactive non-login shell
+    - *sudo su - root*, *sudo su -*, or *sudo -i* start interactive login shell as root
+    - *sudo su root* or *sudo su* start interactive non-login shell as root
+    - *sudo -s* or *sudo -u root -s* start non-login shell as root
+    - *sudo -i <cmd>* start interactive login shell as root, run <cmd>, & return to user
+
+  * shell type: *run echo $0*
+    - Interactive login: *-<sh>* or *-su*
+    - Interactive non-login: *<sh>* or *</bin/sh>*
+    - Non-Interactive non-login (scripts): *<script>*
+  
+### The Origin of Shell Startup Files: SKEL
+  * SKEL is a veriable w/abs path to skel dir
+    - skel dir is template for fs structure of home dir
+    - includes files inherited by new user accounts
+    - SKEL & other vars are stored in */etc/adduser.conf* 
+    - Skel set to */etc/skel*
+
+
+## 105.1 Customize and Use the Shell Environment
+  - shell/local vars: live within scope of shell
+  - shell/global vars: inherited by children &/or processes
+
+### Variables: Assignment and References
+  - Variable Assignment: asign name to value
+  - Variable Reference: access variable value
+
+  * Variable Names
+    - can contain (a-z,A-Z,0-9,_)
+    - may not start w/number
+    - may not contain space
+
+  * Variable Values
+    - can contain most ascii char
+    - must be enclosed in quotes if contain space
+    - musr be enclosed in quotes if contain special char
+    - single quotes read special chars literally
+    - double quotes allow substitution
+    - must escape special chars with "\" to avoid substitution
+
+  * Local/Shell Variables
+    - lower-case by convention
+    - exist only in spawning shell
+    - *set* — prints current shell variables
+
+  * Global/Environment Variables
+    - exist for parent & all children shells
+    - export — sets global variable
+    - export — can print set global variables
+    - env/printenv  — can also print enviernment variables
+    - env — can be used to modify shell enviernment to run program *env -i <sh>*
+
+### Common Environment Variable
+  * Display
+    - Related to display server; normally has three elements
+    - hostname; or localhos if absent
+    - A colon as a delimiter
+    - display number; default 0
+
+  * HISTCONTROL
+    - controls commands sames in *HISTFILE*; three posible values
+    - *ignorespace* — commands starting w/space won't be saved
+    - *ignoredups* — commands same as previous not saved
+    - *ignoreboth* — Combination of previous two options
+
+  * HISTSIZE
+    - number of commands to store in memmory for session
+
+  * HISTFILESIZE
+    - number of commands ro save to HISTFILE
+    
+  * HISTFILE
+    - name/location of histfile
+
+  * HOME
+    - stores absolute path of current users home dir
+
+ * HOSTNAME
+   - stores TCP/IP name of host computer
+
+ * HOSTTYPE
+   - stores architecture of host computer's processor
+
+  * LANG
+    - stores locale of system
+
+ * LD_LIBRARY_PATH
+   - colon-seperated set of dirs of shared libraries 
+
+  * MAIL
+    - where shell searches for email
+
+  * MAILCHECK
+    - numeric value indicating in seconds frequency shell searches for new mail
+
+  * PATH
+    - list of dirs where shell looks for executables
+
+ * PS1
+   - stores value of shell prompt
+
+  * PS2
+    - stores value of prompt for multiline cmd; usually >
+
+  * PS3
+    - prompt for select command
+
+  * PS4
+    - normally +; used for debugging
+
+  * SHELL
+    - path to current shell
+
+  * USER
+    - current users name
+
+
+## 105.1 Customize and Use the Shell Environment
+
+### Aliases
+
+ * alias — set vaiable name for command or composition of commands
+   - syntax; *alias var_name='cmd;cmd'*
+
+  * unalias — unset alias
+
+  * Expansion & Evaluatiion of Quotes in Aliases
+    - single quotes foe synamic expansion
+    - double quotes for static expansion
+
+  * set aliases in startup scripts for persistance
+
+### Creating Functions
+  * Two syntax
+    - *function* keyword: function function_name { cmd #n }
+    - *params*: function_name() { cmd #n }
+
+  * Functions can be written directly or sourced from file
+
+  * Can be used with line breaks or oneliners w/semicolon between cmds
+
+  * Bash specific built-in variables
+    - *$?*: expands to results of previous cmd; non-zero value indicates error
+    - *$$*: expands to shell PID
+    - *$!*: expands to pid of previous background process
+    - *$0-$9*: positional params expand to passed arguments
+    - *$#*: expands to num of passed args
+    - *$@,$**: expand to args passed
+    - *$_*: expands to last param or name of script
+
+  * Can alias/unalias both funcs and vars
+    - unset -v: unset variable alias
+    - unset -f: unset function alias
+
+  * Can call a function inside of anothers definition
+
+
+## 105.2 Customize or Write Simple Scripts
+  * Very basic, reference section directly
+    - script allowing root execution by general user
+    - backtick ` to store cmd output in variable
+    - posix built-ins
+    - arrays and SIZE of array 
+    - declaring with *declare -a*
+    - declaring arrays with specific vals with params
+    - bash built-in *expr* for arithmeric
+    - output porgress messages with *echo -e* for potental logging
+    - printf for samw as previous
+
+
+
+## 105.2 Customize or Write Simple Scripts
+ * Very basic, reference section directly
+   - extended tests in scripts
+  - case statment
+  - loops
+
+
+# Topic 106: User Interfaces and Desktops
+
+## 106.1 Install and Configure X11
+ * Basic info on X & Wayland, reference chapter directly
+
+
+## 106.2 Graphical Desktops
+  * Basic info on DEs, reference chapter directly
+
+
+## 106.3 Accessibility
+  * Reference directly for fucked up ppl
+
+
+# Topic 107: Administrative Tasks
+
+## 107.1 Manage User and Group Accounts and Related System Files
+
+### User Accounts
+  * id <user>: get GID of users groups
+  * groups <user>: get list of names of belonging groups
+
+  * useradd options
+    - *-c*: add comment to user account
+    - *-d*: custome home dir
+    - *-e*: set date to disable account
+    - *-f*: set experation date for passwd
+    - *-g*: set specific GID
+    - *-G*: add multiple secondary groups
+    - *-k*: create account w/specific skel; must be used with *-m,--create-home*
+    - *-m*: create account w/home dir
+    - *-M*: create account without home dir
+    - *-s*: create account w/specific login shell
+    - *-u*: create account w/specific UID
+
+  * Usermod options
+    - *-c*: comment
+    - *-d*: change home dir
+    - *-e*: experation date for account
+    - *-f*: experation in days for passwd
+    - *-g*: change primary group
+    - *-G*: add secondary groups
+    - *-l*: change login name
+    - *-L*: lock account
+    - *-s*: change login shell
+    - *-u*: change UID
+    - *-U*: unlock account
+
+  * *userdel -r*: delete account and home dir
+
+  * *groupadd -g <GID> group_name*: create new group with GID and group_name
+  * *groupdel group_name*: delete group
+
+### The Skeleton Directory
+  * The */etc/login.defs* File
+    - *UID_MIN,UID_MAX*: Range of UIDs assignable to ordinary users
+    - *GID_MIN,GID_MAX*: Range of GIDs assignable to ordinary users
+    - *CREATE_HOME*: if home dir should be created for new users
+    - *USERGROUPS_ENAB*: if system should create new groups for users with name of user account
+    - *MAIL_DIR*: Mail spool dir
+    - *PASS_MAX_DAYS*: max days passwd can be used
+    - *PASS_MIN_DAYS*: min days passwd can be used
+    - *PASS_MIN_LEN*: min passwd len
+    - *PASS_WARN_AGE*: num of warning days before passwd experation
+
+### The passwd Command
+  - command to change passwd
+  - user can change own passwd, root can change any
+  - */usr/bin/passwd*: has SUID bit for executable flag *-rwsr* for execute w/privileges of file owner
+  - *-d*: delete passwd for user (disable user)
+  - *-e*: for passwd change
+  - *-i*: set num days of inactivity after passwd experation after which account disabled
+  - *-l*: lock user account; passwd in */etc/shadow* becomes prefixed w/exlimation mark
+  - *-n*: min passwd life
+  - *-S*: output passwd status
+  - *-u*: unlock user account; rem
+  - *-x*: min passwd lifetime
+  - *-w*: num days warning before passwd experation
+
+### The change Command
+  - Stands for "change age"
+  - changes passwd aging info
+  - restricted to root except for *chage -l* to list own passwd info
+  - *-d*: set last passwd change
+  - *-E*: set experation date for account
+  - *-I*: set num days of inactivity before experation
+  - *-m*: ser min passwd lifetime
+  - *-M*: set max passwd lifetime
+  - *-W*: set num days of warning before passwd experation
+
+
+## 107.1 Manage User and Group Accounts and Related System Files
+  * Files associated w/previous cmds; these should not be edited directly
+    - */etc/passwd*: file of seven colon-delimited fields w/user info
+    - */etc/group*: file of four colon-delimited fields w/group info
+    - */etc/shadow*: file of nine colon-delimited fields w/encrypted passwds
+    - */etc/gshadow* file of four colon-delimited fields w/encrypted group passwds
+
+  * */etc/passwd*
+    - *Username*: login name of user
+    - *Password*: encrypted passwd
+    - *User ID (UID)*: ID num assigned to user
+    - *Group ID (GID)*: primary group num of user
+    - *GECOSE: options comment field
+    - *Home Directory*: avs path to home dir
+    - *Shell*: abs path of login shell
+
+  * */etc/group*
+    - *Group Name*
+    - *Group Password*
+    - *GID*
+    - *Member List*: comma-delimited list of users in group
+
+  * */etc/shadow*
+    - readable only w/root privileges
+    - *Username*
+    - *Encrypted Password*
+    - *Date of Last Password Change*
+    - *Minimum Password Age*
+    - *Maximun Password Age*
+    - *Password Warning Period*
+    - *Password Inactivity Period*
+    - *Account Experation Date*
+    - *A reserved field*: field reserved for future use
+ 
+  * */etc/gshadow*
+    - *Group Name*
+    - *Encrypted Password*
+    - *Group Administrators*
+    - *Group Members*
+
+  * *getent*
+    - displays entries from databases supported by Name Service Switch (NSS)
+    - requires name of database & lookup key
+    - if no lookup key provided, displays all entries
+    - can only access databases configured in */etc/nsswitch.conf*
+
+
+## 107.2 Automate System Administration Tasks By Scheduling Jobs
+  * Basic cron and systemd.timer usage
+
+
+## 107.2 Automate System Administration Tasks By Scheduling Jobs
+
+### Schedule Jobs with at
+  * used for one-time scheduling at specific time
+    - *at now +5 minutes*: opens interactive prompt to enter cmds to run in 5 minutes
+    - *-c*: prints cmds job ID to stdout
+    - *-d*: delete job by ID; alias for atrm
+    - *-f*: read job from file
+    - *-l*: list pending jobs
+    - *-m*: send mail at end of job if no output
+    - *-q*: specify queue by letter (a-z,A-Z); default a=at, b=batch; highest letter execute w/increased niceness;capital letter for batch jobs
+    - *-v*: show time when job will run
+
+  * *atq*
+    - list scheduled jobs
+    - run as root to display scheduled jobs for all users
+
+  * *atrm*
+    - delete scheduled jobs by job ID
+
+  * *batch*: cmd similar to *at* but runs at low system load
+
+  * */etc/at.allow*: configure access to at for normal users
+  * */etc/at.deny*: Deny a user at scheduling
+
+
+## 107.3 Localisation and Internationalisation
+  * Basic info on TZ & locale
+  * usage of standard util *tzselect*
+
+  * */etc/locale.conf*: select LANG
+
+  * locale
+    - *LC_COLLATE*: set alphabetical ordering
+    - *LC_CTYPE*: set how system treats certain characters; such as capital or lowercase
+    - *LC_MESSAGES*: set lang for program messages
+    - *LC_MONETARY*: set currency type
+    - *LC_NUMERIC*: set numerical format
+    - *LC_TIME*: set time dte format
+    - *LC_PAPER*: set standard paper size
+    - *LC_ALL*: overrides all variables including LANG
+
+  * *iconv*: convert encoding; help system display unintelligible chars
+    - *iconv -f ISO-8859-1 -t UTF-8 original.txt > converted.txt*
+
+
+# Topic 108: Essential System Services
+
+## 108.1 Maintain System time
+  * usage of date cmd
+  * usage of hwclock
+  * Usage of timedatectl
+  * ntp
+
+
+## 108.1 Maintain System time
+  * NTP: Syncronize time using a reference atomic clock over network
+    - reference clocks are *Stratum 1* machines not accessibile to the puclic
+    - *Stratum 1* machines are accessibile to the public but are accessibile to *Stratum 2* machine & so on
+    - *Stratum 2* machines are servers accessibile to the public
+    - good practice to have *Stratum 2+* machines connected to small number of computers and have those provide NTP
+
+    - *Offset*: refers to abs diff between sys time and NTP time
+    - *Step*: if time differs > 128ms, NTP performs single significant time update
+    - *Slew*: changes to sys time when < 128ms made gradually
+    - *Insane Time*: if offset > 17mins, system considered insane and NTP does not change time
+    - *Drift*: phenomenon when two clocks becom out of sync
+    - *Jitter*: ammount of drift since clock last queried
+
+  * timedatectl implements SNTP istead of NTP
+    - less complex and does not serve NTP to other computers
+
+  * NTPD: daemon to source ntp and serve to other computers
+
+  * */etc/ntp.conf*: configure ntp; select sources to poll
+
+  * *ntpupdate*: update npd pool manually if offset greater than 17mins
+
+  * *ntpq*: utility for monitoring status of ntp
+    - *ntpq -p*: prints summary of peers
+    - *remote*: hostname of ntp provider
+    - *refid*: reference ID of provider
+    - *st*: stratum of provider
+    - *when*: seconds since query
+    - *poll*: seconds between query
+    - *reach*: status ID indicating if server reached
+    - *delay*: time between query & response
+
+  * Chrony
+    - another NTP implementation
+    - *chronyd*: daemon
+    - *chronyc*: command to interact w/program
+
+
+## 108.2 System Logging
+  * 

@@ -1,0 +1,12 @@
+return {
+  languages = {
+    r = {
+      tasks = {
+        build = {
+          command = 'Rscript -e rmarkdown::render(lpic-101-500.rmd, quiet=TRUE)',
+          output = 'quickfix',
+        },
+      },
+    },
+  }
+}
