@@ -3,7 +3,7 @@
 # PATH
 #typeset -U PATH path
 #path=("$PATH" "/usr/local/sbin/" "/usr/local/bin/" "/usr/sbin/" "/usr/bin/" "/sbin/" "/bin/" "/usr/lib/ccache/bin/" "$HOME/.local/bin/" "$HOME/Documents/Notes/" "$HOME/.local/bin/statusbar/" "$HOME/.local/share/skim/bin/" "$path[@]")
-export PATH="$PATH:/usr/local/sbin/:/usr/local/bin/:/usr/sbin/:/usr/bin/:/sbin/:/bin/:/usr/lib/ccache/bin/:$HOME/.local/bin/:$HOME/.local/share/skim/bin/:$HOME/.local/share/npm/bin/:$HOME/.local/share/go/bin/:$HOME/.local/bin/statusbar/:$HOME/.local/bin/doas/:$HOME/.local/bin/menu/:$HOME/.local/bin/hypr"
+export PATH="$PATH:/usr/local/sbin/:/usr/local/bin/:/usr/sbin/:/usr/bin/:/sbin/:/bin/:/usr/lib/ccache/bin/:$HOME/.local/bin/:$HOME/.local/share/skim/bin/:$HOME/.local/share/npm/bin/:$HOME/.local/share/go/bin/:$HOME/.local/bin/myBin/:$HOME/.local/bin/myBin/statusbar/:$HOME/.local/bin/myBin/doas/:$HOME/.local/bin/myBin/menu/:$HOME/.local/bin/myBin/hypr"
 export PATH
 # MANPATH
 export MANPATH="$MANPATH:/usr/local/man:"
@@ -56,7 +56,7 @@ export XDG_DATA_HOME=${XDG_DATA_HOME:="$HOME/.local/share"}
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:="$HOME/.cache"}
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:="$HOME/.config"}
 export XDG_STATE_HOME=${XDG_STATE_HOME:="$HOME/.local/state"}
-export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:="run/user/$UID"}
+#export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:="run/user/$UID"}
 
 #startx
 #export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority

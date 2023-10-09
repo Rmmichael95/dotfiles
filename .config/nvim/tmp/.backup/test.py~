@@ -1,15 +1,3 @@
-import pandas as pd
-#import pyarrow.parquet as pq
-#import pyarrow as pa
-
-
-df = pd.read_pickle('/home/ryanm/documents/batcave/climbing/climbing-data_TwinQuest/curated_datasets/All_Ratings.pkl.zip', compression='zip')
-
-df.sample(5)
-
-df['ratings'] = df['ratings'].astype('str')
-df['grade'] = df['grade'].astype('str')
-
-df.to_parquet('/home/ryanm/documents/batcave/climbing/climbing-data_TwinQuest/curated_datasets/All_Ratings.parquet.zst', engine = 'pyarrow', compression = 'zstd')
-#df = pa.Table.from_pandas(df)
-#pq.write_table(df, '/home/ryanm/documents/batcave/climbing/climbing-data_TwinQuest/curated_datasets/All_Ratings.parquet')
+import geocoder
+g = geocoder.ip("me")
+print(g.lating)

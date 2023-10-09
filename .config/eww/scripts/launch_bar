@@ -6,8 +6,7 @@ EWW="/usr/bin/eww --config "$CFG""
 
 ## Open widgets
 run_eww() {
-    ${EWW} open-many \
-         bar
+    ${EWW} open-many bar
 }
 
 ## Launch or close widgets accordingly

@@ -32,17 +32,14 @@
     (box :class "cal-in"
     (calendar :class "cal"
               :day calendar_day
-              :year calendar_year)
-    ))
-)
+              :year calendar_year))))
 
 (defwidget clock_module []
     (box :class "module" :halign "center"
       (button :class "clock_date_class"
              :onclick "zsh ../scripts/pop calendar"
-      (label :text "${time}"))
-    )
-)
+             :onmiddleclick `(alacritty -e calcurse &)`
+      (label :text "${time}"))))
 
 (defwidget center []
     (box :orientation "h"

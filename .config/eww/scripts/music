@@ -45,12 +45,18 @@ get_artist() {
 ## Get cover
 get_cover() {
     while true; do
-      if [ "$STATUS" = "Playing" ] || [ "$STATUS" == "Paused" ];then
-        echo "$(playerctl metadata mpris:artUrl)"
+      if [ "$STATUS" = "Playing" ] || [ "$STATUS" = "Paused" ];then
+        url="$(playerctl metadata mpris:artUrl)"
+        img="$(playerctl metadata mpris:artUrl | cut -c25-)"
+        if [ $(echo "$url" | cut -c1-5) = "https" ] && [ -z $(ls "/tmp/$img") ];then
+          wget --directory-prefix=/tmp "$url" && echo "/tmp/$img"
+        else
+          echo "$url"
+        fi
       else
         echo "img/music"
       fi
-        sleep 1
+        sleep 8
     done
 }
 
@@ -65,7 +71,7 @@ next() {
 }
 
 ## Previous
-previous() {
+previous() {#
   playerctl previous
 }
 
@@ -85,3 +91,5 @@ elif [[ "$1" == "--next" ]]; then
 elif [[ "$1" == "--prev" ]]; then
     previous
 fi
+
+# vim: filetype=sh

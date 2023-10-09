@@ -200,7 +200,70 @@ calendar:indeterminate {
 }
 
 
+/** Weather *********************************************/
+.weather {
+    background-color: #131313;
+    border-radius: 1rem;
+    margin: 4px;
+    padding: 1rem;
+}
 
+.weather-current-icon {
+    font-size: 3rem;
+}
+
+.weather-location {
+    font-size: 1.25rem;
+    font-weight: normal;
+    color: #a1bdce;
+}
+
+.weather-current-text {
+    font-size: 1.5rem;
+    color: #a1bdce;
+}
+
+.weather-info {
+    margin-top: 0.5rem;
+}
+
+.weather-current-temp {
+    font-size: 2.5rem;
+    color: #a1bdce;
+}
+
+.weather-current-maxtemp {
+    color: #a1bdce;
+    font-size: 1.25rem;
+}
+
+.weather-current-mintemp {
+    font-size: 1.25rem;
+    margin-left: 0.5rem;
+    color: #d3c6aa;
+}
+
+.weather-hour {
+    margin: 0 0.5rem;
+}
+
+.weather-hour-icon {
+    font-size: 2rem;
+    margin: 0.25rem 0;
+}
+
+.weather-hour-temp {
+    color: #d3c6aa;
+    font-size: 1.1rem;
+}
+
+.weather-hour-time {
+    color: #d3c6aa;
+}
+
+.weather-connection-error {
+    font-size: 1.1rem;
+}
 
 /** Power buttons ***************************************/
 .btn_poweroff {

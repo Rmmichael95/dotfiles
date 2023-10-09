@@ -17,7 +17,7 @@ monitor=,preferred,auto,auto
 
 # Execute your favorite apps at launch
 exec-once = dinit -u
-exec-once = dinitctl enable eww.user
+#exec-once = dinitctl enable eww.user
 exec-once = dinitctl enable hyprpaper.user
 exec-once = dinitctl disable picom.user
 exec-once = dinitctl disable unclutter.user
@@ -26,12 +26,33 @@ exec-once = swayidle -w timeout 300 'doas zzz'
 #exec-once = xset s activate
 exec-once = xss-lock -- /home/ryanm/.local/bin/hypr/hypr-lock
 exec-once = easyeffects
+exec-once = gsettings set org.gnome.desktop.interface cursor-theme Numix-Cursor-Light
+exec-once = hyprctl set-cursor Numix-Cursor-Light 24
 
 # Source a file (multi-file configs)
 # source = ~/.config/hypr/myColors.conf
 
 # Some default env vars.
+env = GDK_BACKEND,wayland,x11
+env = SDL_VIDEODRIVER,wayland,x11
+env = CLUTTER_BACKEND,wayland
+env = QT_AUTO_SCREEN_SCALE_FACTOR,1
+env = QT_QPA_PLATFORM,wayland;xcb
+#env = QT_QPA_PLATFORM,wayland-egl
+env = QT_WAYLAND_DISABLE_WINDOWDECORATIONS,1
+env = QT_QPA_PLATFORMTHEME,qt5ct
+env = QT_WAYLAND_FORCE_DPI,physical
+env = LIBVA_DRIVER_NAME,radionsi
+env = WLR_RENDER,vulkan
+env = WLR_NO_HARDWARE_CURSORS,1
+env = WLR_RENDERER_ALLOW_SOFTWARE,1
+#env = MOZ_ENABLE_WAYLAND,1
+env = GTK_THEME,Adwaita-dark
+env = XURSOR_THEME,Numix-Cursor-Light
 env = XCURSOR_SIZE,24
+env = XDG_CURRENT_DESKTOP,Hyprland
+env = XDG_SESSION_TYPE=wayland
+env = XDG_SESSION_DESKTOP,Hyprland
 
 # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
 input {
@@ -60,6 +81,8 @@ general {
     col.inactive_border = rgba(4b565caa)
 
     layout = dwindle
+
+    cursor_inactive_timeout = 3
 
     #suppress_portal_warnings = true
 
@@ -130,6 +153,8 @@ windowrule=workspace 10 silent,easyeffects
 # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
 # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
 windowrulev2 = opaque,class:^(menu)$,title:^(bemenu-hypr)$
+#windowrulev2 = idleinhibit always,class:^(Brave-browser)$
+#windowrulev2 = idleinhibit always,title:^(Library)$
 
 
 

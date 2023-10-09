@@ -10,7 +10,7 @@
 .background {
   background-color: #15191c;
   border-radius: 12px;
-  padding: 10px;
+  padding: 6px;
 }
 
 
@@ -39,12 +39,12 @@
 
 /* Battery **********************************************/
 .battery {
-  padding-top: 30px;
+  padding-top: 4px;
   font-size:20px;
 }
 
 .baticon {
-  font-size: 26px;
+  font-size: 20px;
 }
 
 /* Microphone *****************************************/
@@ -55,7 +55,7 @@
 
 /** System Sliders ********************************************/
 .slidersbox {
-  padding: 4px;
+  padding: 2px;
 }
 
 .iconbright {
@@ -127,8 +127,8 @@
 
 /** Music ***************************************/
 .album_art {
-  background-size: 180px;
-  min-height: 180px;
+  background-size: 160px;
+  min-height: 160px;
   min-width: 180px;
   margin: 4px;
   border-radius: 14px;
@@ -168,9 +168,9 @@
 /** Calendar *******************************************/
 
 .cal {
-  padding: 5px 5px 0px 5px;
+  padding: 3px 3px 0px 3px;
   border: transparent;
-  font-size: 17px
+  font-size: 16px
 }
 
 calendar {

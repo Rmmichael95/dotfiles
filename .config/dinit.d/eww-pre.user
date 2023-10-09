@@ -1,7 +1,0 @@
-type            = process
-load-options    = sub-vars
-logfile         = $HOME/.local/share/dinit/eww.log
-command         = /usr/bin/eww -c $HOME/.config/eww/bar/ && /bin/echo $(pidof eww) > $HOME/.local/state/eww.pid
-stop-command    = /usr/bin/eww -c $HOME/.config/eww/bar/ close-all
-pid-file        = $HOME/.local/state/eww.pid
-smooth-recovery = true

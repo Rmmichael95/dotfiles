@@ -3,7 +3,7 @@
 # PATH
 #typeset -U PATH path
 #path=("$PATH" "/usr/local/sbin/" "/usr/local/bin/" "/usr/sbin/" "/usr/bin/" "/sbin/" "/bin/" "/usr/lib/ccache/bin/" "$HOME/.local/bin/" "$HOME/Documents/Notes/" "$HOME/.local/bin/statusbar/" "$HOME/.local/share/skim/bin/" "$path[@]")
-export PATH="$PATH:/usr/local/sbin/:/usr/local/bin/:/usr/sbin/:/usr/bin/:/sbin/:/bin/:/usr/lib/ccache/bin/:$HOME/.local/bin/:$HOME/.local/share/skim/bin/:$HOME/.local/share/npm/bin/:$HOME/.local/share/go/bin/:$HOME/.local/bin/myBin/statusbar/:$HOME/.local/bin/myBin/doas/:$HOME/.local/bin/myBin/menu/:$HOME/.local/bin/myBin/hypr"
+export PATH="$PATH:/usr/local/sbin/:/usr/local/bin/:/usr/sbin/:/usr/bin/:/sbin/:/bin/:/usr/lib/ccache/bin/:$HOME/.local/bin/:$HOME/.local/share/skim/bin/:$HOME/.local/share/npm/bin/:$HOME/.local/share/go/bin/:$HOME/.local/bin/myBin/:$HOME/.local/bin/myBin/statusbar/:$HOME/.local/bin/myBin/doas/:$HOME/.local/bin/myBin/menu/:$HOME/.local/bin/myBin/hypr"
 export PATH
 # MANPATH
 export MANPATH="$MANPATH:/usr/local/man:"

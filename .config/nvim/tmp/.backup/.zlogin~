@@ -1,4 +1,4 @@
-echo "/zsh/zlogin"
+#echo "/zsh/zlogin"
 
 if [ "$DS" = "w" ]; then
     if [ -z "${DISPLAY}" ] && [ "$(tty)" = "/dev/tty1" ]; then

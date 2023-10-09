@@ -1,11 +1,12 @@
-#!/bin/sh
+#!/bin/env sh
 
 ## Get Volume
 get_vol() {
     while true; do
-    pactl list sinks | grep '^[[:space:]]Volume:' | \
-        head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,'
-    sleep 1
+      pactl list sinks | grep '^[[:space:]]Volume:' | \
+        tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,'
+        #head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,'
+      sleep 1
     done
 }
 
@@ -67,20 +68,20 @@ set_mic() {
 
 
 
-if [[ "$1" == "--set-vol" ]]; then
+if [ "$1" = "--set-vol" ]; then
     set_vol "$2"
-elif [[ "$1" == "--get-vol" ]]; then
+elif [ "$1" = "--get-vol" ]; then
     get_vol
-elif [[ "$1" == "--toggle-vol" ]]; then
+elif [ "$1" = "--toggle-vol" ]; then
     toggle_vol
-elif [[ "$1" == "--get-volicon" ]]; then
+elif [ "$1" = "--get-volicon" ]; then
     get_volicon
-elif [[ "$1" == "--get-micicon" ]]; then
+elif [ "$1" = "--get-micicon" ]; then
     get_micicon
-elif [[ "$1" == "--toggle-mic" ]]; then
+elif [ "$1" = "--toggle-mic" ]; then
     toggle_mic
-elif [[ "$1" == "--get-mic" ]]; then
+elif [ "$1" = "--get-mic" ]; then
     get_mic
-elif [[ "$1" == "--set-mic" ]]; then
+elif [ "$1" = "--set-mic" ]; then
     set_mic "$2"
 fi

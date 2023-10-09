@@ -2,7 +2,7 @@
 
 ## Toggle state
 toggle() {
-  if [ -z "$(connmanctl state | grep online)" ];then
+  if [ -z "$(connmanctl state | grep -e 'ready|online')" ];then
     connmanctl enable wifi
   else
     connmanctl disable wifi
@@ -12,7 +12,7 @@ toggle() {
 ## Get Icon
 get_icon() {
   while true; do
-    if [ -z "$(connmanctl state | grep online)" ];then
+    if [ -z "$(connmanctl state | grep -E 'ready|online')" ];then
       echo "󰖪"
     else
       echo "󰖩"
@@ -24,7 +24,7 @@ get_icon() {
 ## Get Status
 get_status() {
   while true; do
-    if [ -z "$(connmanctl state | grep online)" ];then
+    if [ -z "$(connmanctl state | grep -E 'ready|online')" ];then
       echo "󰖪  Offline"
     else
       echo "󰖩  $(connmanctl services | grep '*AO' | awk '{print $2}')"

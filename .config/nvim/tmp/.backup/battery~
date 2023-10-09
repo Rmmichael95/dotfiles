@@ -35,11 +35,11 @@ get_icon() {
       elif [ "$BATVAL" -gt 30 ];then
         echo "󰁼"
       elif [ "$BATVAL" -gt 20 ];then
-        echo "󰁻"
+        echo "󰁻" && notify-send "Power Level: $BATVAL"
       elif [ "$BATVAL" -gt 10 ];then
-        echo "󰁺"
+        echo "󰁺" && notify-send "Power Level: $BATVAL"
       elif [ "$BATVAL" -gt 0 ];then
-        echo "󰂎"
+        echo "󰂎" && notify-send "Power Level: $BATVAL"
       fi
      elif [ "$BATSTATUS" = "Charging" ];then
       if [ "$BATVAL" -gt 100 ];then
@@ -87,7 +87,7 @@ get_time() {
     BAT=$(ls /sys/class/power_supply | grep BAT | head -n 1)
     # BATSTATUS="$(cat /sys/class/power_supply/${BAT}/status)"
     #if [ BATSTATUS = "Discharging" ]; then
-    if [ "$(acpi -b | awk '{print $3}')" = "Discharging," ]; then
+    if [ "$(acpi -b | awk '{print $3}' | rg "Discharging")" = "Discharging," ]; then
       echo "󱧥 $(cat /sys/class/power_supply/${BAT}/capacity)% $(acpi -b | awk '{print $5}')"
     else
       echo "󱧥 $(cat /sys/class/power_supply/${BAT}/capacity)%"
