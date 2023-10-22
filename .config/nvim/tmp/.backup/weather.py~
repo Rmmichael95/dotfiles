@@ -1,16 +1,17 @@
 #!/usr/bin/python
 
-import requests, json, sys, time, geocoder, os
+#from types import LambdaType
+import requests, json, sys, time, os, subprocess
 from datetime import datetime
 
+COR = subprocess.check_output("cat $HOME/.config/eww/scripts/coordinate.txt", shell=True)
+COR = str(COR, 'utf-8')
 API_TOKEN = "8236f5b850a3467c915160518231909"
-locate = geocoder.ip('me')
-CITY = locate.lating
 EXCLUDE = "hourly"
 AQI = "no"
 DAYS = 2
 
-URL = f"http://api.weatherapi.com/v1/forecast.json?key={API_TOKEN}&q={CITY}&aqi={AQI}&days={DAYS}"
+URL = f"http://api.weatherapi.com/v1/forecast.json?key={API_TOKEN}&q={COR}&aqi={AQI}&days={DAYS}"
 
 def get_icon(code):
     icons = {
@@ -78,7 +79,7 @@ def main():
     for day in response['forecast']['forecastday']:
         for hour in day['hour']:
             data = {"time": hour['time'][-5:],
-                    "temp": f"{round(hour['temp_c'])}°",
+                    "temp": f"{round(hour['temp_f'])}°",
                     "icon": get_icon(f"{hour['condition']['code']}_{hour['is_day']}")
                     }
             hourly.append(data)
@@ -90,10 +91,10 @@ def main():
     hourly = hourly[:4]
     data = {
         "location": response["location"]["name"],
-        "maxtemp": f"{round(response['forecast']['forecastday'][0]['day']['maxtemp_c'])}°",
-        "mintemp": f"{round(response['forecast']['forecastday'][0]['day']['mintemp_c'])}°",
+        "maxtemp": f"{round(response['forecast']['forecastday'][0]['day']['maxtemp_f'])}°",
+        "mintemp": f"{round(response['forecast']['forecastday'][0]['day']['mintemp_f'])}°",
         "current": {
-            "temp": f"{round(response['current']['temp_c'])}°",
+            "temp": f"{round(response['current']['temp_f'])}°",
             "text": response['current']['condition']['text'],
             "icon": get_icon(f"{response['current']['condition']['code']}_{response['current']['is_day']}"),
         },

@@ -1,0 +1,4 @@
+rm /home/ryanm/.local/share/ds
+rm /home/ryanm/.local/share/wm
+ln -sv /home/ryanm/documents/batcave/dotfiles/ds-x /home/ryanm/.local/share/ds
+ln -sv /home/ryanm/documents/batcave/dotfiles/wm-dwm /home/ryanm/.local/share/wm

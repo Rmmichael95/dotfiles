@@ -1,6 +1,0 @@
-#!/bin/env sh
-
-j=301
-while [ $j -le 578 ]; do
-    ping oldschool1.runescape.com
-done

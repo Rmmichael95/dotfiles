@@ -1,6 +1,5 @@
 #!/bin/env sh
 
-
 ## Get Battery
 get_percentage() {
   while true; do
@@ -41,7 +40,7 @@ get_icon() {
       elif [ "$BATVAL" -gt 0 ];then
         echo "󰂎" && notify-send "Power Level: $BATVAL"
       fi
-     elif [ "$BATSTATUS" = "Charging" ];then
+    elif [ "$BATSTATUS" = "Charging" ];then
       if [ "$BATVAL" -gt 100 ];then
         echo "󰂅"
       elif [ "$BATVAL" -gt 90 ];then
@@ -107,3 +106,4 @@ elif [ "$1" = "--time" ]; then
     get_time
 fi
 
+# vim:ft=sh

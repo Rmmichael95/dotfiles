@@ -6,7 +6,7 @@ local opt = vim.opt -- set options
 local cmd = vim.cmd -- vim command
 
 -- set system python3
---g.python3_host_prog = '/home/ryanm/.local/share/nvim/.venv/bin/python'
+g.python3_host_prog = '/usr/bin/python3'
 --cmd([[let g:python3_host_prog '/home/ryanm/.local/share/nvim/.venv/bin/python3']])
 -- set system ruby
 g.ruby_host_prog = '/home/ryanm/.local/share/ruby/rbenv/versions/3.1.2/bin/neovim-ruby-host'
@@ -51,7 +51,7 @@ g.browsedir     = 'buffer'  -- put up directory requestor
 opt.hlsearch    = false     -- don't highlight for searching
 opt.ignorecase  = true      -- ignore case for pattern matching
 opt.clipboard   = 'unnamedplus' -- copy with system clipboard
-opt.modeline    = false     -- the modeline is a well-known security risk
+opt.modeline    = true     -- the modeline is a well-known security risk
 
 -- set colorscheme
 opt.termguicolors = true      -- enable 24bit colors in TUI, uses guibg/guifg

@@ -1,0 +1,16 @@
+#!/bin/zsh
+
+tesseract_lang=eng+jpn
+
+SCR_IMG=`mktemp`
+trap "rm $SCR_IMG*" EXIT
+
+grim -g "$(slurp)" -l 0 $SCR_IMG.png
+
+#should increase detection rate
+mogrify -modulate 100,0 -resize 400% $SCR_IMG.png
+
+tesseract -l $tesseract_lang $SCR_IMG.png $SCR_IMG &> /dev/null
+cat $SCR_IMG.txt | clipman store --primary
+
+exit

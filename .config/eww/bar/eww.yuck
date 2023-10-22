@@ -15,17 +15,15 @@
 
 
 ;; widgets
-
 (defwidget workspaces []
-  (literal :content workspace)
-)
+  (literal :content workspace))
 
 (defwidget left []
     (box :orientation "h"
          :space-evenly false
          :halign "start"
          :class "left_modules"
-(workspaces)))
+    (workspaces)))
 
 (defwidget cal []
     (box :class "cal" :orientation "v"
@@ -46,39 +44,36 @@
          :space-evenly false
          :halign "center"
          :class "center_modules"
-(clock_module)))
+    (clock_module)))
 
-;;(defwidget right []
-;;    (box :orientation "h"
-;;         :space-evenly false
-;;         :halign "end"
-;;         :class "right_modules"
-;;(bright)
-;;(volume)
-;;(wifi)
-;;(sep)
-;;(bat)
-;;(mem)
-;;(sep)
-;;(clock_module)))
+;;Make individual buttons clickable
+;;network
+;;time
+;;battery
 
-(defwidget bar_1 []
-  (box :class "bar_class"
-       :orientation "h"
-  (left)
-  (center)
+(defwidget sysboard []
   (box :halign "end"
       (button :class "systray"
               :onclick "zsh ../scripts/launch_dashboard"
               :onmiddleclick "zsh ../scripts/audio --toggle-vol"
-          (label :text "${network} ${volume} ${battery}")))
-  ;;(right)
-  )
-)
+      (label :text "${network} ${volume} ${battery}"))))
+
+(defwidget right []
+    (box :orientation "h"
+         :space-evenly false
+         :halign "end"
+         :class "right_modules"
+    (sysboard)))
+
+(defwidget bar_1 []
+    (box :class "bar_class"
+         :orientation "h"
+    (left)
+    (center)
+    (right)))
 
 
 ;; Window
-
 (defwindow calendar
     :monitor 0
     :geometry (geometry :x "-20px"
@@ -95,4 +90,3 @@
                         :anchor "top center")
     :exclusive true
 (bar_1))
-
