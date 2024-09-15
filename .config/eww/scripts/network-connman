@@ -1,0 +1,45 @@
+#!/bin/env sh
+
+## Toggle state
+toggle() {
+  if [ -z "$(connmanctl state | grep -e 'ready|online')" ];then
+    connmanctl enable wifi
+  else
+    connmanctl disable wifi
+  fi
+}
+
+## Get Icon
+get_icon() {
+  while true; do
+    if [ -z "$(connmanctl state | grep -E 'ready|online')" ];then
+      echo "󰖪"
+    else
+      echo "󰖩"
+    fi
+    sleep 5
+  done
+}
+
+## Get Status
+get_status() {
+  while true; do
+    if [ -z "$(connmanctl state | grep -E 'ready|online')" ];then
+      echo "󰖪  Offline"
+    else
+      echo "󰖩  $(connmanctl services | grep '*AO' | awk '{print $2}')"
+    fi
+    sleep 5
+  done
+}
+
+
+
+if [ "$1" = "--toggle" ]; then
+  toggle
+elif [ "$1" = "--icon" ]; then
+  get_icon
+else #default
+  get_status
+fi
+

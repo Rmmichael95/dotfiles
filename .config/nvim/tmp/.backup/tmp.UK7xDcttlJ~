@@ -1,0 +1,9 @@
+# PUT YOUR CONFIG IN separate files
+# in /etc/dracut.conf.d named "<name>.conf"
+# SEE man dracut.conf(5) for options
+hostonly="yes"
+compress="zstd"
+add_drivers+=" nvidia nvidia_modeset nvidia_uvm nvidia_drm "
+add_dracutmodules+=" btrfs crypt resume drm "
+omit_dracutmodules+=" plymouth "
+install_items+=" /etc/crypt-keys.d/cryptroot.keyfile /etc/crypt-keys.d/cryptswap.keyfile "

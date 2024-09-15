@@ -1,0 +1,22 @@
+# Static information about the filesystems.
+# See fstab(5) for details.
+
+# <file system> <dir> <type> <options> <dump> <pass>
+# /dev/mapper/cryptroot LABEL=ROOT
+UUID=a3e1db90-5112-4f04-93f4-68cf04d22e4c	/         	btrfs     	rw,relatime,compress-force=zstd:3,ssd,space_cache=v2,subvolid=256,subvol=/@	0 0
+
+# /dev/mapper/cryptroot LABEL=ROOT
+UUID=a3e1db90-5112-4f04-93f4-68cf04d22e4c	/home     	btrfs     	rw,relatime,compress-force=zstd:3,ssd,space_cache=v2,subvolid=257,subvol=/@home	0 0
+
+# /dev/mapper/cryptroot LABEL=ROOT
+UUID=a3e1db90-5112-4f04-93f4-68cf04d22e4c	/var/log  	btrfs     	rw,relatime,compress-force=zstd:3,ssd,space_cache=v2,subvolid=258,subvol=/@var_log	0 0
+
+# /dev/mapper/cryptroot LABEL=ROOT
+UUID=a3e1db90-5112-4f04-93f4-68cf04d22e4c	/.snapshots	btrfs     	rw,relatime,compress-force=zstd:3,ssd,space_cache=v2,subvolid=259,subvol=/@snapshots	0 0
+
+# /dev/nvme0n1p1 LABEL=EFI
+UUID=5395-35CA      	/efi      	vfat      	rw,relatime,fmask=0077,dmask=0077,codepage=437,iocharset=ascii,shortname=mixed,utf8,errors=remount-ro	0 2
+
+# /dev/mapper/cryptswap LABEL=SWAP
+UUID=cc3b712f-0915-4cee-b869-641b6fe44718	none      	swap      	defaults  	0 0
+

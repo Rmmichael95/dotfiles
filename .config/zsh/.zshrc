@@ -16,8 +16,8 @@ source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring
 [[ -e /usr/share/doc/pkgfile/command-not-found.zsh ]] && source /usr/share/doc/pkgfile/command-not-found.zsh
 
 # Use skim
-source $XDG_DATA_HOME/skim/shell/key-bindings.zsh
-source $XDG_DATA_HOME/skim/shell/completion.zsh
+#source $XDG_DATA_HOME/skim/shell/key-bindings.zsh
+#source $XDG_DATA_HOME/skim/shell/completion.zsh
 
 # rvm
 eval "$(rbenv init -)"
@@ -221,3 +221,4 @@ eval "$(thefuck --alias)":
 
 # start starship prompt
 eval "$(starship init zsh)"
+

@@ -1,13 +1,13 @@
 ; Global settings
 [general]
 ; Set the day and night screen temperatures
-;temp-day=25000
-temp-night=2500
+temp-day=5700
+temp-night=2000
 
 ; Disable the smooth fade between temperatures when Redshift starts and stops.
 ; 0 will cause an immediate change between screen temperatures.
 ; 1 will gradually apply the new screen temperature over a couple of seconds.
-fade=5
+fade=1
 
 ; Solar elevation thresholds.
 ; By default, Redshift will use the current elevation of the sun to determine
@@ -29,17 +29,15 @@ fade=5
 ; It is also possible to use different settings for day and night
 ; since version 1.8.
 brightness-day=1.0
-brightness-night=0.5
+brightness-night=0.1
 ; Set the screen gamma (for all colors, or each color channel
 ; individually)
 ;gamma=0.8
-;gamma=0.8:0.7:0.8
+;gamma=0.8:0.8:0.6
 ; This can also be set individually for day and night since
 ; version 1.10.
-;gamma-day=1.0.:1.0:1.0
-gamma-night=0.8:0.8:0.4
-gamma-day=1.0
-;gamma-night=0.8
+gamma-day=0.8:0.7:0.8
+gamma-day=0.8:0.8:0.6
 
 ; Set the location-provider: 'geoclue2', 'manual'.
 ; The location provider settings are in a different section.
@@ -68,3 +66,5 @@ adjustment-method=wayland
 ; If this option is not specified, Redshift will try to adjust _all_ screens.
 [randr]
 screen=0
+
+

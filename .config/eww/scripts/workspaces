@@ -152,6 +152,6 @@ works=""
 }
 
 workspaces
-socat -u "UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" - | while IFS="\n" read -r line; do
+socat -u "UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" - | while IFS="\n" read -r line; do
     [ "workspace>>" = "$(echo $line | cut -c1-11)" ] && workspaces
 done

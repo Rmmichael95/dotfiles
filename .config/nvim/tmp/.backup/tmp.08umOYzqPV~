@@ -1,0 +1,3 @@
+# sudo sysctl -w dev.hpet.max-user-freq=2048
+source /etc/profile
+export ZDOTDIR=$HOME/.config/zsh

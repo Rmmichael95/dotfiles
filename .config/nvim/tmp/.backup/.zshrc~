@@ -16,8 +16,8 @@ source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring
 [[ -e /usr/share/doc/pkgfile/command-not-found.zsh ]] && source /usr/share/doc/pkgfile/command-not-found.zsh
 
 # Use skim
-source $XDG_DATA_HOME/skim/shell/key-bindings.zsh
-source $XDG_DATA_HOME/skim/shell/completion.zsh
+#source $XDG_DATA_HOME/skim/shell/key-bindings.zsh
+#source $XDG_DATA_HOME/skim/shell/completion.zsh
 
 # rvm
 eval "$(rbenv init -)"
@@ -199,8 +199,8 @@ alias ls='lsd'
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
 alias path='echo -e ${PATH//:/\\n}'
-alias vim='source ~/.local/share/nvim/.venv/bin/activate && nvim'
-alias nv='source ~/.local/share/nvim/.venv/bin/activate && nvim'
+alias vim='nvim'
+alias nv='nvim'
 alias virc='nv $XDG_CONFIG_HOME/nvim'
 alias zshrc='nv $XDG_CONFIG_HOME/zsh/zshrc'
 alias poweroff='dinitctl shutdown && doas-askpass poweroff'
@@ -211,6 +211,10 @@ alias mbsync='mbsync -c "$XDG_CONFIG_HOME"/isync/mbsyncrc'
 alias scron='su -c "crontab -e"'
 #alias upd="sudo reflector --verbose --threads 8 --country 'US,CA' --protocol https --sort rate --save /etc/pacman.d/mirrorlist && doas pacman -Syu"
 alias upda="doas reflector --verbose --threads 8 --country 'US,CA' --protocol https --sort rate --save /etc/pacman.d/mirrorlist-arch && doas pacman -Syu"
+
+# alacritty completions
+fpath+=${ZDOTDIR:-~}/.zsh_functions
+
 # You can use whatever you want as an alias, like for Mondays:
 #eval "$(thefuck --alias FUCK)"
 eval "$(thefuck --alias)":
@@ -218,4 +222,4 @@ eval "$(thefuck --alias)":
 # start starship prompt
 eval "$(starship init zsh)"
 
-fpath+=${ZDOTDIR:-~}/.zsh_functions
+source /etc/profile.d/*

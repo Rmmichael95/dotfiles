@@ -23,7 +23,7 @@ export WM="$(cat /home/ryanm/.local/share/wm 2>/dev/null)"
 export ARCHFLAGS="-arch x86_64"
 
 # makeflags
-export MAKEFLAGS="-j9 -l8"
+export MAKEFLAGS="-j13 -l12"
 
 # Default programs:
 # Preferred editor for local and remote sessions
@@ -125,3 +125,7 @@ export DOAS_ASKPASS="dmenu -b -P -p password:"
 export WINEFSYNC=1
 
 #export $(dbus-launch)
+
+#export DEBUGINFOD_URLS="https://debuginfod.archlinux.org"
+
+source /etc/profile.d/*

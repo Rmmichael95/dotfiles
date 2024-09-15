@@ -87,7 +87,7 @@ get_time() {
     # BATSTATUS="$(cat /sys/class/power_supply/${BAT}/status)"
     #if [ BATSTATUS = "Discharging" ]; then
     if [ "$(acpi -b | awk '{print $3}' | head -n 1)" = "Discharging," ]; then
-      echo "󱧥 $(cat /sys/class/power_supply/${BAT}/capacity)% $(acpi -b | awk '{print $5}' | head -n 1)"
+      echo "󱧥 $(cat /sys/class/power_supply/${BAT}/capacity)% $(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | rg "time to empty:" | awk '{print $4 " " $5}')"
     else
       echo "󱧥 $(cat /sys/class/power_supply/${BAT}/capacity)%"
     fi
@@ -106,4 +106,4 @@ elif [ "$1" = "--time" ]; then
     get_time
 fi
 
-# vim:filetpe=sh
+# vim:ft=sh

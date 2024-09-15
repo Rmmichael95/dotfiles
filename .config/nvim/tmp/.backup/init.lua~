@@ -9,7 +9,7 @@ local cmd = vim.cmd -- vim command
 g.python3_host_prog = '/usr/bin/python3'
 --cmd([[let g:python3_host_prog '/home/ryanm/.local/share/nvim/.venv/bin/python3']])
 -- set system ruby
-g.ruby_host_prog = '/home/ryanm/.local/share/ruby/rbenv/versions/3.1.2/bin/neovim-ruby-host'
+--g.ruby_host_prog = '/home/ryanm/.local/share/ruby/rbenv/versions/3.1.2/bin/neovim-ruby-host'
 --cmd([[let g:ruby_host_prog = '/home/ryanm/.local/ruby/rbenv/versions/3.1.2/bin/neovim-ruby-host']])
 
 cmd('syntax on')
@@ -51,13 +51,13 @@ g.browsedir     = 'buffer'  -- put up directory requestor
 opt.hlsearch    = false     -- don't highlight for searching
 opt.ignorecase  = true      -- ignore case for pattern matching
 opt.clipboard   = 'unnamedplus' -- copy with system clipboard
-opt.modeline    = true     -- the modeline is a well-known security risk
+opt.modeline    = false     -- the modeline is a well-known security risk
 
 -- set colorscheme
 opt.termguicolors = true      -- enable 24bit colors in TUI, uses guibg/guifg
 opt.background    = 'dark'    -- set background dark/light
 g.everforest_transparent_background = 1 -- keep transparent guibg
-cmd('let g:everforest_background = "medium"') -- use everforest colorscheme; plays nice with redshift
+--cmd('let g:everforest_background = "medium"') -- use everforest colorscheme; plays nice with redshift
 cmd('let g:everforest_better_performance = 1') -- use everforest colorscheme; plays nice with redshift
 cmd('colorscheme everforest') -- use everforest colorscheme; plays nice with redshift
 -- highlight 81st column darkred on lines that run long

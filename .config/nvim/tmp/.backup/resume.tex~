@@ -6,8 +6,6 @@
 \usepackage{fancyhdr}
 \usepackage{varwidth}
 \usepackage{multicol}
-\usepackage[hidelinks]{hyperref}
-\hypersetup{colorlinks=true,urlcolor=blue}
 \setlength{\columnsep}{1cm}
 
 \renewcommand{\maketitle}{
@@ -23,14 +21,11 @@ Energetic team leader excited to get back to work
 }
 
 \pagestyle{fancy}
-\lhead{%
-  \textsc{\Huge Ryan M Sullivan}
-  \small {\\GitHub: \href{https://github.com/Rmmichael95}{https://github.com/Rmmichael95}}
-          \\LinkedIn: \href{https://www.linkedin.com/in/Rmmichael95}{https://www.linkedin.com/in/Rmmichael95}}
+\lhead{\textsc{\Huge Ryan M Sullivan\\ \small Energetic team leader excited to get back to work.}}
 \rhead{%
   \begin{varwidth}[b]{10cm}
   \raggedright
-  \textsc{9350 S Cimarron rd Unit 2038\\ Las Vegas, NV 89178\\ (949) 514-5329\\ \href{mailto:Rmmichael95@gmail.com}{Rmmichael95@gmail.com}}%
+  \textsc{13122 Magnolia St J7\\ Garden Grove, CA 92844\\ (949) 514-5329\\ Rmmichael95@gmail.com}%
   \end{varwidth}
 }
 \setlength{\headheight}{80pt}
@@ -52,19 +47,19 @@ Energetic team leader excited to get back to work
 
 \section{Experience}
 \subsection{June Mountain} -- June Lake, CA
-\subsubsection{Lift Operator:} December 2021 -- April 2022
+\subsubsection{Lift Operator:} December 2021 -- Current
 \begin{itemize}
-\item{Opening \& closing lift/maintaining area}
-\item{Ensure guests reach the top of the lift both safe \& excited}
+\item{Opening and closing lift/ maintaining area}
+\item{Ensure guests reach the top of the lift both safe and excited}
 \item{Assist small children safely on/off the lift}
-\item{Assist guests with questions/concerns \& luggage}
-\item{Interact with first timer skiers with an infectiously confident attitude}
+\item{Assist guests with questions/concerns and luggage}
+\item{Interact with first timer skiers with an infectously confident attitude}
 \end{itemize}
 
 \subsection{Five Crowns} -- Corona Del Mar, CA
 \subsubsection{Host, Busser, Barback:} October 2019 -- October 2020
 \begin{itemize}
-\item{Assisted guests over the phone with reservations, orders, \& general questions}
+\item{Assisted guests over the phone with reservations, orders, and general questions}
 \item{Assisted servers with guests in their sections, including: refilling drinks, running food, clearing dishes}
 \item{Assisted bartenders with their stations, including: dishes, fetching alcohol bottles, pouring beer/wine}
 \end{itemize}
@@ -72,36 +67,33 @@ Energetic team leader excited to get back to work
 \subsection{Muscle Maker Grill} -- Irvine, CA
 \subsubsection{Shift Lead:} April 2019 -- October 2019
 \begin{itemize}
-\item{Managed store opening \& closing procedures}
-\item{Established effective employee schedules \& delegated tasks to take
-    advantage of individual abilities \& to meet expected demands}
-\item{Applied security, safety, \& loss-prevention strategies during shifts—including key holding, tip distribution, \& properly securing the restaurant during closing}
-\item{Trained new employees \& leveraged individual strengths to maximize efficiency}
+\item{Managed store opening and closing procedures}
+\item{Established effective employee schedules and delegated tasks to take
+    advantage of individual abilities and to meet expected demands}
+\item{Applied security, safety, and loss-prevention strategies during shifts—including key holding, tip distribution, and properly securing the restaurant during closing}
+\item{Trained new employees and leveraged individual strengths to maximize efficiency}
 \end{itemize}
 
 \columnbreak
 
 \section{Skills}
 \begin{itemize}
-\item{Time management}
-\item{Problem-solving}
-\item{Communication}
-\item{System architecture}
-\item{Terminal, scripting \& automation of tasks}
-\item{Linux \& UNIX Systems}
-\item{Networking \& DNS}
-\item{Determine \& configure hardware/peripheral  settings}
-\item{Management of system components \& files}
-\item{Management of security, permissions, \& user settings}
+\item{Conflict resolution}
+\item{Customer service}
+\item{POS and delivery services}
+\item{Sense of urgency}
+\item{Beer, wine, and spirits}
 \end{itemize}
 
-\section{Certifications}
-\subsection{Linux Professional Institute} --
-\subsubsection{\href{https://cs.lpi.org/caf/Xamman/certification/verify/LPI000569076/avmxtz9g5n}{LPIC-1}}
+\section{Credentials}
+\subsubsection{California Food Handlers Card} -- Current
+
+\section{Awards}
+\subsubsection{Panera Employee of the Month} -- April 2019
 
 \section{Education}
 \subsection{Orange Coast College} -- Costa Mesa, CA
-\subsubsection{Computer Science \& Mathematics}
+\subsubsection{I attended OCC for Mathematics and Computer Science}
 
 \subsection{Laguna Beach High} -- Laguna Beach, CA
 \subsubsection{High School Diploma from Laguna Beach High School}
