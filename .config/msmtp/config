@@ -11,3 +11,15 @@ tls_trust_file	/etc/ssl/certs/ca-certificates.crt
 logfile /home/ryanm/.config/msmtp/msmtp.log
 # tls_starttls
 
+account Rmmichael95@gmail.com
+host smtp.gmail.com
+port 587
+from Rmmichael95@gmail.com
+user Rmmichael95@gmail.com
+passwordeval "pass Rmmichael95@gmail.com"
+auth on
+tls on
+tls_trust_file	/etc/ssl/certs/ca-certificates.crt
+logfile /home/ryanm/.config/msmtp/msmtp.log
+# tls_starttls
+

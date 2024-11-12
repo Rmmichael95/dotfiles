@@ -1,3 +1,1 @@
-#echo "/zsh/zprofile"
-
-#[ ! -f $HOME/.profile ] && . $HOME/.profile
+emulate sh -c 'source /etc/profile'

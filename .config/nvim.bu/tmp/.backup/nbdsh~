@@ -1,0 +1,40 @@
+#!/bin/sh -
+# Copyright Red Hat
+#
+# sh/nbdsh.  Generated from nbdsh.in by configure.
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+
+# macOS's System Integrity Protection (SIP) misfeature removes the
+# DYLD_LIBRARY_PATH environment variable when passed to Apple (only)
+# binaries such as /bin/sh above.  We must restore it here.  Confine
+# this hack to Darwin only so it doesn't cause potential security
+# issues on normal platforms.
+case "linux-gnu" in
+    darwin*)
+	if test -z "$DYLD_LIBRARY_PATH" && test -n "$_DYLD_LIBRARY_PATH"; then
+	    DYLD_LIBRARY_PATH="$_DYLD_LIBRARY_PATH"
+	    export DYLD_LIBRARY_PATH
+	fi
+	;;
+esac
+
+# Test if /bin/sh supports exec -a option (only supported in bash 4.2
+# and above, and not part of POSIX).
+if /bin/sh -c 'exec -a test true' 2>/dev/null; then
+    exec -a nbdsh python3 -mnbd "$@"
+else
+    exec          python3 -mnbd "$@"
+fi

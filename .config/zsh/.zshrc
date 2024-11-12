@@ -195,7 +195,8 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
-alias ls='lsd'
+#alias ls='lsd'
+alias ls='eza'
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
 alias path='echo -e ${PATH//:/\\n}'
@@ -221,4 +222,3 @@ eval "$(thefuck --alias)":
 
 # start starship prompt
 eval "$(starship init zsh)"
-

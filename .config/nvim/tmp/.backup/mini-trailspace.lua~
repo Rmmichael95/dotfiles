@@ -1,0 +1,8 @@
+return {
+	"echasnovski/mini.trailspace",
+
+	lazy = false,
+	opts = {
+		only_in_normal_buffers = true,
+	},
+}

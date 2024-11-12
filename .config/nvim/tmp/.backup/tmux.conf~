@@ -1,0 +1,219 @@
+# Maintainer: Ryan M Sullivan
+# Last Change: February 5, 2018
+# ------------------------------------------------------------------------------
+# Tmux Config
+# -------------------------------------------------------------------------- {{{
+# ========{ Settings }====================================================== {{{
+# history
+set -g history-limit 10000
+# shorten command display
+set -s escape-time 0
+# ========{ Intput Settings }=============================================== {{{
+# set command prefix for tmux
+set-option -g prefix C-,
+unbind C-b
+# bind a reload key
+bind R source-file ~/.tmux.conf \; display-message "  Configuration reloaded.."
+# toggle statusbar
+bind c new-window -a -c '#{pane_current_path}'
+# ----------------------
+# Copy & Paste
+# ----------------------
+# provide access to the clipboard for pbpaste, pbcopy
+set-option -g default-command "reattach-to-user-namespace -l zsh"
+set-window-option -g automatic-rename on
+# use vim keybindings in copy mode
+setw -g mode-keys vi
+set -w -g mode-keys vi
+set -w -g xterm-keys on
+#bind Escape copy-mode
+bind C-y copy-mode
+# bind -t vi-copy Escape cancel
+unbind [
+unbind p
+bind p paste-buffer
+# setup 'v' to begin selection as in Vim
+# bind-key -t vi-copy v begin-selection
+# bind -t vi-copy V rectangle-toggle
+# bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
+# update default binding of 'Enter' to also use copy-pipe
+# unbind -t vi-copy Enter
+# bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
+bind y run 'tmux save-buffer - | reattach-to-user-namespace pbcopy '
+bind C-y run 'tmux save-buffer - | reattach-to-user-namespace pbcopy '
+# buffer
+bind space choose-buffer
+# for tmux-yank
+set -g @shell_mode 'vi'
+set -g @yank_selection 'primary'
+# ----------------------
+# shell
+set -g default-command /bin/zsh
+set -g default-shell /bin/zsh
+# repeat last vim command in right pane
+bind r select-pane -t 2 \; send-keys : Up Enter \; last-pane
+# }}}
+# }}}
+# ========{ Keybinds }====================================================== {{{
+# rebind pane splitting
+unbind %
+bind - split-window -c '#{pane_current_path}'
+unbind '"'
+bind '\' split-window -h -c '#{pane_current_path}'
+
+# make current window the first window
+bind T swap-window -t 1
+
+# resize panes using PREFIX H, J, K, L
+bind H resize-pane -L 5
+bind J resize-pane -D 5
+bind K resize-pane -U 5
+bind L resize-pane -R 5
+
+#mouse on, pane selecting and resizing
+set -g mouse on
+
+# set vi mode keys
+setw -g mode-keys vi
+
+#set vim movement around panes
+unbind l
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+bind b previous-window # replace rebound l
+
+# allow terminal scrolling
+set-option -g terminal-overrides 'xterm*:smcup@:rmcup@'
+
+bind T \
+  splitw -h -c '/home/ryanm/Documents' -p 20 \; \
+  send 'c' 'a' 't' ' ' 't' 'o' 'd' 'o' 'L' 'i' 's' 't' '.' 't' 'x' 't' 'Enter' \; \
+  selectp -t 1
+
+# bind S \
+#   splitw -h -c '/home/ryanm/Documents' -p 20 \; \
+#   send 'c' 'a' 't' ' ' 'm' 'y' 'S' 'y' 'm' 'b' 'o' 'l' 's' '.' 'm' 'd' 'Enter' \; \
+#   selectp -t 1
+
+# movind panes around window
+unbind '{'
+unbind '}'
+bind < swap-pane -U
+bind > swap-pane -D
+
+#swap pane with prev window
+bind [ joinp -h -t :-
+
+#swap pane with next window
+bind ] joinp -h -t :+
+
+## Join windows: <prefix> s, <prefix> j
+bind j command-prompt -p "join pane from:"  "join-pane -s '%%'"
+bind s command-prompt -p "send pane to:"  "join-pane -t '%%'"
+
+#bind-key a \
+#    if 'test $(tmux lsp | wc -l) -gt 1' '' "splitw -h -c '#{pane_current_path}'" \; \
+#    send -t $TMUX_WINDOW.2 '.' '/' 'm' 'a' 'i' 'n' 'Enter'
+
+#bind-key s \
+#    if 'test $(tmux lsp | wc -l) -gt 2' '' 'selectp -t 2' \; \
+#    if 'test $(tmux lsp | wc -l) -gt 2' '' "splitw -c '#{pane_current_path}'" \; \
+#    send -t $TMUX_WINDOW.3 '.' '/' 'm' 'a' 'i' 'n' 'Enter'
+
+##swap pane 1 with window 1
+#bind-key d \
+#    if 'tmux selectw -t 1' '' 'splitw -h' \; \
+#    if 'test $(tmux lsp | wc -l) -gt 1' '' 'splitw -h' \; \
+#    if 'tmux selectw -t 2' '' 'neww -a' \; \
+#    selectw -t 1 \; \
+#    selectp -t 2 \; \
+#    joinp -t 2.1 \; \
+#    selectp -U \; \
+#    joinp -h -t 1.1 \; \
+#    lastp
+# }}}
+# ========{ Appearence }==================================================== {{{
+# start windows numbers at 1
+set -g base-index 1
+
+# start pane numbers at 1
+set -g pane-base-index 1
+
+# screen mode
+set -g default-terminal "screen-256color" # 256color term as of tmux2.1
+
+## Some colors  ##
+# set pane color - highlight active pane
+set -g pane-border-style bg=colour0,fg=colour7
+set -g pane-active-border-style bg=colour0,fg=colour4
+
+#modes
+setw -g mode-style bg=colour6,fg=colour0
+set -g clock-mode-colour colour4
+setw -g mode-style bold
+# ========{ Status-Bar }==================================================== {{{
+set-option -g status on       # turn on status bar
+set -g status-interval 5      # update frequency (default 15sec)
+set -g status-justify centre  # center window list
+set-option -g status-position top # status bar position: top
+
+# visual notification of activity in other vindows
+set -g monitor-activity on
+set -g visual-activity on
+
+# set color for status bar
+set -g status-style bg=default,fg=colour12
+
+# show host name and IP address on left side of status bar
+set -g status-left-length 70
+set -g status-left "#[fg=colour5]: #h : #[fg=colour6]#(curl icanhazip.com) #[fg=colour3]#(ifconfig en0 | grep 'inet ' | awk '{print \"en0 \" $2}') #(ifconfig en1 | grep 'inet ' | awk '{print \"en1 \" $2}') #[fg=colour9]#(ifconfig tun0 | grep 'inet ' | awk '{print \"vpn \" $2}') "
+
+# show session name, window & pane number, date and time on right side of status bar
+set -g status-right-length 60
+set -g status-right "#[fg=colour4]#S #I:#P #[fg=colour3]:: %d %b %Y #[fg=colour2]:: %l:%M %p ::"
+
+# window status
+setw -g window-status-format " #F#I:#W#F "
+setw -g window-status-current-format " #F#I:#W#F "
+setw -g window-status-format "#[bg=colour5]#[fg=colour0] #I #[bg=colour6]#[fg=colour0] #W "
+setw -g window-status-current-format "#[fg=colour5]#[bg=colour0] #I #[fg=colour0]#[bg=colour6] #W "
+setw -g window-status-current-style bg=colour0,fg=colour0
+setw -g window-status-style bg=green,fg=black,reverse
+setw -g window-status-style bg=colour0,fg=colour0,bold,reverse
+
+# messaging
+set -g message-command-style fg=blue,bg=black
+set -g message-style fg=colour8,bg=colour9,bold
+
+# bell
+setw -g window-status-bell-style fg=colour8,bg=colour9,bold
+
+# loud or quiet?
+set-option -g visual-activity off
+set-option -g visual-bell off
+set-option -g visual-silence off
+set-window-option -g monitor-activity off
+set-option -g bell-action none
+# }}}
+#}}}
+# ========{ Plugins }======================================================= {{{
+# List of plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'christoomey/vim-tmux-navigator'
+
+set -g @tpm_plugins '          \
+  tmux-plugins/tpm             \
+  tmux-plugins/tmux-yank       \
+  tmux-plugins/tmux-open       \
+  tmux-plugins/tmux-copycat    \
+  tmux-plugins/tmux-continuum  \
+  tmux-plugins/tmux-resurrect  \
+'
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'
+# }}}
+# }}}

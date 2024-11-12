@@ -1,0 +1,214 @@
+neofetch 
+paru -S xcursor-numix
+clear
+exit
+clear
+cd .config/
+ls
+cd nushell/
+ls
+ls -l
+clear
+ls -al
+exit
+ls
+exit
+starship 
+exit
+lsd
+exit
+lsd
+ls
+clear
+exit
+ls -al ~
+ls -a ~
+exit
+nvim config.nu
+cd .config/nushell/
+nvim .config/nvim/lua/config/plugins/linting.lua
+nvim config.nu
+dc
+cd .config/nushell/
+nvim config.nu
+cd .config/nushell/
+nvim config.nu
+nvim env.nu
+cd .config/nushell/
+nvim env.nu
+cd .config/
+ls .env
+envsubst < .env
+bat .env
+nvim .env
+cd
+bat .config/zsh/.zshenv
+fd .local/bin/ -type d -printf ":%p"
+fd .local/bin/ --type d -printf ":%p"
+fd .local/bin/ --type d --printf ":%p"
+fd .local/bin/ --type d --print0 ":%p"
+fd --type d --print0 ":%p" .local/bin/
+fd -h
+fd --type d .local/bin/
+fd . --type d .local/bin/
+fd . -t d .local/bin/
+man fd
+fd --type d --print0 .local/bin/
+fd . --type d --print0 .local/bin/
+lz .local/bin/
+ls .local/bin/
+lz .local/bin/myBin/
+ls .local/bin/myBin/
+fd . --type d --print0 .local/bin/myBin/
+fd . --type d .local/bin/myBin/
+nvim .config/nushell/env.nu
+help path
+help usage path
+help path
+fd . --type d $HOME/.local/bin/myBin/
+fd . --type d "$HOME"/.local/bin/myBin/
+fd . --type d "$HOME/.local/bin/myBin/"
+fd . --type d '$HOME/.local/bin/myBin/'
+fd . --type d $HOME/.local/bin/myBin/
+fd . --type d ~/.local/bin/myBin/
+doasedit /etc/adjtime
+nvim .config/zsh/.zshenv
+fd . --type d ~/.local/bin/myBin/
+cat .config/zsh/.zshenv
+fd . --type d ~/.local/bin/
+fd . -t d ~/.local/bin/myBin/
+cat .config/zsh/.zshenv
+nvim .config/nushell/env.nu
+fastfetch 
+nvim .config/pacman/makepkg.conf
+nvim .config/.env
+nvim .config/zsh/.zshenv
+nvim .config/pacman/makepkg.conf
+ls
+ls -a
+systemd-analyze
+systemctl suspend
+su
+cat /sys/power/mem_sleep
+doas systemctl status suspend.target sleep.target hubernate.target
+systemctl status suspend.target sleep.target hubernate.target
+systemctl status suspend.target sleep.target hibernate.target
+exit
+doasedit /etc/systemd/logind.conf
+lsblk
+doasedit /etc/initcpio/hooks/openswap
+doasedit /etc/mkinitcpio.conf
+doas mkinitcpio  -P
+doas mkinitcpio -P
+ls /etc/initcpio/
+ls /etc/initcpio/hooks/
+doasedit /etc/initcpio/install/openswap
+doas mkinitcpio -P
+doas reboot
+./.config/eww/scripts/launch_bar
+systemctl hibernate
+doasedit /etc/systemd/logind.conf
+doas reboot
+./.config/eww/scripts/launch_bar
+ls
+clear
+fastfetch 
+./.config/eww/scripts/launch_bar
+doasedit /etc/systemd/logind.conf
+cd .local/src/
+wget https://aur.archlinux.org/cgit/aur.git/snapshot/mkinitcpio-openswap.tar.gz
+tar zxvf mkinitcpio-openswap.tar.gz && rm mkinitcpio-openswap.tar.gz
+tar zxvf mkinitcpio-openswap.tar.gz; rm mkinitcpio-openswap.tar.gz
+cd mkinitcpio-openswap/
+ls /etc/cryptsetup-keys.d/
+doas ls /etc/cryptsetup-keys.d/
+doas ls -a /etc/cryptsetup-keys.d/
+doas ls -a /etc/crypt-keys.d/
+doas ls -a /etc/cryptsetup-keys.d/
+doas cp -r /etc/crypt-keys.d/* /etc/cryptsetup-keys.d/
+nvim /etc/mkinitcpio.conf
+nvim /etc/default/grub
+doasedit /etc/default/grub
+doasedit /etc/mkinitcpio.conf
+doasedit /etc/initcpio/hooks/openswap
+doas grub-mkconfig -o /boot/grub/grub.cfg
+doas mkinitcpio -P
+nvim openswap.conf
+nvim openswap.hook
+doas make install
+doas rm -rf /etc/initcpio/hooks/openswap
+doas rm -rf /etc/initcpio/install/openswap
+cd .local/src/mkinitcpio-openswap/
+install -Dm 644 openswap.hook "${pkgdir}/usr/lib/initcpio/hooks/openswap"
+ls /usr/lib/initcpio/hooks/
+cp openswap.conf /etc/
+cp openswap.hook /etc/initcpio/hooks/openswap
+cp openswap.install /etc/initcpio/install/openswap
+doas grub-mkconfig -o /boot/grub/grub.cfg
+grub-mkconfig -o /boot/grub/grub.cfg
+mkinitcpio -P
+cat openswap.install
+exit
+lsd
+ls
+rm -rf /etc/openswap.conf
+doas rm -rf /etc/openswap.conf
+doas rm -rf /etc/initcpio/install/openswap
+doas rm -rf /etc/initcpio/hooks/openswap
+doas edit /etc/initcpio/hooks/openswap
+doasedit /etc/initcpio/hooks/openswap
+doasedit /etc/initcpio/install/openswap
+doas mkinitcpio -P
+nvim /etc/initcpio/hooks/openswap
+nvim /etc/initcpio/install/openswap
+nvim /etc/initcpio/hooks/openswap
+doas mkinitcpio -P
+nvim /etc/default/grub
+ls
+nvim .config/zsh/.zshenv
+cd .config/nushell/
+./.config/eww/scripts/launch_bar
+nvim .config/nushell/config.nu
+cd .config/nvim/lua/config/plugins/
+nvim lsp/mason.lua
+nvim lsp/lspconfig.lua
+cd .config/nvim/
+nvim init.lua
+rm -rf `1`
+nvim init.lua
+nvim .config/nushell/config.nu
+cd .config/nvim/
+nvim init.lua
+nvim .config/nushell/config.nu
+cd .config/nvim/
+..
+cd nushell/
+nvim config.nu
+cd .local/share/locals/twinquestlinux/app/public/
+ls
+ls wp-content/themes/twinquestlinux/
+cd wp-content/themes/twinquestlinux/
+clear
+ls
+nvim header.php
+cd .config/nushell/
+nvim config.nu
+nvim ../nvim/lua/config/plugins/formatting.lua
+nvim ../nvim/lua/config/plugins/linting.lua
+cd .config/nushell/
+nvim index.php
+nvim page.php
+cd .config/nvim/lua/config/plugins/
+nvim lsp/mason.lua
+nvim formatting.lua
+nvim lsp/mason.lua
+doas pacman -Syu
+doas pacman -S typescript
+nvim config.nu
+nvim .config/hypr/hyprland.conf
+nvim .config/nushell/config.nu
+nvim .config/nvim/ftdetect/filetype.lua
+doas pacman -S zoxide
+nvim .config/nushell/config.nu
+nvim .config/nushell/env.nu
+nvim .config/hypr/hyprland.conf

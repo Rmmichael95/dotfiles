@@ -51,13 +51,14 @@ eval $(/usr/bin/gpg-agent --daemon --enable-ssh-support --sh)
 get_session(){
     local dbus_args=(--sh-syntax --exit-with-session)
     case "$WM" in
-        dwm) dbus_args+=(ssh-agent dwm) ;;
+#        dwm) dbus_args+=(ssh-agent dwm) ;;
+#        dwm) dbus-launch ssh-agent dwm) ;;
         awesome) dbus_args+=(ssh-agent awesome) ;;
         xmonad) dbus_args+=(ssh-agent xmonad) ;;
                 *) dbus-launch ssh-agent dwm ;; #prev dbuslaunch at end
     esac
 
-    echo "dbus-launch ${dbus_args[*]}"
+#    echo "dbus-launch ${dbus_args[*]}"
 }
 
 #exec $(get_session)

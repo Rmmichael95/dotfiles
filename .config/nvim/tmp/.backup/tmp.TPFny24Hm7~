@@ -1,0 +1,31 @@
+# Static information about the filesystems.
+# See fstab(5) for details.
+
+# <file system> <dir> <type> <options> <dump> <pass>
+# /dev/mapper/cryptroot LABEL=ROOT
+UUID=f8586e40-9306-47a8-bd5d-e88ea53df5d1	/         	btrfs     	rw,relatime,compress-force=zstd:3,ssd,space_cache=v2,subvolid=256,subvol=/@	0 0
+
+# /dev/mapper/cryptroot LABEL=ROOT
+UUID=f8586e40-9306-47a8-bd5d-e88ea53df5d1	/home     	btrfs     	rw,relatime,compress-force=zstd:3,ssd,space_cache=v2,subvolid=257,subvol=/@home	0 0
+
+# /dev/mapper/cryptroot LABEL=ROOT
+UUID=f8586e40-9306-47a8-bd5d-e88ea53df5d1	/.snapshots	btrfs     	rw,relatime,compress-force=zstd:3,ssd,space_cache=v2,subvolid=262,subvol=/@snapshots	0 0
+
+# /dev/mapper/cryptroot LABEL=ROOT
+UUID=f8586e40-9306-47a8-bd5d-e88ea53df5d1	/nix      	btrfs     	rw,relatime,compress-force=zstd:3,ssd,space_cache=v2,subvolid=261,subvol=/@nix	0 0
+
+# /dev/mapper/cryptroot LABEL=ROOT
+#UUID=f8586e40-9306-47a8-bd5d-e88ea53df5d1	/var/lib/flatpak      	btrfs     	rw,relatime,compress-force=zstd:3,ssd,space_cache=v2,subvolid=261,subvol=/@var_lib_flatpak	0 0
+
+# /dev/mapper/cryptroot LABEL=ROOT
+UUID=f8586e40-9306-47a8-bd5d-e88ea53df5d1	/var/log  	btrfs     	rw,relatime,compress-force=zstd:3,ssd,space_cache=v2,subvolid=259,subvol=/@var_log	0 0
+
+# /dev/mapper/cryptroot LABEL=ROOT
+UUID=f8586e40-9306-47a8-bd5d-e88ea53df5d1	/var/cache	btrfs     	rw,relatime,compress-force=zstd:3,ssd,space_cache=v2,subvolid=260,subvol=/@var_cache	0 0
+
+# /dev/nvme0n1p1 LABEL=EFI
+UUID=B35D-2E7F      	/efi      	vfat      	rw,relatime,fmask=0077,dmask=0077,codepage=437,iocharset=ascii,shortname=mixed,utf8,errors=remount-ro	0 2
+
+# /dev/mapper/cryptswap LABEL=SWAP
+UUID=487b9d73-2db7-46b7-ae4c-50f29e56eb4e	none      	swap      	defaults  	0 0
+

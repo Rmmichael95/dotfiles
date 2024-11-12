@@ -1,14 +1,12 @@
-#echo "/zsh/zshenv"
-
 # PATH
 #typeset -U PATH path
 #path=("$PATH" "/usr/local/sbin/" "/usr/local/bin/" "/usr/sbin/" "/usr/bin/" "/sbin/" "/bin/" "/usr/lib/ccache/bin/" "$HOME/.local/bin/" "$HOME/Documents/Notes/" "$HOME/.local/bin/statusbar/" "$HOME/.local/share/skim/bin/" "$path[@]")
-export PATH="$PATH:/usr/local/sbin/:/usr/local/bin/:/usr/sbin/:/usr/bin/:/sbin/:/bin/:/usr/lib/ccache/bin/:$HOME/.local/bin/:$HOME/.local/share/skim/bin/:$HOME/.local/share/npm/bin/:$HOME/.local/share/go/bin/:$HOME/.local/bin/myBin/:$HOME/.local/bin/myBin/statusbar/:$HOME/.local/bin/myBin/doas/:$HOME/.local/bin/myBin/menu/:$HOME/.local/bin/myBin/hypr"
+export PATH="$PATH:/usr/local/sbin/:/usr/local/bin/:/usr/sbin/:/usr/bin/:/sbin/:/bin/:/usr/lib/ccache/bin/:$HOME/.local/bin/:$HOME/.local/share/npm/bin/:$HOME/.local/bin/myBin/:$HOME/.local/bin/myBin/doas/:$HOME/.local/bin/myBin/menu/:$HOME/.local/bin/myBin/hypr:$HOME/.config/composer/vendor/bin/"
 export PATH
 # MANPATH
 export MANPATH="$MANPATH:/usr/local/man:"
 # CDPATH
-export CDPATH="$CDPATH:.:$HOME/documents/batcave"
+#export CDPATH="$CDPATH:.:$HOME/documents/batcave"
 
 # You may need to manually set your language environment
 export LANG="en_US.UTF-8"
@@ -23,7 +21,7 @@ export WM="$(cat /home/ryanm/.local/share/wm 2>/dev/null)"
 export ARCHFLAGS="-arch x86_64"
 
 # makeflags
-export MAKEFLAGS="-j13 -l12"
+export MAKEFLAGS="-j$(nproc)"
 
 # Default programs:
 # Preferred editor for local and remote sessions
@@ -66,7 +64,7 @@ export XAUTHORITY="$XDG_DATA_HOME"/sx/xauthority
 #doesnt seem to work with dxvk; got working
 export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
 
-export RBENV_ROOT="$XDG_DATA_HOME"/ruby/rbenv
+#export RBENV_ROOT="$XDG_DATA_HOME"/ruby/rbenv
 #if not using rbenv
 #export GEM_PATH="$XDG_DATA_HOME/ruby/gems"
 #export GEM_SPEC_CACHE="$XDG_DATA_HOME/ruby/specs"
@@ -123,9 +121,3 @@ export GPG_TTY
 export DOAS_ASKPASS="dmenu -b -P -p password:"
 
 export WINEFSYNC=1
-
-#export $(dbus-launch)
-
-#export DEBUGINFOD_URLS="https://debuginfod.archlinux.org"
-
-source /etc/profile.d/*

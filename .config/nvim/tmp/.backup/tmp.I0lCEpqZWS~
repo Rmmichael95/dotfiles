@@ -1,0 +1,5 @@
+run_hook ()
+{
+    cryptsetup open /dev/nvme0n1p2 cryptswap
+}
+

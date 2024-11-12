@@ -4,9 +4,5 @@
 -- Vim Configuration
 -- ------------------------------------------------------------------------ " {{{1
 
-require("plugins")
-require("init")
-require("autocomplete")
-require("autocmds")
-require("commands")
-require("mappings")
+require("config.core")
+require("config.lazy")
