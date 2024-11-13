@@ -61,17 +61,33 @@ if ($twinquestlinux_description || is_customize_preview()):
         </nav>
 
 
-        <!-- <nav id="site-navigation" class="main-navigation"> -->
-        <!--     <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e('Primary Menu', 'twinquestlinux'); ?></button> -->
-        <!--     <?php -->
-        <!--         wp_nav_menu( -->
-        <!--             array( -->
-        <!--                 'theme_location' => 'menu-1', -->
-        <!--                 'menu_id' => 'primary-menu', -->
-        <!--             ) -->
-        <!--         ); -->
-        <!--     ?> -->
-        <!-- </nav><!-- #site-navigation --> -->
+        <nav id="site-navigation" class="main-navigation">
+            <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e('Primary Menu', 'twinquestlinux'); ?></button>
+            <?php
+                wp_nav_menu(
+                    array(
+                        'menu'                 => '',
+                        'container'            => 'div',
+                        'container_class'      => '',
+                        'container_id'         => '',
+                        'container_aria_label' => '',
+                        'menu_class'           => '',
+                        'menu_id'              => '',
+                        'echo'                 => true,
+                        'fallback_cb'          => 'wp_page_menu',
+                        'before'               => '',
+                        'after'                => '',
+                        'link_before'          => '',
+                        'link_after'           => '',
+                        'items_wrap'           => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+                        'item_spacing'         => 'preserve',
+                        'depth'                => 0,
+                        'walker'               => '',
+                        'theme_location'       => '',
+                    );
+                );
+            ?>
+        </nav><!-- #site-navigation -->
 
 
     </header><!-- #masthead -->

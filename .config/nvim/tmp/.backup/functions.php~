@@ -159,7 +159,6 @@ add_action('wp_enqueue_scripts', 'twinquestlinux_scripts');
 
 /** Implement the Custom Header feature. */
 require get_template_directory() . '/inc/custom-header.php';
-add_theme_support('custom-header');
 
 /** Custom template tags for this theme. */
 require get_template_directory() . '/inc/template-tags.php';
@@ -182,3 +181,10 @@ function enqueue_bootstrap()
 }
 
 add_action('wp_enqueue_scripts', 'enqueue_bootstrap');
+
+function register_my_menu()
+{
+    register_nav_menu('header-menu', __('Header Menu'));
+}
+
+add_action('init', 'register_my_menu');
