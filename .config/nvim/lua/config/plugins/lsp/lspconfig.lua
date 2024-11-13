@@ -331,6 +331,7 @@ return {
 					},
 					environment = {
 						includePaths = {
+							"/home/ryanm/.config/composer/vendor/",
 							"/home/ryanm/.config/composer/vendor/php-stubs/",
 							"/home/ryanm/.config/composer/vendor/wpsyntex/",
 							"/home/ryanm/.config/composer/vendor/symfony/",

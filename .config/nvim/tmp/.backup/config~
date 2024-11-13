@@ -1,0 +1,7 @@
+# Personal GitHub
+Host github.com
+  HostName git@github.com:Rmmichael95/dotfiles.git
+  User Rmmichael95
+  IdentityFile ~/.ssh/github_id_rsa
+  IdentitiesOnly yes
+  UpdateHostKeys yes

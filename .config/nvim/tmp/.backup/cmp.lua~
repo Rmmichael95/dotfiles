@@ -13,7 +13,7 @@ return {
 		},
 		"saadparwaiz1/cmp_luasnip", -- for autocompletion
 		"rafamadriz/friendly-snippets", -- useful snippets
-		--"molleweide/luasnip_snippets.nvim",
+		"molleweide/luasnip-snippets.nvim",
 		"onsails/lspkind.nvim", -- vs-code like pictograms
 	},
 	config = function()

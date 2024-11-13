@@ -36,8 +36,8 @@ VCSCLIENTS=('bzr::bzr'
 CARCH="x86_64"
 CHOST="x86_64-pc-linux-gnu"
 
-export CC="clang"
-export CXX="clang++"
+#export CC="clang"
+#export CXX="clang++"
 #export CC="zig cc"
 #export CXX="zig cxx"
 
@@ -143,12 +143,12 @@ DBGSRCDIR="/usr/src/debug"
 COMPRESSGZ=(pigz -c -f -n --best)
 COMPRESSBZ2=(pbzip2 -c -f --best)
 COMPRESSXZ=(xz -c -z --threads=0 --best -)
-COMPRESSZST=(zstd -c -z -q --ultra -22 --threads=0 -)
+COMPRESSZST=(zstd -c -T0 --auto-threads=logical -)
 COMPRESSLRZ=(lrzip -9 -q)
 COMPRESSLZO=(lzop -q --best)
 COMPRESSZ=(compress -c -f)
 COMPRESSLZ4=(lz4 -q --best)
-COMPRESSLZ=(lzip -c -f)
+COMPRESSLZ=(plzip -c -f)
 
 #########################################################################
 # EXTENSION DEFAULTS

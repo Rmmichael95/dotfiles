@@ -175,8 +175,8 @@ windowrulev2 = float,class:^(Steam)$,title:^(Steam)$
 $mainMod = SUPER
 
 # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-#bind = $mainMod, return, exec, alacritty -e fish
-bind = $mainMod, return, exec, alacritty -e nu
+bind = $mainMod, return, exec, alacritty -e fish
+#bind = $mainMod, return, exec, alacritty -e nu
 bind = $mainMod, F, togglefloating,
 bind = $mainMod, R, exec, bemenu-hypr
 bind = $mainMod, P, pseudo, # dwindle

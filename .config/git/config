@@ -1,5 +1,7 @@
 [user]
 	name = Ryan M Sullivan
-	email = Deffpatch@gmail.com
+	email = RyanMSul@protonmail.com
 [core]
-	editor = nvim
+	editor = neovim
+[diff]
+	tool = vimdiff

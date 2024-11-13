@@ -56,10 +56,27 @@ export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:="$HOME/.config"}
 export XDG_STATE_HOME=${XDG_STATE_HOME:="$HOME/.local/state"}
 export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:="run/user/$UID"}
 
+# git
+# export GITCONFIG="$XDG_CONFIG_HOME"/git/config
+# export GITIGNORE="$XDG_CONFIG_HOME"/git/ignore
+# export GITATTRIBUTES="$XDG_CONFIG_HOME"/git/attributes
+# export GIT-CREDENTIALS="$XDG_CONFIG_HOME"/git/credentials
+# export GITK="$XDG_CONFIG_HOME"/git/gitk
+
+# XDG_CONFIG_HOME/git/config
+# XDG_CONFIG_HOME/git/ignore
+# XDG_CONFIG_HOME/git/attributes
+# XDG_CONFIG_HOME/git/credentials
+# XDG_CONFIG_HOME/git/gitk
+
+# gdb
+#XDG_CONFIG_HOME/gdb/gdbinit
+export GDBHISTFILE="$XDG_DATA_HOME"/gdb/history
+
 #startx
 #export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 #sx
-export XAUTHORITY="$XDG_DATA_HOME"/sx/xauthority
+#export XAUTHORITY="$XDG_DATA_HOME"/sx/xauthority
 
 #doesnt seem to work with dxvk; got working
 export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
@@ -119,5 +136,12 @@ export GPG_TTY
 
 #doas-askpass
 export DOAS_ASKPASS="dmenu -b -P -p password:"
+
+# ssh-agent
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+# gpg-agent as ssh-agent
+#export SSH_AGENT_PID=""
+#unset SSH_AGENT_PIDexport SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh"
 
 export WINEFSYNC=1

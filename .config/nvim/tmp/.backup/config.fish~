@@ -3,4 +3,6 @@ if status is-interactive
     eval (starship init fish)
 
     set -g fish_key_bindings fish_vi_key_bindings
+
+    set -Ux SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 end
