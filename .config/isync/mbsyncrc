@@ -1,22 +1,23 @@
 
-IMAPStore rmmichael95@gmail.com-remote
+
+IMAPStore Rmmichael95@gmail.com-remote
 Host imap.gmail.com
 Port 993
-User rmmichael95@gmail.com
-PassCmd "pass rmmichael95@gmail.com"
+User Rmmichael95@gmail.com
+PassCmd "pass Rmmichael95@gmail.com"
 AuthMechs LOGIN
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
-MaildirStore rmmichael95@gmail.com-local
+MaildirStore Rmmichael95@gmail.com-local
 Subfolders Verbatim
-Path /home/ryanm/.local/share/mail/rmmichael95@gmail.com/
-Inbox /home/ryanm/.local/share/mail/rmmichael95@gmail.com/INBOX
+Path /home/ryanm/.local/share/mail/Rmmichael95@gmail.com/
+Inbox /home/ryanm/.local/share/mail/Rmmichael95@gmail.com/INBOX
 
-Channel rmmichael95@gmail.com
+Channel Rmmichael95@gmail.com
 Expunge Both
-Far :rmmichael95@gmail.com-remote:
-Near :rmmichael95@gmail.com-local:
+Far :Rmmichael95@gmail.com-remote:
+Near :Rmmichael95@gmail.com-local:
 Patterns * !"[Gmail]/All Mail"
 Create Both
 SyncState *

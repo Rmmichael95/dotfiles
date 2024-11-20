@@ -1,0 +1,74 @@
+* {
+  all: unset;
+  font-family: "JetBrains Mono Nerd Font";
+  color: #d3c6aa;
+  font-size: 22px;
+}
+
+.bar_class {
+  padding: 6px 12px;
+  background-color: #15191c;
+  border-radius: 12px;
+  margin: 4px 4px 0 4px;
+
+  //background-color: transparent;
+}
+
+.main-container {
+  padding: 6px 12px;
+  background-color: #15191c;
+  border-radius: 12px;
+  margin: 3px 3px 0 3px;
+}
+
+.workspaces {
+  margin-left: 0px;
+  padding-left: 0px;
+}
+
+.o {
+  color: #4b565c;
+}
+
+.of {
+  color: #d3c6aa;
+}
+
+.time {
+  background: transparent;
+}
+
+.systray {
+  padding-right: 8px;
+}
+
+.cal {
+  border-radius: 12px;
+  background-color: #15191c;
+}
+
+calendar {
+  color: #4b565c;
+}
+
+calendar:selected {
+  color: #d3c6aa;
+}
+
+calendar.header {
+  color: #a1bdce;
+  font-weight: bold;
+}
+
+calendar.button {
+  color: #afbea2;
+}
+
+calendar.highlight {
+  color: #a1bdce;
+  font-weight: bold;
+}
+
+calendar:indeterminate {
+  color: #242424;
+}

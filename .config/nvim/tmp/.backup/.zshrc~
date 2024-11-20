@@ -196,6 +196,7 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 #alias ls='lsd'
+alias ls='eza'
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
 alias path='echo -e ${PATH//:/\\n}'
@@ -221,3 +222,13 @@ eval "$(thefuck --alias)":
 
 # start starship prompt
 eval "$(starship init zsh)"
+
+# yazi wrapper, exit to cwd
+function y() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+        builtin cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
+}

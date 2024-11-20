@@ -20,74 +20,43 @@ if ($twinquestlinux_description || is_customize_preview()):
             <?php endif; ?>
         </div><!-- .site-branding -->
 
+        <?php the_header_image_tag(); ?>
 
-        <!-- <?php the_header_image_tag(); ?> -->
 
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <nav class="navbar bg-body-tertiary fixed-top navbar-expand-lg">
           <div class="container-fluid">
-            <a class="navbar-brand" href="#">></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="#">Offcanvas navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="https://www.linkedin.com/in/rmmichael95/">Linkedin</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link active" href="https://github.com/Rmmichael95/dotfiles">Dotfiles</a>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Credentials
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="https://www.lpi.org/our-certifications/lpic-1-overview/">LPIC-1</a></li>
-                    <li><a class="dropdown-item" href="https://www.lpi.org/our-certifications/lpic-2-overview/">LPIC-2</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="https://cs.lpi.org/caf/Xamman/certification/verify/LPI000569076/avmxtz9g5n">Proof of Completion</a></li>
-                  </ul>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                </li>
-              </ul>
-              <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-              </form>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+              <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              </div>
+              <div class="offcanvas-body">
+
+                <?php
+                    wp_nav_menu(
+                        array(
+                            'theme_location' => 'menu-1',
+                            'menu_id' => 'primary-menu',
+                            'container' => 'false',
+                            'walker' => new Bootstrap_Navwalker(),
+                            'menu_class' => 'navbar-nav ms-auto mb-2 mb-lg-0',
+                        )
+                    );
+                ?>
+
+
+              </div>
             </div>
           </div>
         </nav>
 
 
-        <nav id="site-navigation" class="main-navigation">
-            <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e('Primary Menu', 'twinquestlinux'); ?></button>
-            <?php
-                wp_nav_menu(
-                    array(
-                        'menu'                 => '',
-                        'container'            => 'div',
-                        'container_class'      => '',
-                        'container_id'         => '',
-                        'container_aria_label' => '',
-                        'menu_class'           => '',
-                        'menu_id'              => '',
-                        'echo'                 => true,
-                        'fallback_cb'          => 'wp_page_menu',
-                        'before'               => '',
-                        'after'                => '',
-                        'link_before'          => '',
-                        'link_after'           => '',
-                        'items_wrap'           => '<ul id="%1$s" class="%2$s">%3$s</ul>',
-                        'item_spacing'         => 'preserve',
-                        'depth'                => 0,
-                        'walker'               => '',
-                        'theme_location'       => '',
-                    );
-                );
-            ?>
-        </nav><!-- #site-navigation -->
 
+          </div>
+        </div>
 
     </header><!-- #masthead -->

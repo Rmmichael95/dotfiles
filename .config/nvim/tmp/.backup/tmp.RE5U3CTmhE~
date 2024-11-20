@@ -1,0 +1,2 @@
+permit setenv { XAUTHORITY LANG LC_ALL } :wheel
+permit nopass :wheel cmd /usr/bin/xbacklight

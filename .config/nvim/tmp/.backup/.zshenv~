@@ -45,7 +45,7 @@ export GPG_TTY=$(tty)
 export QT_QPA_PLATFORMTHEME="qt5ct"
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 export WINEFSYNC=1
-export LIBVA_DRIVER_NAME="radeonsi"
+#export LIBVA_DRIVER_NAME="radeonsi"
 export NOTES_DIR="$HOME/documents/batcave/notes"
 export MAILSYNC_MUTE=1
 
@@ -55,6 +55,9 @@ export XDG_CACHE_HOME=${XDG_CACHE_HOME:="$HOME/.cache"}
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:="$HOME/.config"}
 export XDG_STATE_HOME=${XDG_STATE_HOME:="$HOME/.local/state"}
 export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:="run/user/$UID"}
+
+# nvidia
+export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
 
 # git
 # export GITCONFIG="$XDG_CONFIG_HOME"/git/config
@@ -69,6 +72,10 @@ export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:="run/user/$UID"}
 # XDG_CONFIG_HOME/git/credentials
 # XDG_CONFIG_HOME/git/gitk
 
+# latex
+export TEXMFVAR=$XDG_CACHE_HOME/texlive/texmf-var
+export TEXMFCONFIG=$XDG_CONFIG_HOME/texlive/texmf-config
+
 # gdb
 #XDG_CONFIG_HOME/gdb/gdbinit
 export GDBHISTFILE="$XDG_DATA_HOME"/gdb/history
@@ -81,7 +88,7 @@ export GDBHISTFILE="$XDG_DATA_HOME"/gdb/history
 #doesnt seem to work with dxvk; got working
 export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
 
-#export RBENV_ROOT="$XDG_DATA_HOME"/ruby/rbenv
+export RBENV_ROOT="$XDG_DATA_HOME"/rbenv
 #if not using rbenv
 #export GEM_PATH="$XDG_DATA_HOME/ruby/gems"
 #export GEM_SPEC_CACHE="$XDG_DATA_HOME/ruby/specs"
@@ -142,7 +149,7 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 # gpg-agent as ssh-agent
 #export SSH_AGENT_PID=""
-unset SSH_AGENT_PID
-export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh"
+#unset SSH_AGENT_PIDexport SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh"
 
 export WINEFSYNC=1
+export MBSYNCRC="$XDG_CONFIG_HOME"/isync/mbsyncrc

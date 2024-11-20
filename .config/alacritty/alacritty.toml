@@ -559,7 +559,7 @@ render_timer = false
 TERM = "alacritty"
 
 [font]
-size = 14.0
+size = 18.0
 
 [font.bold]
 family = "Hack Nerd Font"
@@ -570,7 +570,7 @@ x = 0
 y = 0
 
 [font.italic]
-family = "Hack"
+family = "Hack Nerd Font"
 style = "Italic"
 
 [font.normal]

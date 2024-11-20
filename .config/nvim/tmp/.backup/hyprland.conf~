@@ -4,7 +4,8 @@
 #
 
 # See https://wiki.hyprland.org/Configuring/Monitors/
-monitor=,highres,auto,1.5
+#monitor=,preferred,auto,auto
+monitor=,highres,auto,2
 
 
 # See https://wiki.hyprland.org/Configuring/Keywords/ for more
@@ -175,7 +176,8 @@ windowrulev2 = float,class:^(Steam)$,title:^(Steam)$
 $mainMod = SUPER
 
 # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-bind = $mainMod, return, exec, alacritty -e fish
+bind = $mainMod, return, exec, alacritty
+#bind = $mainMod, return, exec, alacritty -e fish
 #bind = $mainMod, return, exec, alacritty -e nu
 bind = $mainMod, F, togglefloating,
 bind = $mainMod, R, exec, bemenu-hypr

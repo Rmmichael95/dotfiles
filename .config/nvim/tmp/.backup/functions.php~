@@ -169,6 +169,9 @@ require get_template_directory() . '/inc/template-functions.php';
 /** Customizer additions. */
 require get_template_directory() . '/inc/customizer.php';
 
+/** Nav Walker */
+require get_template_directory() . '/dhali-bootstrap-5-navwalker.php';
+
 /** Load Jetpack compatibility file. */
 if (defined('JETPACK__VERSION')) {
     require get_template_directory() . '/inc/jetpack.php';
@@ -182,9 +185,14 @@ function enqueue_bootstrap()
 
 add_action('wp_enqueue_scripts', 'enqueue_bootstrap');
 
-function register_my_menu()
-{
-    register_nav_menu('header-menu', __('Header Menu'));
-}
+add_filter('nav_menu_link_attributes', function ($atts, $item, $args) {
+    $atts['data-bs-dismiss'] = 'offcanvas';
 
-add_action('init', 'register_my_menu');
+    return $atts;
+}, 10, 3);
+
+add_filter('nav_menu_item_attributes', function ($li_atts, $menu_item, $args, $depth) {
+    $li_atts['data-bs-dismiss'] = 'offcanvas';
+
+    return $li_atts;
+}, 10, 3);
