@@ -1,5 +1,0 @@
-run_hook ()
-{
-    cryptsetup open --key-file /etc/crypt-keys.d/cryptswap.keyfile /dev/nvme0n1p2 cryptswap
-}
-

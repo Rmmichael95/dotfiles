@@ -1,2 +1,0 @@
-permit persist :wheel
-permit nopass :wheel cmd /usr/bin/xbacklight

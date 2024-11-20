@@ -138,13 +138,13 @@ o.grepformat = "%f:%l:%c:%m"
 
 -- backups
 o.backupskip = "/tmp/*,/private/tmp/*,*.gpg" -- don't backup filename with these patterns
-o.backupdir = "/home/ryanm/.config/nvim/tmp/.backup/" -- where to store backup files
-o.undodir = "/home/ryanm/.config/nvim/tmp/.undo/" -- where to store undo files
-o.directory = "/home/ryanm/.config/nvim/tmp/.swp/" -- where to store swap files
+o.backupdir = "/home/ryanm/.local/state/nvim/backup/" -- where to store backup files
+o.undodir = "/home/ryanm/.local/state/nvim/undo/" -- where to store undo files
+o.directory = "/home/ryanm/.local/state/nvim/swap/" -- where to store swap files
 o.backup = true -- make backup before overwriting files
 o.swapfile = false -- its 2014, just do backups
-o.undofile = true
-o.undolevels = 10000
+o.undofile = true -- undo across edits
+o.undolevels = 10000 -- undo everything
 
 o.shortmess = o.shortmess + "A" -- ignore annoying swapfile messages
 o.shortmess = o.shortmess + "I" -- no splash screen
