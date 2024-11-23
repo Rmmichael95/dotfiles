@@ -212,3 +212,4 @@ doas pacman -S zoxide
 nvim .config/nushell/config.nu
 nvim .config/nushell/env.nu
 nvim .config/hypr/hyprland.conf
+exit

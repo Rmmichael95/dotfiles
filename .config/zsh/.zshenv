@@ -1,7 +1,7 @@
 # PATH
 #typeset -U PATH path
 #path=("$PATH" "/usr/local/sbin/" "/usr/local/bin/" "/usr/sbin/" "/usr/bin/" "/sbin/" "/bin/" "/usr/lib/ccache/bin/" "$HOME/.local/bin/" "$HOME/Documents/Notes/" "$HOME/.local/bin/statusbar/" "$HOME/.local/share/skim/bin/" "$path[@]")
-export PATH="$PATH:/usr/local/sbin/:/usr/local/bin/:/usr/sbin/:/usr/bin/:/sbin/:/bin/:/usr/lib/ccache/bin/:$HOME/.local/bin/:$HOME/.local/share/npm/bin/:$HOME/.local/bin/myBin/:$HOME/.local/bin/myBin/doas/:$HOME/.local/bin/myBin/menu/:$HOME/.local/bin/myBin/hypr:$HOME/.config/composer/vendor/bin/"
+export PATH="$PATH:/usr/local/sbin/:/usr/local/bin/:/usr/sbin/:/usr/bin/:/sbin/:/bin/:/usr/lib/ccache/bin/:$HOME/.local/bin/:$HOME/.local/share/npm/bin/:$HOME/.local/bin/myBin/:$HOME/.local/bin/myBin/doas/:$HOME/.local/bin/myBin/menu/:$HOME/.local/bin/myBin/hypr:$HOME/.config/composer/vendor/bin/:$HOME/.nix-profile/bin/"
 export PATH
 # MANPATH
 export MANPATH="$MANPATH:/usr/local/man:"
@@ -34,7 +34,7 @@ export SHELL=/usr/bin/zsh
 export PAGER='nvim +Man!'
 export MANPAGER='nvim +Man!'
 export TERMINAL=alacritty
-export BROWSER=librewolf
+export BROWSER=floorp
 export BROWSERCLI=w3m
 export READER=zathura
 export IMAGEVIEWER=nsxiv
@@ -153,4 +153,15 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 #unset SSH_AGENT_PIDexport SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh"
 
 export WINEFSYNC=1
+
 export MBSYNCRC="$XDG_CONFIG_HOME"/isync/mbsyncrc
+
+export XCURSOR_PATH=${XCURSOR_PATH}:~/.local/share/icons
+export GTK_THEME=Numix:dark
+export XCURSOR_THEME=Numix-Cursor-Light
+export XCURSOR_SIZE=28px
+export QT_QPA_PLATFORMTHEME=gtk2
+
+export XDG_DATA_DIRS=$HOME/.nix-profile/share:$XDG_DATA_DIRS
+
+export CHROME_PATH="/usr/bin/brave"

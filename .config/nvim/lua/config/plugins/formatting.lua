@@ -10,6 +10,13 @@ return {
 		local conform = require("conform")
 
 		conform.setup({
+			formatters = {
+				phpcbf = {
+					--					command = "vendor/bin/phpcbf",
+					command = "phpcbf",
+					args = { "--standard=WordPress", "$FILENAME" },
+				},
+			},
 			formatters_by_ft = {
 				javascript = { "prettier" },
 				typescript = { "prettier" },
@@ -17,8 +24,7 @@ return {
 				typescriptreact = { "prettier" },
 				svelte = { "prettier" },
 				css = { "prettier" },
-				--php = { "php-cs-fixer" },
-				php = { "pretty-php" },
+				php = { "phpcbf" },
 				html = { "prettier" },
 				json = { "prettier" },
 				yaml = { "prettier" },
@@ -28,6 +34,8 @@ return {
 				lua = { "stylua" },
 				python = { "isort", "black" },
 				sh = { "shfmt" },
+				["*"] = { "codespell" },
+				["_"] = { "trim_whitespace" },
 			},
 			format_on_save = {
 				lsp_fallback = true,

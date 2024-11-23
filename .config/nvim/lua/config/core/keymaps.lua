@@ -70,7 +70,10 @@ map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result
 map("n", ";", ":", options) -- easy command mode
 map("n", "V", "V`]", options) -- easy linewise reselection of what you just paste
 
-map("n", "<leader>|", ":vsplit<CR>", options) -- easy virtical split
+map("n", "q:", "<nop>", options) -- disable cmd history popup
+map("n", "Q", "<nop>", options) -- disable cmd history popup
+
+map("n", "<leader>|", ":vsplit<CR>", options) -- easy vertical split
 map("n", "<leader>-", ":split<CR>", options) -- easy horizontal split
 map("n", "<leader>=", "<C-w>=", options) -- easy equal splits
 map("n", "<C-J>", "<C-W><C-J>", options) -- ctrl-j to move down a split

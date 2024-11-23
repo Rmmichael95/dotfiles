@@ -4,35 +4,26 @@ return {
 	config = function()
 		local lint = require("lint")
 
-		lint.linters_by_ft = {
-
-			codespell = { "md", "txt" },
-			eslint = { "js", "jsx", "ts", "tsx" },
-			tidy = { "html" },
-			jsonlint = { "json" },
-			markdownlint = { "md" },
-			php = { "php" },
-			phpcs = { "php" },
-			pylint = { "py" },
-			stylelint = { "css", "scss", "less" },
+		local phpcs = require("lint").linters.phpcs
+		phpcs.args = {
+			"--standard=WordPress",
 		}
 
-		-- lint.linters_by_ft = {
-		-- 	-- text = { "codespell" },
-		-- 	-- markdown = { "markdownlint" },
-		-- 	-- json = { "jsonlint" },
-		-- 	-- css = { "stylelint" },
-		-- 	-- scss = { "stylelint" },
-		-- 	-- html = { "htmllint" },
-		-- 	javascript = { "eslint_d" },
-		-- 	typescript = { "eslint_d" },
-		-- 	javascriptreact = { "eslint_d" },
-		-- 	typescriptreact = { "eslint_d" },
-		-- 	svelte = { "eslint_d" },
-		-- 	php = { "php" },
-		-- 	phpcs = { "php" },
-		-- 	python = { "pylint" },
-		-- }
+		lint.linters_by_ft = {
+			-- text = { "codespell" },
+			-- markdown = { "markdownlint" },
+			-- json = { "jsonlint" },
+			-- css = { "stylelint" },
+			-- scss = { "stylelint" },
+			-- html = { "htmllint" },
+			javascript = { "eslint_d" },
+			typescript = { "eslint_d" },
+			javascriptreact = { "eslint_d" },
+			typescriptreact = { "eslint_d" },
+			svelte = { "eslint_d" },
+			php = { "phpcs" },
+			python = { "pylint" },
+		}
 
 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 

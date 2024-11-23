@@ -1,7 +1,7 @@
-CXX=clang++
+CXX=zig c++
 RM=rm -rf
 # flags
-CXXFLAGS=-std=c++17 -pthread
+CXXFLAGS=-pthread
 CPPFLAGS=
 # target dirs
 OBJDIR=obj
@@ -56,7 +56,7 @@ endif
 $(RECDIR):
 ifeq ($(RECS),)
 else
-	@echo [INFO] Handling recources [$(RECT)]
+	@echo [INFO] Handling resources [$(RECT)]
 	@$(MKDIR) $(RECDIR)
 	@mv $(RECS) $(RECDIR)
 endif

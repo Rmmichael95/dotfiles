@@ -2,99 +2,98 @@
 
 ## Get Battery
 get_percentage() {
-  while true; do
-    BAT=$(ls /sys/class/power_supply | grep BAT | head -n 1)
-    echo "$(cat /sys/class/power_supply/${BAT}/capacity)%"
-    sleep 3
-  done
+    while true; do
+        BAT=$(ls /sys/class/power_supply | grep BAT | head -n 1)
+        echo "$(cat /sys/class/power_supply/${BAT}/capacity)%"
+        sleep 3
+    done
 }
 
 ## Get Battery Icon
 get_icon() {
-  while true; do
-    BAT=$(ls /sys/class/power_supply | grep BAT | head -n 1)
-    BATSTATUS="$(cat /sys/class/power_supply/${BAT}/status)"
-    BATVAL="$(cat /sys/class/power_supply/${BAT}/capacity)"
+    while true; do
+        BAT=$(ls /sys/class/power_supply | grep BAT | head -n 1)
+        BATSTATUS="$(cat /sys/class/power_supply/${BAT}/status)"
+        BATVAL="$(cat /sys/class/power_supply/${BAT}/capacity)"
 
-    if [ "$BATSTATUS" = "Discharging" ];then
-      if [ "$BATVAL" -gt 100 ];then
-        echo "󰁹"
-      elif [ "$BATVAL" -gt 90 ];then
-        echo "󰂂"
-      elif [ "$BATVAL" -gt 80 ];then
-        echo "󰂁"
-      elif [ "$BATVAL" -gt 70 ];then
-        echo "󰂀"
-      elif [ "$BATVAL" -gt 60 ];then
-        echo "󰁿"
-      elif [ "$BATVAL" -gt 50 ];then
-        echo "󰁾"
-      elif [ "$BATVAL" -gt 40 ];then
-        echo "󰁽"
-      elif [ "$BATVAL" -gt 30 ];then
-        echo "󰁼"
-      elif [ "$BATVAL" -gt 20 ];then
-        echo "󰁻" # && notify-send "Power Level: $BATVAL"
-      elif [ "$BATVAL" -gt 10 ];then
-        echo "󰁺" # && notify-send "Power Level: $BATVAL"
-      elif [ "$BATVAL" -gt 0 ];then
-        echo "󰂎" # && notify-send "Power Level: $BATVAL"
-      fi
-    elif [ "$BATSTATUS" = "Charging" ];then
-      if [ "$BATVAL" -gt 100 ];then
-        echo "󰂅"
-      elif [ "$BATVAL" -gt 90 ];then
-        echo "󰂋"
-      elif [ "$BATVAL" -gt 80 ];then
-        echo "󰂊"
-      elif [ "$BATVAL" -gt 70 ];then
-        echo "󰢞"
-      elif [ "$BATVAL" -gt 60 ];then
-        echo "󰂉"
-      elif [ "$BATVAL" -gt 50 ];then
-        echo "󰢝"
-      elif [ "$BATVAL" -gt 40 ];then
-        echo "󰂈"
-      elif [ "$BATVAL" -gt 30 ];then
-        echo "󰂇"
-      elif [ "$BATVAL" -gt 20 ];then
-        echo "󰂆"
-      elif [ "$BATVAL" -gt 10 ];then
-        echo "󰢜"
-      elif [ "$BATVAL" -gt 0 ];then
-        echo "󰢟"
-      fi
-     elif [ "$BATSTATUS" = "Not charging" ];then
-       echo "󱈑"
-     else
-       echo "♻️"
-    fi
-    sleep 3
-  done
+        if [ "$BATSTATUS" = "Discharging" ]; then
+            if [ "$BATVAL" -gt 100 ]; then
+                echo "󰁹"
+            elif [ "$BATVAL" -gt 90 ]; then
+                echo "󰂂"
+            elif [ "$BATVAL" -gt 80 ]; then
+                echo "󰂁"
+            elif [ "$BATVAL" -gt 70 ]; then
+                echo "󰂀"
+            elif [ "$BATVAL" -gt 60 ]; then
+                echo "󰁿"
+            elif [ "$BATVAL" -gt 50 ]; then
+                echo "󰁾"
+            elif [ "$BATVAL" -gt 40 ]; then
+                echo "󰁽"
+            elif [ "$BATVAL" -gt 30 ]; then
+                echo "󰁼"
+            elif [ "$BATVAL" -gt 20 ]; then
+                echo "󰁻" # && notify-send "Power Level: $BATVAL"
+            elif [ "$BATVAL" -gt 10 ]; then
+                echo "󰁺" # && notify-send "Power Level: $BATVAL"
+            elif [ "$BATVAL" -gt 0 ]; then
+                echo "󰂎" # && notify-send "Power Level: $BATVAL"
+            fi
+        elif [ "$BATSTATUS" = "Charging" ]; then
+            if [ "$BATVAL" -gt 100 ]; then
+                echo "󰂅"
+            elif [ "$BATVAL" -gt 90 ]; then
+                echo "󰂋"
+            elif [ "$BATVAL" -gt 80 ]; then
+                echo "󰂊"
+            elif [ "$BATVAL" -gt 70 ]; then
+                echo "󰢞"
+            elif [ "$BATVAL" -gt 60 ]; then
+                echo "󰂉"
+            elif [ "$BATVAL" -gt 50 ]; then
+                echo "󰢝"
+            elif [ "$BATVAL" -gt 40 ]; then
+                echo "󰂈"
+            elif [ "$BATVAL" -gt 30 ]; then
+                echo "󰂇"
+            elif [ "$BATVAL" -gt 20 ]; then
+                echo "󰂆"
+            elif [ "$BATVAL" -gt 10 ]; then
+                echo "󰢜"
+            elif [ "$BATVAL" -gt 0 ]; then
+                echo "󰢟"
+            fi
+        elif [ "$BATSTATUS" = "Not charging" ]; then
+            echo "󱟤"
+        else
+            echo "󱈑"
+        fi
+        sleep 3
+    done
 }
 
 get_dash() {
-  while true; do
-    BAT=$(ls /sys/class/power_supply | grep BAT | head -n 1)
-    echo "󱧥 $(cat /sys/class/power_supply/${BAT}/capacity)%"
-    sleep 3
-  done
+    while true; do
+        BAT=$(ls /sys/class/power_supply | grep BAT | head -n 1)
+        echo "󱧥 $(cat /sys/class/power_supply/${BAT}/capacity)%"
+        sleep 3
+    done
 }
 
 get_time() {
-  while true; do
-    BAT=$(ls /sys/class/power_supply | grep BAT | head -n 1)
-    # BATSTATUS="$(cat /sys/class/power_supply/${BAT}/status)"
-    #if [ BATSTATUS = "Discharging" ]; then
-    if [ "$(acpi -b | awk '{print $3}' | head -n 1)" = "Discharging," ]; then
-      echo "󱧥 $(cat /sys/class/power_supply/${BAT}/capacity)% $(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | rg "time to empty:" | awk '{print $4 " " $5}')"
-    else
-      echo "󱧥 $(cat /sys/class/power_supply/${BAT}/capacity)%"
-    fi
-    sleep 3
-  done
+    while true; do
+        BAT=$(ls /sys/class/power_supply | grep BAT | head -n 1)
+        # BATSTATUS="$(cat /sys/class/power_supply/${BAT}/status)"
+        #if [ BATSTATUS = "Discharging" ]; then
+        if [ "$(acpi -b | awk '{print $3}' | head -n 1)" = "Discharging," ]; then
+            echo "󱧥 $(cat /sys/class/power_supply/${BAT}/capacity)% $(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | rg "time to empty:" | awk '{print $4 " " $5}')"
+        else
+            echo "󱧥 $(cat /sys/class/power_supply/${BAT}/capacity)%"
+        fi
+        sleep 3
+    done
 }
-
 
 if [ "$1" = "--perc" ]; then
     get_percentage

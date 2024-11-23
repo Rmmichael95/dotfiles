@@ -12,4 +12,5 @@ if status is-interactive
         builtin cd -- "$cwd"
     end
     rm -f -- "$tmp"
+    end
 end
