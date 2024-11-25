@@ -10,7 +10,8 @@ export MANPATH="$MANPATH:/usr/local/man:"
 
 # You may need to manually set your language environment
 export LANG="en_US.UTF-8"
-export LC_COLLATE="C"
+#export LC_COLLATE="C"
+#export LC_ALL=C
 
 #ds
 export DS="$(cat /home/ryanm/.local/share/ds 2>/dev/null)"
@@ -160,8 +161,12 @@ export XCURSOR_PATH=${XCURSOR_PATH}:~/.local/share/icons
 export GTK_THEME=Numix:dark
 export XCURSOR_THEME=Numix-Cursor-Light
 export XCURSOR_SIZE=28px
-export QT_QPA_PLATFORMTHEME=gtk2
+#export QT_QPA_PLATFORMTHEME=gtk2
 
 export XDG_DATA_DIRS=$HOME/.nix-profile/share:$XDG_DATA_DIRS
 
 export CHROME_PATH="/usr/bin/brave"
+
+export NIXPKGS_ALLOW_UNFREE=1
+
+export LIBSEAT_BACKEND="logind"

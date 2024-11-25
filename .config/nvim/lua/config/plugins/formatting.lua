@@ -12,7 +12,6 @@ return {
 		conform.setup({
 			formatters = {
 				phpcbf = {
-					--					command = "vendor/bin/phpcbf",
 					command = "phpcbf",
 					args = { "--standard=WordPress", "$FILENAME" },
 				},
@@ -23,6 +22,8 @@ return {
 				javascriptreact = { "prettier" },
 				typescriptreact = { "prettier" },
 				svelte = { "prettier" },
+				c = { "clang-format" },
+				cpp = { "clang-format" },
 				css = { "prettier" },
 				php = { "phpcbf" },
 				html = { "prettier" },

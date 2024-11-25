@@ -1,0 +1,72 @@
+# Hyprland Variables
+#export HYPRLAND_TRACE="1" # Enable verbose logging
+#export HYPRLAND_NO_RT="1" # Disable realtime priority settings by Hyprland
+#export HYPR_NO_SD_NOTIFY="1" # If systemd disables sd_notify calls
+#export HYPRLAND_NO_SD_VARS="1" # Disables management of variables in systemd and dbus activation environments
+#export HYPRLAND_CONFIG # Specify config location
+
+# Aquamarine Variables
+#export AQ_TRACE="1" # Enables verbose logging
+export AQ_DRM_DEVICES="/dev/dri/card0:/dev/dri/card1" # Explicit list of DRM GPUs
+#export AQ_MGPU_NO_EXPLICIT="1" # Disable explicit syncing on mgpu buffers
+export AQ_NO_MODIFIERS="1" # Disables modifiers for DRM buffers
+
+#export WLR_DRM_DEVICES="/dev/dri/card0" # Explicitly use Intel
+
+# Toolkit Backend
+export GDK_BACKEND="wayland,x11,*"
+export QT_QPA_PLATFORM="wayland;xcb"
+export SDL_VIDEODRIVER="wayland:x11"
+export CLUTTER_BACKEND="wayland"
+
+# XDG Specifications
+export XDG_CURRENT_DESKTOP="Hyprland"
+export XDG_SESSION_TYPE="wayland"
+export XDG_SESSION_DESKTOP="Hyprland"
+
+# QT Variables
+export QT_AUTO_SCREEN_SCALE_FACTOR="1"
+export QT_QPA_PLATFORMTHEME="wayland;xcb"
+export QT_WAYLAND_DISABLE_WINDOWDECORATIONS="1"
+export QT_QPA_PLATFORMTHEME="gtk2" # For consistent theming
+#export QT_QPA_PLATFORMTHEME="qt5ct" For minimize to tray bug
+export QT_SCALE_FACTOR_ROUNDING_POLICY="RoundPreferFloor" # Prevent fractional scaling
+export QT_WAYLAND_FORCE_DPI="physical"
+
+# Electeron
+
+# Java
+export _JAVA_AWT_WM_NOPARENTING="1"
+
+# NVIDIA
+#export GDM_BACKEND="nvidia-drm"
+#export __GLX_VENDOR_LIBRARY_NAME="nvidia"
+#export LIBVA_DRIVER_NAME="nvidia"
+#export __GL_GSYNC_ALLOWED
+#export __GL_VRR_ALLOWED
+#export AQ_NO_ATOMIC="1"
+#export NVD_BACKEND="direct # VA-API with libva-nvidia-driver
+#export WLR_NO_HARDWARE_CURSORS="1 # Depreciated for cursors:no_hardware_cursors = true
+#export ELECTRON_OZONE_PLATFORM_HIMT="auto # Fix flickering w/nvidia
+
+# Intel
+#export GDM_BACKEND="intel-drm"
+#export LIBVA_DRIVER_NAME="i915"
+#export VDPAU_DRIVER="va_gl"
+
+# AMD
+#export LIBVA_DRIVER_NAME="radeonsi"
+
+# Theming
+export GTK_THEME="Numix:dark"
+export XCURSOR_SIZE="28"
+export XURSOR_THEME="Numix-Cursor"
+export HYPRCURSOR_SIZE="28"
+export HYPRCURSOR_THEME="Numix-Cursor"
+
+# Misc
+export sdl_videodriver="wayland:x11"
+export EGL_PLATFORM="wayland"
+#export WLR_RENDER="vulkan"
+export WLR_RENDERER_ALLOW_SOFTWARE="1"
+export MOZ_ENABLE_WAYLAND="1"

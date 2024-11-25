@@ -333,11 +333,9 @@ return {
 							},
 							environment = {
 								includePaths = {
-									"/home/ryanm/.config/composer/vendor/",
 									"/home/ryanm/.config/composer/vendor/php-stubs/",
-									"/home/ryanm/.config/composer/vendor/wpsyntex/",
-									"/home/ryanm/.config/composer/vendor/symfony/",
 								}, -- this line forces the composer path for the stubs in case inteliphense can't find it...
+								root_dir = vim.loop.cwd,
 							},
 							files = {
 								maxSize = 5000000,
