@@ -2,23 +2,12 @@
 
 mkdir $HOME/.config
 mkdir -p $HOME/.local/share
-rm -rf $HOME/config/pacman/makepkg.conf && ln -sv $HOME/documents/batcave/dotfiles/.config/pacman/ $HOME/.config/
-rm -rf $HOME/.config/git && ln -sv $HOME/documents/batcave/dotfiles/.config/git $HOME/.config/
-rm -rf $HOME/.config/alacritty && ln -sv $HOME/documents/batcave/dotfiles/.config/alacritty/ $HOME/.config/
-rm -rf $HOME/.config/calcurse && ln -sv $HOME/documents/batcave/dotfiles/.config/calcurse/ $HOME/.config/
-rm -rf $HOME/.config/dunst && ln -sv $HOME/documents/batcave/dotfiles/.config/dunst/ $HOME/.config/
-rm -rf $HOME/.config/fontconfig && ln -sv $HOME/documents/batcave/dotfiles/.config/fontconfig/ $HOME/.config/
-rm -rf $HOME/.config/ncmpcpp && ln -sv $HOME/documents/batcave/dotfiles/.config/ncmpcpp/ $HOME/.config/
-rm -rf $HOME/.config/newsboat && ln -sv $HOME/documents/batcave/dotfiles/.config/newsboat/ $HOME/.config/
-rm -rf $HOME/.config/nvim && ln -sv $HOME/documents/batcave/dotfiles/.config/nvim/ $HOME/.config/
-rm -rf $HOME/.config/picom && ln -sv $HOME/documents/batcave/dotfiles/.config/picom/ $HOME/.config/
-rm -rf $HOME/.config/redshift && ln -sv $HOME/documents/batcave/dotfiles/.config/redshift/ $HOME/.config/
-rm -rf $HOME/.config/shell && ln -sv $HOME/documents/batcave/dotfiles/.config/shell/ $HOME/.config/
-rm -rf $HOME/.config/sway && ln -sv $HOME/documents/batcave/dotfiles/.config/sway/ $HOME/.config/
-rm -rf $HOME/.config/tmux && ln -sv $HOME/documents/batcave/dotfiles/.config/tmux/ $HOME/.config/
-rm -rf $HOME/.config/waybar && ln -sv $HOME/documents/batcave/dotfiles/.config/waybar/ $HOME/.config
-rm -rf $HOME/.config/x11 && ln -sv $HOME/documents/batcave/dotfiles/.config/x11/ $HOME/.config/
-rm -rf $HOME/.config/zsh && ln -sv $HOME/documents/batcave/dotfiles/.config/zsh/ $HOME/.config/
-rm -rf $HOME/.local/bin && ln -sv $HOME/documents/batcave/dotfiles/.local/bin/ $HOME/.local/
-rm -rf $HOME/.local/share/wm && echo dwm > $HOME/.local/share/wm
-rm -rf $HOME/.zshrc
+
+rm -rf $HOME/{.zshrc,.bashrc,.profile,.login}
+
+ln -sv $HOME/documents/batcave/dotfiles/.local/myBin/ $HOME/.login/bin/
+
+for i in $(ls $HOME/documents/batcave/dotfiles/.config); do
+    rm -rf $HOME/.config/$i &&
+        ln -sv $HOME/documents/batcave/dotfiles/.config/$i/ $HOME/.config/
+done
