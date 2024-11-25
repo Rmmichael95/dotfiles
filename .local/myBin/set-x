@@ -1,0 +1,2 @@
+echo "x" > /home/ryanm/.local/share/ds
+echo "dwm" > /home/ryanm/.local/share/wm

@@ -1,0 +1,2 @@
+echo "w" > /home/ryanm/.local/share/ds
+echo "Hyprland" /home/ryanm/.local/share/wm
