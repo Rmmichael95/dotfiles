@@ -1,3 +1,0 @@
-"Boot with standard options"  "root=PARTUUID=6808939f-573d-4598-8ebb-9e1292fbba09 rw rootflags=subvol=@ resume=PARTUUID=035753d7-162d-7a45-b969-43aa3b52c374 add_efi_memmap reempt=full initrd=amd-ucode.img quiet loglevel=3 splash"
-"Boot to single-user mode"    "root=PARTUUID=6808939f-573d-4598-8ebb-9e1292fbba09 rw rootflags=subvol=@ resume=PARTUUID=035753d7-162d-7a45-b969-43aa3b52c374 add_efi_memmap reempt=full quiet loglevel=3 splash single"
-"Boot with minimal options"   "root=PARTUUID=6808939f-573d-4598-8ebb-9e1292fbba09 ro rootflags=subvol=@ resume=PARTUUID=035753d7-162d-7a45-b969-43aa3b52c374"

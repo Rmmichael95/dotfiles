@@ -1,7 +1,0 @@
-#DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-Wi6ElyAewo,guid=f736adc917ff10eeaf8fffc963092ea9
-XDG_RUNTIME_DIR=/run/user/1000
-DISPLAY=:0
-SWAYSOCK=/run/user/1000/sway.sock
-WAYLAND_DISPLAY=wayland-1
-XDG_CURRENT_DESKTOP=sway
-XAUTHORITY=$HOME/.Xauthority

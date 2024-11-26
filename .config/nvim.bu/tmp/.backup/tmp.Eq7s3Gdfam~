@@ -1,2 +1,0 @@
-compress: zstd -9 -T0
-modules: amdgpu,btrfs,zenpower

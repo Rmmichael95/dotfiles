@@ -1,5 +1,0 @@
-type            = process
-load-options    = sub-vars
-command         = /usr/bin/picom --experimental-backends
-smooth-recovery = true
-logfile         = /var/log/dinit/picom.log

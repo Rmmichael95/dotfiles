@@ -1,3 +1,0 @@
-"Boot with standard options"  "intel_pstate=passive root=6808939f-573d-4598-8ebb-9e1292fbba09 rw rootflags=subvol=@ resume=PARTUUID=035753d7-162d-7a45-b969-43aa3b52c374 initrd=\amd-ucode.img initrd=\booster-linux-tkg-pds-generic_v3.img quiet loglevel=3 splash"
-"Boot to single-user mode"    "reempt=full intel_pstate=passive BOOT_IMAGE=boot\vmlinuz-linux-tkg-pds-generic_v3.img root=PARTUUID=6808939f-573d-4598-8ebb-9e1292fbba09 rw rootflags=subvol=@ resume=PARTUUID=035753d7-162d-7a45-b969-43aa3b52c374 add_efi_memmap initrd=boot\amd-ucode.img quiet loglevel=3 splash single" 
-"Boot with minimal options"   "ro root=/dev/nvme0n1p3 rootflags=subvol=@"

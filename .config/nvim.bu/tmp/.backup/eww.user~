@@ -1,7 +1,0 @@
-type            = bgprocess
-load-options    = sub-vars
-logfile         = $HOME/.local/share/dinit/eww.log
-command         = /bin/zsh $HOME/.config/eww/scripts/launch_bar
-stop-command    = /usr/bin/eww close-all
-pid-file        = $HOME/.local/state/eww.pid
-smooth-recovery = true

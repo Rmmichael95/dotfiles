@@ -1,3 +1,0 @@
-modules: amdgpu,btrfs,zenpower
-compress: zstd -9 -T0
-resume=PARTUUID=035753d7-162d-7a45-b969-43aa3b52c374

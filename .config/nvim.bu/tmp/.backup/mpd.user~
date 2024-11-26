@@ -1,5 +1,0 @@
-type            = process
-load-options    = sub-vars
-command         = /usr/bin/mpd --no-daemon
-smooth-recovery = true
-logfile         = $HOME/.local/share/dinit/mpd.log

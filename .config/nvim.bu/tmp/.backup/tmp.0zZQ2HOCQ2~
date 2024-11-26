@@ -1,6 +1,0 @@
-type            = process
-command         = /usr/bin/ananicy start
-stop-command    = /sbin/sysctl -e kernel.sched_autogroup_enabled=1
-smooth-recovery = true
-logfile         = /var/log/dinit/ananicy.log
-waits-for       = pseudofs

@@ -1,4 +1,0 @@
-#!/usr/bin/env sh
-
-#su -c ryanm - /home/ryanm/.local/bin/lock-hypr
-WAYLAND_DISPLAY=:0 runuser ryanm /home/ryanm/.local/bin/lock-hypr

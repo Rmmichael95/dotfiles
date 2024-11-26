@@ -3,6 +3,8 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
+		"williamboman/mason.nvim",
+		"williamboman/mason-lspconfig.nvim",
 		"folke/lazydev.nvim",
 		-- "nvimdev/lspsaga.nvim",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
@@ -331,12 +333,12 @@ return {
 								"zmq",
 								"zookeeper",
 							},
-							environment = {
-								includePaths = {
-									"/home/ryanm/.config/composer/vendor/php-stubs/",
-								}, -- this line forces the composer path for the stubs in case inteliphense can't find it...
-								root_dir = vim.loop.cwd,
-							},
+							-- environment = {
+							-- 	includePaths = {
+							-- 		"/home/ryanm/.config/composer/vendor/php-stubs/",
+							-- 	}, -- this line forces the composer path for the stubs in case inteliphense can't find it...
+							-- 	root_dir = vim.loop.cwd,
+							-- },
 							files = {
 								maxSize = 5000000,
 							},

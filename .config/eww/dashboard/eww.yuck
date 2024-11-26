@@ -34,15 +34,15 @@
   (box :class "genwin" :vexpand "false" :hexpand "false" :width 325
     (box :class "slidersbox" :orientation "v" :spacing 10 :halign "center" :valign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
       (box :class "volume_bar" :orientation "h" :spacing 20 :space-evenly "false" :vexpand "false" :hexpand "false"
-        (button :width 30 :onclick `( pavucontrol & ) && zsh ../scripts/launch_dashboard` :onmiddleclick  "zsh ../scripts/audio --toggle-vol"
+        (button :width 30 :onclick `( uwsm app -- pavucontrol & ) && zsh ../scripts/launch_dashboard` :onmiddleclick  "zsh ../scripts/audio --toggle-vol"
           (label :class "iconvolume" :text VOLUMEICON))
         (scale :min 0 :max 100 :value VOLUME :active "true" :onchange "zsh ../scripts/audio --set-vol {}"))
       (box :class "mic_bar" :orientation "h" :spacing 20 :space-evenly "false" :vexpand "false" :hexpand "false"
-        (button :width 30 :onclick `( pavucontrol & ) && zsh ../scripts/launch_dashboard` :onmiddleclick  "zsh ../scripts/audio --toggle-mic"
+        (button :width 30 :onclick `( uwsm app -- pavucontrol & ) && zsh ../scripts/launch_dashboard` :onmiddleclick  "zsh ../scripts/audio --toggle-mic"
           (label :class "iconmic" :text MICICON))
         (scale :min 0 :max 100 :value MIC :active "true" :onchange "zsh ../scripts/audio --set-mic {}"))
       (box :class "bright_bar" :orientation "h" :spacing 20 :space-evenly "false" :vexpand "false" :hexpand "false"
-        (button :width 30 :onclick `(clight-gui &) && zsh ../scripts/launch_dashboard` :onmiddleclick  "if [ `dinitctl is-started gammastep.user` = 'STARTED' ]; then dinitctl stop gammastep.user; else dinitctl start gammastep.user; fi"
+        (button :width 30 :onclick `(uwsm app -- clight-gui &) && zsh ../scripts/launch_dashboard` :onmiddleclick  "if [ `dinitctl is-started gammastep.user` = 'STARTED' ]; then dinitctl stop gammastep.user; else dinitctl start gammastep.user; fi"
           (label :width 30 :class "iconbright" :text ""))
         (scale :min 0 :max 100 :value BLIGHT :active "true" :onchange "zsh ../scripts/backlight --set {}")))))
 
@@ -57,14 +57,15 @@
 ;; network
 (defwidget network []
   (box :class "genwin" :vexpand "false" :hexpand "true" :orientation "h" :width 180
-    (button :class "btn_net" :onclick `( connman-gtk & ) && zsh ../scripts/launch_dashboard` :onmiddleclick  "zsh ../scripts/network --toggle"
+    (button :class "btn_net" :onclick `( uwsm app -- connman-gtk & ) && zsh ../scripts/launch_dashboard` :onmiddleclick  "zsh ../scripts/network --toggle"
       (label :class "network" :text NET))))
 
 
 ;; bluetooth
 (defwidget bluetooth []
   (box :class "genwin" :vexpand "false" :hexpand "false" :width 60
-    (button :class "btn_bluet" :onclick  `export $(dbus-launch) && ( bluedevil-wizard & ) && zsh ../scripts/launch_dashboard` :onmiddleclick "zsh ../scripts/bluetooth --toggle"
+    ;;(button :class "btn_bluet" :onclick  `export $(dbus-launch) && ( bluedevil-wizard & ) && zsh ../scripts/launch_dashboard` :onmiddleclick "zsh ../scripts/bluetooth --toggle"
+    (button :class "btn_bluet" :onclick  `( uwsm app -- bluedevil-wizard & ) && zsh ../scripts/launch_dashboard` :onmiddleclick "zsh ../scripts/bluetooth --toggle"
       (label :class "bticon" :text BTICON))))
 
 
@@ -100,7 +101,7 @@
 ;; Calendar
 (defwidget cal []
     (box :class "genwin" :orientation "v"
-      (button :class "btn_cal" :onclick `(alacritty -e calcurse &) &&  zsh ../scripts/launch_dashboard`
+      (button :class "btn_cal" :onclick `(uwsm app -- alacritty -e calcurse &) &&  zsh ../scripts/launch_dashboard`
         (calendar :class "cal" :day day :year year))))
 
 ;; Weather
@@ -108,31 +109,31 @@
     (box :orientation "v" :space-evenly false :class "weather"
         (label :class "weather-connection-error" :text "󰤨 Connect to the internet" :visible {weather != "null" ? false : true})
         (box :orientation "h" :space-evenly false
-            (button :class "btn_wtr" :onclick `(meteo &) && zsh ../scripts/launch_dashboard` :onmiddleclick `(python ../scripts/coordinate.py &)`
+            (button :class "btn_wtr" :onclick `(uwsm app -- meteo &) && zsh ../scripts/launch_dashboard` :onmiddleclick `(python ../scripts/coordinate.py &)`
                 (label :hexpand true :class "weather-current-icon" :halign "start" :valign "start" :text {weather.current.icon}))
                 (box :hexpand true :orientation "v" :space-evenly false :halign "end" :valign "start"
-                    (button :class "btn_wtr" :onclick `(meteo &) && zsh ../scripts/launch_dashboard` :onmiddleclick `(python ../scripts/coordinate.py &)`
+                    (button :class "btn_wtr" :onclick `(uwsm app -- meteo &) && zsh ../scripts/launch_dashboard` :onmiddleclick `(python ../scripts/coordinate.py &)`
                         (label :halign "end" :class "weather-location" :text {weather.location}))
-                    (button :class "btn_wtr" :onclick `(meteo &) && zsh ../scripts/launch_dashboard` :onmiddleclick `(python ../scripts/coordinate.py &)`
+                    (button :class "btn_wtr" :onclick `(uwsm app -- meteo &) && zsh ../scripts/launch_dashboard` :onmiddleclick `(python ../scripts/coordinate.py &)`
                         (label :limit-width 20 :halign "end" :class "weather-current-text" :text {weather.current.text}))))
 
         (box :orientation "h" :space-evenly false :class "weather-info"
             (box :orientation "v" :space-evenly false :halign "start" :hexpand true
-                (button :class "btn_wtr" :onclick `(meteo &) && zsh ../scripts/launch_dashboard` :onmiddleclick `(python ../scripts/coordinate.py &)`
+                (button :class "btn_wtr" :onclick `(uwsm app -- meteo &) && zsh ../scripts/launch_dashboard` :onmiddleclick `(python ../scripts/coordinate.py &)`
                     (label :halign "start" :class "weather-current-temp" :text {weather.current.temp}))
                     (box :orientation "h" :space-evenly true
-                        (button :class "btn_wtr" :onclick `(meteo &) && zsh ../scripts/launch_dashboard` :onmiddleclick `(python ../scripts/coordinate.py &)`
+                        (button :class "btn_wtr" :onclick `(uwsm app -- meteo &) && zsh ../scripts/launch_dashboard` :onmiddleclick `(python ../scripts/coordinate.py &)`
                            (label :class "weather-current-maxtemp" :text {weather.maxtemp}))
-                        (button :class "btn_wtr" :onclick `(meteo &) && zsh ../scripts/launch_dashboard` :onmiddleclick `(python ../scripts/coordinate.py &)`
+                        (button :class "btn_wtr" :onclick `(uwsm app -- meteo &) && zsh ../scripts/launch_dashboard` :onmiddleclick `(python ../scripts/coordinate.py &)`
                            (label :class "weather-current-mintemp" :text {weather.mintemp}))))
             (box :orientation "h" :space-evenly false :halign "end" :hexpand true
                 (for hour in {weather.hourly}
                     (box :orientation "v" :space-evenly false :class "weather-hour"
-                        (button :class "btn_wtr" :onclick `(meteo &) && zsh ../scripts/launch_dashboard` :onmiddleclick `(python ../scripts/coordinate.py &)`
+                        (button :class "btn_wtr" :onclick `(uwsm app -- meteo &) && zsh ../scripts/launch_dashboard` :onmiddleclick `(python ../scripts/coordinate.py &)`
                             (label :class "weather-hour-temp" :text {hour.temp}))
-                        (button :class "btn_wtr" :onclick `(meteo &) && zsh ../scripts/launch_dashboard` :onmiddleclick  `(python ../scripts/coordinate.py &)`
+                        (button :class "btn_wtr" :onclick `(uwsm app -- meteo &) && zsh ../scripts/launch_dashboard` :onmiddleclick  `(python ../scripts/coordinate.py &)`
                             (label :class "weather-hour-icon" :text {hour.icon}))
-                        (button :class "btn_wtr" :onclick `(meteo &) && zsh ../scripts/launch_dashboard` :onmiddleclick `(python ../scripts/coordinate.py &)`
+                        (button :class "btn_wtr" :onclick `(uwsm app -- meteo &) && zsh ../scripts/launch_dashboard` :onmiddleclick `(python ../scripts/coordinate.py &)`
                             (label :class "weather-hour-time" :text {hour.time}))))))))
 
 

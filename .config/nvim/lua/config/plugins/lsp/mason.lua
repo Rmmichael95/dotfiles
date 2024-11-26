@@ -2,19 +2,24 @@ return {
 	"williamboman/mason.nvim",
 	dependencies = {
 		"williamboman/mason-lspconfig.nvim",
+		"jay-babu/mason-nvim-dap.nvim",
 		"LittleEndianRoot/mason-conform",
+		"rshkarin/mason-nvim-lint",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 	},
 	config = function()
 		-- import mason
 		local mason = require("mason")
 
-		-- import mason-lspconfig
-		local mason_lspconfig = require("mason-lspconfig")
+		-- local mason_lspconfig = require("mason-lspconfig")
+
+		-- local mason_dap = require("mason-nvim-dap")
+
+		-- local mason_conform = require("mason-conform")
+
+		-- local mason_lint = require("mason-nvim-lint")
 
 		local mason_tool_installer = require("mason-tool-installer")
-
-		local mason_conform = require("mason-conform")
 
 		-- enable mason and configure icons
 		mason.setup({
@@ -27,42 +32,51 @@ return {
 			},
 		})
 
-		mason_lspconfig.setup({
-			-- list of servers for mason to install
-			ensure_installed = {
-				"ts_ls",
-				"html",
-				"cssls",
-				--"tailwindcss",
-				"svelte",
-				"lua_ls",
-				--"graphql",
-				--"emmet_ls",
-				--"prismals",
-				"pyright",
-			},
-		})
-
 		mason_tool_installer.setup({
 			ensure_installed = {
+				-- LSP
+				"clangd",
+				"css-lsp",
+				"html-lsp",
+				"phpactor",
+				"svelte-language-server",
+				"bash-language-server",
+				"intelephense",
+				"lua-language-server",
+				"tailwindcss-language-server",
+				"typescript-language-server",
+				"yaml-language-server",
+				"r-languageserver",
+				"rust-analyzer",
+				"vim-language-server",
+				"texlab",
+				"zls",
+				-- DAP
+				"cpptools",
+				"debugpy",
+				"firefox-debug-adapter",
+				"php-debug-adapter",
+				-- conform
+				"clang-format",
 				"prettier", -- prettier formatter
+				-- "phpcbf", -- php formatting w/code sniffer
 				"stylua", -- lua formatter
 				"isort", -- python formatter
 				"black", -- python formatter
+				-- lint
+				"codespell",
+				"cpplint",
+				"phpcs",
 				"pylint",
 				"eslint_d",
 			},
+			-- doing lazy loading.
+			integrations = {
+				["mason-lspconfig"] = true,
+				["mason-nvim-dap"] = true,
+				["mason-conform"] = true,
+				["mason-nvim-lint"] = true,
+			},
 		})
-
-		-- mason_conform.setup({
-		-- 	ensure_installed = {
-		-- 		"prettier", -- prettier formatter
-		-- 		"stylua", -- lua formatter
-		-- 		"isort", -- python formatter
-		-- 		"black", -- python formatter
-		-- 		"pylint",
-		-- 		"eslint_d",
-		-- 	},
-		-- })
 	end,
 }

@@ -1,7 +1,0 @@
-no-greeting
-no-permission-warning
-lock-never
-keyserver hkp://keyserver.kjsl.com:80
-keyserver-options timeout=10
-keyserver-options import-clean
-keyserver-options no-self-sigs-only

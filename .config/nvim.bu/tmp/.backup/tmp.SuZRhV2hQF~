@@ -1,4 +1,0 @@
-permit persist setenv { XAUTHORITY LANG LC_ALL } :wheel
-permit nopass :wheel as ryanm cmd clamfang.sh
-permit nopass :wheel cmd zzz
-permit nopass :wheel cmd tlp

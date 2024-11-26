@@ -1,13 +1,13 @@
 #!/bin/env sh
 
-mkdir $HOME/.config
-mkdir -p $HOME/.local/share
+[ ! -d '$HOME/.config' ] && mkdir $HOME/.config
+[ ! -d '$HOME/.config' ] mkdir -p $HOME/.local/share
 
 rm -rf $HOME/{.zshrc,.bashrc,.profile,.login}
 
-ln -sv $HOME/documents/batcave/dotfiles/.local/myBin/ $HOME/.login/bin/
+rm -rf $HOME/.local/bin/myBin && ln -sv $HOME/documents/.bc/batcave/dotfiles/.local/myBin/ $HOME/.local/bin/
 
-for i in $(ls $HOME/documents/batcave/dotfiles/.config); do
+for i in $(ls $HOME/documents/.bc/batcave/dotfiles/.config); do
     rm -rf $HOME/.config/$i &&
-        ln -sv $HOME/documents/batcave/dotfiles/.config/$i/ $HOME/.config/
+        ln -sv $HOME/documents/.bc/batcave/dotfiles/.config/$i/ $HOME/.config/
 done

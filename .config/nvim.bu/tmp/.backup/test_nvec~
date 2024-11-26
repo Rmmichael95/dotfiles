@@ -1,6 +1,0 @@
-ffmpeg -threads:v 2 -threads:a 2 -filter_threads 2 -filter_complex_threads 2 \
-       -device /dev/dri/card0 -f kmsgrab -thread_queue_size 1024 -i - \
-       -f pulse -thread_queue_size 1024 -i default -c:a libopus -ac 2 -ar 48000 -b:a 512k \
-       -filter:v hwupload_cuda,scale_npp=w=1920:h=1080:format=nv12:interp_algo=lanczos,hwdownload \
-       -c:v hevc_nvenc -profile:v main -preset slow -rc vbr_hq \
-       -c:a copy

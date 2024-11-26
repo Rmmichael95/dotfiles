@@ -1,6 +1,0 @@
-type = process
-load-options = sub-vars
-logfile = /var/log/dinit/dbus.log
-command = /etc/dinit.d/user/scripts/dbus-session --print-address 3
-smooth-recovery = true
-ready-notification = pipefd:3

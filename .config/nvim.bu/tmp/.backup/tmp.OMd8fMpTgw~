@@ -1,7 +1,0 @@
-type            = bgprocess
-command         = /usr/bin/rsyslogd
-smooth-recovery = true
-logfile         = /var/log/dinit/rsyslog.log
-options         = starts-log
-depends-on      = pseudofs
-waits-for       = loginready

@@ -1,2 +1,0 @@
-ln -sv /home/ryanm/documents/batcave/dotfiles/ds-w /home/ryanm/.local/share/ds
-ln -sv /home/ryanm/documents/batcave/dotfiles/wm-hypr /home/ryanm/.local/share/wm

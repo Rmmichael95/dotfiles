@@ -1,3 +1,0 @@
-type    = scripted
-command = mkdir -m 700 -p $XDG_RUNTIME_DIR/gnupg
-logfile = $HOME/.local/share/dinit/gpg-agent-pre.log

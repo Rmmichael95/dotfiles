@@ -1,5 +1,0 @@
-#!/bin/sh
-case "$3" in
-    LIDB) echo -n mem >/sys/power/state ;;
-    *)    logger "ACPI action undefined: $3" ;;
-esac

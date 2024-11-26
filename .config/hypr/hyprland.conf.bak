@@ -27,9 +27,8 @@ monitor=,highres,auto,1
 # Set programs that you use
 $terminal = uwsm app -- alacritty
 $fileManager = $terminal -e yazi
-$menu = uwsm app -- $HOME/.local/bin/myBin/menu/bemenu-hypr
-$nmenu = uwsm app -- $HOME/.local/bin/myBin/menu/nvidia-menu
-$pmenu = uwsm app -- $HOME/.local/bin/myBin/menu/bemenu-power
+$menu = bemenu-hypr
+$pmenu = nvidia-menu
 
 #################
 ### AUTOSTART ###
@@ -43,8 +42,9 @@ exec-once = systemctl --user import-environment
 exec-once = hash dbus-update-activation-environment 2>/dev/null
 exec-once = dbus-update-activation-environment --systemd
 
-#exec-once = systemctl --user start hyprpolkitagent
 exec-once = uwsm app -- /usr/lib/geoclue-2.0/demos/agent
+exec-once = uwsm app -- eww -c /home/ryanm/.config/eww/bar daemon
+exec-once = uwsm app -- zsh /home/ryanm/.config/eww/scripts/launch_bar
 exec-once = uwsm app -- hyprpaper
 #exec-once = uwsm app -- hypridle
 
@@ -81,6 +81,8 @@ exec-once = uwsm app -- hyprpaper
 env = AQ_DRM_DEVICES,/dev/dri/card0:/dev/dri/card1 # Explicit list of DRM GPUs
 #env = AQ_MGPU_NO_EXPLICIT,1 # Disable explicit syncing on mgpu buffers
 env = AQ_NO_MODIFIERS,1 # Disables modifiers for DRM buffers
+
+#env = WLR_DRM_DEVICES,/dev/dri/card0 # Explicitly use Intel
 
 # Toolkit Backend
 env = GDK_BACKEND,wayland,x11,*
@@ -232,17 +234,15 @@ master {
     new_status = master
 }
 
+# See https://wiki.hyprland.org/Configuring/Variables/ for more
+gestures {
+    workspace_swipe = true
+    workspace_swipe_fingers = 3
+}
+
 # debug {
 #     disable_logs = false
 # }
-
-# https://wiki.hyprland.org/Configuring/Variables/#misc
-misc {
-    force_default_wallpaper = -1 # Set to 0 or 1 to disable the anime mascot wallpapers
-    disable_hyprland_logo = false # If true disables the random hyprland logo / anime girl background. :(
-    enable_swallow = true
-    swallow_regex=^(Alacritty)$
-}
 
 # Ref https://wiki.hyprland.org/Configuring/Workspace-Rules/
 # "Smart gaps" / "No gaps when only"
@@ -253,6 +253,15 @@ misc {
 # windowrulev2 = rounding 0, floating:0, onworkspace:w[tv1]
 # windowrulev2 = bordersize 0, floating:0, onworkspace:f[1]
 # windowrulev2 = rounding 0, floating:0, onworkspace:f[1]
+
+
+# https://wiki.hyprland.org/Configuring/Variables/#misc
+misc {
+    force_default_wallpaper = -1 # Set to 0 or 1 to disable the anime mascot wallpapers
+    disable_hyprland_logo = false # If true disables the random hyprland logo / anime girl background. :(
+    enable_swallow = true
+    swallow_regex=^(Alacritty)$
+}
 
 
 #############
@@ -276,10 +285,10 @@ input {
     }
 }
 
+# https://wiki.hyprland.org/Configuring/Variables/#gestures
 gestures {
-    workspace_swipe = true
+    workspace_swipe = false
 }
-
 
 # Example per-device config
 # See https://wiki.hyprland.org/Configuring/Keywords/#per-device-input-configs for more
@@ -287,7 +296,6 @@ device {
     name = epic-mouse-v1
     sensitivity = -0.5
 }
-
 cursor {
     no_hardware_cursors = true
     #allow_dumb_copy = true # Set if using hardware cursors
@@ -304,26 +312,24 @@ $mainMod = SUPER # Sets super key as main modifier
 # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
 bind = $mainMod, return, exec, $terminal
 bind = $mainMod, R, exec, $menu
-bind = $mainMod SHIFT, R, exec, $nmenu
+bind = $mainMod SHIFT, R, exec, $pmenu
 bind = $mainMod, E, exec, $fileManager
 bind = $mainMod, P, pseudo, # dwindle
 bind = $mainMod, J, togglesplit, # dwindle
 bind = $mainMod, F, togglefloating,
 bind = $mainMod, X, killactive,
-bind = $mainMod, D, exec, $HOME/.config/eww/scripts/launch_dashboard # eww dashboard
-bind = $mainMod, N, exec, uwsm app -- swaync-client -t # eww dashboard
+bind = $mainMod, D, exec, ~/.config/eww/scripts/launch_dashboard, # eww dashboard
 bind = $mainMod CTRL, Z, exit,
 bind = $mainMod CTRL, C, exec, doas tlp setcharge BAT0 1
-bind = $mainMod CTRL, P, exec, grim -g "$(slurp)"
 bind = $mainMod SHIFT, C, exec, doas tlp setcharge BAT0 0
 bind = $mainMod SHIFT, X, killactive,
 bind = $mainMod SHIFT, F, fullscreen
-bind = $mainMod SHIFT, Z, exec, $HOME/.local/bin/myBin/menu/bemenu_power "Poweroff?"
-bind = $mainMod SHIFT, L, exec, $HOME/.local/bin/myBin/hypr/hypr-lock
-bind = $mainMod SHIFT, G, exec, $HOME/.local/bin/myBin/OnScreenToClip
-bind = $mainMod SHIFT, |, exec, pamixer -t
-bind = $mainMod SHIFT, {, exec, pamixer --allow-boost -d 5
-bind = $mainMod SHIFT, }, exec, pamixer --allow-boost -i 5
+bind = $mainMod SHIFT, Z, exec, bemenu_power "Poweroff?"
+bind = $mainMod SHIFT, L, exec, hypr-lock
+bind = $mainMod SHIFT, G, exec, OnScreenToClip
+bind = $mainMod SHIFT, {, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+
+bind = $mainMod SHIFT, }, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+bind = $mainMod SHIFT, |, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 
 # Move focus with mainMod + arrow keys
 bind = $mainMod, left, movefocus, l
@@ -372,11 +378,8 @@ bindel = ,XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@
 bindel = ,XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
 bindel = ,XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 bindel = ,XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
-bindel = ,xf86monbrightnessup, exec, xbacklight -inc 5
-bindel = ,xf86monbrightnessdown, exec, xbacklight -dec 5
-#bindel = ,XF86MonBrightnessUp, exec, brightnessctl s 10%+
-#bindel = ,XF86MonBrightnessDown, exec, brightnessctl s 10%-
-bindel = ,xf86poweroff, exec, $pmenu "Do you want to poweroff?"
+bindel = ,XF86MonBrightnessUp, exec, brightnessctl s 10%+
+bindel = ,XF86MonBrightnessDown, exec, brightnessctl s 10%-
 
 # Requires playerctl
 bindl = , XF86AudioNext, exec, playerctl next
@@ -384,8 +387,17 @@ bindl = , XF86AudioPause, exec, playerctl play-pause
 bindl = , XF86AudioPlay, exec, playerctl play-pause
 bindl = , XF86AudioPrev, exec, playerctl previous
 
+
 # special keys
-bindel = ,code:248, exec, grim
+bind = ,xf86poweroff, exec, bemenu_power "Do you want to poweroff?"
+#bind = ,xf86audiomute, exec, pamixer -t
+#bind = ,xf86audiolowervolume, exec, pamixer --allow-boost -d 5
+#bind = ,xf86audioraisevolume, exec, pamixer --allow-boost -i 5
+#bind = ,xf86audiomicmute, exec, amixer set Capture toggle
+#bind = ,xf86monbrightnessup, exec, xbacklight -inc 5
+#bind = ,xf86monbrightnessdown, exec, xbacklight -dec 5
+bind = ,code:248, exec, grim
+bind = $mainMod CTRL, P, exec, grim -g "$(slurp)"
 
 ##############################
 ### WINDOWS AND WORKSPACES ###

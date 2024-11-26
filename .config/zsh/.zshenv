@@ -6,7 +6,7 @@ export PATH
 # MANPATH
 export MANPATH="$MANPATH:/usr/local/man:"
 # CDPATH
-#export CDPATH="$CDPATH:.:$HOME/documents/batcave"
+export CDPATH="$CDPATH:.:$HOME/documents/.bc"
 
 # You may need to manually set your language environment
 export LANG="en_US.UTF-8"

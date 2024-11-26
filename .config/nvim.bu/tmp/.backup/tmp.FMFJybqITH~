@@ -1,7 +1,0 @@
-#!/bin/sh
-case "$1" in
-    start)
-        /usr/bin/zramen -a zstd make ;;
-    stop)
-        /usr/bin/zramen toss ;;
-esac

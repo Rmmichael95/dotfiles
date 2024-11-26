@@ -1,9 +1,0 @@
-[Trigger]
-Operation = Upgrade
-Type = Package
-Target = *
-
-[Action]
-Description = Updating statusbar...
-When = PostTransaction
-Exec = /usr/bin/pkill -RTMIN+8 dwmblocks

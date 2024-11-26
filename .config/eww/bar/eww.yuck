@@ -36,7 +36,7 @@
     (box :class "module" :halign "center"
       (button :class "clock_date_class"
              :onclick "zsh ../scripts/pop calendar"
-             :onmiddleclick `(alacritty -e calcurse &)`
+             :onmiddleclick `(uwsm app -- alacritty -e calcurse &)`
       (label :text "${time}"))))
 
 (defwidget center []
@@ -55,7 +55,8 @@
   (box :halign "end"
       (button :class "systray"
               :onclick "zsh ../scripts/launch_dashboard"
-              :onmiddleclick "zsh ../scripts/audio --toggle-vol"
+              ;;:onmiddleclick "zsh ../scripts/audio --toggle-vol"
+              :onmiddleclick "`(uwsm app -- swaync-client -t)`"
       (label :text "${network} ${volume} ${battery}"))))
 
 (defwidget right []

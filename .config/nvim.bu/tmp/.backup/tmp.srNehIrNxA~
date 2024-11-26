@@ -1,3 +1,0 @@
-"Boot with standard options"  "intel_pstate=passive BOOT_IMAGE=/@/boot/vmlinuz-linux-tkg-pds-generic_v3 root=/dev/nvme0n1p3 rw rootflags=subvol=@ resume=PARTUUID=7f98f989-00cc-4628-994a-cec6c90e5398 loglevel=3 quiet splash"
-"Boot to single-user mode"    "intel_pstate=passive BOOT_IMAGE=/@/boot/vmlinuz-linux-tkg-pds-generic_v3 root=/dev/nvme0n1p3 rw rootflags=subvol=@ resume=PARTUUID=7f98f989-00cc-4628-994a-cec6c90e5398 loglevel=3 quiet single"
-"Boot with minimal options"   "ro root=/dev/nvme0n1p3"
