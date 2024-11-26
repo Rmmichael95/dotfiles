@@ -13,7 +13,7 @@ ln -sv "$DOTS/.local/myBin/" "$HOME/.local/bin/"
 
 for i in $(ls "$DOTS/.config"); do
     rm -rf "$HOME/.config/$i" &&
-        ln -sv "$DOTS/.config/$i/" "$HOME/.config/"
+        ln -sv "$DOTS/.config/$i" "$HOME/.config/"
 done
 
 sudo-askpass cat zshenv >>'/etc/zsh/zshenv'
