@@ -1,6 +1,9 @@
+#CXX=g++
+#CXX=clang++
 CXX=zig c++
 RM=rm -rf
 # flags
+#CXXFLAGS=-std=c++17 -pthread
 CXXFLAGS=-pthread
 CPPFLAGS=
 # target dirs

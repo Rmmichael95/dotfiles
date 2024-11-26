@@ -1,3 +1,5 @@
+#CC=gcc
+#CC=clang
 CC=zig cc
 RM=rm -rf
 LIBS=-lm
