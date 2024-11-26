@@ -1,13 +1,17 @@
-#!/bin/env sh
+#!/usr/bin/zsh
 
-[ ! -d '$HOME/.config' ] && mkdir $HOME/.config
-[ ! -d '$HOME/.config' ] mkdir -p $HOME/.local/share
+[ -d "$HOME/.config" ] || mkdir "$HOME/.config"
+[ -d "$HOME/.local/share" ] || mkdir -p "$HOME/.local/share"
 
 rm -rf $HOME/{.zshrc,.bashrc,.profile,.login}
 
-rm -rf $HOME/.local/bin/myBin && ln -sv $HOME/documents/.bc/batcave/dotfiles/.local/myBin/ $HOME/.local/bin/
+sudo cat zshenv >>'/etc/zsh/zshenv'
 
-for i in $(ls $HOME/documents/.bc/batcave/dotfiles/.config); do
-    rm -rf $HOME/.config/$i &&
-        ln -sv $HOME/documents/.bc/batcave/dotfiles/.config/$i/ $HOME/.config/
+rm -rf "$HOME/.local/bin/myBin" && ln -sv "$HOME/documents/.bc/batcave/dotfiles/.local/myBin/" "$HOME/.local/bin/"
+
+"$HOME/.local/bin/myBin/set-w"
+
+for i in $(ls "$HOME/documents/.bc/batcave/dotfiles/.config"); do
+    rm -rf "$HOME/.config/$i" &&
+        ln -sv "$HOME/documents/.bc/batcave/dotfiles/.config/$i/" "$HOME/.config/"
 done
