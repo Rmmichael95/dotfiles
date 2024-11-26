@@ -13,7 +13,7 @@ TARGET=main
 MKDIR=@mkdir -p
 DIR_GUARD=$(MKDIR) $(@D)
 
-SRCT=*.[cpp][h]
+SRCT=*.cpp *.h
 RECT=*.txt
 
 DEBUG ?= 1

@@ -78,5 +78,24 @@ return {
 				["mason-nvim-lint"] = true,
 			},
 		})
+
+		local mason_nvim_dap = require("mason-nvim-dap")
+		mason_nvim_dap.setup({
+			ensure_installed = {},
+			automatic_installation = false,
+			handlers = {
+				function(config)
+					mason_nvim_dap.default_setup(config)
+				end,
+				-- cppdbg = function(config)
+				-- 	config.adapters = {
+				-- 		id = "cppdbg",
+				-- 		type = "executable",
+				-- 		command = vim.fn.stdpath("data") .. "/mason/bin/OpenDebugAD7",
+				-- 	}
+				-- 	mason_nvim_dap.default_setup(config)
+				-- end,
+			},
+		})
 	end,
 }

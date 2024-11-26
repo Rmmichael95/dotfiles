@@ -74,7 +74,7 @@ o.synmaxcol = 200 -- don't highlight long lines
 -- set options
 o.shiftwidth = 4 -- read help to set up later
 o.winminwidth = 5 -- Minimum window width
-g.browsedir = "buffer" -- put up directory requestor
+g.browsedir = "buffer" -- put up directory requester
 o.hlsearch = false -- don't highlight for searching
 o.ignorecase = true -- ignore case for pattern matching
 o.smartcase = true -- smart search case-sensativity
@@ -107,7 +107,7 @@ o.background = "dark" -- set background dark/light
 cmd([[autocmd BufEnter,FocusGained,BufWinEnter,WinEnter * match ColorColumn "\%81v."]])
 cmd("highlight ColorColumn guibg=darkred")
 
-o.showbreak = "↪" -- str to put at begining of wrapped lines
+o.showbreak = "↪" -- str to put at beginning of wrapped lines
 o.list = true -- show whitesoace chars
 o.listchars = {
 	nbsp = "␣",

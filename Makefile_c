@@ -38,7 +38,7 @@ $(TARGET): $(OBJS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(DIR_GUARD)
-	@echo [C] $<
+	@echo [CC] $<
 	@$(CC) $(LDFLAGS) $(CFLAGS) -c -o $@ $<
 
 clean:
