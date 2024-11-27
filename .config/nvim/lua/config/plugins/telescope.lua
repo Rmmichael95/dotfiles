@@ -51,8 +51,8 @@ return {
 		{ "<leader>sj", "<cmd>Telescope jumplist<cr>", desc = "Jumplist" },
 		{ "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
 		{ "<leader>sl", "<cmd>Telescope loclist<cr>", desc = "Location List" },
-		{ "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
-		{ "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
+		-- { "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
+		-- { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
 		{ "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
 		{ "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
 		{ "<leader>sq", "<cmd>Telescope quickfix<cr>", desc = "Quickfix List" },
@@ -80,7 +80,7 @@ return {
 		--   desc = "Goto Symbol (Workspace)",
 		-- },
 		{
-			"<leader>tp",
+			"<leader>fp",
 			function()
 				require("telescope.builtin").find_files({
 					cwd = require("config.plugins").options.root,
@@ -89,7 +89,7 @@ return {
 			desc = "Find Plugin File",
 		},
 		{
-			"<leader>tf",
+			"<leader>ff",
 			function()
 				local builtin = require("telescope.builtin")
 				builtin.find_files({
@@ -102,7 +102,7 @@ return {
 			desc = "Lists files in your current working directory, respects .gitignore",
 		},
 		{
-			"<leader>tg",
+			"<leader>lg",
 			function()
 				local builtin = require("telescope.builtin")
 				builtin.live_grep({
@@ -120,7 +120,7 @@ return {
 			desc = "Lists open buffers",
 		},
 		{
-			"<leader>th",
+			"<leader>fh",
 			function()
 				local builtin = require("telescope.builtin")
 				builtin.help_tags()
@@ -136,7 +136,7 @@ return {
 			desc = "Resume the previous telescope picker",
 		},
 		{
-			"<leader>td",
+			"<leader>dd",
 			function()
 				local builtin = require("telescope.builtin")
 				builtin.diagnostics()
@@ -144,7 +144,7 @@ return {
 			desc = "Lists Diagnostics for all open buffers or a specific buffer",
 		},
 		{
-			"<leadser>tl",
+			"<leadser>fn",
 			function()
 				local builtin = require("telescope.builtin")
 				builtin.treesitter()
@@ -152,7 +152,7 @@ return {
 			desc = "Lists Function names, variables, from Treesitter",
 		},
 		{
-			"<leader>tb",
+			"<leader>fb",
 			function()
 				local telescope = require("telescope")
 

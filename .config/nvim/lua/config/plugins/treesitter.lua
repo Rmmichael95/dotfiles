@@ -7,27 +7,8 @@ return {
 		"windwp/nvim-ts-autotag",
 	},
 	config = function()
-		-- import nvim-treesitter plugin
-		local treesitter = require("nvim-treesitter.configs")
-
-		-- configure treesitter
-		--treesitter.setup({ -- enable syntax highlighting
-		require("nvim-ts-autotag").setup({
-			opts = {
-				-- Defaults
-				enable_close = true, -- Auto close tags
-				enable_rename = true, -- Auto rename pairs of tags
-				enable_close_on_slash = false, -- Auto close on trailing </
-			},
-			highlight = {
-				enable = true,
-			},
-			-- enable indentation
-			indent = { enable = true },
-			-- enable autotagging (w/ nvim-ts-autotag plugin)
-			autotag = {
-				enable = true,
-			},
+		require("nvim-treesitter.configs").setup({
+			-- A list of parser names, or "all" (the listed parsers MUST always be installed)
 			-- ensure these language parsers are installed
 			ensure_installed = {
 				"json",
@@ -37,11 +18,8 @@ return {
 				"yaml",
 				"html",
 				"css",
-				"prisma",
 				"markdown",
 				"markdown_inline",
-				"svelte",
-				"graphql",
 				"bash",
 				"lua",
 				"vim",
@@ -50,15 +28,34 @@ return {
 				"query",
 				"vimdoc",
 				"c",
+				"cpp",
+				"zig",
 			},
-			incremental_selection = {
+			-- ensure_installed = { "all" },
+
+			-- Install parsers synchronously (only applied to `ensure_installed`)
+			sync_install = false,
+
+			-- Automatically install missing parsers when entering buffer
+			-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+			auto_install = true,
+
+			highlight = {
 				enable = true,
-				keymaps = {
-					init_selection = "<C-space>",
-					node_incremental = "<C-space>",
-					scope_incremental = false,
-					node_decremental = "<bs>",
-				},
+
+				-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+				-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+				-- Using this option may slow down your editor, and you may see some duplicate highlights.
+				-- Instead of true it can also be a list of languages
+				additional_vim_regex_highlighting = false,
+			},
+		})
+		require("nvim-ts-autotag").setup({
+			opts = {
+				-- Defaults
+				enable_close = true, -- Auto close tags
+				enable_rename = true, -- Auto rename pairs of tags
+				enable_close_on_slash = false, -- Auto close on trailing </
 			},
 		})
 	end,

@@ -16,8 +16,8 @@ TARGET=main
 MKDIR=@mkdir -p
 DIR_GUARD=$(MKDIR) $(@D)
 
-SRCT=*.cpp *.h
-RECT=*.txt
+SRCT=$(wildcard *.cpp *.h)
+RECT=$(wildcard *.txt)
 
 DEBUG ?= 1
 
@@ -63,7 +63,7 @@ endif
 $(RECDIR):
 ifeq ($(RECS),)
 else
-	@echo [INFO] Handling resources [$(RECT)]
+	@echo [INFO] Handling reSAUCEs [$(RECT)]
 	@$(MKDIR) $(RECDIR)
 	@mv $(RECS) $(RECDIR)
 endif

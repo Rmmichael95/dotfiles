@@ -16,8 +16,8 @@ TARGET=main
 MKDIR=@mkdir -p
 DIR_GUARD=$(MKDIR) $(@D)
 
-SRCT=*.[ch]
-RECT=*.txt
+SRCT=$(wildcard *.c *.h)
+RECT=$(wildcard *.txt)
 
 DEBUG ?= 1
 

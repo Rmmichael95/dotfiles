@@ -12,28 +12,10 @@ return {
 	config = function()
 		-- import lspconfig plugin
 		local lspconfig = require("lspconfig")
-
 		-- import mason_lspconfig plugin
 		local mason_lspconfig = require("mason-lspconfig")
-
 		-- import cmp-nvim-lsp plugin
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
-		local protocol = require("vim.lsp.protocol")
-
-		local on_attach = function(_, bufnr)
-			vim.lsp.handlers["textDocument/publishDiagnostics"] =
-				vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-					-- disable virtual text
-					virtual_text = false,
-
-					-- show signs
-					signs = true,
-
-					-- delay update diagnostics
-					update_in_insert = false,
-				})
-		end
 
 		-- local saga = require("lspsaga")
 		--
@@ -79,12 +61,12 @@ return {
 				keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
 
 				opts.desc = "Toggle Diagnostic"
-				keymap.set("n", "<leader>td", function()
+				keymap.set("n", "<leader>D", function()
 					vim.diagnostic.enable(not vim.diagnostic.is_enabled())
 				end, opts) -- mapping to toggle lsp diagnostic
 
 				opts.desc = "Show buffer diagnostics"
-				keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- show  diagnostics for file
+				keymap.set("n", "<leader>sD", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- show  diagnostics for file
 
 				opts.desc = "Show line diagnostics"
 				keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
@@ -103,34 +85,36 @@ return {
 				keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
 			end,
 		})
+
+		-- local protocol = require("vim.lsp.protocol")
 		--protocol.SymbolKind = { }
-		protocol.CompletionItemKind = {
-			"", -- Text
-			"", -- Method
-			"", -- Function
-			"", -- Constructor
-			"", -- Field
-			"", -- Variable
-			"", -- Class
-			"ﰮ", -- Interface
-			"", -- Module
-			"", -- Property
-			"", -- Unit
-			"", -- Value
-			"", -- Enum
-			"", -- Keyword
-			"﬌", -- Snippet
-			"", -- Color
-			"", -- File
-			"", -- Reference
-			"", -- Folder
-			"", -- EnumMember
-			"", -- Constant
-			"", -- Struct
-			"", -- Event
-			"ﬦ", -- Operator
-			"", -- TypeParameter
-		}
+		-- protocol.CompletionItemKind = {
+		-- 	"", -- Text
+		-- 	"", -- Method
+		-- 	"", -- Function
+		-- 	"", -- Constructor
+		-- 	"", -- Field
+		-- 	"", -- Variable
+		-- 	"", -- Class
+		-- 	"ﰮ", -- Interface
+		-- 	"", -- Module
+		-- 	"", -- Property
+		-- 	"", -- Unit
+		-- 	"", -- Value
+		-- 	"", -- Enum
+		-- 	"", -- Keyword
+		-- 	"﬌", -- Snippet
+		-- 	"", -- Color
+		-- 	"", -- File
+		-- 	"", -- Reference
+		-- 	"", -- Folder
+		-- 	"", -- EnumMember
+		-- 	"", -- Constant
+		-- 	"", -- Struct
+		-- 	"", -- Event
+		-- 	"ﬦ", -- Operator
+		-- 	"", -- TypeParameter
+		-- }
 
 		-- used to enable autocompletion (assign to every lsp server config)
 		local capabilities = cmp_nvim_lsp.default_capabilities()
@@ -148,15 +132,6 @@ return {
 			function(server_name)
 				lspconfig[server_name].setup({
 					capabilities = capabilities,
-				})
-			end,
-			["phpactor"] = function()
-				-- configure phpactor language server
-				lspconfig["phpactor"].setup({
-					capabilities = capabilities,
-					filetypes = {
-						"php",
-					},
 				})
 			end,
 			["intelephense"] = function()
@@ -333,12 +308,13 @@ return {
 								"zmq",
 								"zookeeper",
 							},
-							-- environment = {
-							-- 	includePaths = {
-							-- 		"/home/ryanm/.config/composer/vendor/php-stubs/",
-							-- 	}, -- this line forces the composer path for the stubs in case inteliphense can't find it...
-							-- 	root_dir = vim.loop.cwd,
-							-- },
+							environment = {
+								includePaths = {
+									"/home/ryanm/.config/composer/vendor/php-stubs/",
+									"/home/ryanm/.config/composer/vendor/wpsyntex/",
+								}, -- this line forces the composer path for the stubs in case inteliphense can't find it...
+								-- root_dir = vim.loop.cwd,
+							},
 							files = {
 								maxSize = 5000000,
 							},
