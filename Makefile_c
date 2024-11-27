@@ -1,7 +1,6 @@
 #CC=gcc
 #CC=clang
 CC=zig cc
-RM=rm -rf
 LIBS=-lm
 # flags
 LDFLAGS=
@@ -13,6 +12,7 @@ RECDIR=rec
 # executable name
 TARGET=main
 
+RM=rm -rf
 MKDIR=@mkdir -p
 DIR_GUARD=$(MKDIR) $(@D)
 

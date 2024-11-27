@@ -1,7 +1,7 @@
 #CXX=g++
 #CXX=clang++
 CXX=zig c++
-RM=rm -rf
+LIBS=
 # flags
 #CXXFLAGS=-std=c++17 -pthread
 CXXFLAGS=-pthread
@@ -13,6 +13,7 @@ RECDIR=rec
 # executable name
 TARGET=main
 
+RM=rm -rf
 MKDIR=@mkdir -p
 DIR_GUARD=$(MKDIR) $(@D)
 
@@ -36,7 +37,7 @@ all: $(TARGET)
 
 $(TARGET): $(OBJS)
 	@echo [INFO] Creating executable [$(TARGET)]
-	@$(CXX) $(CXXFLAGS) $(CPPFLAGS) -o $(TARGET) $(OBJS)
+	@$(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OBJS) -o $(TARGET) $(LIBS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	$(DIR_GUARD)
