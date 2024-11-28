@@ -11,6 +11,26 @@ return {
 		local dap, ui = require("dap"), require("dapui")
 		require("dapui").setup()
 
+		require("dap").adapters.firefox = {
+			type = "executable",
+			command = "node",
+			args = {
+				vim.fn.stdpath("data") .. "/mason/bin/firefox-debug-adapter",
+			},
+		}
+
+		require("dap").configurations.typescriptreact = {
+			{
+				name = "Debug with Firefox",
+				type = "firefox",
+				request = "launch",
+				reAttach = true,
+				url = "http://localhost:3000",
+				webRoot = "${workspaceFolder}",
+				firefoxExecutable = "/usr/bin/floorp", -- adjust to your Firefox executable path
+			},
+		}
+
 		local keymap = vim.keymap -- for conciseness
 		local opts = { silent = true }
 

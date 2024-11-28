@@ -1,0 +1,28 @@
+alias orphaned="sudo pacman -Rns $(pacman -Qtdq)"
+alias fixpac="sudo rm /var/lib/pacman/db.lck"
+alias ugtar='tar -zxvf '
+alias untar='tar -zxvf '
+alias wget='wget -c '
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+#alias ls='lsd'
+alias ls='eza'
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
+alias path='echo -e ${PATH//:/\\n}'
+alias vim='nvim'
+alias nv='nvim'
+alias virc='nv $XDG_CONFIG_HOME/nvim'
+alias zshrc='nv $XDG_CONFIG_HOME/zsh/zshrc'
+alias poweroff='dinitctl shutdown && doas-askpass poweroff'
+alias reboot='dinitctl shutdown && doas-askpass reboot'
+alias gzip='pigz'
+alias find='fd'
+alias mbsync='mbsync -c "$XDG_CONFIG_HOME"/isync/mbsyncrc'
+alias scron='su -c "crontab -e"'
+#alias upd="sudo reflector --verbose --threads 8 --country 'US,CA' --protocol https --sort rate --save /etc/pacman.d/mirrorlist && doas pacman -Syu"
+alias upda="doas reflector --verbose --threads 8 --country 'US,CA' --protocol https --sort rate --save /etc/pacman.d/mirrorlist-arch && doas pacman -Syu"
+alias ff="fastfetch"

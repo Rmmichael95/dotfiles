@@ -2,12 +2,12 @@
 
 DOTS="$HOME/documents/.bc/batcave/dotfiles"
 
-[ -d "$HOME/.config" ] || mkdir "$HOME/.config"
-[ -d "$HOME/.local/share" ] || mkdir -p "$HOME/.local/share"
+[ ! -f "$HOME/.config" ] && mkdir "$HOME/.config"
+[ ! -f "$HOME/.local/share" ] && mkdir -p "$HOME/.local/share"
 
 rm -rf $HOME/{.zshrc,.bashrc,.profile,.login}
 
-ln -sv "$DOTS/.local/myBin/" "$HOME/.local/bin/"
+ln -sv "$DOTS/.local/myBin" "$HOME/.local/bin/"
 
 "$HOME/.local/bin/myBin/set-w"
 

@@ -1,8 +1,6 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-#echo "/zsh/zshrc"
-
 ## Plugins section: Enable fish style features
 # Use syntax highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -15,14 +13,79 @@ source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring
 # https://wiki.archlinux.org/index.php/Pkgfile#.22Command_not_found.22_hook
 [[ -e /usr/share/doc/pkgfile/command-not-found.zsh ]] && source /usr/share/doc/pkgfile/command-not-found.zsh
 
-# Use skim
-#source $XDG_DATA_HOME/skim/shell/key-bindings.zsh
-#source $XDG_DATA_HOME/skim/shell/completion.zsh
+# alacritty completions
+fpath+=${ZDOTDIR:-~}/.zsh_functions
 
-# rvm
-eval "$(rbenv init -)"
-#nvm
-source /usr/share/nvm/init-nvm.sh
+# Use fzf
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+export FZF_DEFAULT_OPTS='--no-height --no-reverse'
+# Using highlight (http://www.andre-simon.de/doku/highlight/en/highlight.html)
+export FZF_CTRL_T_OPTS="--select-1 --exit-0 --preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
+# export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+
+fzf-history-widget-accept() {
+  fzf-history-widget
+  zle accept-line
+}
+
+zle     -N     fzf-history-widget-accept
+bindkey '^X^R' fzf-history-widget-accept
+
+# Find and edit using fzf
+fe() {
+  nvim "$(find -type f | fzf --preview 'cat {}' --preview-window 'up:60%')"
+}
+
+frg() {
+  RG_PREFIX="rga --files-with-matches"
+  local file
+  file="$(
+    FZF_DEFAULT_COMMAND="$RG_PREFIX '$1'" \
+      fzf --sort --preview="[[ ! -z {} ]] && rga --pretty --context 5 {q} {}" \
+        --phony -q "$1" \
+        --bind "change:reload:$RG_PREFIX {q}" \
+        --preview-window="70%:wrap"
+  )" &&
+  echo "opening $file" &&
+  xdg-open "$file"
+}
+
+pe() {
+  local file
+  file=$(find ~/.password-store -type f -name '*.gpg' | sed "s|^$HOME/.password-store/||;s|\.gpg$||" | fzf)
+  if [ -n "$file" ]; then
+    pass edit "$file"
+  fi
+}
+
+# Find and remove files with fzf
+frm() {
+  # Use `find` to list files and directories, and pipe them to `fzf` for selection
+  selected=$(find . -type f -o -type d 2>/dev/null | fzf -m)
+
+  # Check if any selection was made
+  if [[ -n "$selected" ]]; then
+    # Echo the files or directories that will be deleted
+    echo "Deleting the following files or directories:"
+    echo "$selected"
+
+    # Use `xargs` to safely pass selected files/directories to `rm -rf`
+    echo "$selected" | xargs -d '\n' rm -rf
+  else
+    echo "No files or directories selected."
+  fi
+}
+
+ssh_fzf() {
+  local host=$(grep "Host " ~/.ssh/config | cut -d " " -f 2 | fzf)
+  if [[ -n $host ]]; then
+    ssh "$host"
+    else
+      echo "No host selected"
+    fi
+}
 
 # perl
 PATH="$XDG_DATA_HOME/perl5/bin${PATH:+:${PATH}}"; export PATH;
@@ -33,7 +96,7 @@ PERL_MM_OPT="INSTALL_BASE=$XDG_DATA_HOME/perl5"; export PERL_MM_OPT;
 
 # Load aliases and shortcuts if existent.
 #[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc"
-#[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"
 #[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc"
 
 ## Options section
@@ -53,6 +116,7 @@ setopt pushdminus
 
 # Completion.
 autoload -Uz compinit
+
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
@@ -138,24 +202,6 @@ else
   bindkey -M vicmd "^[3;5~" delete-char
 fi
 
-#Functions
-cd_with_skim() {
-  cd "$(fd -t d | sk --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden)" && clear
-}
-
-open_with_skim() {
-  file="$(fd -t f -H | sk --preview="head -$LINES {}")"
-  if [ -n "$file" ]; then
-      mimetype="$(xdg-mime query filetype $file)"
-      default="$(xdg-mime query default $mimetype)"
-      if [[ "$default" == "vim.desktop" ]]; then
-          nvim "$file"
-      else
-          &>/dev/null xdg-open "$file" & disown
-      fi
-  fi
-}
-
 zle -N cd_with_skim
 zle -N open_with_skim
 
@@ -166,70 +212,45 @@ bindkey '^v' nvim
 # Change cursor shape for different vi modes.
 function zle-keymap-select {
   if [[ ${KEYMAP} == vicmd ]] ||
-     [[ $1 = 'block' ]]; then
+    [[ $1 = 'block' ]]; then
     echo -ne '\e[1 q'
 
   elif [[ ${KEYMAP} == main ]] ||
-       [[ ${KEYMAP} == viins ]] ||
-       [[ ${KEYMAP} = '' ]] ||
-       [[ $1 = 'beam' ]]; then
+     [[ ${KEYMAP} == viins ]] ||
+     [[ ${KEYMAP} = '' ]] ||
+     [[ $1 = 'beam' ]]; then
     echo -ne '\e[5 q'
   fi
 }
 zle -N zle-keymap-select
 
 zle-line-init() {
-    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
-    echo -ne "\e[5 q"
+  zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+  echo -ne "\e[5 q"
 }
 zle -N zle-line-init
 
 # Add useful aliases
-alias orphaned="sudo pacman -Rns $(pacman -Qtdq)"
-alias fixpac="sudo rm /var/lib/pacman/db.lck"
-alias ugtar='tar -zxvf '
-alias untar='tar -zxvf '
-alias wget='wget -c '
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-alias ......='cd ../../../../..'
-#alias ls='lsd'
-alias ls='eza'
-alias dir='dir --color=auto'
-alias vdir='vdir --color=auto'
-alias path='echo -e ${PATH//:/\\n}'
-alias vim='nvim'
-alias nv='nvim'
-alias virc='nv $XDG_CONFIG_HOME/nvim'
-alias zshrc='nv $XDG_CONFIG_HOME/zsh/zshrc'
-alias poweroff='dinitctl shutdown && doas-askpass poweroff'
-alias reboot='dinitctl shutdown && doas-askpass reboot'
-alias gzip='pigz'
-alias find='fd'
-alias mbsync='mbsync -c "$XDG_CONFIG_HOME"/isync/mbsyncrc'
-alias scron='su -c "crontab -e"'
-#alias upd="sudo reflector --verbose --threads 8 --country 'US,CA' --protocol https --sort rate --save /etc/pacman.d/mirrorlist && doas pacman -Syu"
-alias upda="doas reflector --verbose --threads 8 --country 'US,CA' --protocol https --sort rate --save /etc/pacman.d/mirrorlist-arch && doas pacman -Syu"
-alias ff="fastfetch"
+eval "$(zoxide init zsh)"
 
-# alacritty completions
-fpath+=${ZDOTDIR:-~}/.zsh_functions
+# start starship prompt
+eval "$(starship init zsh)"
 
 # You can use whatever you want as an alias, like for Mondays:
 #eval "$(thefuck --alias FUCK)"
 eval "$(thefuck --alias)":
 
-# start starship prompt
-eval "$(starship init zsh)"
+# rvm
+eval "$(rbenv init -)"
+#nvm
+source /usr/share/nvm/init-nvm.sh
 
 # yazi wrapper, exit to cwd
 function y() {
-    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-    yazi "$@" --cwd-file="$tmp"
-    if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-        builtin cd -- "$cwd"
-    fi
-    rm -f -- "$tmp"
+  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+  yazi "$@" --cwd-file="$tmp"
+  if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+    builtin cd -- "$cwd"
+  fi
+  rm -f -- "$tmp"
 }
