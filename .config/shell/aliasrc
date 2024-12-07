@@ -1,28 +1,169 @@
-alias orphaned="sudo pacman -Rns $(pacman -Qtdq)"
-alias fixpac="sudo rm /var/lib/pacman/db.lck"
-alias ugtar='tar -zxvf '
-alias untar='tar -zxvf '
-alias wget='wget -c '
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-alias ......='cd ../../../../..'
-#alias ls='lsd'
-alias ls='eza'
-alias dir='dir --color=auto'
-alias vdir='vdir --color=auto'
-alias path='echo -e ${PATH//:/\\n}'
-alias vim='nvim'
-alias nv='nvim'
-alias virc='nv $XDG_CONFIG_HOME/nvim'
-alias zshrc='nv $XDG_CONFIG_HOME/zsh/zshrc'
-alias poweroff='dinitctl shutdown && doas-askpass poweroff'
-alias reboot='dinitctl shutdown && doas-askpass reboot'
-alias gzip='pigz'
-alias find='fd'
+#!/bin/env sh
+
+# Use neovim for vim if present
+[ -x "$(command -v nvim)" ] && alias vim=nvim vimdiff="nvim -d"
+
+# [ -f "$MBSYNCRC" ] && alias mbsync="mbsync -c $MBSYNCRC"
 alias mbsync='mbsync -c "$XDG_CONFIG_HOME"/isync/mbsyncrc'
-alias scron='su -c "crontab -e"'
-#alias upd="sudo reflector --verbose --threads 8 --country 'US,CA' --protocol https --sort rate --save /etc/pacman.d/mirrorlist && doas pacman -Syu"
-alias upda="doas reflector --verbose --threads 8 --country 'US,CA' --protocol https --sort rate --save /etc/pacman.d/mirrorlist-arch && doas pacman -Syu"
-alias ff="fastfetch"
+
+#sudo not required for some system commands
+# for command in mount umount sv pacman updatedb su shutdown poweroff reboot; do
+#   alias $command="sudo $command"
+# done
+
+# Arch
+alias \
+    orphaned='sudo pacman -Rns $(pacman -Qtdq)' \
+    fixpac='sudo rm /var/lib/pacman/db.lck' \
+    upd="sudo reflector --verbose --threads 8 --country 'US,CA' --protocol https --sort rate --save /etc/pacman.d/mirrorlist && doas pacman -Syu"
+
+# Pacman - https://wiki.archlinux.org/index.php/Pacman_Tips
+alias \
+    pacupg='sudo pacman -Syu' \
+    pacins'sudo pacman -S' \
+    pacout='sudo pacman -R' \
+    pacin='sudo pacman -U' \
+    pacupg='sudo pacman -Syu' \
+    paclean='sudo pacman -Sc' \
+    paclr='sudo pacman -Scc' \
+    pacre='sudo pacman -R' \
+    pacrem='sudo pacman -Rns' \
+    pacrep='pacman -Si' \
+    pacreps='pacman -Ss' \
+    pacloc='pacman -Qi' \
+    paclocs='pacman -Qs' \
+    pacinsd='sudo pacman -S --asdeps' \
+    pacmir='sudo pacman -Syy' \
+    paclsorphans='sudo pacman -Qdt' \
+    pacrmorphans='sudo pacman -Rs $(pacman -Qtdq)' \
+    pacfileupg='sudo pacman -Fy' \
+    pacfiles='pacman -F' \
+    pacls='pacman -Ql' \
+    pacown='pacman -Qo' \
+    pacupd='sudo pacman -Sy'
+
+# Paru
+alias \
+    paupg='paru -Sua' \
+    pacclean='paru -Sc' \
+    pacclr='paru -Scc' \
+    pasu='paru -Sua --noconfirm' \
+    pains='paru -S' \
+    pain='paru -U' \
+    parout='paru -R' \
+    param='paru -Rns' \
+    parep='paru -Si' \
+    pareps='paru -Ss' \
+    paloc='paru -Qi' \
+    palocs='paru -Qs' \
+    palst='paru -Qe' \
+    paorph='paru -Qtd' \
+    painsd='paru -S --asdeps' \
+    pamir='paru -Syy'
+#'paru -Sy' # unsafe
+#'paru --ask' # unsafe
+
+# ls='ls -hN --color=auto --group-directories-first' \
+# Colorize commands when possible.
+alias \
+    grep='grep --color=auto' \
+    diff='diff --color=auto' \
+    ccat='highlight --out-format=ansi' \
+    ip='ip -color=auto'
+
+# TODO update to rg
+#alias sgrep='grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS} '
+
+# Verbosity and settings that you pretty much just always are going to want.
+alias \
+    ..='cd ..' \
+    ...='cd ../..' \
+    ....='cd ../../..' \
+    .....='cd ../../../..' \
+    ......='cd ../../../../..' \
+    cp='cp -iv' \
+    mv='mv -iv' \
+    rm='rm -vI' \
+    bc='bc -ql' \
+    rsync='rsync -vrPlu' \
+    mkd='mkdir -pv' \
+    yt='yt-dlp --embed-metadata -i' \
+    yta='yt -x -f bestaudio/best' \
+    ytt='yt --skip-download --write-thumbnail' \
+    ffmpeg='ffmpeg -hide_banner' \
+    dir='dir --color=auto' \
+    vdir='vdir --color=auto' \
+    path='echo -e ${PATH//:/\\n}' \
+    ugtar='tar -zxvf ' \
+    untar='tar -zxvf ' \
+    wget='wget -c '
+
+# head / tail shortcuts
+alias \
+    -g H='| head' \
+    -g T='| tail' \
+    -g G='| grep' \
+    -g L="| less" \
+    -g M="| most" \
+    -g LL="2>&1 | less" \
+    -g CA="2>&1 | cat -A" \
+    -g NE="2> /dev/null" \
+    -g NUL="> /dev/null 2>&1" \
+    -g P="2>&1| pygmentize -l pytb"
+
+alias \
+    h='history' \
+    hl='history | less' \
+    hs='history | grep' \
+    his='history | grep -i'
+
+# eza
+#
+#size,show type,human readable
+#long list,show almost all,show type,human readable
+#sorted by date,recursive,show type,human readable
+#long list,sorted by date,show type,human readable
+#Recursive list of files and directories
+
+#
+#
+#
+#A column contains name of files and directories
+#long list
+alias \
+    l='eza --icons auto' \
+    ls='eza -lhF auto' \
+    la='eza -lAhF auto' \
+    lr='eza -tRhF' \
+    lt='eza -lthF' \
+    ll='eza -l' \
+    ldot='eza -ld .*' \
+    lS='eza -1SshF' \
+    lart='eza -1cartF' \
+    lrt='eza -1crtF' \
+    lsr='eza -lARhF auto' \
+    lsn='eza -1'
+
+# These common commands are just too long! Abbreviate them.
+alias \
+    ka='killall' \
+    g='git' \
+    trem='transmission-remote' \
+    YT='youtube-viewer' \
+    sdn='shutdown -h now' \
+    e='$EDITOR' \
+    v='$EDITOR' \
+    p='pacman' \
+    za='zathura'
+
+alias vrc='${=EDITOR} $XDG_CONFIG_HOME/nvim'
+alias ezrc='${=EDITOR} $XDG_CONFIG_HOME/zsh/zshrc'
+alias gzip='pigz'
+alias scron='su -c "fcrontab -e"'
+alias yz="yazi"
+alias ff='fastfetch'
+
+#alias upda="doas reflector --verbose --threads 8 --country 'US,CA' --protocol https --sort rate --save /etc/pacman.d/mirrorlist-arch && doas pacman -Syu"
+# Dinit
+#alias poweroff='dinitctl shutdown && doas-askpass poweroff'
+#alias reboot='dinitctl shutdown && doas-askpass reboot'

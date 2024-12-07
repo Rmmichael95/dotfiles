@@ -1,8 +1,136 @@
-#echo "shell/profile"
+#!/bin/sh
 
-#[ ! -f $XDG_CONFIG_HOME/shell/shortcutrc ] && shortcuts >/dev/null 2>&1
+# Add all directories in `~/.local/bin` to $PATH
+export PATH="$PATH:$(fd --type d . $HOME/.local/bin/myBin/ | paste -sd ':' -)"
+
+# MANPATH
+export MANPATH="$MANPATH:/usr/local/man:"
+
+# CDPATH
+export CDPATH="$CDPATH:.:$HOME/documents/.bc"
+
+# Set display server
+export DS="$(cat /home/ryanm/.local/share/ds 2>/dev/null)"
+
+# Set window manager
+export WM="$(cat /home/ryanm/.local/share/wm 2>/dev/null)"
+
+# Default programs:
+# Preferred editor for local and remote sessions
+#if [ -n $SSH_CONNECTION ]; then
+#    export EDITOR='vim'
+#else
+export EDITOR='nvim'
+#fi
+
+export SHELL='/usr/bin/zsh'
+export PAGER='nvim +Man!'
+export MANPAGER='nvim +Man!'
+export TERMINAL='alacritty'
+export BROWSER='floorp'
+export BROWSERCLI='w3m'
+export READER='zathura'
+export IMAGEVIEWER='nsxiv'
+export VIDEOPLAYER='mpv'
+export FILE='lf'
+export COLORTERM='truecolor'
+export OPENER='xdg-open'
+export GPG_TTY=$(tty)
+export QT_QPA_PLATFORMTHEME='qt5ct'
+export GTK2_RC_FILES="$HOME"/.gtkrc-2.0
+export WINEFSYNC=1
+#export LIBVA_DRIVER_NAME='radeonsi'
+export NOTES_DIR="$HOME"/documents/batcave/notes
+export MAILSYNC_MUTE=1
+export WINEFSYNC=1
+
+# Other XDG paths
+export XDG_DATA_HOME=${XDG_DATA_HOME:="$HOME/.local/share"}
+export XDG_CACHE_HOME=${XDG_CACHE_HOME:="$HOME/.cache"}
+export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:="$HOME/.config"}
+export XDG_STATE_HOME=${XDG_STATE_HOME:="$HOME/.local/state"}
+export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:="run/user/$UID"}
+
+# ~/ Clean-up: Fixing Paths
+#startx
+# export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
+#sx
+# export XAUTHORITY="$XDG_DATA_HOME"/sx/xauthority
+export XINITRC="$XDG_CONFIG_HOME"/x11/xinitrc
+export XSERVERRC="$XDG_CONFIG_HOME"/x11/xserverrc
+export MAKEPKG_CONF="$XDG_CONFIG_HOME"/pacman/makepkg.conf
+export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0"
+#export ZDOTDIR=$XDG_CONFIG_HOME/zsh  # exported in /etc/zsh/zshenv
+export HISTFILE="$XDG_DATA_HOME/history"
+export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME"/ripgrep/ripgreprc
+export WGETRC="$XDG_CONFIG_HOME"/wget/wgetrc
+export MBSYNCRC="$XDG_CONFIG_HOME/mbsync/config"
+export NOTMUCH_CONFIG="$XDG_CONFIG_HOME"/notmuch-config
+export LESSHISTFILE="-"
+export INPUTRC="$XDG_CONFIG_HOME"/shell/inputrc
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/share/password-store
+export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
+export KODI_DATA="$XDG_DATA_HOME/kodi"
+export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
+export ANSIBLE_CONFIG="$XDG_CONFIG_HOME/ansible/ansible.cfg"
+export UNISON="$XDG_DATA_HOME/unison"
+export ANDROID_SDK_HOME="$XDG_CONFIG_HOME/android"
+export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
+export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
+export PYTHONHISTFILE="$XDG_STATE_HOME"/python/history
+export CARGO_HOME="$XDG_DATA_HOME"/cargo
+export SQLITE_HISTORY="$XDG_DATA_HOME/sqlite_history"
+export GOPATH="$XDG_DATA_HOME"/go
+export GOMODCACHE="$XDG_CACHE_HOME/go/mod"
+export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+export GDBHISTFILE="$XDG_DATA_HOME"/gdb/history
+export ELECTRUMDIR="$XDG_DATA_HOME/electrum"
+export TEXMFVAR=$XDG_CACHE_HOME/texlive/texmf-var
+export TEXMFCONFIG=$XDG_CONFIG_HOME/texlive/texmf-config
+export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
+
+# Other program settings:
+export DICS='/usr/share/stardict/dic/'
+export SUDO_ASKPASS="$XDG_DATA_HOME"/bin/myBin/menu/dmenupass
+export DOAS_ASKPASS='bemenu --prompt "password:" --password hide --ignorecase --bottom --line-height 30 --fn "JetBrainsMonoNerdFontMono 14" --tb "#15191c" --tf "#eb4d4b" --fb "#15191c" --ff "#d3c6aa" --nb "#15191c" --nf "#4b565c" --hb "#15191c" --hf "#d3c6aa" --fbb "#15191c" --fbf "#d3c6aa"  --sb "#15191c" --sf "#d3c6aa" --ab "#15191c" --af "#4b565c" --bdr "#4b565c"'
+export LESS="R"
+export LESS_TERMCAP_mb="$(printf '%b' '[1;31m')"
+export LESS_TERMCAP_md="$(printf '%b' '[1;36m')"
+export LESS_TERMCAP_me="$(printf '%b' '[0m')"
+export LESS_TERMCAP_so="$(printf '%b' '[01;44;33m')"
+export LESS_TERMCAP_se="$(printf '%b' '[0m')"
+export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"
+export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
+export LESSOPEN="| /usr/bin/highlight -O ansi %s 2>/dev/null"
+export MOZ_USE_XINPUT2=1                  # Mozilla smooth scrolling/touchpads.
+export AWT_TOOLKIT="MToolkit wmname LG3D" # May have to install wmname
+export _JAVA_AWT_WM_NONREPARENTING=1      # Fix for Java applications in dwm
+export XDG_DATA_DIRS="$HOME"/.nix-profile/share:"$XDG_DATA_DIRS"
+export XCURSOR_PATH=${XCURSOR_PATH}:~/.local/share/icons
+export GTK_THEME=Numix:dark
+export XCURSOR_THEME=Numix-Cursor-Light
+export XCURSOR_SIZE=28px
+export QT_QPA_PLATFORMTHEME=gtk2 # Have QT use gtk2 theme.
+export CHROME_PATH='/usr/bin/brave'
+export NIXPKGS_ALLOW_UNFREE=1
+export LIBSEAT_BACKEND='logind'
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+export FZF_DEFAULT_OPTS='--layout=reverse --height 40%'
+# Using highlight (http://www.andre-simon.de/doku/highlight/en/highlight.html)
+export FZF_CTRL_T_OPTS="--select-1 --exit-0 --preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
+export NVM_DIR="$XDG_DATA_HOME"/nvm
+export RBENV_ROOT="$XDG_DATA_HOME"/rbenv
+#if not using rbenv
+#export GEM_PATH="$XDG_DATA_HOME"/ruby/gems
+#export GEM_SPEC_CACHE="$XDG_DATA_HOME"/ruby/specs
+#export GEM_HOME="$XDG_DATA_HOME"/ruby/gems
+
+# [ ! -f "$XDG_CONFIG_HOME/shell/shortcutrc" ] && setsid -f shortcuts >/dev/null 2>&1
 
 # Switch escape and caps if tty and no passwd required:
-#sudo -n loadkeys $XDG_DATA_HOME/ttymaps.kmap 2>/dev/null
-
-#[ -f /etc/zsh/zshenv ] && . /etc/zsh/zshenv
+# sudo -n loadkeys "$XDG_DATA_HOME/ttymaps.kmap" 2>/dev/null

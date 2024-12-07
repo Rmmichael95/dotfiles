@@ -6,3 +6,6 @@
 
 require("config.core")
 require("config.lazy")
+
+-- has to be after plugins to work. debugging
+vim.api.nvim_set_keymap("n", ";", ":", { noremap = true })

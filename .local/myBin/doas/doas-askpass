@@ -2,7 +2,7 @@
 
 # askpass implementation for doas
 # export DOAS_ASKPASS="dmenu -b -P -p password:" and run with doas-askpass [cmd "options"]
-# export DOAS_ASKPASS="bemenu --prompt "password:" --password --ignorecase --bottom --line-height 30 --tb "#15191c" --tf "#eb4d4b" --fb "#15191c" --ff "#d3c6aa" --nb "#15191c" --nf "#4b565c" --hb "#15191c" --hf "#d3c6aa" --fbb "#15191c" --fbf "#d3c6aa"  --sb "#15191c" --sf "#d3c6aa" --ab "#15191c" --af "#4b565c" --bdr "#4b565c""
+# export DOAS_ASKPASS="bemenu --prompt "password:" --password hide --ignorecase --bottom --line-height 30 --tb "#15191c" --tf "#eb4d4b" --fb "#15191c" --ff "#d3c6aa" --nb "#15191c" --nf "#4b565c" --hb "#15191c" --hf "#d3c6aa" --fbb "#15191c" --fbf "#d3c6aa"  --sb "#15191c" --sf "#d3c6aa" --ab "#15191c" --af "#4b565c" --bdr "#4b565c""
 
 # do
 log_user 0
@@ -21,7 +21,7 @@ if {[info exists ::env(DOAS_ASKPASS)]} {
 }
 
 # read password from user
-set pwd [exec {*}$askpass]
+set pwd [exec echo "" | {*}$askpass]
 
 # spawn doas operation
 spawn doas {*}$cmd

@@ -1,6 +1,15 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+HISTFILE="$XDG_STATE_HOME"/zsh/history
+HISTSIZE=10000000
+SAVEHIST=10000000
+
+# Load aliases and shortcuts if existent.
+[ -e "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"
+#[ -e "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc"
+#[ -e "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc"
+
 ## Plugins section: Enable fish style features
 # Use syntax highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -11,19 +20,21 @@ source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring
 
 # Arch Linux command-not-found support, you must have package pkgfile installed
 # https://wiki.archlinux.org/index.php/Pkgfile#.22Command_not_found.22_hook
-[[ -e /usr/share/doc/pkgfile/command-not-found.zsh ]] && source /usr/share/doc/pkgfile/command-not-found.zsh
+[ -e /usr/share/doc/pkgfile/command-not-found.zsh ] && source /usr/share/doc/pkgfile/command-not-found.zsh
 
 # alacritty completions
-fpath+=${ZDOTDIR:-~}/.zsh_functions
+[ -e ${ZDOTDIR:-~}/.zsh_functions ] && fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 # Use fzf
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
-export FZF_DEFAULT_OPTS='--no-height --no-reverse'
-# Using highlight (http://www.andre-simon.de/doku/highlight/en/highlight.html)
-export FZF_CTRL_T_OPTS="--select-1 --exit-0 --preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
-# export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
-export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+
+# perl
+PATH="$XDG_DATA_HOME/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="$XDG_DATA_HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="$XDG_DATA_HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"$XDG_DATA_HOME/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=$XDG_DATA_HOME/perl5"; export PERL_MM_OPT;
 
 fzf-history-widget-accept() {
   fzf-history-widget
@@ -35,7 +46,7 @@ bindkey '^X^R' fzf-history-widget-accept
 
 # Find and edit using fzf
 fe() {
-  nvim "$(find -type f | fzf --preview 'cat {}' --preview-window 'up:60%')"
+  nvim "$(fd -type f | fzf --preview 'cat {}' --preview-window 'up:60%')"
 }
 
 frg() {
@@ -54,7 +65,7 @@ frg() {
 
 pe() {
   local file
-  file=$(find ~/.password-store -type f -name '*.gpg' | sed "s|^$HOME/.password-store/||;s|\.gpg$||" | fzf)
+  file=$(fd ~/.password-store -type f -name '*.gpg' | sed "s|^$HOME/.password-store/||;s|\.gpg$||" | fzf)
   if [ -n "$file" ]; then
     pass edit "$file"
   fi
@@ -63,7 +74,7 @@ pe() {
 # Find and remove files with fzf
 frm() {
   # Use `find` to list files and directories, and pipe them to `fzf` for selection
-  selected=$(find . -type f -o -type d 2>/dev/null | fzf -m)
+  selected=$(fd . -type f -o -type d 2>/dev/null | fzf -m)
 
   # Check if any selection was made
   if [[ -n "$selected" ]]; then
@@ -87,18 +98,6 @@ ssh_fzf() {
     fi
 }
 
-# perl
-PATH="$XDG_DATA_HOME/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="$XDG_DATA_HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="$XDG_DATA_HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"$XDG_DATA_HOME/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=$XDG_DATA_HOME/perl5"; export PERL_MM_OPT;
-
-# Load aliases and shortcuts if existent.
-#[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc"
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"
-#[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc"
-
 ## Options section
 setopt correct               # Auto correct mistakes
 setopt extendedglob          # Extended globbing. Allows using regular expressions with *
@@ -113,6 +112,7 @@ setopt autocd                # if only directory path is entered, cd there.
 setopt auto_pushd
 setopt pushd_ignore_dups
 setopt pushdminus
+setopt interactive_comments
 
 # Completion.
 autoload -Uz compinit
@@ -137,10 +137,6 @@ _comp_options+=(globdots)
 
 # automatically load bash completion functions
 autoload -U +X bashcompinit && bashcompinit
-
-HISTFILE="$XDG_STATE_HOME"/zsh/history
-HISTSIZE=50000
-SAVEHIST=10000
 
 # Keys.
 # Let zsh be in vi mode
@@ -230,20 +226,11 @@ zle-line-init() {
 }
 zle -N zle-line-init
 
-# Add useful aliases
 eval "$(zoxide init zsh)"
-
-# start starship prompt
 eval "$(starship init zsh)"
 
-# You can use whatever you want as an alias, like for Mondays:
-#eval "$(thefuck --alias FUCK)"
-eval "$(thefuck --alias)":
-
-# rvm
-eval "$(rbenv init -)"
-#nvm
-source /usr/share/nvm/init-nvm.sh
+# eval "$(rbenv init -)"
+# source /usr/share/nvm/init-nvm.sh
 
 # yazi wrapper, exit to cwd
 function y() {
@@ -254,3 +241,5 @@ function y() {
   fi
   rm -f -- "$tmp"
 }
+
+ff

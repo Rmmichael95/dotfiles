@@ -1,4 +1,0 @@
-#/bin/sh
-
-IFS=:
-doas rg -Irl /'#!/bin/sh/' $PATH | xargs -r checkbashisms

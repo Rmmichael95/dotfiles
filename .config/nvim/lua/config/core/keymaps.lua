@@ -1,17 +1,18 @@
-local map = vim.api.nvim_set_keymap
-local cmd = vim.cmd -- vim command
-local g = vim.g -- global variable
+local function map(mode, lhs, rhs, opts)
+	local options = { noremap = true }
+	if opts then
+		options = vim.tbl_extend("force", options, opts)
+	end
+	vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+end
 
 -- map the leader key
 --map('n', '<Space>', '', {})
-g.mapleader = " "
-g.maplocalleader = "."
-
-options = { noremap = true }
-options_f = { noremap = false }
+vim.g.mapleader = " "
+vim.g.maplocalleader = "."
 
 -- extended text objects
-cmd([[
+vim.cmd([[
 let items = [ "<bar>", "\\", "/", ":", ".", "*", "_" ]
 for item in items
   exe "nnoremap yi".item." T".item."yt".item
@@ -26,7 +27,7 @@ endfor
 ]])
 
 -- cmap
-map("c", "w!!", "w !doas tee > /dev/null %", options_f)
+map("c", "w!!", "w !doas tee > /dev/null %", { noremap = false, desc = "Save as SUDO" })
 
 -- Clear search with <esc>
 --map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch" })
@@ -41,23 +42,23 @@ map(
 )
 
 -- cnoremap
-map("c", "<C-A>", "<Home>", options) -- bash like keys for the command line
-map("c", "<C-E>", "<End>", options) -- bash like keys for the command line
-map("c", "<C-K>", "<C-U>", options) -- bash like keys for the command line
+map("c", "<C-A>", "<Home>") -- bash like keys for the command line
+map("c", "<C-E>", "<End>") -- bash like keys for the command line
+map("c", "<C-K>", "<C-U>") -- bash like keys for the command line
 
-map("c", "cd.", "lcd %:p:h<cr>", options) -- :cd. change working directory to that of the current file
+map("c", "cd.", "<Cmd>lcd %:p:h<CR>") -- :cd. change working directory to that of the current file
 
-map("c", "/", "/\v", options) -- use sane regexes
+map("c", "/", "/\v") -- use sane regexes
 -- nnoremap
-map("n", "<leader>y", ':if expand("%:e") == "h" | e %:r.cpp | else | e %:r.h | endif<CR>', options) -- switch between cpp/h files
+map("n", "<leader>y", ':if expand("%:e") == "h" | e %:r.cpp | else | e %:r.h | endif<CR>') -- switch between cpp/h files
 
-map("n", "n", "nzzzv", options) -- keep search in center screen
-map("n", "N", "Nzzzv", options) -- keep search in center screen
-map("n", "H", "^", options) -- keep search in center screen
-map("n", "L", "g", options) -- keep search in center screen
-map("n", "g;", "g;zz", options) -- keep search in center screen
-map("n", "g,", "g,zz", options) -- keep search in center screen
-map("n", "<c-o>", "<c-o>zz", options) -- keep search in center screen
+map("n", "n", "nzzzv") -- keep search in center screen
+map("n", "N", "Nzzzv") -- keep search in center screen
+map("n", "H", "^") -- keep search in center screen
+map("n", "L", "g") -- keep search in center screen
+map("n", "g;", "g;zz") -- keep search in center screen
+map("n", "g,", "g,zz") -- keep search in center screen
+map("n", "<c-o>", "<c-o>zz") -- keep search in center screen
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 map("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next Search Result" })
@@ -67,66 +68,68 @@ map("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev Search R
 map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
 map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
 
-map("n", ";", ":", options) -- easy command mode
-map("n", "V", "V`]", options) -- easy linewise reselection of what you just paste
+map("n", ";", ":") -- easy command mode
+map("n", "V", "V`]") -- easy linewise reselection of what you just paste
 
-map("n", "q:", "<nop>", options) -- disable cmd history popup
-map("n", "Q", "<nop>", options) -- disable cmd history popup
+map("n", "q:", "<nop>") -- disable cmd history popup
+map("n", "Q", "<nop>") -- disable cmd history popup
 
-map("n", "<leader>|", ":vsplit<CR>", options) -- easy vertical split
-map("n", "<leader>-", ":split<CR>", options) -- easy horizontal split
-map("n", "<leader>=", "<C-w>=", options) -- easy equal splits
-map("n", "<C-J>", "<C-W><C-J>", options) -- ctrl-j to move down a split
-map("n", "<C-K>", "<C-W><C-K>", options) -- ctrl-k to move up a split
-map("n", "<C-L>", "<C-W><C-L>", options) -- ctrl-l to move right a split
-map("n", "<C-H>", "<C-W><C-H>", options) -- ctrl-h to move left a split
+map("n", "<leader>|", "<Cmd>vsplit<CR>") -- easy vertical split
+map("n", "<leader>-", "<Cmd>split<CR>") -- easy horizontal split
+map("n", "<leader>=", "<C-w>=") -- easy equal splits
+map("n", "<C-J>", "<C-W><C-J>") -- ctrl-j to move down a split
+map("n", "<C-K>", "<C-W><C-K>") -- ctrl-k to move up a split
+map("n", "<C-L>", "<C-W><C-L>") -- ctrl-l to move right a split
+map("n", "<C-H>", "<C-W><C-H>") -- ctrl-h to move left a split
 
-map("n", "<C-t><C-t>", ":tabnew<CR>", options) -- easy new tab
-map("n", "<C-t><C-z>", ":tabclose<CR>", options) -- easy close tab
-map("n", "<C-t><C-n>", ":tabn<CR>", options) -- easy next tab
-map("n", "<C-t><C-p>", ":tabp<CR>", options) -- easy prev tab
+map("n", "<C-t><C-t>", ":tabnew<CR>") -- easy new tab
+map("n", "<C-t><C-z>", ":tabclose<CR>") -- easy close tab
+map("n", "<C-t><C-n>", ":tabn<CR>") -- easy next tab
+map("n", "<C-t><C-p>", ":tabp<CR>") -- easy prev tab
 
 -- Resize window using <ctrl> arrow keys
-map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
-map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
-map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
-map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
+map("n", "<C-Up>", "<Cmd>resize +2<CR>", { desc = "Increase Window Height" })
+map("n", "<C-Down>", "<Cmd>resize -2<CR>", { desc = "Decrease Window Height" })
+map("n", "<C-Left>", "<Cmd>vertical resize -2<CR>", { desc = "Decrease Window Width" })
+map("n", "<C-Right>", "<Cmd>vertical resize +2<CR>", { desc = "Increase Window Width" })
 
-map("n", "<C-9>", ":bp<CR>", options) -- easy switch buffers
-map("n", "<C-0>", ":bn<CR>", options) -- easy switch buffers
-map("n", "<C-h>", "<C-w>h", options) -- easy buffer navigation
-map("n", "<C-j>", "<C-w>j", options) -- easy buffer navigation
-map("n", "<C-k>", "<C-w>k", options) -- easy buffer navigation
-map("n", "<C-l>", "<C-w>l", options) -- easy buffer navigation
-map("n", "vaa", "ggvGg_", options) -- select entire buffer
-map("n", "Vaa", "ggVG", options) -- select entire buffer
+map("n", "<C-9>", ":bp<CR>") -- easy switch buffers
+map("n", "<C-0>", ":bn<CR>") -- easy switch buffers
+map("n", "<C-h>", "<C-w>h") -- easy buffer navigation
+map("n", "<C-j>", "<C-w>j") -- easy buffer navigation
+map("n", "<C-k>", "<C-w>k") -- easy buffer navigation
+map("n", "<C-l>", "<C-w>l") -- easy buffer navigation
+map("n", "vaa", "ggvGg_") -- select entire buffer
+map("n", "Vaa", "ggVG") -- select entire buffer
 
 -- Move Lines
-map("n", "<A-j>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down" })
-map("n", "<A-k>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move Up" })
-map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
-map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
-map("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move Down" })
-map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
+map("n", "<A-j>", "<Cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down" })
+map("n", "<A-k>", "<Cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move Up" })
+map("i", "<A-j>", "<esc><Cmd>m .+1<cr>==gi", { desc = "Move Down" })
+map("i", "<A-k>", "<esc><Cmd>m .-2<cr>==gi", { desc = "Move Up" })
+map("v", "<A-j>", "<Cmd><C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move Down" })
+map("v", "<A-k>", "<Cmd><C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
 
-map("n", ",q", ":q!<cr>", options) -- easy quit
-map("n", ",w", ":w!<cr>", options) -- easy write
-map("n", ",W", ":w!!<cr>", options) --
-map("n", ",z", ":wq!<cr>", options) --
+map("n", ",q", "<Cmd>q!<CR>") -- easy quit
+map("n", ",w", "<Cmd>w!<CR>") -- easy write
+map("n", ",W", "<Cmd>w!!<CR>") --
+map("n", ",z", "<Cmd>wq!<CR>") --
 
-map("n", "Y", "y$", options) -- fix Y behaviour
-map("n", "D", "d$", options) -- fix D behaviour
+map("n", "Y", "y$") -- fix Y behaviour
+map("n", "D", "d$") -- fix D behaviour
 
-map("n", ",cd", ":cd %:p:h<CR>:pwd<CR>", options) -- change wd to where the file in the buffer is located w/ `,cd`
+map("n", ",cd", "<Cmd>cd %:p:h<CR>:pwd<CR>") -- change wd to where the file in the buffer is located w/ `,cd`
 
-map("n", "<F9>", ":call myfuncs#CycleLang()<CR>", options) -- call my spell check function
+map("n", "<F9>", "<Cmd>call myfuncs#CycleLang()<CR>") -- call my spell check function
 
-map("n", "Vit", "vitVkoj", options) -- fix linewise visual selection of various text objects
-map("n", "Vat", "vatV", options) -- fix linewise visual selection of various text objects
-map("n", "Vab", "vabV", options) -- fix linewise visual selection of various text objects
-map("n", "VaB", "vaBV", options) -- fix linewise visual selection of various text objects
+map("n", "Vit", "vitVkoj") -- fix linewise visual selection of various text objects
+map("n", "Vat", "vatV") -- fix linewise visual selection of various text objects
+map("n", "Vab", "vabV") -- fix linewise visual selection of various text objects
+map("n", "VaB", "vaBV") -- fix linewise visual selection of various text objects
 
-map("n", "gI", "``.", options) -- gi moves to "last place you exited insert mode", map gI to move to last change
+map("n", "gI", "``.") -- gi moves to "last place you exited insert mode", map gI to move to last change
+
+map("n", "<leader>c", '<Cmd>w! | !compiler "%:p"<CR>')
 
 -- better up/down
 -- map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
@@ -134,15 +137,15 @@ map("n", "gI", "``.", options) -- gi moves to "last place you exited insert mode
 -- map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 -- map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 
---map('n', ',T', ':let _s=@/<Bar>:%s/\\s\\+$//e<Bar>%s/ \\+\\ze\\t//e<Bar>:let @/=_s<Bar>:unlet _s<CR>', options) -- trim whitespace before tabs and eol
+--map('n', ',T', ':let _s=@/<Bar>:%s/\\s\\+$//e<Bar>%s/ \\+\\ze\\t//e<Bar>:let @/=_s<Bar>:unlet _s<CR>', opts) -- trim whitespace before tabs and eol
 
 -- inoremap
---map('i', '', '', options)
+--map('i', '', '')
 
 -- vnoremap
 -- better indenting
-map("v", "<", "<gv", options) -- allow multiple indentation in visual mode
-map("v", ">", ">gv", options) -- allow multiple deindentation in visual mode
+map("v", "<", "<gv") -- allow multiple indentation in visual mode
+map("v", ">", ">gv") -- allow multiple deindentation in visual mode
 
 -- tnoremap
-map("t", "<ESC>", "<C-\\><C-n><C-w><C-p>", options) -- <ESC> exits in terminal mode
+map("t", "<ESC>", "<C-\\><C-n><C-w><C-p>") -- <ESC> exits in terminal mode

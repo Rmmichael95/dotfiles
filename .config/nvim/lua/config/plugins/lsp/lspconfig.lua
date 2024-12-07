@@ -285,7 +285,6 @@ return {
 								"win32service",
 								"winbinder",
 								"wincache",
-								"wordpress",
 								"xcache",
 								"xdebug",
 								"xhprof",
@@ -307,6 +306,13 @@ return {
 								"zlib",
 								"zmq",
 								"zookeeper",
+								"wordpress",
+								"woocommerce",
+								"acf-pro",
+								"wordpress-globals",
+								"wp-cli",
+								"genesis",
+								"polylang",
 							},
 							environment = {
 								includePaths = {
