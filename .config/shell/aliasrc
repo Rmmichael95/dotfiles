@@ -20,7 +20,7 @@ alias \
 # Pacman - https://wiki.archlinux.org/index.php/Pacman_Tips
 alias \
     pacupg='sudo pacman -Syu' \
-    pacins'sudo pacman -S' \
+    pacins='sudo pacman -S' \
     pacout='sudo pacman -R' \
     pacin='sudo pacman -U' \
     pacupg='sudo pacman -Syu' \
@@ -99,17 +99,17 @@ alias \
     wget='wget -c '
 
 # head / tail shortcuts
-alias \
-    -g H='| head' \
-    -g T='| tail' \
-    -g G='| grep' \
-    -g L="| less" \
-    -g M="| most" \
-    -g LL="2>&1 | less" \
-    -g CA="2>&1 | cat -A" \
-    -g NE="2> /dev/null" \
-    -g NUL="> /dev/null 2>&1" \
-    -g P="2>&1| pygmentize -l pytb"
+# alias \
+#     -g H='| head' \
+#     -g T='| tail' \
+#     -g G='| grep' \
+#     -g L="| less" \
+#     -g M="| most" \
+#     -g LL="2>&1 | less" \
+#     -g CA="2>&1 | cat -A" \
+#     -g NE="2> /dev/null" \
+#     -g NUL="> /dev/null 2>&1" \
+#     -g P="2>&1| pygmentize -l pytb"
 
 alias \
     h='history' \

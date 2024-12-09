@@ -213,3 +213,117 @@ nvim .config/nushell/config.nu
 nvim .config/nushell/env.nu
 nvim .config/hypr/hyprland.conf
 exit
+z .config/nushell/
+cd .config/nushell/
+nvim history.txt
+nvim config.nu
+exit
+ls
+exit
+ls
+nvim config.nu
+exit
+z
+cd
+paru -S 
+cd .config/
+nvim hypr/hyprland.conf 
+alacritty -h
+/usr/bin/env sh
+echo /usr/bin/env sh
+echo "/usr/bin/env sh"
+/usr/bin/env sh
+/bin/env sh
+/bin/sh
+doas chsh -s dash
+doas chsh -s /bin/dash
+echo #SHELL
+echo $SHELL
+echo $env.SHELL
+clear
+\
+if \
+if do, then
+clear
+text;
+systemctl --user start eww@bar
+systemctl --user start eww-open@bar
+cd .local/cache/
+ls
+..
+rm -rf cache/
+exit
+systemctl --user start eww-open@bar
+clear
+ls -a
+clear
+cd .config/nushell/
+cd .local/bin/myBin/wp/
+./dvlbx-min_up
+cd .local/share/dvlbx/data/www/twinquestlinux/htdocs/wp-content/themes/twinquestlinux/assets/
+..
+nvim config.nu 
+load-env
+load-env ../shell/profile
+zsh -c $"source ($env.XDG_CONFIG_HOME)/shell/profile && env" | lines  | parse "{n}={v}" | filter { |x| (not $x.n in $env) or ($x.v) != ($env | get $x.n) } | where not n in ["_", "LAST_EXIT_CODE", "DIRS_POSITION"] | transpose -r | into record | load-env
+bash -c $"source ($env.XDG_CONFIG_HOME)/shell/profile && env" | lines  | parse "{n}={v}" | filter { |x| (not $x.n in $env) or ($x.v) != ($env | get $x.n) } | where not n in ["_", "LAST_EXIT_CODE", "DIRS_POSITION"] | transpose -r | into record | load-env
+zsh -c $"source ($env.XDG_CONFIG_HOME)/shell/profile && env" | lines  | parse "{n}={v}" | filter { |x| (not $x.n in $env) or ($x.v) != ($env | get $x.n) } | where not n in ["_", "LAST_EXIT_CODE", "DIRS_POSITION"] | transpose -r | into record | load-env
+zsh -c $"source ($env.XDG_CONFIG_HOME)/shell/profile && env" | lines  | parse "{n}={v}" | filter { |x| (not $x.n in $env) or ($x.v) != ($env | get $x.n) } | where n not-in ["_", "LAST_EXIT_CODE", "DIRS_POSITION"] | transpose -r | into record | load-env
+bash -c $"source ($env.XDG_CONFIG_HOME)/shell/profile && env"<\n>    | lines<\n>    | parse "{n}={v}"<\n>    | filter { |x| ($x.n not-in $env) or $x.v != ($env | get $x.n) }<\n>    | where n not-in ["_", "LAST_EXIT_CODE", "DIRS_POSITION"]<\n>    | transpose --header-row<\n>    | into record<\n>    | load-env
+bash -c $"source ($env.XDG_CONFIG_HOME)/shell/aliasrc && env"<\n>    | lines<\n>    | parse "{n}={v}"<\n>    | filter { |x| ($x.n not-in $env) or $x.v != ($env | get $x.n) }<\n>    | where n not-in ["_", "LAST_EXIT_CODE", "DIRS_POSITION"]<\n>    | transpose --header-row<\n>    | into record<\n>    | load-env
+..
+nvim shell/aliasrc 
+bash -c $"source ($env.XDG_CONFIG_HOME)/shell/aliasrc && env"<\n>    | lines<\n>    | parse "{n}={v}"<\n>    | filter { |x| ($x.n not-in $env) or $x.v != ($env | get $x.n) }<\n>    | where n not-in ["_", "LAST_EXIT_CODE", "DIRS_POSITION"]<\n>    | transpose --header-row<\n>    | into record<\n>    | load-env
+nvim shell/aliasrc 
+bash -c $"source ($env.XDG_CONFIG_HOME)/shell/aliasrc && env"<\n>    | lines<\n>    | parse "{n}={v}"<\n>    | filter { |x| ($x.n not-in $env) or $x.v != ($env | get $x.n) }<\n>    | where n not-in ["_", "LAST_EXIT_CODE", "DIRS_POSITION"]<\n>    | transpose --header-row<\n>    | into record<\n>    | load-env
+nvim shell/aliasrc 
+bash -c $"source ($env.XDG_CONFIG_HOME)/shell/aliasrc && env"<\n>    | lines<\n>    | parse "{n}={v}"<\n>    | filter { |x| ($x.n not-in $env) or $x.v != ($env | get $x.n) }<\n>    | where n not-in ["_", "LAST_EXIT_CODE", "DIRS_POSITION"]<\n>    | transpose --header-row<\n>    | into record<\n>    | load-env
+zsh -c $"source ($env.XDG_CONFIG_HOME)/shell/aliasrc && env"<\n>    | lines<\n>    | parse "{n}={v}"<\n>    | filter { |x| ($x.n not-in $env) or $x.v != ($env | get $x.n) }<\n>    | where n not-in ["_", "LAST_EXIT_CODE", "DIRS_POSITION"]<\n>    | transpose --header-row<\n>    | into record<\n>    | load-env
+cd shell/
+e aliasrc
+cat aliasrc 
+eza --icons auto
+eza -lhF auto
+ls -a
+eza -lhF auto
+c
+cd
+ls
+ls -a
+ls -al
+clear
+ls -a
+ls .cache/
+ls -a .local/cache/
+ls .cache/
+eza -lahF auto
+eza -lhF auto
+eza -lahF auto
+eza -lahF always
+eza -lahF auto
+cat .viminfo 
+rm .viminfo
+lS -a
+ls -a
+cat .pam_environment 
+rm Documents/
+rm -rf Documents/
+ls -a
+clear
+nvim .config/hypr/hyprland.conf
+alacritty -h
+alacritty -e nu fastfetch
+alacritty -e nu
+alacritty -e nu fastfetch
+cd .config/nushell/
+ls
+fastfetch 
+clear
+nvim .config/hypr/hyprland.conf
+doas pacman -S fish
+..
+nvim hypr/hyprland.conf 
+nvim style.css 
+nvim header.php 
+composer update 
+nvim header.php 

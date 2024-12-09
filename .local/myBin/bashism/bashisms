@@ -2,4 +2,3 @@
 
 IFS=:
 fd . $PATH -t f -o root --print0 | xargs -0 gawk '/^#!.*( |[/])sh/{printf "%s\0", FILENAME} {nextfile}' | xargs -0 checkbashisms > /tmp/bashisms 2>&1
-cat /tmp/bashisms | rg bashism | awk '{print $4}' | awk '!seen[$0]++' | notify-send

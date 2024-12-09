@@ -17,11 +17,11 @@ export WM="$(cat /home/ryanm/.local/share/wm 2>/dev/null)"
 
 # Default programs:
 # Preferred editor for local and remote sessions
-#if [ -n $SSH_CONNECTION ]; then
-#    export EDITOR='vim'
-#else
-export EDITOR='nvim'
-#fi
+if [ -n "$SSH_CONNECTION" ]; then
+    export EDITOR='vim'
+else
+    export EDITOR='nvim'
+fi
 
 export SHELL='/usr/bin/zsh'
 export PAGER='nvim +Man!'
@@ -45,17 +45,22 @@ export MAILSYNC_MUTE=1
 export WINEFSYNC=1
 
 # Other XDG paths
-export XDG_DATA_HOME=${XDG_DATA_HOME:="$HOME/.local/share"}
-export XDG_CACHE_HOME=${XDG_CACHE_HOME:="$HOME/.cache"}
-export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:="$HOME/.config"}
-export XDG_STATE_HOME=${XDG_STATE_HOME:="$HOME/.local/state"}
+# export XDG_DATA_HOME=${XDG_DATA_HOME:="$HOME/.local/share"}
+# export XDG_CACHE_HOME=${XDG_CACHE_HOME:="$HOME/.local/cache"}
+# export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:="$HOME/.config"}
+# export XDG_STATE_HOME=${XDG_STATE_HOME:="$HOME/.local/state"}
 export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:="run/user/$UID"}
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.local/cache"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_STATE_HOME="$HOME/.local/state"
+#export XDG_RUNTIME_DIR="run/user/$UID"
 
 # ~/ Clean-up: Fixing Paths
 #startx
 # export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 #sx
-# export XAUTHORITY="$XDG_DATA_HOME"/sx/xauthority
+export XAUTHORITY="$XDG_DATA_HOME"/sx/xauthority
 export XINITRC="$XDG_CONFIG_HOME"/x11/xinitrc
 export XSERVERRC="$XDG_CONFIG_HOME"/x11/xserverrc
 export MAKEPKG_CONF="$XDG_CONFIG_HOME"/pacman/makepkg.conf

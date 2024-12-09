@@ -6,7 +6,7 @@ return {
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
 		"folke/lazydev.nvim",
-		-- "nvimdev/lspsaga.nvim",
+		"nvimdev/lspsaga.nvim",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 	},
 	config = function()
@@ -17,17 +17,17 @@ return {
 		-- import cmp-nvim-lsp plugin
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-		-- local saga = require("lspsaga")
-		--
-		-- saga.setup({
-		--  ui = {
-		--      winblend = 0,
-		--      border = "rounded",
-		--      colors = {
-		--          --normal_bg = "#002b36",
-		--      },
-		--  },
-		-- })
+		local saga = require("lspsaga")
+
+		saga.setup({
+			ui = {
+				winblend = 0,
+				border = "rounded",
+				colors = {
+					--normal_bg = "#002b36",
+				},
+			},
+		})
 
 		local keymap = vim.keymap -- for conciseness
 
@@ -78,43 +78,13 @@ return {
 				keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
 
 				opts.desc = "Show documentation for what is under cursor"
-				keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
-				--keymap.set("n", "K", "<Cmd>Lspsaga hover_doc<CR>", opts) -- show documentation for what is under cursor
+				-- keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
+				keymap.set("n", "K", "<Cmd>Lspsaga hover_doc<CR>", opts) -- show documentation for what is under cursor
 
 				opts.desc = "Restart LSP"
 				keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
 			end,
 		})
-
-		-- local protocol = require("vim.lsp.protocol")
-		--protocol.SymbolKind = { }
-		-- protocol.CompletionItemKind = {
-		-- 	"", -- Text
-		-- 	"", -- Method
-		-- 	"", -- Function
-		-- 	"", -- Constructor
-		-- 	"", -- Field
-		-- 	"", -- Variable
-		-- 	"", -- Class
-		-- 	"ﰮ", -- Interface
-		-- 	"", -- Module
-		-- 	"", -- Property
-		-- 	"", -- Unit
-		-- 	"", -- Value
-		-- 	"", -- Enum
-		-- 	"", -- Keyword
-		-- 	"﬌", -- Snippet
-		-- 	"", -- Color
-		-- 	"", -- File
-		-- 	"", -- Reference
-		-- 	"", -- Folder
-		-- 	"", -- EnumMember
-		-- 	"", -- Constant
-		-- 	"", -- Struct
-		-- 	"", -- Event
-		-- 	"ﬦ", -- Operator
-		-- 	"", -- TypeParameter
-		-- }
 
 		-- used to enable autocompletion (assign to every lsp server config)
 		local capabilities = cmp_nvim_lsp.default_capabilities()

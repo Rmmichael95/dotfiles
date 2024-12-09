@@ -150,7 +150,7 @@ let light_theme = {
 # } else { $spans })
 
 
-# Set up usuable tab completion
+# Set up usable tab completion
 let fish_completer = {|spans|
     fish --command $'complete "--do-complete=($spans | str join " ")"'
     | $"value(char tab)description(char newline)" + $in

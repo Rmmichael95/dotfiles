@@ -1,0 +1,3 @@
+#!/bin/sh
+
+cd /opt/devilbox && doas /usr/bin/docker-compose stop

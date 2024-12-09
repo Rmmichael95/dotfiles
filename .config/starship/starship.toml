@@ -1,0 +1,247 @@
+# Wait 10 milliseconds for starship to check files under the current directory.
+scan_timeout = 10
+
+# Disable the blank line at the start of the prompt
+add_newline = false
+
+# Set 'foo' as custom color palette
+palette = 'catforest'
+
+# Define custom colors
+[palettes.catforest]
+red = '#e67e80'
+maroon = '#ed8796'
+orange = '#e69875'
+yellow = '#dbbc7f'
+green = '#a7c080'
+cyan = '#83c092'
+blue = '#7fbbb3'
+sapphire = '#8bd5ca'
+sky = '#91d7e3'
+lavender = '#b7bdf8'
+magenta = '#d699b6'
+pink = '#f5bde6'
+flamingo = '#f0c6c6'
+white = '#f4dbd6'
+black = '#495156'
+grey1 = '#8087a2'
+grey0 = '#939ab7'
+grey = '#cad3f5'
+
+format = """
+$username\
+$hostname\
+$localip\
+$shlvl\
+$singularity\
+$kubernetes\
+$directory\
+$vcsh\
+$fossil_branch\
+$fossil_metrics\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$hg_branch\
+$pijul_channel\
+$docker_context\
+$package\
+$c\
+$cmake\
+$cobol\
+$daml\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$fennel\
+$gleam\
+$golang\
+$guix_shell\
+$haskell\
+$haxe\
+$helm\
+$java\
+$julia\
+$kotlin\
+$gradle\
+$lua\
+$nim\
+$nodejs\
+$ocaml\
+$opa\
+$perl\
+$php\
+$pulumi\
+$purescript\
+$python\
+$quarto\
+$raku\
+$rlang\
+$red\
+$ruby\
+$rust\
+$scala\
+$solidity\
+$swift\
+$terraform\
+$typst\
+$vlang\
+$vagrant\
+$zig\
+$buf\
+$nix_shell\
+$conda\
+$meson\
+$spack\
+$aws\
+$gcloud\
+$openstack\
+$azure\
+$nats\
+$direnv\
+$env_var\
+$crystal\
+$sudo\
+$cmd_duration\
+$line_break\
+$jobs\
+$battery\
+$status\
+$container\
+$shell\
+$character"""
+
+[battery]
+full_symbol = '🔋 '
+charging_symbol = '⚡️ '
+discharging_symbol = '💀 '
+
+[[battery.display]] # 'bold red' style and discharging_symbol when capacity is between 0% and 10%
+threshold = 10
+style = 'bold red'
+
+[[battery.display]] # 'bold yellow' style and 💦 symbol when capacity is between 10% and 30%
+threshold = 30
+style = 'bold yellow'
+discharging_symbol = '💦 '
+
+[buf]
+symbol = '🦬 '
+
+[bun]
+format = 'via [🍔 $version](bold cyan) '
+
+[c]
+format = 'via [$name $version]($style)'
+
+[character]
+success_symbol = '[➜](bold green) '
+error_symbol = '[✗](bold red) '
+
+[directory]
+style = 'bold lavender'
+truncation_length = 8
+truncation_symbol = '…/'
+
+[docker_context]
+format = 'via [🐋 $context](blue sapphire)'
+
+[git_branch]
+symbol = '🌱 '
+truncation_length = 4
+truncation_symbol = ''
+ignore_branches = ['master', 'main']
+
+[git_commit]
+commit_hash_length = 4
+tag_symbol = '🔖 '
+
+[git_state]
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+cherry_pick = '[🍒 PICKING](bold maroon)'
+
+[git_metrics]
+added_style = 'bold blue'
+format = '[+$added]($added_style)/[-$deleted]($deleted_style) '
+
+[git_status]
+conflicted = '🏳'
+ahead = '🏎💨'
+behind = '😰'
+diverged = '😵'
+up_to_date = '✓'
+untracked = '🤷'
+stashed = '📦'
+modified = '📝'
+staged = '[++\($count\)](green)'
+renamed = '👅'
+deleted = '🗑'
+
+[golang]
+format = 'via [$symbol($version )($mod_version )]($style)'
+
+[hostname]
+ssh_only = true
+format = '[$ssh_symbol](bold sky) on [$hostname](bold flamingo) '
+trim_at = '.companyname.com'
+disabled = false
+
+[jobs]
+symbol = '+ '
+number_threshold = 4
+symbol_threshold = 0
+
+[lua]
+format = 'via [🌕 $version](bold sapphire) '
+
+[memory_usage]
+threshold = -1
+symbol = ' '
+style = 'bold dimmed yellow'
+
+[nix_shell]
+disabled = true
+impure_msg = '[impure shell](bold maroon)'
+pure_msg = '[pure shell](bold sapphire)'
+unknown_msg = '[unknown shell](bold pink)'
+format = 'via [☃️ $state( \($name\))](bold sky) '
+
+[nodejs]
+format = 'via [🤖 $version](bold cyan) '
+
+[perl]
+format = 'via [🦪 $version]($style) '
+
+[php]
+format = 'via [🔹 $version](147 bold) '
+
+
+[python]
+symbol = '👾 '
+pyenv_version_name = true
+python_binary = 'python3'
+
+[rlang]
+format = 'with [📐 $version](sapphire bold) '
+
+[ruby]
+symbol = '🔺 '
+
+[rust]
+format = 'via [⚙️ $version](red maroon)'
+
+[shell]
+zsh_indicator = ' '
+fish_indicator = '󰈺 '
+# nushell = ':: '
+unknown_indicator = ':? '
+style = 'lavender bold'
+disabled = false
+
+[zig]
+symbol = '⚡️ '

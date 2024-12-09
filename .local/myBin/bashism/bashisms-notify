@@ -1,0 +1,3 @@
+#/bin/sh
+
+cat /tmp/bashisms | rg bashism | awk '{print $4}' | awk '!seen[$0]++' | notify-send

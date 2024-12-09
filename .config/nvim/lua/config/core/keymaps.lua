@@ -82,10 +82,10 @@ map("n", "<C-K>", "<C-W><C-K>") -- ctrl-k to move up a split
 map("n", "<C-L>", "<C-W><C-L>") -- ctrl-l to move right a split
 map("n", "<C-H>", "<C-W><C-H>") -- ctrl-h to move left a split
 
-map("n", "<C-t><C-t>", ":tabnew<CR>") -- easy new tab
-map("n", "<C-t><C-z>", ":tabclose<CR>") -- easy close tab
-map("n", "<C-t><C-n>", ":tabn<CR>") -- easy next tab
-map("n", "<C-t><C-p>", ":tabp<CR>") -- easy prev tab
+map("n", "<C-t><C-t>", "<Cmd>tabnew<CR>") -- easy new tab
+map("n", "<C-t><C-z>", "<Cmd>tabclose<CR>") -- easy close tab
+map("n", "<C-t><C-n>", "<Cmd>tabn<CR>") -- easy next tab
+map("n", "<C-t><C-p>", "<Cmd>tabp<CR>") -- easy prev tab
 
 -- Resize window using <ctrl> arrow keys
 map("n", "<C-Up>", "<Cmd>resize +2<CR>", { desc = "Increase Window Height" })

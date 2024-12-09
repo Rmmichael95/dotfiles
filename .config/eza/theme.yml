@@ -1,120 +1,131 @@
 colourful: true
 
+#catforest
 colors:
-  black: "#4b565c"
-  white: "#d3c6aa"
-  blue: "#7fbbb3"
-  cyan: "#83c092"
-  green: "#a7c080"
-  magenta: "#d699b6"
   red: "#e67e80"
+  maroon: "#ed8796"
+  orange: "#e69875"
   yellow: "#dbbc7f"
+  green: "#a7c080"
+  cyan: "#83c092"
+  blue: "#7fbbb3"
+  sapphire: "#8bd5ca"
+  sky: "#91d7e3"
+  lavender: "#b7bdf8"
+  magenta: "#d699b6"
+  pink: "#f5bde6"
+  flamingo: "#f0c6c6"
+  white: "#f4dbd6"
+  black: "#495156"
+  grey1: "#8087a2"
+  grey0: "#939ab7"
+  grey: "#cad3f5"
 
 filekinds:
-  normal: { foreground: "colors.white" }
-  directory: { foreground: "colors.blue" }
-  symlink: { foreground: "colors.cyan" }
-  pipe: { foreground: "#7F849C" }
-  block_device: { foreground: "colors.red" }
-  char_device: { foreground: "colors.red" }
-  socket: { foreground: "colors.black" }
-  special: { foreground: "colors.magenta" }
-  executable: { foreground: "colors.green" }
-  mount_point: { foreground: "#74C7EC" }
+  normal: { foreground: colors.white }
+  directory: { foreground: colors.blue }
+  symlink: { foreground: colors.cyan }
+  pipe: { foreground: colors.grey1 }
+  block_device: { foreground: colors.red }
+  char_device: { foreground: colors.red }
+  socket: { foreground: colors.black }
+  special: { foreground: colors.magenta }
+  executable: { foreground: colors.green }
+  mount_point: { foreground: colors.sapphire }
 
 perms:
-  user_read: { foreground: "#CDD6F4" }
-  user_write: { foreground: "colors.yellow" }
-  user_execute_file: { foreground: "colors.green" }
-  user_execute_other: { foreground: "colors.green" }
-  group_read: { foreground: "colors.white" }
-  group_write: { foreground: "colors.yellow" }
-  group_execute: { foreground: "colors.green" }
-  other_read: { foreground: "#A6ADC8" }
-  other_write: { foreground: "yellow" }
-  other_execute: { foreground: "colors.green" }
-  special_user_file: { foreground: "colors.magenta" }
-  special_other: { foreground: "colors.black" }
-  attribute: { foreground: "#A6ADC8" }
+  user_read: { foreground: colors.flamingo }
+  user_write: { foreground: colors.yellow }
+  user_execute_file: { foreground: colors.green }
+  user_execute_other: { foreground: colors.green }
+  group_read: { foreground: colors.white }
+  group_write: { foreground: colors.yellow }
+  group_execute: { foreground: colors.green }
+  other_read: { foreground: colors.grey }
+  other_write: { foreground: colors.yellow }
+  other_execute: { foreground: colors.green }
+  special_user_file: { foreground: colors.magenta }
+  special_other: { foreground: colors.black }
+  attribute: { foreground: colors.grey }
 
 size:
-  major: { foreground: "#A6ADC8" }
-  minor: { foreground: "colors.cyan" }
-  number_byte: { foreground: "#CDD6F4" }
-  number_kilo: { foreground: "colors.white" }
-  number_mega: { foreground: "colors.blue" }
-  number_giga: { foreground: "colors.magenta" }
-  number_huge: { foreground: "colors.magenta" }
-  unit_byte: { foreground: "#A6ADC8" }
-  unit_kilo: { foreground: "colors.blue" }
-  unit_mega: { foreground: "colors.magenta" }
-  unit_giga: { foreground: "colors.magenta" }
-  unit_huge: { foreground: "#74C7EC" }
+  major: { foreground: colors.grey }
+  minor: { foreground: colors.cyan }
+  number_byte: { foreground: colors.flamingo }
+  number_kilo: { foreground: colors.white }
+  number_mega: { foreground: colors.blue }
+  number_giga: { foreground: colors.magenta }
+  number_huge: { foreground: colors.magenta }
+  unit_byte: { foreground: colors.grey }
+  unit_kilo: { foreground: colors.blue }
+  unit_mega: { foreground: colors.magenta }
+  unit_giga: { foreground: colors.magenta }
+  unit_huge: { foreground: colors.sapphire }
 
 users:
-  user_you: { foreground: "#CDD6F4" }
-  user_root: { foreground: "#F38BA8" }
-  user_other: { foreground: "colors.magenta" }
-  group_yours: { foreground: "colors.white" }
-  group_other: { foreground: "#7F849C" }
-  group_root: { foreground: "#F38BA8" }
+  user_you: { foreground: colors.flamingo }
+  user_root: { foreground: colors.maroon }
+  user_other: { foreground: colors.magenta }
+  group_yours: { foreground: colors.white }
+  group_other: { foreground: colors.grey1 }
+  group_root: { foreground: colors.maroon }
 
 links:
-  normal: { foreground: "colors.cyan" }
-  multi_link_file: { foreground: "#74C7EC" }
+  normal: { foreground: colors.cyan }
+  multi_link_file: { foreground: colors.sapphire }
 
 git:
-  new: { foreground: "colors.green" }
-  modified: { foreground: "colors.yellow" }
-  deleted: { foreground: "#F38BA8" }
-  renamed: { foreground: "#94E2D5" }
-  typechange: { foreground: "#F5C2E7" }
-  ignored: { foreground: "#7F849C" }
-  conflicted: { foreground: "red" }
+  new: { foreground: colors.green }
+  modified: { foreground: colors.yellow }
+  deleted: { foreground: colors.maroon }
+  renamed: { foreground: colors.sky }
+  typechange: { foreground: colors.pink }
+  ignored: { foreground: colors.grey1 }
+  conflicted: { foreground: colors.red }
 
 git_repo:
-  branch_main: { foreground: "#CDD6F4" }
-  branch_other: { foreground: "colors.magenta" }
-  git_clean: { foreground: "colors.green" }
-  git_dirty: { foreground: "#F38BA8" }
+  branch_main: { foreground: colors.flamingo }
+  branch_other: { foreground: colors.magenta }
+  git_clean: { foreground: colors.green }
+  git_dirty: { foreground: colors.maroon }
 
 security_context:
-  colon: { foreground: "#7F849C" }
-  user: { foreground: "colors.white" }
-  role: { foreground: "colors.magenta" }
-  typ: { foreground: "colors.black" }
-  range: { foreground: "colors.magenta" }
+  colon: { foreground: colors.grey1 }
+  user: { foreground: colors.white }
+  role: { foreground: colors.magenta }
+  typ: { foreground: colors.black }
+  range: { foreground: colors.magenta }
 
 file_type:
-  image: { foreground: "yellow" }
-  video: { foreground: "#F38BA8" }
-  music: { foreground: "colors.green" }
-  lossless: { foreground: "#94E2D5" }
-  crypto: { foreground: "colors.black" }
-  document: { foreground: "#CDD6F4" }
-  compressed: { foreground: "#F5C2E7" }
-  temp: { foreground: "red" }
-  compiled: { foreground: "#74C7EC" }
-  build: { foreground: "colors.black" }
-  source: { foreground: "colors.blue" }
+  image: { foreground: colors.yellow }
+  video: { foreground: colors.maroon }
+  music: { foreground: colors.green }
+  lossless: { foreground: colors.sky }
+  crypto: { foreground: colors.black }
+  document: { foreground: colors.flamingo }
+  compressed: { foreground: colors.pink }
+  temp: { foreground: colors.red }
+  compiled: { foreground: colors.sapphire }
+  build: { foreground: colors.black }
+  source: { foreground: colors.blue }
 
-punctuation: { foreground: "#7F849C" }
-date: { foreground: "yellow" }
-inode: { foreground: "#A6ADC8" }
-blocks: { foreground: "#9399B2" }
-header: { foreground: "#CDD6F4" }
-octal: { foreground: "#94E2D5" }
-flags: { foreground: "colors.magenta" }
+punctuation: { foreground: colors.grey1 }
+date: { foreground: colors.yellow }
+inode: { foreground: colors.grey }
+blocks: { foreground: colors.grey0 }
+header: { foreground: colors.flamingo }
+octal: { foreground: colors.sky }
+flags: { foreground: colors.magenta }
 
-symlink_path: { foreground: "colors.cyan" }
-control_char: { foreground: "#74C7EC" }
-broken_symlink: { foreground: "#F38BA8" }
-broken_path_overlay: { foreground: "colors.black" }
+symlink_path: { foreground: colors.cyan }
+control_char: { foreground: colors.sapphire }
+broken_symlink: { foreground: colors.maroon }
+broken_path_overlay: { foreground: colors.black }
 
 filenames:
   # Custom filename-based overrides
-  Cargo.toml: {icon: {glyph: 🦀}}
+  Cargo.toml: { icon: { glyph: 🦀 } }
 
 extensions:
   # Custom extension-based overrides
-  rs: {filename: {foreground: Red}, icon: {glyph: 🦀}}
+  rs: { filename: { foreground: colors.red }, icon: { glyph: 🦀 } }
