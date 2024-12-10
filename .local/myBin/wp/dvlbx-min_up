@@ -1,3 +1,0 @@
-#!/bin/sh
-
-cd /opt/devilbox/ && doas /usr/bin/docker-compose up -d bind httpd php mysql

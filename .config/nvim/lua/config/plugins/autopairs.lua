@@ -16,11 +16,6 @@ return {
 		-- import nvim-autopairs
 		require("nvim-autopairs").setup(opts)
 
-		require("nvim-autopairs.completion.cmp")
-
-		-- import nvim-cmp plugin (completions plugin)
-		local cmp = require("cmp")
-		-- make autopairs and completion work together
-		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+		require("cmp").event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
 	end,
 }
