@@ -1,17 +1,12 @@
 return {
 	"gbprod/substitute.nvim",
-	event = { "BufReadPre", "BufNewFile" },
+	keys = {
+		{ "s", "<Cmd>require('substitute').operator<CR>", desc = "Substitute with motion" },
+		{ "ss", "<Cmd>require('substitute').line<CR>", desc = "Substitute line" },
+		{ "S", "<Cmd>require('substitute').eol<CR>", desc = "Substitute to end of line" },
+		{ "s", "<Cmd>require('substitute').visual<CR>", desc = "Substitute in visual mode" },
+	},
 	config = function()
-		local substitute = require("substitute")
-
-		substitute.setup()
-
-		-- set keymaps
-		local keymap = vim.keymap -- for conciseness
-
-		keymap.set("n", "s", substitute.operator, { desc = "Substitute with motion" })
-		keymap.set("n", "ss", substitute.line, { desc = "Substitute line" })
-		keymap.set("n", "S", substitute.eol, { desc = "Substitute to end of line" })
-		keymap.set("x", "s", substitute.visual, { desc = "Substitute in visual mode" })
+		require("substitute").setup()
 	end,
 }

@@ -15,4 +15,7 @@ return {
 		on_generate_notification = true,
 		on_open_notification = true,
 	},
+	config = function(_, opts)
+		require("dooku").setup(opts)
+	end,
 }

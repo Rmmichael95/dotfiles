@@ -327,3 +327,21 @@ nvim style.css
 nvim header.php 
 composer update 
 nvim header.php 
+ls .local/cache/
+ls .local/cache/zoxide/
+ls
+ls -a
+exit
+..
+l
+ls
+nvim starship/starship.toml 
+exit
+fzf
+cd
+clear
+z /home/ryanm/.config
+z
+clear
+eza
+eza -lahF auto

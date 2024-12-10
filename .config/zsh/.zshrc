@@ -242,4 +242,4 @@ function y() {
   rm -f -- "$tmp"
 }
 
-ff
+fastfetch

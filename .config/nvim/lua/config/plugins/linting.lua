@@ -4,7 +4,8 @@ return {
 		"williamboman/mason.nvim",
 		"rshkarin/mason-nvim-lint",
 	},
-	event = { "BufReadPre", "BufNewFile", "InsertLeave" },
+	lazy = true,
+	event = { "BufWritePost", "InsertLeave" },
 	config = function()
 		local lint = require("lint")
 		local phpcs = lint.linters.phpcs

@@ -1,7 +1,7 @@
 return {
 	"stevearc/conform.nvim",
-	lazy = false,
-	event = { "BufReadPre", "BufNewFile" },
+	lazy = true,
+	event = { "BufWritePost", "InsertLeave" },
 	dependencies = {
 		"williamboman/mason.nvim",
 		"LittleEndianRoot/mason-conform",

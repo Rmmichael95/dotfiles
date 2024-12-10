@@ -1,9 +1,9 @@
 return {
 	"lukas-reineke/indent-blankline.nvim",
-	--  event = "LazyFile",
+	event = "BufEnter",
 	opts = function()
 		-- Snacks.toggle({
-		--   name = "Indention Guides",
+		--   name = "Indentation Guides",
 		--   get = function()
 		--     return require("ibl.config").get_config(0).enabled
 		--   end,

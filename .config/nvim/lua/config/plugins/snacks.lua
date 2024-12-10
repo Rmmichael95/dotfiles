@@ -6,7 +6,66 @@ return {
 		---@type snacks.Config
 		opts = {
 			bigfile = { enabled = true },
-			dashboard = { enabled = true },
+			dashboard = {
+				enabled = true,
+				preset = {
+					header = [[
+                    ██╗      █████╗ ███████╗██╗   ██╗██╗   ██╗██╗███╗   ███╗
+                    ██║     ██╔══██╗╚══███╔╝╚██╗ ██╔╝██║   ██║██║████╗ ████║
+                    ██║     ███████║  ███╔╝  ╚████╔╝ ██║   ██║██║██╔████╔██║
+                    ██║     ██╔══██║ ███╔╝    ╚██╔╝  ╚██╗ ██╔╝██║██║╚██╔╝██║
+                    ███████╗██║  ██║███████╗   ██║    ╚████╔╝ ██║██║ ╚═╝ ██║
+                    ╚══════╝╚═╝  ╚═╝╚══════╝   ╚═╝     ╚═══╝  ╚═╝╚═╝     ╚═╝
+                     ]],
+                    -- stylua: ignore
+                    ---@type snacks.dashboard.Item[]
+                    keys = {
+                        { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+                        { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+                        { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
+                        { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
+                        { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
+                        { icon = " ", key = "s", desc = "Restore Session", section = "session" },
+                        { icon = " ", key = "x", desc = "Lazy Extras", action = ":LazyExtras" },
+                        { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy" },
+                        { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+                    },
+				},
+				sections = {
+					{ section = "header" },
+					{ section = "keys", gap = 1 },
+					-- { icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = { 2, 2 } },
+					-- { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 2 },
+					{ section = "startup" },
+				},
+				zindex = 10,
+				height = 0,
+				width = 0,
+				bo = {
+					bufhidden = "wipe",
+					buftype = "nofile",
+					buflisted = false,
+					filetype = "snacks_dashboard",
+					swapfile = false,
+					undofile = false,
+				},
+				wo = {
+					colorcolumn = "",
+					cursorcolumn = false,
+					cursorline = false,
+					list = false,
+					number = false,
+					relativenumber = false,
+					sidescrolloff = 0,
+					signcolumn = "no",
+					spell = false,
+					statuscolumn = "",
+					statusline = "",
+					winbar = "",
+					winhighlight = "Normal:SnacksDashboardNormal,NormalFloat:SnacksDashboardNormal",
+					wrap = false,
+				},
+			},
 			notifier = {
 				enabled = true,
 				timeout = 3000,

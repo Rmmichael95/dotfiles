@@ -5,6 +5,9 @@ return {
 		{ "echasnovski/mini.icons", opts = {} },
 		"tpope/vim-eunuch",
 	},
+	keys = {
+		{ "-", "<CMD>Oil<CR>", desc = "Open parent directory" },
+	},
 	---@module 'oil'
 	---@type oil.SetupOpts
 	opts = {
@@ -199,5 +202,7 @@ return {
 			border = "rounded",
 		},
 	},
-	vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" }),
+	config = function(_, opts)
+		require("oil").setup(opts)
+	end,
 }

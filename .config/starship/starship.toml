@@ -109,7 +109,6 @@ $crystal\
 $sudo\
 $cmd_duration\
 $line_break\
-$jobs\
 $battery\
 $status\
 $container\
@@ -139,9 +138,9 @@ format = 'via [🍔 $version](bold cyan) '
 [c]
 format = 'via [$name $version]($style)'
 
-[character]
-success_symbol = '[➜](bold green) '
-error_symbol = '[✗](bold red) '
+# [character]
+# success_symbol = '[➜](bold green) '
+# error_symbol = '[✗](bold red) '
 
 [directory]
 style = 'bold lavender'
@@ -191,10 +190,10 @@ format = '[$ssh_symbol](bold sky) on [$hostname](bold flamingo) '
 trim_at = '.companyname.com'
 disabled = false
 
-[jobs]
-symbol = '+ '
-number_threshold = 4
-symbol_threshold = 0
+# [jobs]
+# symbol = '+ '
+# number_threshold = 4
+# symbol_threshold = 0
 
 [lua]
 format = 'via [🌕 $version](bold sapphire) '
@@ -236,10 +235,10 @@ symbol = '🔺 '
 format = 'via [⚙️ $version](red maroon)'
 
 [shell]
-zsh_indicator = ' '
+zsh_indicator = ''
 fish_indicator = '󰈺 '
-# nushell = ':: '
-unknown_indicator = ':? '
+nu_indicator = '::'
+unknown_indicator = '?'
 style = 'lavender bold'
 disabled = false
 

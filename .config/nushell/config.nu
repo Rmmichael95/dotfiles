@@ -956,3 +956,13 @@ def --env y [...args] {
     }
     rm -fp $tmp
 }
+
+# source $"($env.XDG_CONFIG_HOME)/nushell/env.nu"
+source "/home/ryanm/.config/nushell/env.nu"
+# source $"($env.XDG_CACHE_HOME)zoxide/init.nu"
+source "/home/ryanm/.local/cache/zoxide/init.nu"
+# source $"($env.XDG_CACHE_HOME)/carapace/init.nu"
+source "/home/ryanm/.local/cache/carapace/init.nu"
+# source ~/.local/share/atuin/init.nu
+# use $"($env.XDG_CACHE_HOME)/starship/init.nu"
+use "/home/ryanm/.local/cache/starship/init.nu"

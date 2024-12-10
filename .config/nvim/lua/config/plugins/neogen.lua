@@ -1,14 +1,18 @@
 return {
 	"danymat/neogen",
-	config = function()
-		require("neogen").setup({
-			languages = {
-				lua = {
-					template = {
-						annotation_convention = "emmylua", -- for a full list of annotation_conventions, see supported-languages below
-					},
+	keys = {
+		{ "<Leader>nf", "<Cmd>lua require('neogen').generate()<CR>", desc = "Toggle Pin" },
+	},
+	opts = {
+		languages = {
+			lua = {
+				template = {
+					annotation_convention = "emmylua", -- for a full list of annotation_conventions, see supported-languages below
 				},
 			},
-		})
+		},
+	},
+	config = function(_, opts)
+		require("neogen").setup(opts)
 	end,
 }
