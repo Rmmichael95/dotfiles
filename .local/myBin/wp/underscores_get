@@ -31,7 +31,14 @@ echo "${THEME_NAME}" >"${XDG_DATA_HOME}"/dvlbx/data/www/theme
 # && wp config create --dbname=wordpress --dbuser=root --path=/shared/httpd/"${THEME_NAME}"/htdocs \
 doas-askpass bash -c "echo '127.0.0.1 ${THEME_NAME}. dvl.to' >>/etc/hosts" || exit &&
     cd /opt/devilbox || exit &&
-    doas /usr/bin/docker-compose exec --user devilbox php bash -l -c '(THEME_NAME=`cat /shared/httpd/theme` && ln -sv /shared/httpd/"${THEME_NAME}"/wordpress /shared/httpd/"${THEME_NAME}"/htdocs && cp /shared/httpd/wp-config.php /shared/httpd/"${THEME_NAME}"/htdocs && wp db create --path=/shared/httpd/"${THEME_NAME}"/htdocs && wp core install --url=https://"${THEME_NAME}.dvl.to" --title="${THEME_NAME}" --admin_user=rmmichael95 --admin_email=ryanmsul@protonmail.com --path=/shared/httpd/"${THEME_NAME}"/htdocs && wp theme install /shared/httpd/"${THEME_NAME}.zip" --activate --path=/shared/httpd/"${THEME_NAME}"/htdocs && cd /shared/httpd/"${THEME_NAME}"/htdocs/wp-content/themes/"${THEME_NAME}" || exit && composer global require php-stubs/wordpress-globals php-stubs/wordpress-stubs php-stubs/woocommerce-stubs php-stubs/acf-pro-stubs wpsyntex/polylang-stubs php-stubs/genesis-stubs php-stubs/wp-cli-stubs)'
+    doas /usr/bin/docker-compose exec --user devilbox php bash -l -c (THEME_NAME=`cat /shared/httpd/theme \
+&& ln -sv /shared/httpd/"${THEME_NAME}"/wordpress /shared/httpd/"${THEME_NAME}"/htdocs \
+&& cp /shared/httpd/wp-config.php /shared/httpd/"${THEME_NAME}"/htdocs \
+&& wp db create --path=/shared/httpd/"${THEME_NAME}"/htdocs \
+&& wp core install --url=https://"${THEME_NAME}.dvl.to" --title="${THEME_NAME}" --admin_user=rmmichael95 --admin_email=ryanmsul@protonmail.com --path=/shared/httpd/"${THEME_NAME}"/htdocs \
+&& wp theme install /shared/httpd/"${THEME_NAME}.zip" --activate --path=/shared/httpd/"${THEME_NAME}"/htdocs \
+&& cd /shared/httpd/"${THEME_NAME}"/htdocs/wp-content/themes/"${THEME_NAME}" || exit \
+&& composer global require php-stubs/wordpress-globals php-stubs/wordpress-stubs php-stubs/woocommerce-stubs php-stubs/acf-pro-stubs wpsyntex/polylang-stubs php-stubs/genesis-stubs php-stubs/wp-cli-stubs)
 
 rm -rf "${XDG_DATA_HOME}"/dvlbx/data/www/theme "${XDG_DATA_HOME}"/dvlbx/data/www/"${THEME_NAME}.zip"
 
