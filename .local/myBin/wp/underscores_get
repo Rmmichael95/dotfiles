@@ -33,7 +33,7 @@ doas-askpass bash -c "echo '127.0.0.1 ${THEME_NAME}. dvl.to' >>/etc/hosts" || ex
     cd /opt/devilbox || exit &&
     doas /usr/bin/docker-compose exec --user devilbox php bash -l -c (THEME_NAME=`cat /shared/httpd/theme \
 && ln -sv /shared/httpd/"${THEME_NAME}"/wordpress /shared/httpd/"${THEME_NAME}"/htdocs \
-&& cp /shared/httpd/wp-config.php /shared/httpd/"${THEME_NAME}"/htdocs \
+&& wp config create --dbname="${THEME_NAME}" --dbuser=root --dbhost=sql --path=/shared/httpd/"${THEME_NAME}"/htdocs \
 && wp db create --path=/shared/httpd/"${THEME_NAME}"/htdocs \
 && wp core install --url=https://"${THEME_NAME}.dvl.to" --title="${THEME_NAME}" --admin_user=rmmichael95 --admin_email=ryanmsul@protonmail.com --path=/shared/httpd/"${THEME_NAME}"/htdocs \
 && wp theme install /shared/httpd/"${THEME_NAME}.zip" --activate --path=/shared/httpd/"${THEME_NAME}"/htdocs \
