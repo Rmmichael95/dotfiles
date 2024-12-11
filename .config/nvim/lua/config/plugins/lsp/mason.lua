@@ -3,8 +3,6 @@ return {
 	dependencies = {
 		"williamboman/mason-lspconfig.nvim",
 		"jay-babu/mason-nvim-dap.nvim",
-		"LittleEndianRoot/mason-conform",
-		"rshkarin/mason-nvim-lint",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 	},
 	cmd = "Mason",
@@ -48,13 +46,6 @@ return {
 			"pylint",
 			"eslint_d",
 		},
-		-- doing lazy loading.
-		integrations = {
-			["mason-lspconfig"] = true,
-			["mason-nvim-dap"] = true,
-			["mason-conform"] = true,
-			["mason-nvim-lint"] = true,
-		},
 	},
 	---@param opts MasonSettings | {ensure_installed: string[]}
 	config = function(_, opts)
@@ -67,20 +58,14 @@ return {
 				},
 			},
 		})
+
 		require("mason-tool-installer").setup(opts)
+
 		require("mason-nvim-dap").setup({
 			handlers = {
 				function(config)
 					require("mason-nvim-dap").default_setup(config)
 				end,
-				-- cppdbg = function(config)
-				-- 	config.adapters = {
-				-- 		id = "cppdbg",
-				-- 		type = "executable",
-				-- 		command = vim.fn.stdpath("data") .. "/mason/bin/OpenDebugAD7",
-				-- 	}
-				-- 	mason_nvim_dap.default_setup(config)
-				-- end,
 			},
 		})
 	end,

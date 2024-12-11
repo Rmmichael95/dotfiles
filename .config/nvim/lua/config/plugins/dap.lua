@@ -3,9 +3,10 @@ return {
 	dependencies = {
 		"rcarriga/nvim-dap-ui",
 		"nvim-neotest/nvim-nio",
-		"nvim-treesitter/nvim-treesitter",
 		"theHamsta/nvim-dap-virtual-text",
+		"williamboman/mason.nvim",
 		"jay-babu/mason-nvim-dap.nvim",
+		"folke/lazydev.nvim",
 	},
 	keys = {
 		-- set keybinds

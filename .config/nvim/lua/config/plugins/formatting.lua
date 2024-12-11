@@ -1,20 +1,31 @@
 return {
 	"stevearc/conform.nvim",
 	lazy = true,
-    cmd = "ConformInfo",
+	cmd = "ConformInfo",
 	event = { "BufWritePost", "InsertLeave" },
 	dependencies = {
 		"williamboman/mason.nvim",
-		"LittleEndianRoot/mason-conform",
+	},
+	keys = {
+		{
+			"<leader>mp",
+			function()
+				require("conform").format({
+					lsp_fallback = true,
+					async = false,
+					timeout_ms = 1000,
+				})
+			end,
+			desc = "Format file or range (in visual mode)",
+		},
 	},
 	config = function()
-		local conform = require("conform")
-
-		conform.setup({
+		require("conform").setup({
 			formatters = {
 				phpcbf = {
+					-- command = vim.fn.stdpath("data") .. "/mason/bin/phpcbf",
 					command = "phpcbf",
-					args = { "--standard=WordPress", "$FILENAME" },
+					args = { "-q", "--standard=WordPress", "--report-json", "$FILENAME" },
 				},
 			},
 			formatters_by_ft = {
@@ -45,13 +56,5 @@ return {
 				timeout_ms = 1000,
 			},
 		})
-
-		vim.keymap.set({ "n", "v" }, "<leader>mp", function()
-			conform.format({
-				lsp_fallback = true,
-				async = false,
-				timeout_ms = 1000,
-			})
-		end, { desc = "Format file or range (in visual mode)" })
 	end,
 }

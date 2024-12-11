@@ -20,7 +20,7 @@ return {
 				virtual_text = {
 					spacing = 4,
 					source = "if_many",
-					prefix = "●",
+					prefix = "icons",
 					-- this will set set the prefix to a function that returns the diagnostics icon based on the severity
 					-- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
 					-- prefix = "icons",
@@ -35,19 +35,6 @@ return {
 					},
 				},
 			},
-			-- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
-			-- Be aware that you also will need to properly configure your LSP server to
-			-- provide the inlay hints.
-			inlay_hints = {
-				enabled = true,
-				exclude = { "vue" }, -- filetypes for which you don't want to enable inlay hints
-			},
-			-- Enable this to enable the builtin LSP code lenses on Neovim >= 0.10.0
-			-- Be aware that you also will need to properly configure your LSP server to
-			-- provide the code lenses.
-			codelens = {
-				enabled = false,
-			},
 			-- Enable lsp cursor word highlighting
 			document_highlight = {
 				enabled = true,
@@ -61,31 +48,26 @@ return {
 					},
 				},
 			},
-			-- options for vim.lsp.buf.format
-			-- `bufnr` and `filter` is handled by the LazyVim formatter,
-			-- but can be also overridden when specified
-			format = {
-				formatting_options = nil,
-				timeout_ms = nil,
-			},
 		}
 		return ret
 	end,
 	---@param opts PluginLspOpts
 	config = function(_, opts)
 		-- diagnostics signs
-		if type(opts.diagnostics.signs) ~= "boolean" then
-			for severity, icon in pairs(opts.diagnostics.signs.text) do
-				local name = vim.diagnostic.severity[severity]:lower():gsub("^%l", string.upper)
-				name = "DiagnosticSign" .. name
-				vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
+		if vim.fn.has("nvim-0.10.0") == 0 then
+			if type(opts.diagnostics.signs) ~= "boolean" then
+				for severity, icon in pairs(opts.diagnostics.signs.text) do
+					local name = vim.diagnostic.severity[severity]:lower():gsub("^%l", string.upper)
+					name = "DiagnosticSign" .. name
+					vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
+				end
 			end
 		end
 
 		if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
 			opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
 				or function(diagnostic)
-					local icons = vim.config.icons.diagnostics
+					local icons = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
 					for d, icon in pairs(icons) do
 						if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
 							return icon
@@ -97,7 +79,6 @@ return {
 		vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
 		local lspconfig = require("lspconfig")
-		local mason_lspconfig = require("mason-lspconfig")
 		local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 		local has_blink, blink = pcall(require, "blink.cmp")
 		local capabilities = vim.tbl_deep_extend(
@@ -109,11 +90,75 @@ return {
 			opts.capabilities or {}
 		)
 
+		local mason_lspconfig = require("mason-lspconfig")
 		mason_lspconfig.setup_handlers({
 			-- default handler for installed servers
 			function(server_name)
 				lspconfig[server_name].setup({
 					capabilities = capabilities,
+				})
+			end,
+			["svelte"] = function()
+				-- configure svelte server
+				lspconfig["svelte"].setup({
+					capabilities = capabilities,
+					on_attach = function(client, bufnr)
+						vim.api.nvim_create_autocmd("BufWritePost", {
+							pattern = { "*.js", "*.ts" },
+							callback = function(ctx)
+								-- Here use ctx.match instead of ctx.file
+								client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
+							end,
+						})
+					end,
+				})
+			end,
+			["graphql"] = function()
+				-- configure graphql language server
+				lspconfig["graphql"].setup({
+					capabilities = capabilities,
+					filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
+				})
+			end,
+			["emmet_ls"] = function()
+				-- configure emmet language server
+				lspconfig["emmet_ls"].setup({
+					capabilities = capabilities,
+					filetypes = {
+						"html",
+						"typescriptreact",
+						"javascriptreact",
+						"css",
+						"sass",
+						"scss",
+						"less",
+						"svelte",
+					},
+					init_options = {
+						html = {
+							options = {
+								-- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+								["bem.enabled"] = true,
+							},
+						},
+					},
+				})
+			end,
+			["lua_ls"] = function()
+				-- configure lua server (with special settings)
+				lspconfig["lua_ls"].setup({
+					capabilities = capabilities,
+					settings = {
+						Lua = {
+							-- make the language server recognize "vim" global
+							diagnostics = {
+								globals = { "vim" },
+							},
+							completion = {
+								callSnippet = "Replace",
+							},
+						},
+					},
 				})
 			end,
 			["intelephense"] = function()
@@ -305,23 +350,6 @@ return {
 							},
 							files = {
 								maxSize = 5000000,
-							},
-						},
-					},
-				})
-			end,
-			["lua_ls"] = function()
-				-- configure lua server (with special settings)
-				lspconfig["lua_ls"].setup({
-					capabilities = capabilities,
-					settings = {
-						Lua = {
-							-- make the language server recognize "vim" global
-							diagnostics = {
-								globals = { "vim" },
-							},
-							completion = {
-								callSnippet = "Replace",
 							},
 						},
 					},

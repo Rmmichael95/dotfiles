@@ -1,6 +1,8 @@
 return {
 	"Zeioth/dooku.nvim",
-	event = "VeryLazy",
+	cmd = { "DookuGenerate", "DookuOpen", "DookuAutoSetup" },
+	lazy = true,
+	config = true,
 	opts = {
 		-- your config options here
 		project_root = { ".git", ".hg", ".svn", ".bzr", "_darcs", "_FOSSIL_", ".fslckout" }, -- when one of these files is found, consider that directory the project root. Search starts upwards from the current buffer.
@@ -15,7 +17,7 @@ return {
 		on_generate_notification = true,
 		on_open_notification = true,
 	},
-	config = function(_, opts)
-		require("dooku").setup(opts)
-	end,
+	-- config = function(_, opts)
+	-- 	require("dooku").setup(opts)
+	-- end,
 }

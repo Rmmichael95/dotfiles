@@ -30,6 +30,37 @@ return {
 		dependencies = {
 			"JoosepAlviste/nvim-ts-context-commentstring",
 		},
+		lazy = true,
+		keys = {
+			{
+				"gc",
+				function()
+					require("mini.comment").comment()
+				end,
+				desc = "Toggle comment w/TS context",
+			},
+			{
+				"gc",
+				function()
+					require("mini.comment").textobjext()
+				end,
+				desc = "Textobjextq comment w/TS context",
+			},
+			{
+				"gcc",
+				function()
+					require("mini.comment").comment_line()
+				end,
+				desc = "Comment line w/TS context",
+			},
+			{
+				"gcc",
+				function()
+					require("mini.comment").comment_visual()
+				end,
+				desc = "Comment motion w/TS context",
+			},
+		},
 		config = function()
 			require("ts_context_commentstring").setup({
 				enable_autocmd = false,

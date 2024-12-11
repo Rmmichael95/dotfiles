@@ -1,6 +1,7 @@
 return {
 	"lukas-reineke/indent-blankline.nvim",
 	event = "BufEnter",
+	config = true,
 	opts = function()
 		-- Snacks.toggle({
 		--   name = "Indentation Guides",

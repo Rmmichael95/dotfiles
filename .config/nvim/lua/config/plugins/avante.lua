@@ -1,11 +1,11 @@
 return {
 	"yetone/avante.nvim",
-	event = "VeryLazy",
-	lazy = false,
+	lazy = true,
 	version = false, -- set this if you want to always pull the latest change
 	opts = {
-		-- add any opts here
+		file_types = { "Avante" },
 	},
+	ft = { "Avante" },
 	-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
 	build = "make",
 	-- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
@@ -20,7 +20,7 @@ return {
 		{
 			-- support for image pasting
 			"HakonHarnes/img-clip.nvim",
-			event = "VeryLazy",
+			lazy = true,
 			opts = {
 				-- recommended settings
 				default = {

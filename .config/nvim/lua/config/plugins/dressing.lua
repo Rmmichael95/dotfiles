@@ -1,6 +1,8 @@
 return {
 	"stevearc/dressing.nvim",
-	event = "VeryLazy",
+	lazy = true,
+	event = "BufReadPre",
+	config = true,
 	opts = {
 		input = {
 			-- Set to false to disable the vim.ui.input implementation
@@ -175,7 +177,7 @@ return {
 			get_config = nil,
 		},
 	},
-	config = function(_, opts)
-		require("dressing").setup(opts)
-	end,
+	-- config = function(_, opts)
+	-- 	require("dressing").setup(opts)
+	-- end,
 }

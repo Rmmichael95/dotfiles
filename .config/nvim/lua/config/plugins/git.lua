@@ -1,5 +1,6 @@
 return {
 	"dinhhuy258/git.nvim",
+	config = true,
 	keys = {
 		{ "<leader>gb", "<cmd>lua require('git').blame()<CR>" },
 		{ "<leader>go", "<cmd>lua require('git').browse()<CR>" },
@@ -13,7 +14,7 @@ return {
 	opts = {
 		default_mappings = true, -- NOTE: `quit_blame` and `blame_commit` are still merged to the keymaps even if `default_mappings = false`
 	},
-	config = function(_, opts)
-		require("git").setup(opts)
-	end,
+	-- config = function(_, opts)
+	-- 	require("git").setup(opts)
+	-- end,
 }

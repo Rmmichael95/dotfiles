@@ -1,6 +1,8 @@
 return {
 	"akinsho/bufferline.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
+	event = { "BufAdd", "BufDelete" },
+	config = true,
 	opts = {
 		options = {
 			mode = "tabs", -- set to "tabs" to only show tabpages instead
@@ -60,15 +62,15 @@ return {
 			},
 		},
 	},
-	config = function(_, opts)
-		require("bufferline").setup(opts)
-		-- Fix bufferline when restoring a session
-		vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete" }, {
-			callback = function()
-				vim.schedule(function()
-					pcall(nvim_bufferline)
-				end)
-			end,
-		})
-	end,
+	-- config = function(_, opts)
+	-- 	require("bufferline").setup(opts)
+	-- 	-- Fix bufferline when restoring a session
+	-- 	vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete" }, {
+	-- 		callback = function()
+	-- 			vim.schedule(function()
+	-- 				pcall(nvim_bufferline)
+	-- 			end)
+	-- 		end,
+	-- 	})
+	-- end,
 }

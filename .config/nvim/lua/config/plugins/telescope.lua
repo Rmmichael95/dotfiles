@@ -175,6 +175,7 @@ return {
 		},
 	},
 	opts = function()
+		require("telescope").load_extension("fzf")
 		local actions = require("telescope.actions")
 
 		local open_with_trouble = function(...)
