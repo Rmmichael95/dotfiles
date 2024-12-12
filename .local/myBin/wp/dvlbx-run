@@ -1,15 +1,15 @@
 #!/bin/sh
 
 kill_wp() {
-    cd /opt/devilbox && doas /usr/bin/docker-compose stop
+    cd /opt/devilbox && /docker-compose stop
 }
 
 start_max() {
-    cd /opt/devilbox/ && doas /usr/bin/docker-compose up -d
+    cd /opt/devilbox/ && docker-compose up -d
 }
 
 start_min() {
-    cd /opt/devilbox/ && doas /usr/bin/docker-compose up -d bind httpd php mysql
+    cd /opt/devilbox/ && docker-compose up -d bind httpd php mysql
 }
 
 ask_start() {
