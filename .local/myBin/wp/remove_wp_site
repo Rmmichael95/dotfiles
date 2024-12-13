@@ -5,8 +5,8 @@ THEME_NAME=$(/usr/bin/ls "$XDG_DATA_HOME/dvlbx/data/www/" | bemenu --prompt "Cho
 
 echo "${THEME_NAME}" >"${XDG_DATA_HOME}"/dvlbx/data/www/theme
 
-cd /opt/devilbox/ &&
+doas-askpass sed -i "/#${THEME_NAME}/d" /etc/hosts &&
+    cd /opt/devilbox/ &&
     docker-compose exec --user devilbox php bash -l -c "(THEME_NAME=$(cat /shared/httpd/theme) && rm -rf /shared/httpd/theme && wp db drop --path=/shared/httpd/${THEME_NAME}/htdocs)" || exit
 
-rm -rf "${XDG_DATA_HOME}/dvlbx/data/www/${THEME_NAME}" &&
-    doas-askpass sed -i "/#${THEME_NAME}/d" /etc/hosts
+rm -rf "${XDG_DATA_HOME}/dvlbx/data/www/${THEME_NAME}" && notify-send "Removed ${THEME_NAME} from dvlbx"

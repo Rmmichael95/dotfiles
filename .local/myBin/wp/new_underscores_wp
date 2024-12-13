@@ -24,15 +24,16 @@ mv /tmp/"${THEME_NAME}.zip" "${XDG_DATA_HOME}"/dvlbx/data/www/ || exit
 rm -rf /tmp/"${THEME_NAME}"
 rm -rf /tmp/err
 
-git clone https://github.com/WordPress/WordPress.git "${WP_PATH}"/wordpress
-
-notify-send 'Got WordPress'
+cd "$XDG_DATA_HOME"/dvlbx/data/www/.wordpress &&
+    git pull &&
+    notify-send 'Got WordPress'
 
 echo "${THEME_NAME}" >"${XDG_DATA_HOME}"/dvlbx/data/www/theme
 
 doas-askpass bash -c "echo '127.0.0.1 ${THEME_NAME}.dvl.to #${THEME_NAME}' >>/etc/hosts" || exit &&
     cd /opt/devilbox || exit &&
     docker-compose exec --user devilbox php bash -l -c "(THEME_NAME=$(cat /shared/httpd/theme) \
+&& cp -r /shared/httpd/.wordpress /shared/httpd/${THEME_NAME}/wordpress \
 && ln -sv /shared/httpd/${THEME_NAME}/wordpress /shared/httpd/${THEME_NAME}/htdocs \
 && wp config create --dbname=${THEME_NAME} --dbuser=root --dbhost=mysql --path=/shared/httpd/${THEME_NAME}/htdocs \
 && wp db create --path=/shared/httpd/${THEME_NAME}/htdocs \
