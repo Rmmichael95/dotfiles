@@ -1,21 +1,9 @@
-#!/bin/bash
+#!/usr/bin/sh
 
-THEME_NAME=$(echo "" | bemenu --prompt "Enter theme name: " --no-exec --line-height 55 --fn "JetBrainsMonoNerdFontMono 20" --tb "#15191c" --tf "#eb4d4b" --fb "#15191c" --ff "#d3c6aa" --nb "#15191c" --nf "#4b565c" --hb "#15191c" --hf "#d3c6aa" --fbb "#15191c" --fbf "#d3c6aa" --sb "#15191c" --sf "#d3c6aa" --ab "#15191c" --af "#4b565c" --bdr "#4b565c") &&
-    [[ -n $THEME_NAME ]] || exit
+THEME_NAME=$("${XDG_DATA_HOME}/bin/mybin/wp/get_underscores")
 
 ADMIN_PASS=$(echo "" | bemenu --prompt "Enter admin password: " --password --line-height 55 --fn "JetBrainsMonoNerdFontMono 20" --tb "#15191c" --tf "#eb4d4b" --fb "#15191c" --ff "#d3c6aa" --nb "#15191c" --nf "#4b565c" --hb "#15191c" --hf "#d3c6aa" --fbb "#15191c" --fbf "#d3c6aa" --sb "#15191c" --sf "#d3c6aa" --ab "#15191c" --af "#4b565c" --bdr "#4b565c") &&
-    [[ -n $ADMIN_PASS ]] || exit
-
-git clone https://github.com/Automattic/_s.git /tmp/"${THEME_NAME}" >/tmp/err && {
-    fd . --type f /tmp/"${THEME_NAME}"/ --exec sed -i "s/'_s'/'${THEME_NAME}'/" {}
-    fd . --type f --extension css /tmp/"${THEME_NAME}"/ --exec sed -i "s/Text Domain: _s/Text Domain: ${THEME_NAME}/" {}
-    fd . --type f /tmp/"${THEME_NAME}"/ --exec sed -i "s/ _s/ ${THEME_NAME}/" {}
-    fd . --type f /tmp/"${THEME_NAME}"/ --exec sed -i "s/_s-/${THEME_NAME}-/" {}
-    fd . --type f /tmp/"${THEME_NAME}"/ --exec sed -i "s/_S_/${THEME_NAME^^}/" {}
-    fd . --type f /tmp/"${THEME_NAME}"/ --exec sed -i "s/_s_/${THEME_NAME}_/" {}
-}
-
-cd /tmp || exit && zip -r "${THEME_NAME}.zip" "${THEME_NAME}" || exit
+    [ -n "${ADMIN_PASS}" ] || exit
 
 notify-send 'Got Theme'
 
@@ -25,7 +13,7 @@ mkdir -p "${WP_PATH}"
 mv /tmp/"${THEME_NAME}.zip" "${XDG_DATA_HOME}"/dvlbx/data/www/ || exit
 
 rm -rf /tmp/"${THEME_NAME}"
-rm -rf /tmp/err
+rm -rf /tmp/us_err
 
 cd "$XDG_DATA_HOME"/dvlbx/data/www/.wordpress &&
     git pull &&

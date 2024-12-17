@@ -1,7 +1,7 @@
-#!/bin/env sh
+#!/bin/sh
 
 # Usage:
-# `$0`: Ask for recording type via dmenu
+# `$0`: Ask for recording type via bemenu
 # `$0 screencast`: Record both audio and screen
 # `$0 video`: Record only screen
 # `$0 audio`: Record only audio
@@ -17,18 +17,19 @@
 #                                                         #
 ###########################################################
 
-updateicon() {
-    echo "$1" >/tmp/recordingicon
-    pkill -RTMIN+18 "${STATUSBAR:-dwmblocks}"
-}
+# updateicon() {
+#     echo "$1" >/tmp/recordingicon
+#     pkill -RTMIN+18 "${STATUSBAR:-dwmblocks}"
+# }
 
 killrecording() {
-    recpid="$(cat /tmp/recordingpid)"
+    recpid="$(cat /tmp/recording.pid)"
     # kill with SIGTERM, allowing finishing touches.
-    kill -15 "$recpid"
-    rm -f /tmp/recordingpid
+    # kill -15 "$recpid"
+    kill -9 $(pidof ffmpeg)
+    rm -f /tmp/recording.pid
     updateicon ""
-    pkill -RTMIN+18 "${STATUSBAR:-dwmblocks}"
+    # pkill -RTMIN+18 "${STATUSBAR:-dwmblocks}"
     # even after SIGTERM, ffmpeg may still run, so SIGKILL it.
     sleep 3
     kill -9 "$recpid"
@@ -43,8 +44,8 @@ audio_alsa() {
         -c:a flac -ar 48000 -ac 2 -b:a 512k \
         -af 'azmq=bind_address=tcp\\\://127.0.0.1\\\:1235,volume=1' \
         "$HOME/music/recording/audio-$(date '+%y%m%d-%H%M-%S').flac" &
-    echo $! >/tmp/recordingpid
-    updateicon "🎙️"
+    echo $! >/tmp/recording.pid
+    # updateicon "🎙️"
 }
 
 audio_pulse() {
@@ -56,8 +57,8 @@ audio_pulse() {
         -compression_level 8 \
         -af 'azmq=bind_address=tcp\\\://127.0.0.1\\\:1235,volume=1' \
         "$HOME/videos/recording/audio-$(date '+%y%m%d-%H%M-%S').aac" &
-    echo $! >/tmp/recordingpid
-    updateicon "🎙️"
+    echo $! >/tmp/recording.pid
+    # updateicon "🎙️"
 }
 
 audio_jack() {
@@ -70,8 +71,8 @@ audio_jack() {
         -af 'azmq=bind_address=tcp\\\://127.0.0.1\\\:1235,volume=1' \
         -strict -2 \
         "$HOME/videos/recording/audio-$(date '+%y%m%d-%H%M-%S').flac" &
-    echo $! >/tmp/recordingpid
-    updateicon "🎙️"
+    echo $! >/tmp/recording.pid
+    # updateicon "🎙️"
 }
 
 screenshot_kms() {
@@ -92,13 +93,13 @@ video() {
         -vaapi_device /dev/dri/renderD128 \
         -video_size "$(xdpyinfo | grep dimensions | awk '{print $2;}')" \
         -framerate 60 \
-        -i $DISPLAY \
+        -i "$DISPLAY" \
         -vf 'format=nv12,hwupload' \
         -c:v hevc_vaapi -qp 24 \
         -strict -2 \
         "$HOME/videos/recording/video-$(date '+%y%m%d-%H%M-%S').mp4" &
-    echo $! >/tmp/recordingpid
-    updateicon "⏺️"
+    echo $! >/tmp/recording.pid
+    # updateicon "⏺️"
 }
 
 video_kms() {
@@ -111,9 +112,26 @@ video_kms() {
         -vf 'hwmap=derive_device=vaapi,scale_vaapi=w=1920:h=1080:format=nv12' \
         -c:v hevc_vaapi -qp 24 \
         -strict -2 \
+        -movflags +frag_keyframe+separate_moof+omit_tfhd_offset+empty_moov \
         "$HOME/videos/recording/video-$(date '+%y%m%d-%H%M-%S').mp4" &
-    echo $! >/tmp/recordingpid
-    updateicon "⏺️"
+    echo $! >/tmp/recording.pid
+    # updateicon "⏺️"
+
+}
+nvenc_video_kms() {
+    prime-run ffmpeg \
+        -threads:v 1 -filter_threads 1 \
+        -device /dev/dri/card0 \
+        -framerate 60 \
+        -f kmsgrab -thread_queue_size 128 \
+        -i - \
+        -vf 'hwmap=derive_device=vaapi,hwdownload,format=bgr0' \
+        -c:v hevc_nvenc -qp 24 \
+        -strict -2 \
+        -movflags +frag_keyframe+separate_moof+omit_tfhd_offset+empty_moov \
+        "$HOME/videos/recording/video-$(date '+%y%m%d-%H%M-%S').mp4" &
+    echo $! >/tmp/recording.pid
+    # updateicon "⏺️"
 }
 
 webcam() {
@@ -127,12 +145,12 @@ webcam() {
         -i ffmpeg \
         -c:a libopus -ac 2 -ar 48000 -b:a 512k \
         -af 'azmq=bind_address=tcp\\\://127.0.0.1\\\:1235,volume=1' \
-        -vf 'lut3d="$HOME"/.local/share/luts/35FreeLUTs/Azrael\ 93.CUBE:interp=tetrahedral,format=nv12|vaapi,hwupload,scale_vaapi=w=1920:h=1080:format=nv12' \
+        -vf "lut3d=$HOME/.local/share/luts/35FreeLUTs/Azrael\ 93.CUBE:interp=tetrahedral,format=nv12|vaapi,hwupload,scale_vaapi=w=1920:h=1080:format=nv12" \
         -c:v hevc_vaapi -qp 24 \
         -strict -2 \
         "$HOME/webcam-$(date '+%y%m%d-%H%M-%S').mp4" &
-    echo $! >/tmp/recordingpid
-    updateicon "🎥"
+    echo $! >/tmp/recording.pid
+    # updateicon "🎥"
 }
 
 webcamhidef() {
@@ -147,12 +165,12 @@ webcamhidef() {
         -i ffmpeg \
         -c:a libopus -ac 2 -ar 48000 -b:a 512k \
         -af 'azmq=bind_address=tcp\\\://127.0.0.1\\\:1235,volume=1' \
-        -vf 'lut3d="$HOME"/.local/share/luts/35FreeLUTs/Azrael\ 93.CUBE:interp=tetrahedral,format=nv12,hwupload' \
+        -vf "lut3d=$HOME/.local/share/luts/35FreeLUTs/Azrael\ 93.CUBE:interp=tetrahedral,format=nv12,hwupload" \
         -c:v hevc_vaapi -qp 24 \
         -strict -2 \
         "$HOME/webcam-$(date '+%y%m%d-%H%M-%S').mp4" &
-    echo $! >/tmp/recordingpid
-    updateicon "🎥"
+    echo $! >/tmp/recording.pid
+    # updateicon "🎥"
 }
 
 screencast_alsa() {
@@ -170,8 +188,8 @@ screencast_alsa() {
         -c:v hevc_vaapi -qp 24 \
         -strict -2 \
         "$HOME/videos/screencast-$(date '+%y%m%d-%H%M-%S').mp4" &
-    echo $! >/tmp/recordingpid
-    updateicon "⏺️🎙️"
+    echo $! >/tmp/recording.pid
+    # updateicon "⏺️🎙️"
 }
 
 screencast_pulse() {
@@ -189,8 +207,8 @@ screencast_pulse() {
         -c:v hevc_vaapi -qp 24 \
         -strict -2 \
         "$HOME/videos/screencast-$(date '+%y%m%d-%H%M-%S').mp4" &
-    echo $! >/tmp/recordingpid
-    updateicon "⏺️🎙️"
+    echo $! >/tmp/recording.pid
+    # updateicon "⏺️🎙️"
 }
 
 screencast_jack() {
@@ -207,9 +225,30 @@ screencast_jack() {
         -vf 'hwmap=derive_device=vaapi,scale_vaapi=w=1920:h=1080:format=nv12' \
         -c:v hevc_vaapi -qp 24 \
         -strict -2 \
+        -movflags +frag_keyframe+separate_moof+omit_tfhd_offset+empty_moov \
         "$HOME/videos/recording/screencast-$(date '+%y%m%d-%H%M-%S').mp4" &
-    echo $! >/tmp/recordingpid
-    updateicon "⏺️🎙️"
+    echo $! >/tmp/recording.pid
+    # updateicon "⏺️🎙️"
+}
+
+nvenc_screencast_jack() {
+    prime-run ffmpeg \
+        -threads:v 1 -threads:a 1 -filter_threads 1 -filter_complex_threads 1 \
+        -device /dev/dri/card0 \
+        -framerate 60 \
+        -f kmsgrab -thread_queue_size 256 \
+        -i - \
+        -f jack -thread_queue_size 256 \
+        -i ffmpeg \
+        -c:a libopus -ac 2 -ar 48000 -b:a 512k \
+        -af 'azmq=bind_address=tcp\\\://127.0.0.1\\\:1235,volume=1' \
+        -vf 'hwmap=derive_device=vaapi,hwdownload,format=bgr0' \
+        -c:v hevc_nvenc -qp 24 \
+        -strict -2 \
+        -movflags +frag_keyframe+separate_moof+omit_tfhd_offset+empty_moov \
+        "$HOME/videos/recording/screencast-$(date '+%y%m%d-%H%M-%S').mp4" &
+    echo $! >/tmp/recording.pid
+    # updateicon "⏺️🎙️"
 }
 
 overlay_alsa() {
@@ -219,7 +258,7 @@ overlay_alsa() {
         -f x11grab -thread_queue_size 512 \
         -video_size "$(xdpyinfo | grep dimensions | awk '{print $2;}')" \
         -framerate 60 \
-        -i $DISPLAY \
+        -i "$DISPLAY" \
         -f v4l2 -thread_queue_size 512 \
         -video_size 320x240 \
         -framerate 30 \
@@ -228,12 +267,12 @@ overlay_alsa() {
         -i default \
         -c:a libopus -ac 2 -ar 48000 -b:a 512k \
         -af 'azmq=bind_address=tcp\\\://127.0.0.1\\\:1235,volume=1' \
-        -filter_complex '[1:v]lut3d="$HOME"/.local/share/luts/35FreeLUTs/Azrael\ 93.CUBE:interp=tetrahedral[b],[0:v][b]overlay=x=1588:y=830,zmq=bind_address=tcp\\\://127.0.0.1\\\:1236,format=nv12,hwupload' \
+        -filter_complex "[1:v]lut3d=$HOME/.local/share/luts/35FreeLUTs/Azrael\ 93.CUBE:interp=tetrahedral[b],[0:v][b]overlay=x=1588:y=830,zmq=bind_address=tcp\\\://127.0.0.1\\\:1236,format=nv12,hwupload" \
         -c:v hevc_vaapi -qp 24 \
         -strict -2 \
         "$HOME/videos/recording/overlay-$(date '+%y%m%d-%H%M-%S').mp4" &
-    echo $! >/tmp/recordingpid
-    updateicon "⏺️🎙️"
+    echo $! >/tmp/recording.pid
+    # updateicon "⏺️🎙️"
 }
 
 overlay_pulse() {
@@ -243,7 +282,7 @@ overlay_pulse() {
         -f x11grab -thread_queue_size 512 \
         -video_size "$(xdpyinfo | grep dimensions | awk '{print $2;}')" \
         -framerate 60 \
-        -i $DISPLAY \
+        -i "$DISPLAY" \
         -f v4l2 -thread_queue_size 512 \
         -video_size 320x240 \
         -framerate 30 \
@@ -252,11 +291,11 @@ overlay_pulse() {
         -i default \
         -c:a libopus -ac 2 -ar 48000 -b:a 512k \
         -af 'azmq=bind_address=tcp\\\://127.0.0.1\\\:1235,volume=1' \
-        -filter_complex '[1:v]lut3d="$HOME"/.local/share/luts/35FreeLUTs/Azrael\ 93.CUBE:interp=tetrahedral[b],[0:v][b]overlay=x=1588:y=830,zmq=bind_address=tcp\\\://127.0.0.1\\\:1236,format=nv12,hwupload' \
+        -filter_complex "[1:v]lut3d=$HOME/.local/share/luts/35FreeLUTs/Azrael\ 93.CUBE:interp=tetrahedral[b],[0:v][b]overlay=x=1588:y=830,zmq=bind_address=tcp\\\://127.0.0.1\\\:1236,format=nv12,hwupload" \
         -c:v hevc_vaapi -qp 24 \
         "$HOME/videos/recording/overlay-$(date '+%y%m%d-%H%M-%S').mp4" &
-    echo $! >/tmp/recordingpid
-    updateicon "⏺️🎙️"
+    echo $! >/tmp/recording.pid
+    # updateicon "⏺️🎙️"
 }
 
 overlay_jack() {
@@ -269,7 +308,7 @@ overlay_jack() {
         -f x11grab -thread_queue_size 512 \
         -video_size "$(xdpyinfo | grep dimensions | awk '{print $2;}')" \
         -framerate 60 \
-        -i $DISPLAY \
+        -i "$DISPLAY" \
         -f v4l2 -thread_queue_size 512 \
         -video_size 320x240 \
         -framerate 30 \
@@ -282,8 +321,8 @@ overlay_jack() {
         -c:v hevc_vaapi -qp 24 \
         -strict -2 \
         "$HOME/videos/recording/overlay-$(date '+%y%m%d-%H%M-%S').mp4" &
-    echo $! >/tmp/recordingpid
-    updateicon "⏺️🎙️"
+    echo $! >/tmp/recording.pid
+    # updateicon "⏺️🎙️"
 }
 
 overlay_kms_jack() {
@@ -322,8 +361,8 @@ overlay_kms_jack() {
         -c:v hevc_vaapi -qp 24 \
         -strict -2 \
         "$HOME/videos/recording/overlay-$(date '+%y%m%d-%H%M-%S').mp4" &
-    echo $! >/tmp/recordingpid
-    updateicon "⏺️🎙️"
+    echo $! >/tmp/recording.pid
+    # updateicon "⏺️🎙️"
 }
 
 stream_youtube() {
@@ -342,8 +381,8 @@ stream_youtube() {
         -c:v hevc_vaapi -qp:v 24 \
         -profile:v high -rc:v cbr_ld_hq -level:v 4.2 -r:v 60 -g:v 120 -bf:v 0 -refs:v 16 \
         -f flv rtmp://a.rtmp.youtube.com/live2/"$youtube_stream_key" \
-        echo $! >/tmp/recordingpid
-    updateicon "⏺️🎙️"
+        echo $! >/tmp/recording.pid
+    # updateicon "⏺️🎙️"
 }
 
 stream_twitch() {
@@ -353,7 +392,7 @@ stream_twitch() {
         -f x11grab -thread_queue_size 512 \
         -video_size "$(xdpyinfo | grep dimensions | awk '{print $2;}')" \
         -framerate 60 \
-        -i $DISPLAY \
+        -i "$DISPLAY" \
         -f v4l2 -thread_queue_size 512 \
         -video_size 320x240 \
         -framerate 30 \
@@ -367,12 +406,12 @@ stream_twitch() {
         -c:v hevc_vaapi -qp:v 24 \
         -profile:v high -rc:v cbr_ld_hq -level:v 4.2 -r:v 60 -g:v 120 -bf:v 0 -refs:v 16 \
         -f flv rtmp://live.twitch.tv/app/"$twitch_stream_key" \
-        echo $! >/tmp/recordingpid
-    updateicon "⏺️🎙️"
+        echo $! >/tmp/recording.pid
+    # updateicon "⏺️🎙️"
 }
 
 askrecording() {
-    choice=$(printf "screencast\\noverlay\\nvideo\\nvideo selected\\naudio\\nwebcam\\nscreenshot" | dmenu -i -p "Select recording style:")
+    choice=$(printf "screencast\\noverlay\\nvideo\\nnvideo\\nvideo selected\\naudio\\nwebcam\\nscreenshot" | bemenu -i -p "Select recording style:")
     case "$choice" in
     screencast) screencast_jack ;;
     overlay) overlay_jack ;;
@@ -380,14 +419,15 @@ askrecording() {
     streamt) twitch ;;
     audio) audio_jack ;;
     video) video_kms ;;
-    *selected) overlay_jack ;;
+    nvideo) nvenc_video_kms ;;
+    *selected) nvenc_screencast_jack ;;
     webcam) webcam ;;
     screenshot) screenshot_kms ;;
     esac
 }
 
 asktoend() {
-    response=$(printf "No\\nYes" | dmenu -i -p "Recording still active. End recording?") &&
+    response=$(printf "No\\nYes" | bemenu -i -p "Recording still active. End recording?") &&
         [ "$response" = "Yes" ] && killrecording
 }
 
@@ -397,7 +437,8 @@ streamy) youtube ;;
 streamt) twitch ;;
 audio) audio_jack ;;
 video) video_kms ;;
+nvideo) nvenc_video_kms ;;
 *selected) overlay_jack ;;
 kill) killrecording ;;
-*) ([ -f /tmp/recordingpid ] && asktoend && exit) || askrecording ;;
+*) ([ -f /tmp/recording.pid ] && asktoend && exit) || askrecording ;;
 esac

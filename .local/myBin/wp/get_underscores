@@ -1,0 +1,21 @@
+#!/usr/bin/bash
+
+# Ask user for theme name with bemenu as interface
+THEME_NAME=$(echo "" | bemenu --prompt "Enter theme name: " --no-exec --line-height 55 --fn "JetBrainsMonoNerdFontMono 20" --tb "#15191c" --tf "#eb4d4b" --fb "#15191c" --ff "#d3c6aa" --nb "#15191c" --nf "#4b565c" --hb "#15191c" --hf "#d3c6aa" --fbb "#15191c" --fbf "#d3c6aa" --sb "#15191c" --sf "#d3c6aa" --ab "#15191c" --af "#4b565c" --bdr "#4b565c") &&
+    [[ -n $THEME_NAME ]] || exit
+
+# Get underscores and change names in files as per instructions in repo README w/fd & sed
+git clone https://github.com/Automattic/_s.git /tmp/"${THEME_NAME}" 2>/tmp/us_err && {
+    fd . --type f /tmp/"${THEME_NAME}"/ --exec sed -i "s/'_s'/'${THEME_NAME}'/" {}
+    fd . --type f --extension css /tmp/"${THEME_NAME}"/ --exec sed -i "s/Text Domain: _s/Text Domain: ${THEME_NAME}/" {}
+    fd . --type f /tmp/"${THEME_NAME}"/ --exec sed -i "s/ _s/ ${THEME_NAME}/" {}
+    fd . --type f /tmp/"${THEME_NAME}"/ --exec sed -i "s/_s-/${THEME_NAME}-/" {}
+    fd . --type f /tmp/"${THEME_NAME}"/ --exec sed -i "s/_S_/${THEME_NAME^^}/" {}
+    fd . --type f /tmp/"${THEME_NAME}"/ --exec sed -i "s/_s_/${THEME_NAME}_/" {}
+}
+
+# Zip file to import to WP
+cd /tmp || exit && zip -r "${THEME_NAME}.zip" "${THEME_NAME}" || exit
+
+# Return THEME_NAME to stdout
+echo "${THEME_NAME}"

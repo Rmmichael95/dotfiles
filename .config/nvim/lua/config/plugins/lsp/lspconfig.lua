@@ -6,7 +6,6 @@ return {
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
 		"folke/lazydev.nvim",
-		"nvimdev/lspsaga.nvim",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 	},
 	opts = function()
@@ -357,15 +356,6 @@ return {
 			end,
 		})
 
-		local saga = require("lspsaga")
-
-		saga.setup({
-			ui = {
-				winblend = 0,
-				border = "rounded",
-			},
-		})
-
 		local keymap = vim.keymap -- for conciseness
 
 		vim.api.nvim_create_autocmd("LspAttach", {
@@ -415,8 +405,7 @@ return {
 				keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
 
 				opts.desc = "Show documentation for what is under cursor"
-				-- keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
-				keymap.set("n", "K", "<Cmd>Lspsaga hover_doc<CR>", opts) -- show documentation for what is under cursor
+				keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
 
 				opts.desc = "Restart LSP"
 				keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
