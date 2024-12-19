@@ -1,0 +1,2 @@
+#!/bin/sh
+doas cat /tmp/bashisms-list | doas xargs -I {} sed -i '1s/sh/bash/' {}

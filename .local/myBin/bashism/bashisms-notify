@@ -1,3 +1,2 @@
 #/bin/sh
-
-cat /tmp/bashisms | rg bashism | awk '{print $4}' | awk '!seen[$0]++' | notify-send
+/usr/bin/notify-send $(wc -l /tmp/bashisms-list)

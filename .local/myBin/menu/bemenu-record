@@ -298,6 +298,97 @@ overlay_pulse() {
     # updateicon "⏺️🎙️"
 }
 
+nvenc_simple_kms_overlay_jack_tq() {
+    prime-run ffmpeg -probesize 42M \
+        -threads:v 2 -filter_threads 1 -filter_complex_threads 2 \
+        -device /dev/dri/card0 \
+        -hwaccel_device 0 -hwaccel cuda -hwaccel_output_format cuda \
+        -r 60 \
+        -f kmsgrab -thread_queue_size 1024 \
+        -i - \
+        -video_size 320x240 \
+        -r 30 \
+        -f v4l2 -thread_queue_size 1024 \
+        -i /dev/video0 \
+        -threads:a 1 \
+        -f jack -thread_queue_size 1024 \
+        -i ffmpeg \
+        -c:a libopus \
+        -ac 2 \
+        -ar 48000 \
+        -b:a 512k \
+        -af 'azmq=bind_address=tcp\://127.0.0.1\:1235,volume=1' -thread_queue_size 1024 \
+        -filter_complex '[0:v]hwdownload,format=bgr0[a];[a][1:v]overlay=x=1588:y=830' -thread_queue_size 1024 \
+        -c:v hevc_nvenc \
+        -b:v 5M -bufsize 6M \
+        -qp 24 -strict 2 \
+        -movflags +frag_keyframe+separate_moof+omit_tfhd_offset+empty_moov \
+        output.mp4
+}
+
+nvenc_kms_overlay_jack_tq() {
+    prime-run ffmpeg -probesize 42M \
+        -threads:v 1 \
+        -device /dev/dri/card0 \
+        -hwaccel_device 0 -hwaccel cuda -hwaccel_output_format cuda \
+        -r 60 \
+        -f kmsgrab -thread_queue_size 1024 \
+        -i - \
+        -threads:v 1 \
+        -video_size 320x240 \
+        -framerate 30 \
+        -f v4l2 -thread_queue_size 1024 \
+        -i /dev/video0 \
+        -threads:a 1 \
+        -f jack -thread_queue_size 1024 \
+        -i ffmpeg \
+        -filter_complex_threads 2 \
+        -filter_complex '[0:v]hwdownload,format=bgr0[a];[a][1:v]overlay=x=1588:y=830' -thread_queue_size 1024 \
+        -filter_threads 1 \
+        -af 'azmq=bind_address=tcp\\\://127.0.0.1\\\:1235,volume=1' -thread_queue_size 1024 \
+        -c:v hevc_nvenc \
+        -b:v 5M \
+        -bufsize 6M \
+        -c:a libopus \
+        -ac 2 \
+        -ar 48000 \
+        -b:a 512k \
+        -rc vbr -cq 24 -qmin 24 -qmax 24 \
+        -strict 2 \
+        -movflags +frag_keyframe+separate_moof+omit_tfhd_offset+empty_moov \
+        "$HOME/videos/recording/overlay-$(date '+%y%m%d-%H%M-%S').mp4" &
+    echo $! >/tmp/recording.pid
+}
+
+tmp_ol0() {
+    ffmpeg -probesize 42M \
+        -threads:v 1 -filter_threads 1 -filter_complex_threads 1 \
+        -device /dev/dri/card0 \
+        -framerate 60 \
+        -f kmsgrab -thread_queue_size 1024 \
+        -i - \
+        -vaapi_device /dev/dri/renderD128 \
+        -f v4l2 -thread_queue_size 1024 \
+        -framerate 30 \
+        -i /dev/video0 \
+        -filter_complex '[v:0]hwmap=derive_device=vaapi,scale_vaapi=w=1920:h=1080:format=nv12[a];[1:v]format=nv12|vaapi,hwupload,scale_vaapi=w=320:h=240:format=nv12[b];[a][b]overlay_vaapi=x=0:y=0:alpha=1.0' \
+        -c:v hevc_vaapi -qp 24 -strict -2 -movflags +frag_keyframe+separate_moof+omit_tfhd_offset+empty_moov test.mp4
+}
+
+tmp_ol1() {
+    ffmpeg \
+        -threads:v 1 -filter_threads 1 -filter_complex_threads 1 \
+        -device /dev/dri/card0 \
+        -framerate 60 \
+        -f kmsgrab -thread_queue_size 1024 \
+        -i - \
+        -f v4l2 -thread_queue_size 1024 \
+        -framerate 30 \
+        -i /dev/video0 \
+        -filter_complex '[0:v]hwmap=derive_device=vaapi,hwdownload,format=bgr0[a];[a][1:v]overlay=x=1588:y=830,format=bgr0' \
+        -c:v hevc_nvenc -qp 24 -strict -2 -movflags +frag_keyframe+separate_moof+omit_tfhd_offset+empty_moov test.mp4
+}
+
 overlay_jack() {
     ffmpeg -y \
         -threads:v 1 -threads:a 1 -filter_threads 1 -filter_complex_threads 1 \
@@ -328,22 +419,6 @@ overlay_jack() {
 overlay_kms_jack() {
     VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/amd_pro_icd64.json \
         ffmpeg \
-        -threads:v 1 -threads:a 1 -filter_threads 1 -filter_complex_threads 1 \
-        -device /dev/dri/card0 \
-        -framerate 60 \
-        -f kmsgrab -thread_queue_size 256 \
-        -i - \
-        -vaapi_device /dev/dri/renderD128 \
-        -f v4l2 \
-        -framerate 30 \
-        -i /dev/video0 \
-        -f jack -thread_queue_size 256 \
-        -i ffmpeg \
-        -c:a libopus -ac 2 -ar 48000 -b:a 512k \
-        -af 'azmq=bind_address=tcp\://127.0.0.1\:1235,volume=1' \
-        -filter_complex '[v:0]hwmap=derive_device=vaapi,scale_vaapi=w=1920:h=1080:format=nv12[a];[1:v]format=nv12|vaapi,hwupload,scale_vaapi=w=320:h=240:format=nv12[b];[a][b]overlay_vaapi=x=0:y=0:alpha=1.0' \
-        -c:v hevc_vaapi -qp 24 \
-        -strict -2ffmpeg \
         -threads:v 1 -threads:a 1 -filter_threads 1 -filter_complex_threads 1 \
         -device /dev/dri/card0 \
         -framerate 60 \
@@ -420,7 +495,7 @@ askrecording() {
     audio) audio_jack ;;
     video) video_kms ;;
     nvideo) nvenc_video_kms ;;
-    *selected) nvenc_screencast_jack ;;
+    *selected) nvenc_simple_kms_overlay_jack_tq ;;
     webcam) webcam ;;
     screenshot) screenshot_kms ;;
     esac

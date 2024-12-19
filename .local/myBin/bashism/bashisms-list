@@ -1,0 +1,2 @@
+#!/bin/sh
+rg bashism /tmp/bashisms | awk '{print $4}' | awk '!seen[$0]++' >/tmp/bashisms-list
