@@ -3,9 +3,38 @@ font-family = ""
 font-family = "Hack Nerd Font Mono"
 font-size = 18
 
+# If true, the bold text will use the bright color palette
+bold-is-bright = true
+
+# Disable window decorations
 window-decoration = false
 
+# Default: true; Ghostty GTK tabs will be "wide," Gnome style
+gtk-wide-tabs = true
+
+# Default: true; This requires a GTK4 desktop with a GTK4 theme
+gtk-adwaita = true
+
+# Default: true; applications running in the terminal can show desktop notifications using certain escape sequences
+desktop-notifications = true
+
+# Transparent background
 background-opacity = 0.8
 # background-blur-radius = 20
 
+# My color theme
 theme = catforest
+
+# Use the background and foreground colors specified in the Ghostty configuration
+window-theme = ghostty
+
+# Focus as in window manager
+focus-follows-mouse = true
+
+# Clipboard
+clipboard-write = allow
+clipboard-read = allow
+clipboard-trim-trailing-spaces = false
+
+# Set max limit for images 4GiB
+image-storage-limit = 4294967295
