@@ -5,7 +5,7 @@ THEME_NAME=$(echo "" | bemenu --prompt "Enter theme name: " --no-exec --line-hei
     [[ -n $THEME_NAME ]] || exit
 
 # Get underscores and change names in files as per instructions in repo README w/fd & sed
-git clone https://github.com/Automattic/_s.git /tmp/"${THEME_NAME}" 2>/tmp/us_err && {
+git clone https://github.com/Rmmichael95/Starter_Theme_WP.git /tmp/"${THEME_NAME}" 2>/tmp/us_err && {
     fd . --type f /tmp/"${THEME_NAME}"/ --exec sed -i "s/'_s'/'${THEME_NAME}'/" {}
     fd . --type f --extension css /tmp/"${THEME_NAME}"/ --exec sed -i "s/Text Domain: _s/Text Domain: ${THEME_NAME}/" {}
     fd . --type f /tmp/"${THEME_NAME}"/ --exec sed -i "s/ _s/ ${THEME_NAME}/" {}

@@ -1,0 +1,11 @@
+# Font
+font-family = ""
+font-family = "Hack Nerd Font Mono"
+font-size = 18
+
+window-decoration = false
+
+background-opacity = 0.8
+# background-blur-radius = 20
+
+theme = catforest
