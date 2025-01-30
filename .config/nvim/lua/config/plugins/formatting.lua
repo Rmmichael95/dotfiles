@@ -24,7 +24,8 @@ return {
 			formatters = {
 				phpcbf = {
 					-- command = vim.fn.stdpath("data") .. "/mason/bin/phpcbf",
-					command = "phpcbf",
+					--command = "phpcbf",
+					command = vim.fn.getcwd() .. "/vendor/bin/phpcbf",
 					args = { "-q", "--standard=WordPress", "--report-json", "$FILENAME" },
 				},
 			},

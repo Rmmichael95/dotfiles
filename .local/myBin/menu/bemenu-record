@@ -13,7 +13,7 @@
 #
 ###########################################################
 #                                                         #
-# MUST RUN : sudo setcap cap_sys_admin+ep /usr/bin/ffmpeg #
+# MUST RUN : doas setcap cap_sys_admin+ep /usr/bin/ffmpeg #
 #                                                         #
 ###########################################################
 

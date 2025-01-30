@@ -1,9 +1,7 @@
 return {
 	"windwp/nvim-autopairs",
 	event = { "InsertEnter" },
-	dependencies = {
-		"hrsh7th/nvim-cmp",
-	},
+	-- dependencies = { "saghen/blink.cmp" },
 	opts = {
 		check_ts = true, -- enable treesitter
 		ts_config = {
@@ -15,7 +13,6 @@ return {
 	config = function(_, opts)
 		-- import nvim-autopairs
 		require("nvim-autopairs").setup(opts)
-
-		require("cmp").event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
+		-- require("cmp").event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
 	end,
 }

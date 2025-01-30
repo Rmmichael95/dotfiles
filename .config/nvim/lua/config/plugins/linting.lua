@@ -19,7 +19,7 @@ return {
 		local phpcs = lint.linters.phpcs
 		-- phpcs.cmd = vim.fn.stdpath("data") .. "/mason/bin/phpcs"
 		phpcs.cmd = "phpcs"
-		phpcs.stdin = false
+		--phpcs.stdin = false
 		phpcs.args = {
 			"-q",
 			"--standard=WordPress",

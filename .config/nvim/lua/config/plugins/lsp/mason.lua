@@ -19,7 +19,6 @@ return {
 			"bash-language-server",
 			"intelephense",
 			"lua-language-server",
-			"tailwindcss-language-server",
 			"typescript-language-server",
 			"yaml-language-server",
 			"r-languageserver",

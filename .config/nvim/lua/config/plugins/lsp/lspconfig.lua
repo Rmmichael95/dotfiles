@@ -2,55 +2,41 @@ return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
-		"hrsh7th/cmp-nvim-lsp",
+		"saghen/blink.cmp",
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
 		"folke/lazydev.nvim",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 	},
-	opts = function()
-		---@class PluginLspOpts
-		local ret = {
-			-- options for vim.diagnostic.config()
-			---@type vim.diagnostic.Opts
-			diagnostics = {
-				underline = true,
-				update_in_insert = false,
-				virtual_text = {
-					spacing = 4,
-					source = "if_many",
-					prefix = "icons",
-					-- this will set set the prefix to a function that returns the diagnostics icon based on the severity
-					-- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
-					-- prefix = "icons",
-				},
-				severity_sort = true,
-				signs = {
-					text = {
-						[vim.diagnostic.severity.ERROR] = " ",
-						[vim.diagnostic.severity.WARN] = " ",
-						[vim.diagnostic.severity.HINT] = "󰠠 ",
-						[vim.diagnostic.severity.INFO] = " ",
-					},
+	opts = {
+		-- options for vim.diagnostic.config()
+		---@type vim.diagnostic.Opts
+		diagnostics = {
+			underline = true,
+			update_in_insert = false,
+			virtual_text = {
+				spacing = 4,
+				source = "if_many",
+				prefix = "icons",
+				-- this will set set the prefix to a function that returns the diagnostics icon based on the severity
+				-- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
+				-- prefix = "icons",
+			},
+			severity_sort = true,
+			signs = {
+				text = {
+					[vim.diagnostic.severity.ERROR] = " ",
+					[vim.diagnostic.severity.WARN] = " ",
+					[vim.diagnostic.severity.HINT] = "󰠠 ",
+					[vim.diagnostic.severity.INFO] = " ",
 				},
 			},
-			-- Enable lsp cursor word highlighting
-			document_highlight = {
-				enabled = true,
-			},
-			-- add any global capabilities here
-			capabilities = {
-				workspace = {
-					fileOperations = {
-						didRename = true,
-						willRename = true,
-					},
-				},
-			},
-		}
-		return ret
-	end,
-	---@param opts PluginLspOpts
+		},
+		-- Enable lsp cursor word highlighting
+		document_highlight = {
+			enabled = true,
+		},
+	},
 	config = function(_, opts)
 		-- diagnostics signs
 		if vim.fn.has("nvim-0.10.0") == 0 then
@@ -78,18 +64,11 @@ return {
 		vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
 		local lspconfig = require("lspconfig")
-		local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-		local has_blink, blink = pcall(require, "blink.cmp")
-		local capabilities = vim.tbl_deep_extend(
-			"force",
-			{},
-			vim.lsp.protocol.make_client_capabilities(),
-			has_cmp and cmp_nvim_lsp.default_capabilities() or {},
-			has_blink and blink.get_lsp_capabilities() or {},
-			opts.capabilities or {}
-		)
-
 		local mason_lspconfig = require("mason-lspconfig")
+		local capabilities = vim.lsp.protocol.make_client_capabilities()
+		capabilities.textDocument.completion.completionItem.snippetSupport = true
+		capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
+
 		mason_lspconfig.setup_handlers({
 			-- default handler for installed servers
 			function(server_name)
@@ -117,6 +96,12 @@ return {
 				lspconfig["graphql"].setup({
 					capabilities = capabilities,
 					filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
+				})
+			end,
+			["html"] = function()
+				lspconfig["html"].setup({
+					capabilities = capabilities,
+					filetypes = { "html", "templ", "php" },
 				})
 			end,
 			["emmet_ls"] = function()

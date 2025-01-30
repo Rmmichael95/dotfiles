@@ -13,7 +13,7 @@ window-decoration = false
 gtk-wide-tabs = true
 
 # Default: true; This requires a GTK4 desktop with a GTK4 theme
-gtk-adwaita = true
+gtk-adwaita = false
 
 # Default: true; applications running in the terminal can show desktop notifications using certain escape sequences
 desktop-notifications = true

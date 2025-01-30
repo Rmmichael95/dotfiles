@@ -48,7 +48,7 @@ doas-askpass bash -c "echo '127.0.0.1 ${THEME_NAME}.dvl.to #${THEME_NAME}' >>/et
 && wp core install --url=https://${THEME_NAME}.dvl.to --title=${THEME_NAME} --admin_user=rmmichael95 --admin_password=${ADMIN_PASS} --admin_email=ryanmsul@protonmail.com --path=/shared/httpd/${THEME_NAME}/htdocs \
 && wp theme install /shared/httpd/${THEME_NAME}.zip --activate --path=/shared/httpd/${THEME_NAME}/htdocs \
 && cd /shared/httpd/${THEME_NAME}/htdocs/wp-content/themes/${THEME_NAME} || exit \
-&& composer global require php-stubs/wordpress-globals php-stubs/wordpress-stubs php-stubs/woocommerce-stubs php-stubs/acf-pro-stubs wpsyntex/polylang-stubs php-stubs/genesis-stubs php-stubs/wp-cli-stubs)"
+&& composer install)"
 
 rm -rf "${XDG_DATA_HOME}/dvlbx/data/www/theme" "${XDG_DATA_HOME}/dvlbx/data/www/pass" "${XDG_DATA_HOME}/dvlbx/data/www/${THEME_NAME}.zip"
 

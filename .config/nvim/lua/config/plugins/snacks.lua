@@ -69,6 +69,25 @@ return {
 			notifier = {
 				enabled = true,
 				timeout = 3000,
+				border = "rounded",
+				width = { min = 40, max = 0.4 },
+				height = { min = 1, max = 0.6 },
+				-- editor margin to keep free. tabline and statusline are taken into account automatically
+				margin = { top = 0, right = 1, bottom = 0 },
+				padding = true, -- add 1 cell of left/right padding to the notification window
+				sort = { "level", "added" }, -- sort by level and time
+				-- minimum log level to display. TRACE is the lowest
+				-- all notifications are stored in history
+				level = vim.log.levels.TRACE,
+				minimal = false,
+				title = " Notification History ",
+				title_pos = "center",
+				ft = "markdown",
+				style = "fancy",
+				top_down = true, -- place notifications from bottom to top
+				bo = { filetype = "snacks_notif_history", modifiable = false },
+				wo = { winhighlight = "Normal:SnacksNotifierHistory" },
+				keys = { q = "close" },
 			},
 			quickfile = { enabled = true },
 			lazygit = { enabled = true },

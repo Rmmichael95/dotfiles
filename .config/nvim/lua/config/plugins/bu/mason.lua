@@ -38,12 +38,13 @@ return {
 				"clangd",
 				"css-lsp",
 				"html-lsp",
+				"json-lsp",
+				"eslint_d",
 				"phpactor",
 				"svelte-language-server",
 				"bash-language-server",
 				"intelephense",
 				"lua-language-server",
-				"tailwindcss-language-server",
 				"typescript-language-server",
 				"yaml-language-server",
 				"r-languageserver",
@@ -68,7 +69,6 @@ return {
 				"cpplint",
 				"phpcs",
 				"pylint",
-				"eslint_d",
 			},
 			-- doing lazy loading.
 			integrations = {

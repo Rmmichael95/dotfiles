@@ -230,7 +230,7 @@ eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 
 # eval "$(rbenv init -)"
-# source /usr/share/nvm/init-nvm.sh
+source /usr/share/nvm/init-nvm.sh
 
 # yazi wrapper, exit to cwd
 function y() {
@@ -243,3 +243,5 @@ function y() {
 }
 
 fastfetch
+
+gpg-connect-agent updatestartuptty /bye >/dev/null

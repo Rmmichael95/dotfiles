@@ -1,7 +1,7 @@
 return {
 	"danymat/neogen",
 	keys = {
-		{ "<Leader>nf", "<Cmd>lua require('neogen').generate()<CR>", desc = "Toggle Pin" },
+		{ "<Leader>ng", "<Cmd>lua require('neogen').generate()<CR>", desc = "Toggle Pin" },
 	},
 	opts = {
 		languages = {
