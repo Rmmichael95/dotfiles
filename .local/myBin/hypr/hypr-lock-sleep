@@ -1,3 +1,0 @@
-#!/usr/bin/env sh
-
-hypr-lock && sleep 5 && doas zzz

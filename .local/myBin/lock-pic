@@ -1,7 +1,0 @@
-#!/bin/sh
-
-if [ -f "~/pictures/lock" ]; then
-    rm ~/pictures/lock
-fi
-
-grim ~/pictures/pre-lock || exit && magick ~/pictures/pre-lock -swirl 333 ~/pictures/lock

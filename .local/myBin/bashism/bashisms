@@ -1,4 +1,0 @@
-#!/bin/bash
-
-IFS=:
-fd . $PATH -t f --print0 | xargs -0 gawk '/^#!.*( |[/])sh/{printf "%s\0", FILENAME} {nextfile}' | xargs -0 checkbashisms >/tmp/bashisms 2>&1

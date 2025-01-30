@@ -1,3 +1,0 @@
-#!/usr/bin/env sh
-# trim all filesystems in fstab which support it
-/sbin/fstrim --fstab || true

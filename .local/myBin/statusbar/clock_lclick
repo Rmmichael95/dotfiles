@@ -1,2 +1,0 @@
-#!/bin/env sh
-setsid -f "$TERMINAL" -e calcurse

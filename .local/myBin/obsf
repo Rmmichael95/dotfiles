@@ -1,3 +1,0 @@
-#!/usr/bin/sh
-
-flatpak run com.obsproject.Studio

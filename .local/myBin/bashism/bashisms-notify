@@ -1,2 +1,0 @@
-#/bin/sh
-/usr/bin/notify-send $(wc -l /tmp/bashisms-list)

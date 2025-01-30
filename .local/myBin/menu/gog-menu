@@ -1,7 +1,0 @@
-#!/usr/bin/env sh
-
-CHOICE="$(ls $XDG_DATA_HOME/GOG/ | bemenu --prompt ">" --ignorecase --line-height 55 --counter "always" --fn "JetBrainsMonoNerdFontMono 20" --tb "#15191c" --tf "#eb4d4b" --fb "#15191c" --ff "#d3c6aa" --nb "#15191c" --nf "#4b565c" --hb "#15191c" --hf "#d3c6aa" --fbb "#15191c" --fbf "#d3c6aa" --sb "#15191c" --sf "#d3c6aa" --ab "#15191c" --af "#4b565c" --bdr "#4b565c")"
-
-$(fd $XDG_DATA_HOME/GOG/ CHOICE)
-
-prime-run $XDG_DATA_HOME/GOG/$(fd $XDG_DATA_HOME/GOG/ CHOICE)/start.sh

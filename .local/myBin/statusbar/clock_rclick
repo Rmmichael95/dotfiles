@@ -1,2 +1,0 @@
-#!/bin/env sh
-notify-send "This Month" "$(cal --color=always | sed "s/..7m/<b><span color=\"red\">/;s/..27m/<\/span><\/b>/")" && notify-send "Appointments" "$(calcurse -d3)" ;
