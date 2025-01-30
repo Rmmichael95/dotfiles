@@ -1,3 +1,6 @@
 [submodule ".config/nvim"]
 	path = .config/nvim
 	url = git@github.com:Rmmichael95/nvim.git
+[submodule ".local/myBin"]
+	path = .local/myBin
+	url = git@github.com:Rmmichael95/myBin.git
