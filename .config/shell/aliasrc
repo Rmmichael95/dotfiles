@@ -6,6 +6,8 @@
 # [ -f "$MBSYNCRC" ] && alias mbsync="mbsync -c $MBSYNCRC"
 alias mbsync='mbsync -c "$XDG_CONFIG_HOME"/isync/mbsyncrc'
 
+alias cl='clear'
+
 #sudo not required for some system commands
 # for command in mount umount sv pacman updatedb su shutdown poweroff reboot; do
 #   alias $command="sudo $command"

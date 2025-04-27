@@ -229,7 +229,10 @@ zle -N zle-line-init
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 
+# source rbenv
 # eval "$(rbenv init -)"
+
+# source nvm
 source /usr/share/nvm/init-nvm.sh
 
 # yazi wrapper, exit to cwd

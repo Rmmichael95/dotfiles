@@ -2,6 +2,7 @@
 
 # Add all directories in `~/.local/bin` to $PATH
 export PATH="$PATH:$(fd --type d . $HOME/.local/bin/myBin/ | paste -sd ':' -)"
+export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
 
 # MANPATH
 export MANPATH="$MANPATH:/usr/local/man:"
