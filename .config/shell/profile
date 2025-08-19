@@ -44,7 +44,7 @@ export WINEFSYNC=1
 export NOTES_DIR="$HOME"/documents/batcave/notes
 export MAILSYNC_MUTE=1
 export WINEFSYNC=1
-
+#export WAYLAND_DISPLAY=wayland-0
 # Other XDG paths
 # export XDG_DATA_HOME=${XDG_DATA_HOME:="$HOME/.local/share"}
 # export XDG_CACHE_HOME=${XDG_CACHE_HOME:="$HOME/.local/cache"}
@@ -61,7 +61,7 @@ export XDG_STATE_HOME="$HOME/.local/state"
 #startx
 # export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 #sx
-export XAUTHORITY="$XDG_DATA_HOME"/sx/xauthority
+# export XAUTHORITY="$XDG_DATA_HOME"/sx/xauthority
 export XINITRC="$XDG_CONFIG_HOME"/x11/xinitrc
 export XSERVERRC="$XDG_CONFIG_HOME"/x11/xserverrc
 export MAKEPKG_CONF="$XDG_CONFIG_HOME"/pacman/makepkg.conf
@@ -121,12 +121,15 @@ export QT_QPA_PLATFORMTHEME=gtk2 # Have QT use gtk2 theme.
 export CHROME_PATH='/usr/bin/brave'
 export NIXPKGS_ALLOW_UNFREE=1
 export LIBSEAT_BACKEND='logind'
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
-export FZF_DEFAULT_OPTS='--layout=reverse --height 40%'
+#export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
+export FZF_DEFAULT_COMMAND='fd --type file --hidden --no-ignore'
+export FZF_DEFAULT_OPTS="--layout=reverse --height 40% --preview 'bat --color=always {}'"
 # Using highlight (http://www.andre-simon.de/doku/highlight/en/highlight.html)
 export FZF_CTRL_T_OPTS="--select-1 --exit-0 --preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+
+export VALET_CONFIG_PATH="$HOME"/.config/valet
 
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 export NVM_DIR="$XDG_DATA_HOME"/nvm

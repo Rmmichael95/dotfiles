@@ -165,6 +165,11 @@ alias scron='su -c "fcrontab -e"'
 alias yz="yazi"
 alias ff='fastfetch'
 
+alias \
+    dls='fd -d 1 -t f --hidden . $HOME/documents/.bc/batcave/dotfiles/ | fzf' \
+    cls='fd -t f --hidden . $HOME/documents/.bc/batcave/dotfiles/.config/ | fzf' \
+    sls='fd -t f . $HOME/documents/.bc/batcave/dotfiles/.local/myBin/ | fzf'
+
 #alias upda="doas reflector --verbose --threads 8 --country 'US,CA' --protocol https --sort rate --save /etc/pacman.d/mirrorlist-arch && doas pacman -Syu"
 # Dinit
 #alias poweroff='dinitctl shutdown && doas-askpass poweroff'
