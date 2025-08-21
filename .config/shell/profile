@@ -143,5 +143,6 @@ export RBENV_ROOT="$XDG_DATA_HOME"/rbenv
 
 # Switch escape and caps if tty and no passwd required:
 # sudo -n loadkeys "$XDG_DATA_HOME/ttymaps.kmap" 2>/dev/null
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+# export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+export SSH_AUTH_SOCK=~/.1password/agent.sock
 gpgconf --launch gpg-agent

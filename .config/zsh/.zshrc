@@ -254,3 +254,5 @@ function y() {
 fastfetch
 
 gpg-connect-agent updatestartuptty /bye >/dev/null
+
+eval "$(op completion zsh)"; compdef _op op

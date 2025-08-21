@@ -154,6 +154,7 @@ alias \
     YT='youtube-viewer' \
     sdn='shutdown -h now' \
     e='$EDITOR' \
+    dls='fd -d 1 -t f --hidden . $HOME/documents/.bc/batcave/dotfiles/ | fzf' \
     v='$EDITOR' \
     p='pacman' \
     za='zathura'
@@ -166,9 +167,11 @@ alias yz="yazi"
 alias ff='fastfetch'
 
 alias \
-    dls='fd -d 1 -t f --hidden . $HOME/documents/.bc/batcave/dotfiles/ | fzf' \
-    cls='fd -t f --hidden . $HOME/documents/.bc/batcave/dotfiles/.config/ | fzf' \
-    sls='fd -t f . $HOME/documents/.bc/batcave/dotfiles/.local/myBin/ | fzf'
+    dls='fd -d 1 -t f --hidden . ~/documents/.bc/batcave/dotfiles/ | fzf | xargs -I{} nvim {}' \
+    cls='fd -t f --hidden . ~/documents/.bc/batcave/dotfiles/.config/ | fzf | xargs -I{} nvim {}' \
+    sls='fd -t f . ~/documents/.bc/batcave/dotfiles/.local/myBin/ | fzf | xargs -I{} nvim {}' \
+    wpt='fd -d 1 -t d . ~/Local\ Sites/**/app/public/wp-content/themes/ | fzf | xargs -I{} z {}' \
+    rsd='systemctl --no-legend --type=service --state=running | fzf | awk "{print $1}" | xargs sudo systemctl restart'
 
 #alias upda="doas reflector --verbose --threads 8 --country 'US,CA' --protocol https --sort rate --save /etc/pacman.d/mirrorlist-arch && doas pacman -Syu"
 # Dinit
