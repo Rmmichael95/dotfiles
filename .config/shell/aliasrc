@@ -1,48 +1,153 @@
 #!/bin/env sh
 
+# uutils as coreutils for user session
+# ls='uu-ls' \ # alias to exa
+alias \
+    arch='uu-arch' \
+    base32='uu-base32' \
+    base64='uu-base64' \
+    basename='uu-basename' \
+    basenc='uu-basenc' \
+    cat='uu-cat' \
+    chcon='uu-chcon' \
+    chgrp='uu-chgrp' \
+    chmod='uu-chmod' \
+    chown='uu-chown' \
+    chroot='uu-chroot' \
+    cksum='uu-cksum' \
+    comm='uu-comm' \
+    cp='uu-cp' \
+    csplit='uu-csplit' \
+    cut='uu-cut' \
+    date='uu-date' \
+    dd='uu-dd' \
+    df='uu-df' \
+    dir='uu-dir' \
+    dircolors='uu-dircolors' \
+    dirname='uu-dirname' \
+    du='uu-du' \
+    echo='uu-echo' \
+    env='uu-env' \
+    expand='uu-expand' \
+    expr='uu-expr' \
+    factor='uu-factor' \
+    false='uu-false' \
+    fmt='uu-fmt' \
+    fold='uu-fold' \
+    groups='uu-groups' \
+    hashsum='uu-hashsum' \
+    head='uu-head' \
+    hostid='uu-hostid' \
+    hostname='uu-hostname' \
+    id='uu-id' \
+    install='uu-install' \
+    join='uu-join' \
+    kill='uu-kill' \
+    link='uu-link' \
+    ln='uu-ln' \
+    logname='uu-logname' \
+    mkdir='uu-mkdir' \
+    mkfifo='uu-fifo' \
+    mknod='uu-mknod' \
+    mktemp='uu-mktemp' \
+    more='uu-more' \
+    mv='uu-mv' \
+    nice='uu-nice' \
+    nl='uu-nl' \
+    nohup='uu-nohup' \
+    nproc='uu-nproc' \
+    numfmt='uu-numfmt' \
+    od='uu-od' \
+    paste='uu-paste' \
+    pathchk='uu-pathchk' \
+    pinky='uu-pinky' \
+    pr='uu-pr' \
+    printenv='uu-printenv' \
+    printf='uu-printf' \
+    ptx='uu-ptx' \
+    pwd='uu-pwd' \
+    readlink='uu-readlink' \
+    realpath='uu-realpath' \
+    rm='uu-rm' \
+    rmdir='uu-rmdir' \
+    runcon='uu-runcon' \
+    seq='uu-seq' \
+    shred='uu-shred' \
+    shuf='uu-shuf' \
+    sleep='uu-sleep' \
+    sort='uu-sort' \
+    split='uu-split' \
+    stat='uu=stat' \
+    stdbuf='uu-stdbuf' \
+    stty='uu-stty' \
+    sum='uu-sum' \
+    sync='uu-sync' \
+    tac='uu-tac' \
+    tail='uu-tail' \
+    tee='uu-tee' \
+    test='uu-test' \
+    timeout='uu-timeout' \
+    touch='uu-touch' \
+    tr='uu-tr' \
+    true='uu-true' \
+    truncate='uu-truncate' \
+    tsort='uu-tsort' \
+    tty='uu-tty' \
+    uname='uu-uname' \
+    unexpand='uu-unexpand' \
+    uniq='uu-uniq' \
+    unlink='uu-unlink' \
+    uptime='uu-uptime' \
+    users='uu-users' \
+    vdir='uu-vdir' \
+    wc='uu-wc' \
+    who='uu-who' \
+    whoami='uu-whoami' \
+    yes='uu-yes'
+
+alias sudo='sudo-rs'
+
 # Use neovim for vim if present
 [ -x "$(command -v nvim)" ] && alias vim=nvim vimdiff="nvim -d"
 
 # [ -f "$MBSYNCRC" ] && alias mbsync="mbsync -c $MBSYNCRC"
 alias mbsync='mbsync -c "$XDG_CONFIG_HOME"/isync/mbsyncrc'
 
-alias cl='clear'
-
 #sudo not required for some system commands
-# for command in mount umount sv pacman updatedb su shutdown poweroff reboot; do
-#   alias $command="sudo $command"
-# done
+for command in mount umount sv pacman updatedb su shutdown poweroff reboot; do
+    alias $command="sudo-rs $command"
+done
 
 # Arch
 alias \
-    orphaned='sudo pacman -Rns $(pacman -Qtdq)' \
-    fixpac='sudo rm /var/lib/pacman/db.lck' \
-    upd="sudo reflector --verbose --threads 8 --country 'US,CA' --protocol https --sort rate --save /etc/pacman.d/mirrorlist && doas pacman -Syu"
+    orphaned='sudo-rs pacman -Rns $(pacman -Qtdq)' \
+    fixpac='sudo uu-rm /var/lib/pacman/db.lck' \
+    upd="sudo-rs reflector --verbose --threads 8 --country 'US,CA' --protocol https --sort rate --save /etc/pacman.d/mirrorlist && doas pacman -Syu"
 
 # Pacman - https://wiki.archlinux.org/index.php/Pacman_Tips
 alias \
-    pacupg='sudo pacman -Syu' \
-    pacins='sudo pacman -S' \
-    pacout='sudo pacman -R' \
-    pacin='sudo pacman -U' \
-    pacupg='sudo pacman -Syu' \
-    paclean='sudo pacman -Sc' \
-    paclr='sudo pacman -Scc' \
-    pacre='sudo pacman -R' \
-    pacrem='sudo pacman -Rns' \
-    pacrep='pacman -Si' \
-    pacreps='pacman -Ss' \
+    pacupg='sudo-rs pacman -Syu' \
+    pacins='sudo-rs pacman -S' \
+    pacout='sudo-rs pacman -R' \
+    pacin='sudo-rs pacman -U' \
+    pacupg='sudo-rs pacman -Syu' \
+    paclean='sudo-rs pacman -Sc' \
+    paclr='sudo-rs pacman -Scc' \
+    pacre='sudo-rs pacman -R' \
+    pacrem='sudo-rs pacman -Rns' \
+    pacrep='sudo-rs pacman -Si' \
+    pacreps='sudo-rs pacman -Ss' \
     pacloc='pacman -Qi' \
     paclocs='pacman -Qs' \
-    pacinsd='sudo pacman -S --asdeps' \
-    pacmir='sudo pacman -Syy' \
-    paclsorphans='sudo pacman -Qdt' \
-    pacrmorphans='sudo pacman -Rs $(pacman -Qtdq)' \
-    pacfileupg='sudo pacman -Fy' \
-    pacfiles='pacman -F' \
+    pacinsd='sudo-rs pacman -S --asdeps' \
+    pacmir='sudo-rs pacman -Syy' \
+    paclsorphans='pacman -Qdt' \
+    pacrmorphans='sudo-rs pacman -Rs $(pacman -Qtdq)' \
+    pacfileupg='sudo-rs pacman -Fy' \
+    pacfiles='sudo-rs pacman -F' \
     pacls='pacman -Ql' \
     pacown='pacman -Qo' \
-    pacupd='sudo pacman -Sy'
+    pacupd='sudo-rs pacman -Sy'
 
 # Paru
 alias \
@@ -78,22 +183,23 @@ alias \
 
 # Verbosity and settings that you pretty much just always are going to want.
 alias \
-    ..='cd ..' \
-    ...='cd ../..' \
-    ....='cd ../../..' \
-    .....='cd ../../../..' \
-    ......='cd ../../../../..' \
-    cp='cp -iv' \
-    mv='mv -iv' \
-    rm='rm -vI' \
+    ..='z ..' \
+    ...='z ../..' \
+    ....='z ../../..' \
+    .....='z ../../../..' \
+    ......='z ../../../../..' \
+    cd='z' \
+    cp='uu-cp -iv' \
+    mv='uu-mv -iv' \
+    rm='uu-rm -vI' \
     bc='bc -ql' \
     rsync='rsync -vrPlu' \
-    mkd='mkdir -pv' \
+    mkd='uu-mkdir -pv' \
     yt='yt-dlp --embed-metadata -i' \
     yta='yt -x -f bestaudio/best' \
     ytt='yt --skip-download --write-thumbnail' \
     ffmpeg='ffmpeg -hide_banner' \
-    dir='dir --color=auto' \
+    dir='uu-dir --color=auto' \
     vdir='vdir --color=auto' \
     path='echo -e ${PATH//:/\\n}' \
     ugtar='tar -zxvf ' \
@@ -101,17 +207,17 @@ alias \
     wget='wget -c '
 
 # head / tail shortcuts
-# alias \
-#     -g H='| head' \
-#     -g T='| tail' \
-#     -g G='| grep' \
-#     -g L="| less" \
-#     -g M="| most" \
-#     -g LL="2>&1 | less" \
-#     -g CA="2>&1 | cat -A" \
-#     -g NE="2> /dev/null" \
-#     -g NUL="> /dev/null 2>&1" \
-#     -g P="2>&1| pygmentize -l pytb"
+alias \
+    -g H='| uu-head' \
+    -g T='| uu-tail' \
+    -g G='| grep' \
+    -g L="| less" \
+    -g M="| most" \
+    -g LL="2>&1 | less" \
+    -g CA="2>&1 | cat -A" \
+    -g NE="2> /dev/null" \
+    -g NUL="> /dev/null 2>&1" \
+    -g P="2>&1| pygmentize -l pytb"
 
 alias \
     h='history' \
@@ -126,25 +232,22 @@ alias \
 #sorted by date,recursive,show type,human readable
 #long list,sorted by date,show type,human readable
 #Recursive list of files and directories
-
-#
-#
 #
 #A column contains name of files and directories
 #long list
 alias \
-    l='eza --icons auto' \
-    ls='eza -lhF auto' \
-    la='eza -lAhF auto' \
-    lr='eza -tRhF' \
-    lt='eza -lthF' \
-    ll='eza -l' \
-    ldot='eza -ld .*' \
-    lS='eza -1SshF' \
-    lart='eza -1cartF' \
-    lrt='eza -1crtF' \
-    lsr='eza -lARhF auto' \
-    lsn='eza -1'
+    l='eza --group-directories-first auto' \
+    ls='eza --group-directories-first -lhF auto' \
+    la='eza --group-directories-first -lAhF auto' \
+    lr='eza --group-directories-first -tRhF' \
+    lt='eza --group-directories-first -lthF' \
+    ll='eza --group-directories-first -l' \
+    ldot='eza --group-directories-first -ld .*' \
+    lS='eza --group-directories-first -1SshF' \
+    lart='eza --group-directories-first -1cartF' \
+    lrt='eza --group-directories-first -1crtF' \
+    lsr='eza --group-directories-first -lARhF auto' \
+    lsn='eza --group-directories-first -1'
 
 # These common commands are just too long! Abbreviate them.
 alias \
@@ -165,6 +268,7 @@ alias gzip='pigz'
 alias scron='su -c "fcrontab -e"'
 alias yz="yazi"
 alias ff='fastfetch'
+alias cl='clear'
 
 alias \
     dls='fd -d 1 -t f --hidden . ~/documents/.bc/batcave/dotfiles/ | fzf | xargs -I{} nvim {}' \

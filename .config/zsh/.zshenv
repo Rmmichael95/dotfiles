@@ -6,3 +6,4 @@ path+=("$HOME/.local/bin/" "$HOME/.local/bin/myBin/" "$HOME/.local/share/npm/bin
 export PATH
 
 source $HOME/.config/shell/profile
+source $HOME/.config/keys

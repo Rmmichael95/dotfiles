@@ -1,15 +1,15 @@
 set selection-clipboard clipboard
 
-set recolor true
+set recolor false
 set recolor-darkcolor "#d3c6aa"
-set default-lightcolor '#15191c'
+set recolor-lightcolor '#15191c'
 
 map D set "first-page-column 1:1"
 map <C-d> set "first-page-column 1:2"
 
-tabbed -c zathura -e
-
-set sandbox none
+# tabbed -c zathura -e
+set synctex-editor-command ""
+# set sandbox none
 set statusbar-h-padding 0
 set statusbar-v-padding 0
 set page-padding 1

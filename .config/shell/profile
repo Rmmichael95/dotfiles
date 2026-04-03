@@ -128,6 +128,18 @@ export FZF_DEFAULT_OPTS="--layout=reverse --height 40% --preview 'bat --color=al
 export FZF_CTRL_T_OPTS="--select-1 --exit-0 --preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+# perl
+# PATH="$XDG_DATA_HOME/perl5/bin${PATH:+:${PATH}}"; export PATH;
+# PERL5LIB="$XDG_DATA_HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+# PERL_LOCAL_LIB_ROOT="$XDG_DATA_HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+# PERL_MB_OPT="--install_base \"$XDG_DATA_HOME/perl5\""; export PERL_MB_OPT;
+# PERL_MM_OPT="INSTALL_BASE=$XDG_DATA_HOME/perl5"; export PERL_MM_OPT;
+
+export PATH="$XDG_DATA_HOME/perl5/bin${PATH:+:${PATH}}"
+export PERL5LIB="$XDG_DATA_HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
+export PERL_LOCAL_LIB_ROOT="$XDG_DATA_HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
+export PERL_MB_OPT="--install_base \"$XDG_DATA_HOME/perl5\""
+export PERL_MM_OPT="INSTALL_BASE=$XDG_DATA_HOME/perl5"
 
 export VALET_CONFIG_PATH="$HOME"/.config/valet
 
@@ -145,4 +157,3 @@ export RBENV_ROOT="$XDG_DATA_HOME"/rbenv
 # sudo -n loadkeys "$XDG_DATA_HOME/ttymaps.kmap" 2>/dev/null
 # export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 export SSH_AUTH_SOCK=~/.1password/agent.sock
-gpgconf --launch gpg-agent
