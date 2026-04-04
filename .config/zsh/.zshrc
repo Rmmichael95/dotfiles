@@ -23,6 +23,11 @@ fpath=(
 
 # --- 2. COMPLETION ENGINE ---
 autoload -Uz compinit
+if [[ -n ${XDG_CACHE_HOME}/zsh/zcompdump(#qN.mh+24) ]]; then
+  compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
+else
+  compinit -C -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
+fi
 
 # Ensure the cache directory exists to prevent silent initialization failure
 mkdir -p "$XDG_CACHE_HOME/zsh"
@@ -42,6 +47,9 @@ zstyle ':completion:*' rehash true
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/zcompcache"
+
+# Map sudo-rs to use standard sudo completion logic
+compdef _sudo sudo-rs
 
 # Hidden files in autocomplete
 _comp_options+=(globdots)
@@ -70,7 +78,7 @@ function zle-keymap-select {
 zle -N zle-keymap-select
 
 zle-line-init() {
-  zle -K viins 
+  zle -K viins
   echo -ne "\e[5 q"
 }
 zle -N zle-line-init
