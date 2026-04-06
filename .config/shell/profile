@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 # Base PATH
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/ccache/bin:$PATH"
@@ -6,54 +6,60 @@ export PATH="$HOME/.local/bin:$HOME/.local/bin/myBin:$HOME/.local/share/npm/bin:
 
 # Add all directories in `~/.local/bin` to $PATH
 export PATH="$PATH:$(fd --type d . $HOME/.local/bin/myBin/ | paste -sd ':' -)"
-export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
+export PATH="$PATH:$(go env GOBIN 2>/dev/null):$(go env GOPATH 2>/dev/null)/bin"
 
 # --- 1. XDG BASE DIRECTORY SPECIFICATION ---
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.local/cache"
-export XDG_STATE_HOME="$HOME/.local/state"
-export XDG_RUNTIME_DIR="/run/user/$UID"
+export XDG_STATE_HOME="$HOME/.local/state" # (analogous to /var/lib) specifically for logs, history files, and recently used data
+export XDG_RUNTIME_DIR="/run/user/$(id -u)"
 
 # --- 2. XDG COMPLIANT TOOLCHAIN & APP PATHS ---
 # Security
-export GNUPGHOME="$XDG_DATA_HOME/gnupg"
-export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
+export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/password-store
 export SSH_AUTH_SOCK="$HOME/.1password/agent.sock"
 
 # Toolchains (Go, Rust, Node, Python, Perl, Java)
-export GOPATH="$XDG_DATA_HOME/go"
-export GOMODCACHE="$XDG_CACHE_HOME/go/mod"
-export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
-export CARGO_HOME="$XDG_DATA_HOME/cargo"
-export NVM_DIR="$XDG_DATA_HOME/nvm"
+export DOTNET_CLI_HOME="$XDG_DATA_HOME"/dotnet
+export OMNISHARPHOME="$XDG_CONFIG_HOME"/omnisharp
+export GOPATH="$XDG_DATA_HOME"/go
+export GOMODCACHE="$XDG_CACHE_HOME"/go/mod
+export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
+export CARGO_HOME="$XDG_DATA_HOME"/cargo
+export NVM_DIR="$XDG_DATA_HOME"/nvm
+export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
-export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
-export PYTHONHISTFILE="$XDG_STATE_HOME/python/history"
-export PERL_LOCAL_LIB_ROOT="$XDG_DATA_HOME/perl5"
+export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc
+export PYTHONHISTFILE="$XDG_STATE_HOME"/python/history
+export PERL_LOCAL_LIB_ROOT="$XDG_DATA_HOME"/perl5
 export PERL_MB_OPT="--install_base \"$XDG_DATA_HOME/perl5\""
 export PERL_MM_OPT="INSTALL_BASE=$XDG_DATA_HOME/perl5"
-export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
+export JULIA_DEPOT_PATH="$XDG_DATA_HOME/julia:$JULIA_DEPOT_PATH"
+export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=\"$XDG_CONFIG_HOME/java\""
 
 # System Utilities & Logging
 export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/ripgreprc"
 export ANSIBLE_CONFIG="$XDG_CONFIG_HOME/ansible/ansible.cfg"
-export SQLITE_HISTORY="$XDG_DATA_HOME/sqlite_history"
-export GDBHISTFILE="$XDG_DATA_HOME/gdb/history"
+export SQLITE_HISTORY="$XDG_STATE_HOME/sqlite_history"
+export MYSQL_HISTFILE="$XDG_STATE_HOME"/mysql_history
+export GDBHISTFILE="$XDG_STATE_HOME/gdb/history"
 export UNISON="$XDG_DATA_HOME/unison"
 export HISTFILE="$XDG_STATE_HOME/zsh/history"
 export LESSHISTFILE="-"
 export INPUTRC="$XDG_CONFIG_HOME/shell/inputrc"
 
 # Media & Specific Apps
+export NUGET_PACKAGES="$XDG_CACHE_HOME"/NuGetPackages
 export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
-export KODI_DATA="$XDG_DATA_HOME/kodi"
+export KODI_DATA_DIR="$XDG_DATA_HOME/kodi"
 export ELECTRUMDIR="$XDG_DATA_HOME/electrum"
 export TEXMFVAR="$XDG_CACHE_HOME/texlive/texmf-var"
 export TEXMFCONFIG="$XDG_CONFIG_HOME/texlive/texmf-config"
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv"
-export ANDROID_SDK_HOME="$XDG_CONFIG_HOME/android"
+export ANDROID_USER_HOME="$XDG_DATA_HOME/android"
 export MBSYNCRC="$XDG_CONFIG_HOME/mbsync/config"
 export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch-config"
 export NOTES_DIR="$HOME/documents/batcave/notes"
@@ -61,7 +67,7 @@ export NOTES_DIR="$HOME/documents/batcave/notes"
 # GUI / X11 Fallbacks
 export XINITRC="$XDG_CONFIG_HOME/x11/xinitrc"
 export XSERVERRC="$XDG_CONFIG_HOME/x11/xserverrc"
-export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0"
+export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 export XCURSOR_PATH="$XDG_DATA_HOME/icons"
 export XDG_DATA_DIRS="$HOME/.nix-profile/share:$XDG_DATA_DIRS"
 
@@ -86,7 +92,7 @@ export COLORTERM='truecolor'
 export OPENER='xdg-open'
 
 # --- 4. BEHAVIOR & THEME ---
-export GPG_TTY=$(tty)
+export GPG_TTY="$(tty)"
 export QT_QPA_PLATFORMTHEME='qt5ct'
 export GTK_THEME='Numix:dark'
 export XCURSOR_THEME='Numix-Cursor-Light'
@@ -111,13 +117,13 @@ export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap 
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
 # Less Colors
-export LESS_TERMCAP_mb="$(printf '%b' '\e[1;31m')"
-export LESS_TERMCAP_md="$(printf '%b' '\e[1;36m')"
-export LESS_TERMCAP_me="$(printf '%b' '\e[0m')"
-export LESS_TERMCAP_so="$(printf '%b' '\e[01;44;33m')"
-export LESS_TERMCAP_se="$(printf '%b' '\e[0m')"
-export LESS_TERMCAP_us="$(printf '%b' '\e[1;32m')"
-export LESS_TERMCAP_ue="$(printf '%b' '\e[0m')"
+export LESS_TERMCAP_mb="$(printf '%b' '\033[1;31m')"
+export LESS_TERMCAP_md="$(printf '%b' '\033[1;36m')"
+export LESS_TERMCAP_me="$(printf '%b' '\033[0m')"
+export LESS_TERMCAP_so="$(printf '%b' '\033[01;44;33m')"
+export LESS_TERMCAP_se="$(printf '%b' '\033[0m')"
+export LESS_TERMCAP_us="$(printf '%b' '\033[1;32m')"
+export LESS_TERMCAP_ue="$(printf '%b' '\033[0m')"
 export LESSOPEN="| /usr/bin/highlight -O ansi %s 2>/dev/null"
 
 # Miscellaneous Paths

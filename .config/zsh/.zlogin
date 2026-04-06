@@ -1,5 +1,5 @@
 # Verify no display server is currently active
-#if [ -z "${WAYLAND_DISPLAY}" ] && [ -z "${DISPLAY}" ]; then
+if [ -z "${WAYLAND_DISPLAY}" ] && [ -z "${DISPLAY}" ]; then
 
     # Let UWSM dictate if the current terminal/seat is valid for a session
 #    if uwsm check may-start && uwsm select; then
@@ -11,4 +11,4 @@
         # Execute UWSM wrapped in systemd-cat for journaled logging
         exec systemd-cat -t uwsm_start uwsm start hyprland-uwsm.desktop
 #    fi
-#fi
+fi

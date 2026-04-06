@@ -204,20 +204,7 @@ alias \
     path='echo -e ${PATH//:/\\n}' \
     ugtar='tar -zxvf ' \
     untar='tar -zxvf ' \
-    wget='wget -c '
-
-# head / tail shortcuts
-alias \
-    -g H='| uu-head' \
-    -g T='| uu-tail' \
-    -g G='| grep' \
-    -g L="| less" \
-    -g M="| most" \
-    -g LL="2>&1 | less" \
-    -g CA="2>&1 | cat -A" \
-    -g NE="2> /dev/null" \
-    -g NUL="> /dev/null 2>&1" \
-    -g P="2>&1| pygmentize -l pytb"
+    wget='wget -c --hsts-file="$XDG_CACHE_HOME/wget-hsts" '
 
 alias \
     h='history' \
@@ -257,7 +244,6 @@ alias \
     YT='youtube-viewer' \
     sdn='shutdown -h now' \
     e='$EDITOR' \
-    dls='fd -d 1 -t f --hidden . $HOME/documents/.bc/batcave/dotfiles/ | fzf' \
     v='$EDITOR' \
     p='pacman' \
     za='zathura'
@@ -270,12 +256,16 @@ alias yz="yazi"
 alias ff='fastfetch'
 alias cl='clear'
 
+# XDG
+alias startx='startx "$XDG_CONFIG_HOME/x11/xinitrc"'
+alias nvidia-settings='nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settings'
+
 alias \
     dls='fd -d 1 -t f --hidden . ~/documents/.bc/batcave/dotfiles/ | fzf | xargs -I{} nvim {}' \
     cls='fd -t f --hidden . ~/documents/.bc/batcave/dotfiles/.config/ | fzf | xargs -I{} nvim {}' \
     sls='fd -t f . ~/documents/.bc/batcave/dotfiles/.local/myBin/ | fzf | xargs -I{} nvim {}' \
     wpt='fd -d 1 -t d . ~/Local\ Sites/**/app/public/wp-content/themes/ | fzf | xargs -I{} z {}' \
-    rsd='systemctl --no-legend --type=service --state=running | fzf | awk "{print $1}" | xargs sudo systemctl restart'
+    rsd='systemctl --no-legend --type=service --state=running | fzf | awk '\''{print $1}'\'' | xargs sudo systemctl restart'
 
 #alias upda="doas reflector --verbose --threads 8 --country 'US,CA' --protocol https --sort rate --save /etc/pacman.d/mirrorlist-arch && doas pacman -Syu"
 # Dinit
