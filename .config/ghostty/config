@@ -40,3 +40,55 @@ clipboard-trim-trailing-spaces = false
 
 # Set max limit for images 4GiB
 image-storage-limit = 4294967295
+
+# ── Keybindings ────────────────────────────────────────────────
+# Philosophy: Ctrl+Shift = terminal-level ops (new tab, clipboard)
+#             Alt+hjkl   = split navigation (no conflict with nvim)
+
+# Tabs
+keybind = ctrl+shift+t=new_tab
+keybind = ctrl+shift+w=close_surface
+keybind = ctrl+shift+h=previous_tab
+keybind = ctrl+shift+l=next_tab
+keybind = alt+1=goto_tab:1
+keybind = alt+2=goto_tab:2
+keybind = alt+3=goto_tab:3
+keybind = alt+4=goto_tab:4
+keybind = alt+5=goto_tab:5
+
+# Splits (muscle memory: | = vertical, - = horizontal, like vim)
+keybind = ctrl+shift+backslash=new_split:right
+keybind = ctrl+shift+minus=new_split:down
+
+# Navigate splits (Alt+hjkl — safe from nvim's Ctrl+W+hjkl)
+keybind = alt+h=goto_split:left
+keybind = alt+j=goto_split:bottom
+keybind = alt+k=goto_split:top
+keybind = alt+l=goto_split:right
+
+# Resize splits
+keybind = alt+shift+h=resize_split:left,20
+keybind = alt+shift+l=resize_split:right,20
+keybind = alt+shift+j=resize_split:down,10
+keybind = alt+shift+k=resize_split:up,10
+
+# Zoom current split (like tmux prefix+z)
+keybind = alt+z=toggle_split_zoom
+
+# Clipboard
+keybind = ctrl+shift+c=copy_to_clipboard
+keybind = ctrl+shift+v=paste_from_clipboard
+
+# Scrollback
+keybind = shift+page_up=scroll_page_up
+keybind = shift+page_down=scroll_page_down
+keybind = ctrl+shift+up=jump_to_prompt:-1
+keybind = ctrl+shift+down=jump_to_prompt:1
+
+# Open scrollback in $EDITOR (nvim) — classic Luke Smith
+keybind = ctrl+shift+e=write_scrollback_file:open
+
+# Font size
+keybind = ctrl+shift+equal=increase_font_size:2
+keybind = ctrl+shift+minus=decrease_font_size:2
+keybind = ctrl+shift+zero=reset_font_size

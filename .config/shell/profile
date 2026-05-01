@@ -2,7 +2,7 @@
 
 # Base PATH
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/ccache/bin:$PATH"
-export PATH="$HOME/.local/bin:$HOME/.local/bin/myBin:$HOME/.local/share/npm/bin:$HOME/.config/composer/vendor/bin:$HOME/.nix-profile/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.local/bin/myBin:$HOME/.local/share/npm/bin:$HOME/.config/composer/vendor/bin:$HOME/.nix-profile/bin:/var/lib/flatpak/exports/bin:$PATH"
 
 # Add all directories in `~/.local/bin` to $PATH
 export PATH="$PATH:$(fd --type d . $HOME/.local/bin/myBin/ | paste -sd ':' -)"
@@ -33,10 +33,11 @@ export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc
 export PYTHONHISTFILE="$XDG_STATE_HOME"/python/history
-export PERL_LOCAL_LIB_ROOT="$XDG_DATA_HOME"/perl5
+export PERL_LOCAL_LIB_ROOT="$XDG_DATA_HOME/perl5"
 export PERL_MB_OPT="--install_base \"$XDG_DATA_HOME/perl5\""
 export PERL_MM_OPT="INSTALL_BASE=$XDG_DATA_HOME/perl5"
-export JULIA_DEPOT_PATH="$XDG_DATA_HOME/julia:$JULIA_DEPOT_PATH"
+export PERL5LIB="$XDG_DATA_HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
+export PATH="$XDG_DATA_HOME/perl5/bin:$PATH"export JULIA_DEPOT_PATH="$XDG_DATA_HOME/julia:$JULIA_DEPOT_PATH"
 export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=\"$XDG_CONFIG_HOME/java\""
 
 # System Utilities & Logging

@@ -26,7 +26,9 @@ export ELECTRON_OZONE_PLATFORM_HINT="auto"
 export MOZ_ENABLE_WAYLAND="1"
 
 # Intel Iris Xe
-export LIBVA_DRIVER_NAME="iHD"
+#export LIBVA_DRIVER_NAME="iHD"
+# AMD Radeon 860M
+export LIBVA_DRIVER_NAME="radeonsi"
 
 # Theming
 export GTK_THEME="Numix"
@@ -38,4 +40,4 @@ export HYPRCURSOR_THEME="Numix-Cursor"
 # Misc
 export EGL_PLATFORM="wayland"
 export WLR_RENDER="vulkan"
-export WLR_RENDERER_ALLOW_SOFTWARE="1"
+#export WLR_RENDERER_ALLOW_SOFTWARE="1"

@@ -48,16 +48,17 @@ fpath=(
 [ -e ${ZDOTDIR:-~}/.zsh_functions ] && fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 # --- 2. COMPLETION ENGINE ---
-mkdir -p "${XDG_CACHE_HOME}/zsh"
-autoload -Uz compinit
-if [[ -n ${XDG_CACHE_HOME}/zsh/zcompdump(#qN.mh+24) ]]; then
-  compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
-else
-  compinit -C -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
-fi
-
 # Ensure the cache directory exists to prevent silent initialization failure
-mkdir -p "$XDG_CACHE_HOME/zsh"
+mkdir -p "${XDG_CACHE_HOME}/zsh"
+local dump_file="$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
+autoload -Uz compinit
+
+# Check if the dump file is older than 24h or doesn't exist
+if [[ -n "$dump_file"(#qN.mh+24) || ! -f "$dump_file" ]]; then
+  compinit -d "$dump_file"
+else
+  compinit -C -d "$dump_file"
+fi
 
 # Completion Styling
 zstyle ':completion:*' menu select
@@ -75,9 +76,13 @@ zstyle ':completion:*:descriptions' format '%U%F{cyan}%d%f%u'
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/zcompcache"
+zstyle ':completion:*:paru:*' force-list always
+zstyle ':completion:*:*:paru:*' menu yes select
 
 # Map sudo-rs to use standard sudo completion logic
 compdef _sudo sudo-rs
+# Map paru to use its completion script
+compdef _paru paru
 
 # Hidden files in autocomplete
 _comp_options+=(globdots)
@@ -171,13 +176,12 @@ bindkey '^o' cd_with_fzf
 bindkey '^f' open_with_fzf
 bindkey '^v' nvim
 
-
 # --- 4. EXTERNAL SOURCES & PLUGINS ---
 
 # Load aliases and shortcuts if existent.
 [ -e "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"
-#[ -e "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc"
-#[ -e "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc"
+# [ -e "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc"
+# [ -e "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc"
 
 # --- fzf (guarded) ---
 [[ -r /usr/share/fzf/key-bindings.zsh ]] && source /usr/share/fzf/key-bindings.zsh
@@ -185,7 +189,6 @@ bindkey '^v' nvim
 
 # alacritty completions
 [ -e ${ZDOTDIR:-~}/.zsh_functions ] && fpath+=${ZDOTDIR:-~}/.zsh_functions
-
 
 # Arch Linux command-not-found support, you must have package pkgfile installed
 # https://wiki.archlinux.org/index.php/Pkgfile#.22Command_not_found.22_hook
@@ -203,13 +206,7 @@ bindkey '^v' nvim
 [[ -r /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && \
   source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# source nvm
-[[ -r /usr/share/nvm/init-nvm.sh ]] && source /usr/share/nvm/init-nvm.sh
-
 # --- 5. CUSTOM FUNCTIONS & INTEGRATIONS ---
-command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
-command -v starship >/dev/null && eval "$(starship init zsh)"
-
 # Yazi wrapper, exit to cwd
 function y() {
   local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
@@ -237,9 +234,11 @@ _dotnet_zsh_complete()
 }
 
 # --- 6. STARTUP ---
-command -v dotnet >/dev/null && compdef _dotnet_zsh_complete dotnet
-# tmux sessionizer
-command -v tmux >/dev/null && source <(COMPLETE=zsh tms)
+command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
 command -v op >/dev/null && eval "$(op completion zsh)"; compdef _op op
+command -v mise >/dev/null && eval "$(mise activate zsh)"
+command -v starship >/dev/null && eval "$(starship init zsh)"
+command -v dotnet >/dev/null && compdef _dotnet_zsh_complete dotnet
+command -v tmux >/dev/null && source <(COMPLETE=zsh tms) # tmux sessionizer
 command -v dotnet >/dev/null || unset -f _dotnet_zsh_complete 2>/dev/null
 command -v fastfetch >/dev/null && fastfetch
