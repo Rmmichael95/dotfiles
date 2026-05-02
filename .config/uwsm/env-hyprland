@@ -42,13 +42,13 @@ export VDPAU_DRIVER='radeonsi'
 
 # ── Cursor & Theming ──────────────────────────────────────────────────────
 # Bare integer for cursor size — no 'px' suffix
-export XCURSOR_SIZE='28'
-export XCURSOR_THEME='Numix-Cursor-Dark'
-export HYPRCURSOR_SIZE='28'
-export HYPRCURSOR_THEME='Numix-Cursor'
-export GTK_THEME='Numix:dark'
+export XCURSOR_THEME='Nordzy-cursors'
+export XCURSOR_SIZE='32'
+# export HYPRCURSOR_THEME='Nordzy-hyprcursor'   # if hyprcursor variant ships; otherwise omit
+# export HYPRCURSOR_SIZE='32'
+export GTK_THEME='Adwaita-dark'
 export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc"
-export XCURSOR_PATH="$HOME/.local/share/icons"
+export XCURSOR_PATH="$HOME/.local/share/icons:/usr/share/icons"  # add system path
 
 # ── Miscellaneous ─────────────────────────────────────────────────────────
 export CHROME_PATH='/usr/bin/brave'
