@@ -1,43 +1,56 @@
 # ~/.config/uwsm/env-hyprland
+# Sourced by UWSM only when launching Hyprland.
+# Layered on top of ~/.config/uwsm/env.
 
-# Toolkit Backend
-export GDK_BACKEND="wayland,x11,*"
-export QT_QPA_PLATFORM="wayland"
-export SDL_VIDEODRIVER="wayland"
-export CLUTTER_BACKEND="wayland"
+# ── Wayland Toolkit Backends ──────────────────────────────────────────────
+export GDK_BACKEND='wayland,x11,*'      # GTK: Wayland-first, x11 fallback
+export QT_QPA_PLATFORM='wayland;xcb'    # Qt: Wayland-first, xcb fallback
+export SDL_VIDEODRIVER='wayland'
+export CLUTTER_BACKEND='wayland'
+export EGL_PLATFORM='wayland'
 
-# XDG Specifications
-export XDG_CURRENT_DESKTOP="Hyprland"
-export XDG_SESSION_TYPE="wayland"
-export XDG_SESSION_DESKTOP="Hyprland"
+# ── XDG Session Identity ─────────────────────────────────────────────────
+# Tells portals, MIME handlers, and autostart which desktop is running
+export XDG_CURRENT_DESKTOP='Hyprland'
+export XDG_SESSION_TYPE='wayland'
+export XDG_SESSION_DESKTOP='Hyprland'
 
-# QT Variables
-export QT_AUTO_SCREEN_SCALE_FACTOR="1"
-export QT_QPA_PLATFORMTHEME="qt5ct"
-export QT_WAYLAND_DISABLE_WINDOWDECORATIONS="1"
-export QT_SCALE_FACTOR_ROUNDING_POLICY="RoundPreferFloor"
-export QT_WAYLAND_FORCE_DPI="physical"
+# ── Qt ────────────────────────────────────────────────────────────────────
+export QT_AUTO_SCREEN_SCALE_FACTOR='1'
+export QT_QPA_PLATFORMTHEME='qt5ct'
+export QT_WAYLAND_DISABLE_WINDOWDECORATIONS='1'
+export QT_SCALE_FACTOR_ROUNDING_POLICY='RoundPreferFloor'
+export QT_WAYLAND_FORCE_DPI='physical'
 
-# Java
-export _JAVA_AWT_WM_NOPARENTING="1"
+# ── Firefox / Electron ────────────────────────────────────────────────────
+export MOZ_ENABLE_WAYLAND='1'
+export ELECTRON_OZONE_PLATFORM_HINT='auto'
+# MOZ_USE_XINPUT2 is X11-only — intentionally absent here
 
-# Touch / Electron
-export ELECTRON_OZONE_PLATFORM_HINT="auto"
-export MOZ_ENABLE_WAYLAND="1"
+# ── Java ──────────────────────────────────────────────────────────────────
+# Fixes blank/broken windows in tiling compositors
+# NOTE: _JAVA_AWT_WM_NONREPARENTING (not NOPARENTING — that var doesn't exist)
+export _JAVA_AWT_WM_NONREPARENTING='1'
+export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=$HOME/.config/java"
+export AWT_TOOLKIT='MToolkit wmname LG3D'
 
-# Intel Iris Xe
-#export LIBVA_DRIVER_NAME="iHD"
-# AMD Radeon 860M
-export LIBVA_DRIVER_NAME="radeonsi"
+# ── Hardware Video Decode — AMD Radeon 860M ───────────────────────────────
+export LIBVA_DRIVER_NAME='radeonsi'
+export VDPAU_DRIVER='radeonsi'
+# Intel Iris Xe (uncomment if switching to iGPU decode)
+# export LIBVA_DRIVER_NAME='iHD'
 
-# Theming
-export GTK_THEME="Numix"
-export XCURSOR_SIZE="28"
-export XCURSOR_THEME="Numix-Cursor"
-export HYPRCURSOR_SIZE="28"
-export HYPRCURSOR_THEME="Numix-Cursor"
+# ── Cursor & Theming ──────────────────────────────────────────────────────
+# Bare integer for cursor size — no 'px' suffix
+export XCURSOR_SIZE='28'
+export XCURSOR_THEME='Numix-Cursor-Dark'
+export HYPRCURSOR_SIZE='28'
+export HYPRCURSOR_THEME='Numix-Cursor'
+export GTK_THEME='Numix:dark'
+export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc"
+export XCURSOR_PATH="$HOME/.local/share/icons"
 
-# Misc
-export EGL_PLATFORM="wayland"
-export WLR_RENDER="vulkan"
-#export WLR_RENDERER_ALLOW_SOFTWARE="1"
+# ── Miscellaneous ─────────────────────────────────────────────────────────
+export CHROME_PATH='/usr/bin/brave'
+# WLR_RENDER removed — Hyprland uses aquamarine, not wlroots render env vars
+# WLR_RENDERER_ALLOW_SOFTWARE left commented — only needed for VMs/CI

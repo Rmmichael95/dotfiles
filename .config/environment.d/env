@@ -1,0 +1,24 @@
+# ~/.config/environment.d/env
+# Read by systemd --user at session start, BEFORE the compositor launches.
+# No shell evaluation. Use %h for $HOME. All vars here are available to
+# every user unit, including D-Bus-activated services.
+
+# ── XDG Base Directories ─────────────────────────────────────────────────
+# Declare these here so pipewire, dbus services, and portal backends all
+# see them from unit start, not just after Hyprland is running.
+XDG_CONFIG_HOME=%h/.config
+XDG_DATA_HOME=%h/.local/share
+XDG_CACHE_HOME=%h/.local/cache
+XDG_STATE_HOME=%h/.local/state
+# XDG_RUNTIME_DIR is owned by systemd/pam — do not set it here
+
+# ── Security ─────────────────────────────────────────────────────────────
+# 1Password SSH agent — needs to be visible to GUI apps and SSH clients
+# launched from the graphical session before UWSM imports anything
+SSH_AUTH_SOCK=%h/.1password/agent.sock
+GNUPGHOME=%h/.local/share/gnupg
+PASSWORD_STORE_DIR=%h/.local/share/password-store
+
+# ── XDG Data Dirs — Nix profile ──────────────────────────────────────────
+# Ensures nix-installed apps appear in XDG menus and portals
+XDG_DATA_DIRS=%h/.nix-profile/share:/usr/local/share:/usr/share

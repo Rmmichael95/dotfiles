@@ -1,0 +1,71 @@
+# ~/.config/uwsm/env
+# Sourced by UWSM for all compositors. Shell-evaluated (export syntax works).
+# These become available to all systemd user units after UWSM starts.
+
+# ── Default Programs ──────────────────────────────────────────────────────
+# These must reach the systemd session so that apps launched via
+# uwsm app --, D-Bus activation, and desktop portals all agree on defaults.
+export EDITOR='nvim'
+export VISUAL='nvim'
+export PAGER='nvim +Man!'
+export MANPAGER='nvim +Man!'
+export TERMINAL='ghostty'
+export BROWSER='floorp'
+export BROWSERCLI='w3m'
+export READER='zathura'
+export IMAGEVIEWER='nsxiv'
+export VIDEOPLAYER='mpv'
+export FILE='lf'
+export COLORTERM='truecolor'
+export OPENER='xdg-open'
+
+# ── Locale ────────────────────────────────────────────────────────────────
+export LANG='en_US.UTF-8'
+export LC_COLLATE='C'
+
+# ── Toolchain Homes ───────────────────────────────────────────────────────
+# Needed when dev tools are launched from terminal emulators in the session.
+# Keeps tools finding their data/config even when started via systemd units.
+export CARGO_HOME="$HOME/.local/share/cargo"
+export RUSTUP_HOME="$HOME/.local/share/rustup"
+export GOPATH="$HOME/.local/share/go"
+export GOMODCACHE="$HOME/.local/cache/go/mod"
+export NVM_DIR="$HOME/.local/share/nvm"
+export NPM_CONFIG_CACHE="$HOME/.local/cache/npm"
+export NPM_CONFIG_USERCONFIG="$HOME/.config/npm/npmrc"
+export DOTNET_CLI_HOME="$HOME/.local/share/dotnet"
+
+# ── Python / Perl ─────────────────────────────────────────────────────────
+export PYTHONSTARTUP="$HOME/.config/python/pythonrc"
+export PYTHONHISTFILE="$HOME/.local/state/python/history"
+export PERL_LOCAL_LIB_ROOT="$HOME/.local/share/perl5"
+export PERL5LIB="$HOME/.local/share/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
+
+# ── XDG-Compliant App Paths ───────────────────────────────────────────────
+export WGETRC="$HOME/.config/wget/wgetrc"
+export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/ripgreprc"
+export NOTMUCH_CONFIG="$HOME/.config/notmuch-config"
+export MBSYNCRC="$HOME/.config/mbsync/config"
+export ANSIBLE_CONFIG="$HOME/.config/ansible/ansible.cfg"
+export WINEPREFIX="$HOME/.local/share/wineprefixes/default"
+export CUDA_CACHE_PATH="$HOME/.local/cache/nv"
+export NOTES_DIR="$HOME/documents/batcave/notes"
+export MAKEPKG_CONF="$HOME/.config/pacman/makepkg.conf"
+
+# ── Privilege Escalation ─────────────────────────────────────────────────
+# GUI askpass programs — used by polkit, sudo, doas when triggered from the
+# graphical session (e.g., aur helpers, virt-manager, package managers)
+export SUDO_ASKPASS="$HOME/.local/share/bin/myBin/menu/dmenupass"
+export DOAS_ASKPASS='bemenu --password hide --ignorecase --bottom --line-height 30 --fn "JetBrainsMonoNerdFontMono 14" --tb "#15191c" --tf "#eb4d4b" --fb "#15191c" --ff "#d3c6aa" --nb "#15191c" --nf "#4b565c" --hb "#15191c" --hf "#d3c6aa" --fbb "#15191c" --fbf "#d3c6aa" --sb "#15191c" --sf "#d3c6aa" --ab "#15191c" --af "#4b565c" --bdr "#4b565c"'
+
+# ── Build Flags ───────────────────────────────────────────────────────────
+export MAKEFLAGS="-j$(nproc)"
+export ARCHFLAGS="-arch x86_64"
+
+# ── Behavior ─────────────────────────────────────────────────────────────
+export WINEFSYNC=1
+export MAILSYNC_MUTE=1
+export NIXPKGS_ALLOW_UNFREE=1
+export LIBSEAT_BACKEND='logind'
+export LESS='-R'
+export LESSHISTFILE='-'
