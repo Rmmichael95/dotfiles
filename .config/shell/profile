@@ -95,9 +95,9 @@ export OPENER='xdg-open'
 # --- 4. BEHAVIOR & THEME ---
 export GPG_TTY="$(tty)"
 export QT_QPA_PLATFORMTHEME='qt5ct'
-export GTK_THEME='Numix:dark'
-export XCURSOR_THEME='Numix-Cursor-Light'
-export XCURSOR_SIZE='28px'
+export GTK_THEME='Adwaita-dark'
+export XCURSOR_THEME='Adwaita-dark'
+export XCURSOR_SIZE='32'
 export WINEFSYNC=1
 export MAILSYNC_MUTE=1
 export MOZ_USE_XINPUT2=1
