@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Wayland
+Comment=Wayland compositor (login chain)
+Exec=/bin/zsh --login
+Type=Application
+DesktopNames=Wayland;

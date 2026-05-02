@@ -17,3 +17,6 @@ poweroff = ["systemctl", "poweroff"]
 [env]
 XCURSOR_THEME = "Numix-Cursor-Dark"
 XCURSOR_SIZE = "28"
+
+[[session_path]]
+path = "/usr/local/share/wayland-sessions"
