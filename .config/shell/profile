@@ -38,7 +38,7 @@ export PERL_MB_OPT="--install_base \"$XDG_DATA_HOME/perl5\""
 export PERL_MM_OPT="INSTALL_BASE=$XDG_DATA_HOME/perl5"
 export PERL5LIB="$XDG_DATA_HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
 export PATH="$XDG_DATA_HOME/perl5/bin:$PATH"export JULIA_DEPOT_PATH="$XDG_DATA_HOME/julia:$JULIA_DEPOT_PATH"
-export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=\"$XDG_CONFIG_HOME/java\""
+export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
 
 # System Utilities & Logging
 export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
@@ -96,11 +96,10 @@ export OPENER='xdg-open'
 export GPG_TTY="$(tty)"
 export QT_QPA_PLATFORMTHEME='qt5ct'
 export GTK_THEME='Adwaita-dark'
-export XCURSOR_THEME='Adwaita-dark'
+export XCURSOR_THEME='Nordzy-cursors'
 export XCURSOR_SIZE='32'
 export WINEFSYNC=1
 export MAILSYNC_MUTE=1
-export MOZ_USE_XINPUT2=1
 export AWT_TOOLKIT="MToolkit wmname LG3D"
 export _JAVA_AWT_WM_NONREPARENTING=1
 export CHROME_PATH='/usr/bin/brave'
@@ -131,9 +130,8 @@ export LESSOPEN="| /usr/bin/highlight -O ansi %s 2>/dev/null"
 export MANPATH="$MANPATH:/usr/local/man:"
 export CDPATH="$CDPATH:.:$HOME/documents/.bc"
 
-# Security Execution
-export SUDO_ASKPASS="$XDG_DATA_HOME/bin/myBin/menu/dmenupass"
-export DOAS_ASKPASS='bemenu --password hide --ignorecase --bottom --line-height 30 --fn "JetBrainsMonoNerdFontMono 14" --tb "#15191c" --tf "#eb4d4b" --fb "#15191c" --ff "#d3c6aa" --nb "#15191c" --nf "#4b565c" --hb "#15191c" --hf "#d3c6aa" --fbb "#15191c" --fbf "#d3c6aa" --sb "#15191c" --sf "#d3c6aa" --ab "#15191c" --af "#4b565c" --bdr "#4b565c"'
+# Should match uwsm/env:
+export SUDO_ASKPASS="$HOME/.local/bin/myBin/menu/menuaskpass"
 
 # Shortcuts mapping
 [ ! -f "$XDG_CONFIG_HOME/shell/shortcutrc" ] && setsid -f shortcuts >/dev/null 2>&1

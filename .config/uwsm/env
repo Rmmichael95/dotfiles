@@ -53,7 +53,6 @@ export NOTES_DIR="$HOME/documents/batcave/notes"
 export MAKEPKG_CONF="$HOME/.config/pacman/makepkg.conf"
 
 # ── Privilege Escalation ─────────────────────────────────────────────────
-export SUDO_ASKPASS="$HOME/.local/share/bin/myBin/menu/dmenupass"
 export SUDO_ASKPASS="$HOME/.local/bin/myBin/menu/menuaskpass"
 
 # ── Build Flags ───────────────────────────────────────────────────────────
@@ -67,3 +66,17 @@ export NIXPKGS_ALLOW_UNFREE=1
 export LIBSEAT_BACKEND='logind'
 export LESS='-R'
 export LESSHISTFILE='-'
+
+# .NET / C# IDE integration
+export OMNISHARPHOME="$HOME/.config/omnisharp"
+
+# Julia — if launching from graphical IDE
+export JULIA_DEPOT_PATH="$HOME/.local/share/julia:$JULIA_DEPOT_PATH"
+
+# DB tool history — useful for IDE database clients
+export SQLITE_HISTORY="$HOME/.local/state/sqlite_history"
+export MYSQL_HISTFILE="$HOME/.local/state/mysql_history"
+
+# Perl build flags — needed if installing Perl modules from GUI tools
+export PERL_MB_OPT="--install_base \"$HOME/.local/share/perl5\""
+export PERL_MM_OPT="INSTALL_BASE=$HOME/.local/share/perl5"
