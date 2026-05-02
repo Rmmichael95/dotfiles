@@ -1,0 +1,18 @@
+[background]
+fit = "Cover"
+
+[GTK]
+application_prefer_dark_theme = true
+cursor_theme_name = "Numix-Cursor-Dark"
+cursor_theme_size = 28
+font_name = "JetBrainsMono Nerd Font 18"
+icon_theme_name = "Numix-Circle-Light"
+theme_name = "Adwaita"
+
+[commands]
+reboot = ["systemctl", "reboot"]
+poweroff = ["systemctl", "poweroff"]
+
+[env]
+XCURSOR_THEME = "Numix-Cursor-Dark"
+XCURSOR_SIZE = "28"

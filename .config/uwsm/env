@@ -15,7 +15,7 @@ export BROWSERCLI='w3m'
 export READER='zathura'
 export IMAGEVIEWER='nsxiv'
 export VIDEOPLAYER='mpv'
-export FILE='lf'
+export FILE='yazi'
 export COLORTERM='truecolor'
 export OPENER='xdg-open'
 
@@ -53,10 +53,8 @@ export NOTES_DIR="$HOME/documents/batcave/notes"
 export MAKEPKG_CONF="$HOME/.config/pacman/makepkg.conf"
 
 # ── Privilege Escalation ─────────────────────────────────────────────────
-# GUI askpass programs — used by polkit, sudo, doas when triggered from the
-# graphical session (e.g., aur helpers, virt-manager, package managers)
 export SUDO_ASKPASS="$HOME/.local/share/bin/myBin/menu/dmenupass"
-export DOAS_ASKPASS='bemenu --password hide --ignorecase --bottom --line-height 30 --fn "JetBrainsMonoNerdFontMono 14" --tb "#15191c" --tf "#eb4d4b" --fb "#15191c" --ff "#d3c6aa" --nb "#15191c" --nf "#4b565c" --hb "#15191c" --hf "#d3c6aa" --fbb "#15191c" --fbf "#d3c6aa" --sb "#15191c" --sf "#d3c6aa" --ab "#15191c" --af "#4b565c" --bdr "#4b565c"'
+export SUDO_ASKPASS="$HOME/.local/bin/myBin/menu/menuaskpass"
 
 # ── Build Flags ───────────────────────────────────────────────────────────
 export MAKEFLAGS="-j$(nproc)"

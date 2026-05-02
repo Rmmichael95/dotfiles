@@ -88,7 +88,7 @@ export BROWSERCLI='w3m'
 export READER='zathura'
 export IMAGEVIEWER='nsxiv'
 export VIDEOPLAYER='mpv'
-export FILE='lf'
+export FILE='yazi'
 export COLORTERM='truecolor'
 export OPENER='xdg-open'
 

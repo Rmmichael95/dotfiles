@@ -1,0 +1,6 @@
+[terminal]
+vt = 1
+
+[default_session]
+command = "tuigreet --time --time-format '%H:%M  %A, %B %-d' --greeting 'Welcome to Arch Linux' --cmd '/bin/zsh --login' --remember --asterisks --user-menu --power-shutdown 'systemctl poweroff' --power-reboot 'systemctl reboot' --width 120"
+user = "greeter"
