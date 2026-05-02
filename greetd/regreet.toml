@@ -8,6 +8,7 @@ cursor_theme_size = 28
 font_name = "JetBrainsMono Nerd Font 18"
 icon_theme_name = "Numix-Circle-Light"
 theme_name = "Adwaita"
+css = "/etc/greetd/regreet.css"
 
 [commands]
 reboot = ["systemctl", "reboot"]

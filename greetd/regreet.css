@@ -1,0 +1,46 @@
+* {
+  color: #d3c6aa;
+  background-color: #15191c;
+}
+
+window {
+  background-color: #15191c;
+}
+
+box.container {
+  background-color: #2b3339;
+  border: 2px solid #7fbbb3;
+  border-radius: 8px;
+  padding: 24px;
+}
+
+entry {
+  background-color: #2e383c;
+  color: #d3c6aa;
+  border: 1px solid #495156;
+  border-radius: 4px;
+}
+
+entry:focus {
+  border-color: #7fbbb3;
+}
+
+button {
+  background-color: #374145;
+  color: #d3c6aa;
+  border: 1px solid #495156;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #414b50;
+  border-color: #7fbbb3;
+}
+
+label.greeting {
+  color: #d699b6;
+}
+
+label.time {
+  color: #dbbc7f;
+}
