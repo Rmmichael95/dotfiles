@@ -1,5 +1,0 @@
-type            = process
-load-options    = sub-vars
-logfile         = $HOME/.local/share/dinit/waybar.log
-command         = /usr/bin/waybar
-smooth-recovery = true

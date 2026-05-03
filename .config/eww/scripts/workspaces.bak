@@ -24,19 +24,8 @@ workspaces() {
     echo "$out"
 }
 
-# Derive socket path at runtime — HYPRLAND_INSTANCE_SIGNATURE is set by Hyprland
-# and imported by UWSM into the systemd user manager, but the eww daemon may
-# have inherited a stale or empty environment depending on activation ordering.
-# Resolve it directly from the filesystem as a reliable fallback.
-if [ -z "$HYPRLAND_INSTANCE_SIGNATURE" ]; then
-    HYPRLAND_INSTANCE_SIGNATURE=$(ls "$XDG_RUNTIME_DIR/hypr/" 2>/dev/null | head -1)
-fi
-SOCKET="$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock"
-
 workspaces
-socat -u "UNIX-CONNECT:$SOCKET" - | while read -r line; do
-    case "$line" in
-        workspace\>\>* | focusedmon\>\>*)
-            workspaces ;;
-    esac
-done
+socat -u "UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" - \
+    | while IFS="\n" read -r line; do
+        [ "workspace>>" = "$(echo "$line" | cut -c1-11)" ] && workspaces
+    done

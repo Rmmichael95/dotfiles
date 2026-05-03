@@ -7,6 +7,7 @@ PartOf=graphical-session.target
 Type=exec
 ExecStart=/usr/bin/eww --config /home/ryanm/.config/eww/bar daemon --no-daemonize
 Restart=on-failure
+PassEnvironment=HYPRLAND_INSTANCE_SIGNATURE XDG_RUNTIME_DIR
 
 [Install]
 WantedBy=graphical-session.target

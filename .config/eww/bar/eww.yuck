@@ -12,6 +12,7 @@
 (deflisten workspace `zsh ../scripts/workspaces`)
 
 (defvar eww "/usr/bin/eww -c $HOME/.config/eww/bar")
+(defvar ewwd "/usr/bin/eww -c /home/ryanm/.config/eww/dashboard")
 
 
 ;; widgets
@@ -54,7 +55,7 @@
 (defwidget sysboard []
   (box :halign "end"
       (button :class "systray"
-              :onclick "zsh ../scripts/launch_dashboard"
+              :onclick "{ewwd} open --toggle dashboard"
               ;;:onmiddleclick "zsh ../scripts/audio --toggle-vol"
               :onmiddleclick "`(uwsm app -- swaync-client -t)`"
       (label :text "${network} ${volume} ${battery}"))))

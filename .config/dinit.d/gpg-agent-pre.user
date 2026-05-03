@@ -1,3 +1,0 @@
-type    = scripted
-command = mkdir -m 700 -p /run/user/1000/gnupg
-logfile = $HOME/.local/share/dinit/gpg-agent-pre.log
