@@ -1,4 +1,4 @@
-#!/bin/env sh
+#!/bin/env zsh
 
 icons=("󱂈" "󱂉" "󱂊" "󱂋" "󱂌" "󱂍" "󱂎" "󱂏" "󱂐" "󱂑")
 
@@ -17,7 +17,7 @@ workspaces() {
         local class="o"
         [ "$active_id" -eq "$i" ] && class="of"
 
-        out+=" (button :onclick \"hyprctl dispatch workspace $i\" :class \"$class\" \"${icons[$((i-1))]}\")"
+        out+=" (button :onclick \"hyprctl dispatch workspace $i\" :class \"$class\" \"${icons[$i]}\")"
     done
 
     out+=")"

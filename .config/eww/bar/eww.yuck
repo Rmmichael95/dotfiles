@@ -55,7 +55,7 @@
 (defwidget sysboard []
   (box :halign "end"
       (button :class "systray"
-              :onclick "{ewwd} open --toggle dashboard"
+              :onclick "${ewwd} open --toggle dashboard"
               ;;:onmiddleclick "zsh ../scripts/audio --toggle-vol"
               :onmiddleclick "`(uwsm app -- swaync-client -t)`"
       (label :text "${network} ${volume} ${battery}"))))

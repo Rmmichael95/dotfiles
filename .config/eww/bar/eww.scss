@@ -1,3 +1,33 @@
+.works {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.works button {
+  all: unset;
+  min-width: 32px;
+  min-height: 32px;
+  padding: 0 6px;
+  border-radius: 10px;
+}
+
+.works button label {
+  font-family: "JetBrains Mono Nerd Font";
+  font-size: 32px;
+}
+
+.works button.o {
+  background-color: transparent;
+}
+
+.works button.o label {
+  color: #4b565c;
+}
+
+.works button.of label {
+  color: #d3c6aa;
+}
+
 * {
   all: unset;
   font-family: "JetBrains Mono Nerd Font";
@@ -22,19 +52,6 @@
 .workspaces {
   margin-left: 0px;
   padding-left: 0px;
-}
-
-.o {
-  color: #4b565c;
-  min-width: 32px;
-  min-height: 32px;
-}
-
-.of {
-  color: #111111;
-  background-color: #000000;
-  min-width: 32px;
-  min-height: 32px;
 }
 
 .time {

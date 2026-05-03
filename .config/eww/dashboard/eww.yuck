@@ -43,7 +43,7 @@
         (scale :min 0 :max 100 :value MIC :active "true" :onchange "zsh ../scripts/audio --set-mic {}"))
       (box :class "bright_bar" :orientation "h" :spacing 20 :space-evenly "false" :vexpand "false" :hexpand "false"
         (button :width 30 :onclick `(uwsm app -- clight-gui &) && zsh ../scripts/launch_dashboard` :onmiddleclick  "if [ `dinitctl is-started gammastep.user` = 'STARTED' ]; then dinitctl stop gammastep.user; else dinitctl start gammastep.user; fi"
-          (label :width 30 :class "iconbright" :text ""))
+          (label :width 30 :class "iconbright" :text "󰃠"))
         (scale :min 0 :max 100 :value BLIGHT :active "true" :onchange "zsh ../scripts/backlight --set {}")))))
 
 
