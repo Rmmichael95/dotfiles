@@ -1,0 +1,20 @@
+[0;1;32m●[0m dbus-broker.service - D-Bus System Message Bus
+     Loaded: loaded (]8;;file://ryanm-dell/usr/lib/systemd/system/dbus-broker.service\/usr/lib/systemd/system/dbus-broker.service]8;;\; [0;1;38:5:185mdisabled[0m; preset: [0;1;38:5:185mdisabled[0m)
+     Active: [0;1;32mactive (running)[0m since Sat 2026-05-02 15:33:53 PDT; 4h 18min ago
+ Invocation: 93a12d59f2ff452590db779225b9a24e
+TriggeredBy: [0;1;32m●[0m dbus.socket
+       Docs: ]8;;man:dbus-broker-launch(1)\man:dbus-broker-launch(1)]8;;\
+   Main PID: 1131 (dbus-broker-lau)
+      Tasks: 2[0;38:5:245m (limit: 37540)[0m
+     Memory: 6.5M (peak: 9.2M)
+        CPU: 2.464s
+     CGroup: /system.slice/dbus-broker.service
+             ├─[0;38:5:245m1131 /usr/bin/dbus-broker-launch --scope system --audit[0m
+             └─[0;38:5:245m1133 dbus-broker --log 10 --controller 9 --machine-id 372c1a93974949e4927c925c2930f2c6 --max-bytes 536870912 --max-fds 4096 --max-matches 131072 --audit[0m
+
+May 02 15:33:53 ryanm-dell systemd[1]: Starting D-Bus System Message Bus...
+May 02 15:33:53 ryanm-dell systemd[1]: Started D-Bus System Message Bus.
+May 02 15:33:53 ryanm-dell dbus-broker-launch[1131]: Ready
+May 02 15:33:53 ryanm-dell dbus-broker-launch[1131]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mActivation request for 'org.freedesktop.home1' failed: The systemd unit 'dbus-org.freedesktop.home1.service' could not be found.[0m
+May 02 15:34:00 ryanm-dell dbus-broker-launch[1131]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mActivation request for 'org.freedesktop.Avahi' failed: The systemd unit 'dbus-org.freedesktop.Avahi.service' could not be found.[0m
+May 02 15:34:02 ryanm-dell dbus-broker-launch[1131]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mActivation request for 'org.freedesktop.resolve1' failed: The systemd unit 'dbus-org.freedesktop.resolve1.service' could not be found.[0m
