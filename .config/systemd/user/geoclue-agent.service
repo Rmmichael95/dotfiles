@@ -1,0 +1,36 @@
+# ~/.config/systemd/user/geoclue-agent.service
+#
+# Runs the GeoClue2 demo agent for non-GNOME sessions.
+# The agent is the user-side half of GeoClue: the system daemon
+# (geoclue.service, D-Bus activated) handles location lookups, but
+# it will refuse requests from apps unless a whitelisted agent is
+# running for that UID. This unit provides that agent.
+#
+# Install:
+#   mkdir -p ~/.config/systemd/user
+#   cp geoclue-agent.service ~/.config/systemd/user/
+#   systemctl --user daemon-reload
+#   systemctl --user enable --now geoclue-agent.service
+#
+# After enabling, remove the exec-once line from hyprland.conf:
+#   exec-once = uwsm app -- /usr/lib/geoclue-2.0/demos/agent
+
+[Unit]
+Description=GeoClue2 User Agent
+Documentation=man:geoclue(8)
+# The agent is only meaningful inside a graphical Wayland session.
+# UWSM sets graphical-session.target when Hyprland is running.
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/lib/geoclue-2.0/demos/agent
+Restart=on-failure
+RestartSec=3s
+# geoclue agent does not need a display, but some versions probe
+# $DBUS_SESSION_BUS_ADDRESS — UWSM exports this into the user manager
+# automatically, so nothing extra is needed here.
+
+[Install]
+WantedBy=graphical-session.target
