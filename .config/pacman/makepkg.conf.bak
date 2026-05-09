@@ -2,8 +2,6 @@
 #
 # /etc/makepkg.conf
 #
-# Aggressive GCC/mold/LTO profile for CachyOS znver4-capable systems.
-#
 
 #########################################################################
 # SOURCE ACQUISITION
@@ -38,98 +36,23 @@ VCSCLIENTS=('bzr::bzr'
 CARCH="x86_64"
 CHOST="x86_64-pc-linux-gnu"
 
-#########################################################################
-# GCC TOOLCHAIN
-#########################################################################
-#
-# GCC-first profile for maximum AUR compatibility while still using an
-# aggressive native optimization chain.
-#
-export CC="gcc"
-export CXX="g++"
+export CC="clang"
+export CXX="clang++"
+#export CC="zig cc"
+#export CXX="zig cxx"
 
-# GCC LTO-aware archive helpers.
-export AR="gcc-ar"
-export NM="gcc-nm"
-export RANLIB="gcc-ranlib"
-
-#########################################################################
-# COMPILER AND LINKER FLAGS
-#########################################################################
-#
-# -march=native:
-#   Build specifically for this CPU. Good for local AUR packages on this box.
-#
-# -O3:
-#   Aggressive runtime optimization. Can increase compile time and binary size.
-#
-# _FORTIFY_SOURCE=3:
-#   Stronger libc hardening than level 2 on modern Arch/CachyOS systems.
-#
-# This max-runtime profile intentionally does not include:
-#   -fno-omit-frame-pointer
-#   -mno-omit-leaf-frame-pointer
-#   -Wp,-D_GLIBCXX_ASSERTIONS
-#
-# Add those back if you prefer easier profiling/debugging over raw runtime.
-#
+#-- Compiler and Linker Flags
 #CPPFLAGS=""
 CFLAGS="-march=native -O3 -pipe -fno-plt -fexceptions \
-        -Wp,-D_FORTIFY_SOURCE=3 -Wformat -Werror=format-security \
+        -Wp,-D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security \
         -fstack-clash-protection -fcf-protection"
-
-CXXFLAGS="$CFLAGS"
-
-# mold linker.
-#
-# IMPORTANT:
-#   -fuse-ld=mold belongs outside the -Wl list.
-#
-LDFLAGS="-fuse-ld=mold \
-         -Wl,-O1 \
-         -Wl,--sort-common \
-         -Wl,--as-needed \
-         -Wl,-z,relro \
-         -Wl,-z,now \
-         -Wl,-z,pack-relative-relocs"
-
-# GCC LTO.
-#
-# -flto=auto lets GCC choose a parallel LTO mode based on available jobs.
-# -fuse-linker-plugin improves LTO handling with archive/static libraries.
-#
-LTOFLAGS="-flto=auto -fuse-linker-plugin"
-
-# Rust native optimization.
-#
-# codegen-units=1 can produce better optimized binaries but slows Rust builds.
-#
-RUSTFLAGS="-C opt-level=3 \
-           -C target-cpu=native \
-           -C codegen-units=1 \
-           -C lto=thin \
-           -C link-arg=-fuse-ld=mold"
-
-#########################################################################
-# PARALLELISM
-#########################################################################
-#
-# Use all logical CPUs, but prevent make from launching new jobs when load
-# reaches nproc - 1.
-#
-_jobs="$(nproc)"
-_load="$((_jobs - 1))"
-
-if (( _load < 1 )); then
-    _load=1
-fi
-
+CXXFLAGS="$CFLAGS -Wp,-D_GLIBCXX_ASSERTIONS"
+LDFLAGS="-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now,-fuse-ld=mold"
+LTOFLAGS="-flto=auto"
+RUSTFLAGS="-C opt-level=3 -C target-cpu=native -C link-arg=-fuse-ld=mold"
 #-- Make Flags: change this for DistCC/SMP systems
-NPROC="${_jobs}"
-MAKEFLAGS="-j${_jobs} -l${_load}"
-NINJAFLAGS="-j${_jobs}"
-export CMAKE_BUILD_PARALLEL_LEVEL="${_jobs}"
-
+MAKEFLAGS="-j$(nproc)"
+NINJAFLAGS="-j$(nproc)"
 #-- Debugging flags
 DEBUG_CFLAGS="-g"
 DEBUG_CXXFLAGS="$DEBUG_CFLAGS"
@@ -148,25 +71,14 @@ DEBUG_CXXFLAGS="$DEBUG_CFLAGS"
 #-- check:    Run the check() function if present in the PKGBUILD
 #-- sign:     Generate PGP signature file
 #
-# For maximum safety with aggressive flags, use:
-#   BUILDENV=(!distcc color ccache check !sign)
-#
-# For faster routine AUR builds, use:
-#   BUILDENV=(!distcc color ccache !check !sign)
-#
-BUILDENV=(!distcc color ccache !check !sign)
+BUILDENV=(!distcc color ccache check !sign)
 #
 #-- If using DistCC, your MAKEFLAGS will also need modification. In addition,
 #-- specify a space-delimited list of hosts running in the DistCC cluster.
 #DISTCC_HOSTS=""
 #
 #-- Specify a directory for package building.
-#
-# Active fast build directory:
 BUILDDIR=/tmp/makepkg
-
-# Backup safer SSD/NVMe-backed option:
-#BUILDDIR="${XDG_CACHE_HOME:-$HOME/.cache}/makepkg/build"
 
 #########################################################################
 # GLOBAL PACKAGE OPTIONS
@@ -190,25 +102,18 @@ OPTIONS=(strip docs !libtool !staticlibs emptydirs zipman purge !debug lto)
 
 #-- File integrity checks to use. Valid: md5, sha1, sha224, sha256, sha384, sha512, b2
 INTEGRITY_CHECK=(sha256)
-
 #-- Options to be used when stripping binaries. See `man strip' for details.
 STRIP_BINARIES="--strip-all"
-
 #-- Options to be used when stripping shared libraries. See `man strip' for details.
 STRIP_SHARED="--strip-unneeded"
-
 #-- Options to be used when stripping static libraries. See `man strip' for details.
 STRIP_STATIC="--strip-debug"
-
 #-- Manual (man and info) directories to compress (if zipman is specified)
 MAN_DIRS=({usr{,/local}{,/share},opt/*}/{man,info})
-
 #-- Doc directories to remove (if !docs is specified)
 DOC_DIRS=(usr/{,local/}{,share/}{doc,gtk-doc} opt/*/{doc,gtk-doc})
-
 #-- Files to be removed from all packages (if purge is specified)
 PURGE_TARGETS=(usr/{,share}/info/dir .packlist *.pod)
-
 #-- Directory to store source code in for debug packages
 DBGSRCDIR="/usr/src/debug"
 
@@ -220,23 +125,14 @@ DBGSRCDIR="/usr/src/debug"
 #
 #-- Destination: specify a fixed directory where all packages will be placed
 #PKGDEST=/home/packages
-#PKGDEST="${XDG_CACHE_HOME:-$HOME/.cache}/makepkg/pkg"
-
 #-- Source cache: specify a fixed directory where source files will be cached
 #SRCDEST=/home/sources
-#SRCDEST="${XDG_CACHE_HOME:-$HOME/.cache}/makepkg/src"
-
 #-- Source packages: specify a fixed directory where all src packages will be placed
 #SRCPKGDEST=/home/srcpackages
-#SRCPKGDEST="${XDG_CACHE_HOME:-$HOME/.cache}/makepkg/srcpkg"
-
 #-- Log files: specify a fixed directory where all log files will be placed
 #LOGDEST=/home/makepkglogs
-#LOGDEST="${XDG_CACHE_HOME:-$HOME/.cache}/makepkg/log"
-
 #-- Packager: name/email of the person or organization building packages
 #PACKAGER="John Doe <john@doe.com>"
-
 #-- Specify a key to use for package signing
 #GPGKEY=""
 
@@ -244,17 +140,14 @@ DBGSRCDIR="/usr/src/debug"
 # COMPRESSION DEFAULTS
 #########################################################################
 #
-# These affect package creation time and archive size, not runtime speed.
-# Avoid --best for fast local AUR builds.
-#
-COMPRESSGZ=(pigz -c -f -n)
-COMPRESSBZ2=(pbzip2 -c -f)
-COMPRESSXZ=(xz -c -z --threads=0 -)
-COMPRESSZST=(zstd -c -T0 -)
-COMPRESSLRZ=(lrzip -q)
-COMPRESSLZO=(lzop -q)
+COMPRESSGZ=(pigz -c -f -n --best)
+COMPRESSBZ2=(pbzip2 -c -f --best)
+COMPRESSXZ=(xz -c -z --threads=0 --best -)
+COMPRESSZST=(zstd -c -T0 --auto-threads=logical -)
+COMPRESSLRZ=(lrzip -9 -q)
+COMPRESSLZO=(lzop -q --best)
 COMPRESSZ=(compress -c -f)
-COMPRESSLZ4=(lz4 -q)
+COMPRESSLZ4=(lz4 -q --best)
 COMPRESSLZ=(plzip -c -f)
 
 #########################################################################
@@ -269,4 +162,4 @@ SRCEXT='.src.tar.gz'
 #########################################################################
 #
 #-- Command used to run pacman as root, instead of trying sudo and su
-PACMAN_AUTH=(sudo-rs)
+PACMAN_AUTH=()

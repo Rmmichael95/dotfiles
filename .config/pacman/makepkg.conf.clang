@@ -2,7 +2,13 @@
 #
 # /etc/makepkg.conf
 #
-# Aggressive GCC/mold/LTO profile for CachyOS znver4-capable systems.
+# Aggressive Clang/LLVM ThinLTO profile for CachyOS znver4-capable systems.
+#
+# Recommended install location for local testing:
+#   ~/.config/pacman/makepkg.conf
+#
+# System-wide location:
+#   /etc/makepkg.conf
 #
 
 #########################################################################
@@ -39,83 +45,30 @@ CARCH="x86_64"
 CHOST="x86_64-pc-linux-gnu"
 
 #########################################################################
-# GCC TOOLCHAIN
+# LLVM / CLANG TOOLCHAIN
 #########################################################################
 #
-# GCC-first profile for maximum AUR compatibility while still using an
-# aggressive native optimization chain.
+# Clang-first build chain. This is more aggressive than the normal Arch/GCC
+# default and may require package-specific fallback for some AUR packages.
 #
-export CC="gcc"
-export CXX="g++"
+export CC="clang"
+export CXX="clang++"
 
-# GCC LTO-aware archive helpers.
-export AR="gcc-ar"
-export NM="gcc-nm"
-export RANLIB="gcc-ranlib"
-
-#########################################################################
-# COMPILER AND LINKER FLAGS
-#########################################################################
-#
-# -march=native:
-#   Build specifically for this CPU. Good for local AUR packages on this box.
-#
-# -O3:
-#   Aggressive runtime optimization. Can increase compile time and binary size.
-#
-# _FORTIFY_SOURCE=3:
-#   Stronger libc hardening than level 2 on modern Arch/CachyOS systems.
-#
-# This max-runtime profile intentionally does not include:
-#   -fno-omit-frame-pointer
-#   -mno-omit-leaf-frame-pointer
-#   -Wp,-D_GLIBCXX_ASSERTIONS
-#
-# Add those back if you prefer easier profiling/debugging over raw runtime.
-#
-#CPPFLAGS=""
-CFLAGS="-march=native -O3 -pipe -fno-plt -fexceptions \
-        -Wp,-D_FORTIFY_SOURCE=3 -Wformat -Werror=format-security \
-        -fstack-clash-protection -fcf-protection"
-
-CXXFLAGS="$CFLAGS"
-
-# mold linker.
-#
-# IMPORTANT:
-#   -fuse-ld=mold belongs outside the -Wl list.
-#
-LDFLAGS="-fuse-ld=mold \
-         -Wl,-O1 \
-         -Wl,--sort-common \
-         -Wl,--as-needed \
-         -Wl,-z,relro \
-         -Wl,-z,now \
-         -Wl,-z,pack-relative-relocs"
-
-# GCC LTO.
-#
-# -flto=auto lets GCC choose a parallel LTO mode based on available jobs.
-# -fuse-linker-plugin improves LTO handling with archive/static libraries.
-#
-LTOFLAGS="-flto=auto -fuse-linker-plugin"
-
-# Rust native optimization.
-#
-# codegen-units=1 can produce better optimized binaries but slows Rust builds.
-#
-RUSTFLAGS="-C opt-level=3 \
-           -C target-cpu=native \
-           -C codegen-units=1 \
-           -C lto=thin \
-           -C link-arg=-fuse-ld=mold"
+# LLVM archive/binutils helpers.
+# These make the toolchain more coherent when building with Clang + LTO.
+export AR="llvm-ar"
+export NM="llvm-nm"
+export RANLIB="llvm-ranlib"
+export OBJCOPY="llvm-objcopy"
+export STRIP="llvm-strip"
 
 #########################################################################
 # PARALLELISM
 #########################################################################
 #
-# Use all logical CPUs, but prevent make from launching new jobs when load
-# reaches nproc - 1.
+# Use all logical cores for aggressive builds.
+# If the system becomes too hot or unresponsive, change to:
+#   _jobs="$(nproc --ignore=1)"
 #
 _jobs="$(nproc)"
 _load="$((_jobs - 1))"
@@ -124,13 +77,115 @@ if (( _load < 1 )); then
     _load=1
 fi
 
-#-- Make Flags: change this for DistCC/SMP systems
+# makepkg/pacman variable. Newer makepkg also understands NPROC.
 NPROC="${_jobs}"
+
+# Build-system-specific parallel flags.
 MAKEFLAGS="-j${_jobs} -l${_load}"
 NINJAFLAGS="-j${_jobs}"
 export CMAKE_BUILD_PARALLEL_LEVEL="${_jobs}"
 
-#-- Debugging flags
+#########################################################################
+# COMPILER AND LINKER FLAGS
+#########################################################################
+#
+# Aggressive native CPU optimization for this machine.
+#
+# -march=native:
+#   Build specifically for your CPU. Good for local AUR packages on this box.
+#
+# -O3:
+#   Aggressive runtime optimization. Can increase binary size and compile time.
+#
+# -pipe:
+#   Use pipes instead of temporary files during compilation.
+#
+# -fno-plt:
+#   Avoid PLT indirection where possible.
+#
+# _FORTIFY_SOURCE=3:
+#   Stronger libc fortification than level 2 on modern glibc/toolchains.
+#
+# NOTE:
+#   For maximum runtime speed, this profile intentionally does NOT include:
+#     -fno-omit-frame-pointer
+#     -mno-omit-leaf-frame-pointer
+#     -Wp,-D_GLIBCXX_ASSERTIONS
+#
+#   Those improve debugging/profiling/safety, but are not the fastest runtime
+#   profile.
+#
+#CPPFLAGS=""
+CFLAGS="-march=native -O3 -pipe -fno-plt -fexceptions \
+        -Wp,-D_FORTIFY_SOURCE=3 -Wformat -Werror=format-security \
+        -fstack-clash-protection -fcf-protection"
+
+CXXFLAGS="$CFLAGS"
+
+#########################################################################
+# LINKER FLAGS
+#########################################################################
+#
+# Clang + ThinLTO is most coherent with lld.
+#
+# IMPORTANT:
+#   -fuse-ld=lld belongs outside the -Wl list.
+#   Do NOT write it as:
+#     -Wl,...,-fuse-ld=lld
+#
+# ThinLTO cache:
+#   Speeds repeated local rebuilds.
+#
+LDFLAGS="-fuse-ld=lld \
+         -Wl,-O2 \
+         -Wl,--as-needed \
+         -Wl,-z,relro \
+         -Wl,-z,now \
+         -Wl,-z,pack-relative-relocs \
+         -Wl,--thinlto-jobs=${_jobs} \
+         -Wl,--thinlto-cache-dir=/tmp/thinlto \
+         -Wl,--thinlto-cache-policy=cache_size_bytes=20g"
+
+#########################################################################
+# LINK TIME OPTIMIZATION
+#########################################################################
+#
+# Clang's scalable LTO mode.
+#
+# makepkg's lto option appends LTOFLAGS to CFLAGS, CXXFLAGS, and LDFLAGS.
+# Clang's ThinLTO uses -flto=thin and can parallelize backend work through
+# supported linkers such as lld.
+#
+LTOFLAGS="-flto=thin"
+
+#########################################################################
+# RUST FLAGS
+#########################################################################
+#
+# Aggressive Rust profile:
+#
+# -C target-cpu=native:
+#   Native CPU tuning.
+#
+# -C codegen-units=1:
+#   Better optimization potential, slower compile.
+#
+# -C lto=thin:
+#   ThinLTO for Rust.
+#
+# lld linker:
+#   Keep Rust aligned with the Clang/lld profile.
+#
+RUSTFLAGS="-C opt-level=3 \
+           -C target-cpu=native \
+           -C codegen-units=1 \
+           -C lto=thin \
+           -C link-arg=-fuse-ld=lld"
+
+#########################################################################
+# DEBUGGING FLAGS
+#########################################################################
+#
 DEBUG_CFLAGS="-g"
 DEBUG_CXXFLAGS="$DEBUG_CFLAGS"
 #DEBUG_RUSTFLAGS="-C debuginfo=2"
@@ -148,11 +203,8 @@ DEBUG_CXXFLAGS="$DEBUG_CFLAGS"
 #-- check:    Run the check() function if present in the PKGBUILD
 #-- sign:     Generate PGP signature file
 #
-# For maximum safety with aggressive flags, use:
-#   BUILDENV=(!distcc color ccache check !sign)
-#
-# For faster routine AUR builds, use:
-#   BUILDENV=(!distcc color ccache !check !sign)
+# For fastest local package builds, this profile disables check().
+# If you prefer validation over speed, change !check to check.
 #
 BUILDENV=(!distcc color ccache !check !sign)
 #
@@ -162,18 +214,18 @@ BUILDENV=(!distcc color ccache !check !sign)
 #
 #-- Specify a directory for package building.
 #
-# Active fast build directory:
+# /tmp can be faster if tmpfs-backed, but large AUR packages can exhaust RAM.
+# For a stable high-performance workstation, use SSD/NVMe-backed cache.
+#
 BUILDDIR=/tmp/makepkg
-
-# Backup safer SSD/NVMe-backed option:
-#BUILDDIR="${XDG_CACHE_HOME:-$HOME/.cache}/makepkg/build"
+# BUILDDIR="${XDG_CACHE_HOME}/makepkg/build"
 
 #########################################################################
 # GLOBAL PACKAGE OPTIONS
 #   These are default values for the options=() settings
 #########################################################################
 #
-# Makepkg defaults: OPTIONS=(!strip docs libtool staticlibs emptydirs !zipman !purge !debug !lto)
+# Makepkg defaults may vary by pacman version.
 #  A negated option will do the opposite of the comments below.
 #
 #-- strip:      Strip symbols from binaries/libraries
@@ -185,10 +237,11 @@ BUILDDIR=/tmp/makepkg
 #-- purge:      Remove files specified by PURGE_TARGETS
 #-- debug:      Add debugging flags as specified in DEBUG_* variables
 #-- lto:        Add compile flags for building with link time optimization
+#-- autodeps:   Automatically add library dependencies/provides
 #
-OPTIONS=(strip docs !libtool !staticlibs emptydirs zipman purge !debug lto)
+OPTIONS=(strip docs !libtool !staticlibs emptydirs zipman purge !debug lto autodeps)
 
-#-- File integrity checks to use. Valid: md5, sha1, sha224, sha256, sha384, sha512, b2
+#-- File integrity checks to use. Valid: ck, md5, sha1, sha224, sha256, sha384, sha512, b2
 INTEGRITY_CHECK=(sha256)
 
 #-- Options to be used when stripping binaries. See `man strip' for details.
@@ -206,6 +259,9 @@ MAN_DIRS=({usr{,/local}{,/share},opt/*}/{man,info})
 #-- Doc directories to remove (if !docs is specified)
 DOC_DIRS=(usr/{,local/}{,share/}{doc,gtk-doc} opt/*/{doc,gtk-doc})
 
+#-- Library directories used by autodeps
+LIB_DIRS=(lib:usr/lib)
+
 #-- Files to be removed from all packages (if purge is specified)
 PURGE_TARGETS=(usr/{,share}/info/dir .packlist *.pod)
 
@@ -219,20 +275,16 @@ DBGSRCDIR="/usr/src/debug"
 # Default: put built package and cached source in build directory
 #
 #-- Destination: specify a fixed directory where all packages will be placed
-#PKGDEST=/home/packages
-#PKGDEST="${XDG_CACHE_HOME:-$HOME/.cache}/makepkg/pkg"
+PKGDEST="${HOME}/.cache/makepkg/pkg"
 
 #-- Source cache: specify a fixed directory where source files will be cached
-#SRCDEST=/home/sources
-#SRCDEST="${XDG_CACHE_HOME:-$HOME/.cache}/makepkg/src"
+SRCDEST="${HOME}/.cache/makepkg/src"
 
 #-- Source packages: specify a fixed directory where all src packages will be placed
-#SRCPKGDEST=/home/srcpackages
-#SRCPKGDEST="${XDG_CACHE_HOME:-$HOME/.cache}/makepkg/srcpkg"
+SRCPKGDEST="${HOME}/.cache/makepkg/srcpkg"
 
 #-- Log files: specify a fixed directory where all log files will be placed
-#LOGDEST=/home/makepkglogs
-#LOGDEST="${XDG_CACHE_HOME:-$HOME/.cache}/makepkg/log"
+LOGDEST="${HOME}/.cache/makepkg/log"
 
 #-- Packager: name/email of the person or organization building packages
 #PACKAGER="John Doe <john@doe.com>"
@@ -244,8 +296,9 @@ DBGSRCDIR="/usr/src/debug"
 # COMPRESSION DEFAULTS
 #########################################################################
 #
-# These affect package creation time and archive size, not runtime speed.
-# Avoid --best for fast local AUR builds.
+# These affect package creation time and package size, not runtime speed.
+# Avoid --best for local optimized builds unless disk size matters more than
+# build speed.
 #
 COMPRESSGZ=(pigz -c -f -n)
 COMPRESSBZ2=(pbzip2 -c -f)
@@ -262,7 +315,7 @@ COMPRESSLZ=(plzip -c -f)
 #########################################################################
 #
 PKGEXT='.pkg.tar.zst'
-SRCEXT='.src.tar.gz'
+SRCEXT='.src.tar.zst'
 
 #########################################################################
 # OTHER

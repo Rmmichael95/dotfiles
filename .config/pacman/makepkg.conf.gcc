@@ -53,6 +53,12 @@ export AR="gcc-ar"
 export NM="gcc-nm"
 export RANLIB="gcc-ranlib"
 
+# Alternative experimental compilers:
+#export CC="clang"
+#export CXX="clang++"
+#export CC="zig cc"
+#export CXX="zig cxx"
+
 #########################################################################
 # COMPILER AND LINKER FLAGS
 #########################################################################
@@ -154,7 +160,7 @@ DEBUG_CXXFLAGS="$DEBUG_CFLAGS"
 # For faster routine AUR builds, use:
 #   BUILDENV=(!distcc color ccache !check !sign)
 #
-BUILDENV=(!distcc color ccache !check !sign)
+BUILDENV=(!distcc color ccache check !sign)
 #
 #-- If using DistCC, your MAKEFLAGS will also need modification. In addition,
 #-- specify a space-delimited list of hosts running in the DistCC cluster.
@@ -269,4 +275,4 @@ SRCEXT='.src.tar.gz'
 #########################################################################
 #
 #-- Command used to run pacman as root, instead of trying sudo and su
-PACMAN_AUTH=(sudo-rs)
+PACMAN_AUTH=(sudo)
