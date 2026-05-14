@@ -1,13 +1,5 @@
 #!/usr/bin/env sh
 
-# Base PATH
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/ccache/bin:$PATH"
-export PATH="$HOME/.local/bin:$HOME/.local/bin/myBin:$HOME/.local/share/npm/bin:$HOME/.config/composer/vendor/bin:$HOME/.nix-profile/bin:/var/lib/flatpak/exports/bin:$PATH"
-
-# Add all directories in `~/.local/bin` to $PATH
-export PATH="$PATH:$(fd --type d . $HOME/.local/bin/myBin/ | paste -sd ':' -)"
-export PATH="$PATH:$(go env GOBIN 2>/dev/null):$(go env GOPATH 2>/dev/null)/bin"
-
 # --- 1. XDG BASE DIRECTORY SPECIFICATION ---
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
@@ -135,3 +127,12 @@ export SUDO_ASKPASS="$HOME/.local/bin/myBin/menu/menuaskpass"
 
 # Shortcuts mapping
 [ ! -f "$XDG_CONFIG_HOME/shell/shortcutrc" ] && setsid -f shortcuts >/dev/null 2>&1
+
+# Base PATH
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/ccache/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.local/bin/myBin:$HOME/.local/share/npm/bin:$HOME/.config/composer/vendor/bin:$HOME/.nix-profile/bin:/var/lib/flatpak/exports/bin:$XDG_DATA_HOME/cargo/bin/:$PATH"
+
+# Add all directories in `~/.local/bin` to $PATH
+export PATH="$PATH:$(fd --type d . $HOME/.local/bin/myBin/ | paste -sd ':' -)"
+export PATH="$PATH:$(go env GOBIN 2>/dev/null):$(go env GOPATH 2>/dev/null)/bin"
+

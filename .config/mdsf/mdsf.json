@@ -1,0 +1,40 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hougesen/mdsf/main/schemas/v0.4.1/mdsf.schema.json",
+
+  "languages": {
+    "javascript": ["prettier"],
+    "js": ["prettier"],
+    "typescript": ["prettier"],
+    "ts": ["prettier"],
+    "jsx": ["prettier"],
+    "tsx": ["prettier"],
+    "json": ["prettier"],
+    "json5": ["prettier"],
+    "yaml": ["prettier"],
+    "yml": ["prettier"],
+    "html": ["prettier"],
+    "css": ["prettier"],
+    "scss": ["prettier"],
+    "graphql": ["prettier"],
+
+    "lua": ["stylua"],
+
+    "python": ["black"],
+    "py": ["black"],
+
+    "rust": ["rustfmt"],
+    "rs": ["rustfmt"],
+
+    "sh": ["shfmt"],
+    "bash": ["shfmt"],
+    "zsh": ["shfmt"],
+
+    "c": ["clang-format"],
+    "cpp": ["clang-format"],
+    "h": ["clang-format"],
+
+    "sql": ["sql-formatter"]
+  },
+
+  "format_finished_document": false
+}
