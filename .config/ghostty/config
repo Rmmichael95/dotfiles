@@ -60,6 +60,9 @@ keybind = alt+5=goto_tab:5
 keybind = ctrl+shift+backslash=new_split:right
 keybind = ctrl+shift+minus=new_split:down
 
+keybind = ctrl+shift+underscore=new_split:down
+keybind = ctrl+shift+minus=decrease_font_size:2
+
 # Navigate splits (Alt+hjkl — safe from nvim's Ctrl+W+hjkl)
 keybind = alt+h=goto_split:left
 keybind = alt+j=goto_split:bottom

@@ -11,8 +11,6 @@ get_blight() {
 
 set_blight() {
     brightnessctl set "$1%"
-    # Fire swayosd so the overlay shows when eww slider is used too
-    swayosd-client --brightness set "$1"
 }
 
 if [[ "$1" == "--get" ]]; then
