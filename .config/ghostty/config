@@ -58,7 +58,6 @@ keybind = alt+5=goto_tab:5
 
 # Splits (muscle memory: | = vertical, - = horizontal, like vim)
 keybind = ctrl+shift+backslash=new_split:right
-keybind = ctrl+shift+minus=new_split:down
 
 keybind = ctrl+shift+underscore=new_split:down
 keybind = ctrl+shift+minus=decrease_font_size:2
