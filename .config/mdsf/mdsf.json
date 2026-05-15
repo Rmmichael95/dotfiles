@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/hougesen/mdsf/main/schemas/v0.4.1/mdsf.schema.json",
+  "$schema": "https://raw.githubusercontent.com/hougesen/mdsf/main/schemas/v0.12.0/mdsf.schema.json",
 
   "languages": {
     "javascript": ["prettier"],
@@ -33,7 +33,9 @@
     "cpp": ["clang-format"],
     "h": ["clang-format"],
 
-    "sql": ["sql-formatter"]
+    "sql": ["sql-formatter"],
+
+    "php": ["phpcbf"]
   },
 
   "format_finished_document": false

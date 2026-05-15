@@ -1,19 +1,19 @@
 #!/bin/env sh
 
-## Get Brightness
 get_blight() {
     while true; do
-    echo "$(xbacklight -get)"
+        MAX=$(brightnessctl m)
+        CURR=$(brightnessctl g)
+        echo $((CURR * 100 / MAX))
         sleep 1
     done
 }
 
-## Set Brightness
 set_blight() {
-  xbacklight -set $1
+    brightnessctl set "$1%"
+    # Fire swayosd so the overlay shows when eww slider is used too
+    swayosd-client --brightness set "$1"
 }
-
-
 
 if [[ "$1" == "--get" ]]; then
     get_blight

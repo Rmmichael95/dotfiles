@@ -1,0 +1,32 @@
+/* ~/.config/swayosd/style.css */
+window {
+  background: alpha(#15191c, 0.9);
+  border-radius: 12px;
+  border: 1px solid #2d3640;
+}
+
+#container {
+  padding: 16px 20px;
+  min-width: 280px;
+}
+
+progressbar trough {
+  background: #2d3640;
+  border-radius: 6px;
+  min-height: 6px;
+}
+
+progressbar progress {
+  background: #b7bdf8;
+  border-radius: 6px;
+}
+
+label {
+  color: #d3c6aa;
+  font-family: "JetBrainsMonoNerdFontMono";
+  font-size: 14px;
+}
+
+image {
+  color: #b7bdf8;
+}
