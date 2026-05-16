@@ -19,4 +19,7 @@ hl.on("hyprland.start", function()
 
 	-- IIO sensor integration (auto-rotate on tablet mode)
 	hl.exec_cmd("uwsm app -- iio-hyprland")
+
+	-- Open laptop bar on startup (external bar opened by monitor.lua on dock)
+	hl.exec_cmd("sleep 1 && eww open bar-laptop")
 end)

@@ -36,12 +36,14 @@ hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager), { description = "File m
 -- Note / todo quick capture
 hl.bind(
 	mainMod .. " + CTRL + N",
-	hl.dsp.exec_cmd([[sh -c 'ghostty --command="nvim ~/documents/.bc/batcave/Notes/$(bemenu-input).md"']]),
+	hl.dsp.exec_cmd([[uwsn app -- sh -c 'ghostty --command="nvim ~/documents/.bc/batcave/Notes/$(bemenu-input).md"']]),
 	{ description = "New note (nvim)" }
 )
 hl.bind(
 	mainMod .. " + CTRL + T",
-	hl.dsp.exec_cmd([[sh -c 'ghostty --command="nvim ~/documents/.bc/batcave/TODO/$(bemenu-input)-todo.md"']]),
+	hl.dsp.exec_cmd(
+		[[uwsn app -- sh -c 'ghostty --command="nvim ~/documents/.bc/batcave/TODO/$(bemenu-input)-todo.md"']]
+	),
 	{ description = "New todo (nvim)" }
 )
 

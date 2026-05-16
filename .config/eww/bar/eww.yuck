@@ -85,8 +85,18 @@
                         :height "60px")
 (cal))
 
+;; Primary bar — always on monitor index 0 (unchanged from your original)
 (defwindow bar
     :monitor 0
+    :windowtype "dock"
+    :geometry (geometry :width "100%"
+                        :anchor "top center")
+    :exclusive true
+(bar_1))
+
+;; External bar — monitor index 1, only opened when docked in dual mode
+(defwindow bar-ext
+    :monitor 1
     :windowtype "dock"
     :geometry (geometry :width "100%"
                         :anchor "top center")
