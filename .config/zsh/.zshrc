@@ -243,3 +243,6 @@ command -v tmux >/dev/null && source <(COMPLETE=zsh tms) # tmux sessionizer
 command -v dotnet >/dev/null || unset -f _dotnet_zsh_complete 2>/dev/null
 command -v dotnet >/dev/null && export PATH="$PATH:$HOME/.dotnet/tools"
 command -v fastfetch >/dev/null && fastfetch
+
+# Created by `pipx` on 2026-05-16 14:53:01
+export PATH="$PATH:/home/ryanm/.local/bin"

@@ -79,3 +79,6 @@ open_with_fzf() {
 cd_with_fzf() {
     z "$(fd -t d -H -I | fzf --preview='tree -L 1 {}' --bind="space:toggle-preview" --preview-window=:hidden)"
 }
+
+# Created by `pipx` on 2026-05-16 14:53:01
+export PATH="$PATH:/home/ryanm/.local/bin"

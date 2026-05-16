@@ -136,3 +136,5 @@ export PATH="$HOME/.local/bin:$HOME/.local/bin/myBin:$HOME/.local/share/npm/bin:
 export PATH="$PATH:$(fd --type d . $HOME/.local/bin/myBin/ | paste -sd ':' -)"
 export PATH="$PATH:$(go env GOBIN 2>/dev/null):$(go env GOPATH 2>/dev/null)/bin"
 
+# API Key for NPU models, can be anything, just need a string for key
+export FLM_API_KEY="lemonade"
