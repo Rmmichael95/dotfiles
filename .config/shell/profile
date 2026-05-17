@@ -55,7 +55,7 @@ export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv"
 export ANDROID_USER_HOME="$XDG_DATA_HOME/android"
 export MBSYNCRC="$XDG_CONFIG_HOME/mbsync/config"
 export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch-config"
-export NOTES_DIR="$HOME/documents/batcave/notes"
+export NOTES_DIR="$HOME/documents/.bc/batcave/Notes"
 
 # GUI / X11 Fallbacks
 export XINITRC="$XDG_CONFIG_HOME/x11/xinitrc"

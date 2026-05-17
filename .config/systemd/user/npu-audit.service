@@ -1,0 +1,8 @@
+[Unit]
+Description=NPU System Log Auditor Task
+Requires=flm.service
+After=flm.service
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/myBin/npu/npu-log-audit

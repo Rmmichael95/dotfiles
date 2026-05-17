@@ -9,3 +9,5 @@
 	defaultBranch = master
 [push]
 	recurseSubmodules = on-demand
+[safe]
+	directory = *

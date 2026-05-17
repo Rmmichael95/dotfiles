@@ -1,0 +1,35 @@
+# ~/.config/systemd/user/swayosd-libinput.service
+#
+# SwayOSD libinput backend — listens to /dev/input events directly.
+# Automatically shows indicators for scroll lock and other hardware keys
+# WITHOUT needing explicit keybindings.
+#
+# Prerequisites — swayosd-git ships a udev rule that grants input group access.
+# Run once after installing:
+#   sudo udevadm control --reload
+#   sudo udevadm trigger
+#   sudo usermod -aG input $USER  # log out and back in after this
+#
+# Note: Ryan has caps:escape set, so caps-lock indicator is irrelevant.
+# This service is most useful for scroll lock and media indicator passthrough.
+#
+# Install (only after swayosd.service is working):
+#   cp swayosd-libinput.service ~/.config/systemd/user/
+#   systemctl --user daemon-reload
+#   systemctl --user enable --now swayosd-libinput.service
+
+[Unit]
+Description=SwayOSD libinput Input Event Listener
+Documentation=https://github.com/ErikReider/SwayOSD
+PartOf=graphical-session.target
+After=graphical-session.target swayosd.service
+Requires=swayosd.service
+
+[Service]
+Type=simple
+ExecStart=swayosd-libinput-backend
+Restart=on-failure
+RestartSec=3s
+
+[Install]
+WantedBy=graphical-session.target

@@ -1,0 +1,18 @@
+[Unit]
+Description=NPU Real-time Terminal Coach
+Requires=flm.service
+After=flm.service
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/myBin/npu/npu-shell-coach
+Restart=always
+RestartSec=5
+
+# INJECT GUI NOTIFICATION BUS
+Environment="DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/%U/bus"
+
+# Security & Sandboxing
+ProtectSystem=strict
+ProtectHome=read-only
+ReadOnlyPaths=%h/.local/state/zsh/history

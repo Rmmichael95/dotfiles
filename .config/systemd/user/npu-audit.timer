@@ -1,0 +1,11 @@
+[Unit]
+Description=Run NPU Log Audit Every 4 Hours
+
+[Timer]
+# Run 15 minutes after boot, and then every 4 hours
+OnBootSec=15min
+OnUnitActiveSec=4h
+Persistent=true
+
+[Install]
+WantedBy=timers.target

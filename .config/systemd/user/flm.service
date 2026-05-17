@@ -1,0 +1,15 @@
+[Unit]
+Description=FastFlowLM NPU API Engine
+After=default.target
+
+[Service]
+Type=exec
+ExecStart=/usr/bin/flm serve qwen3.5:4b --embed 1 --asr 1
+Restart=always
+RestartSec=3
+
+Environment="FLM_DISABLE_UPDATE_CHECK=1"
+LimitMEMLOCK=infinity
+
+[Install]
+WantedBy=default.target

@@ -366,3 +366,24 @@ hl.bind(
 	hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 100%"),
 	{ description = "Reset volume to 100%" }
 )
+
+-- Note / todo quick capture
+hl.bind(
+	mainMod .. " + CTRL + N",
+	hl.dsp.exec_cmd([[uwsn app -- sh -c 'ghostty --command="nvim ~/documents/.bc/batcave/Notes/$(bemenu-input).md"']]),
+	{ description = "New note (nvim)" }
+)
+hl.bind(
+	mainMod .. " + CTRL + T",
+	hl.dsp.exec_cmd(
+		[[uwsn app -- sh -c 'ghostty --command="nvim ~/documents/.bc/batcave/TODO/$(bemenu-input)-todo.md"']]
+	),
+	{ description = "New todo (nvim)" }
+)
+
+-- UPGRADED: NPU Deep Topic Section Search & Jump
+hl.bind(
+	mainMod .. " + SHIFT + N",
+	hl.dsp.exec_cmd(os.getenv("HOME") .. "/.local/bin/myBin/npu/npu-hypr-search"),
+	{ description = "AI Deep Topic Note Search (bemenu)" }
+)

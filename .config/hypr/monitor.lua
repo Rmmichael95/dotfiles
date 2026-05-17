@@ -1,121 +1,113 @@
 -- ════════════════════════════════════════════════════════════════════════════
 --  ~/.config/hypr/monitor.lua
---  Three-state monitor management using eww integer indices.
---
---  eww does NOT understand Hyprland output names ("eDP-1", "HDMI-A-1").
---  It uses its own integer index list. We let Hyprland control which
---  physical display is index 0 by enabling/disabling outputs, and always
---  open `bar` on index 0.
---
---  ┌──────────────┬──────────────┬──────────────┬────────────────────────┐
---  │ State        │ Index 0      │ Index 1      │ eww windows            │
---  ├──────────────┼──────────────┼──────────────┼────────────────────────┤
---  │ Laptop only  │ eDP-1        │ —            │ bar                    │
---  │ Dual         │ eDP-1        │ external     │ bar + bar-ext          │
---  │ Clamshell    │ external     │ —            │ bar (reopened on ext)  │
---  └──────────────┴──────────────┴──────────────┴────────────────────────┘
---
---  hyprlock: monitor = (blank) in hyprlock.conf → renders on ALL active
---  monitors automatically — no extra config needed here.
+--  Single External Monitor + Clamshell Mode (Dynamic Workspaces)
 -- ════════════════════════════════════════════════════════════════════════════
 
--- ── Known external outputs ────────────────────────────────────────────────
-local EXT = {
-	["HDMI-A-1"] = { mode = "highres@highrr", position = "auto-right", scale = 1.5 },
-	["DP-1"] = { mode = "highres@highrr", position = "auto-right", scale = 1.5 },
-}
+-- Track our single external monitor dynamically (e.g., "DP-1" or "HDMI-A-1")
+local ext_name = nil
 
--- ── Static: built-in display ──────────────────────────────────────────────
+-- ── Static: built-in display fallback configuration ───────────────────────
 hl.monitor({
 	output = "eDP-1",
 	mode = "preferred",
-	position = "auto",
+	position = "0x0",
 	scale = 1,
-	transform = 0,
 })
 
--- ── State ─────────────────────────────────────────────────────────────────
-local connected_ext = nil -- external monitor name, or nil
-local lid_closed = false
-
--- ── Helpers ───────────────────────────────────────────────────────────────
-
-local function eww(cmd)
-	hl.exec_cmd("eww " .. cmd .. " 2>/dev/null")
+-- Reads the hardware state file to accurately sync lid posture at boot time
+local function check_lid_state()
+	local f = io.popen("cat /proc/acpi/button/lid/LID*/state 2>/dev/null")
+	if f then
+		local status = f:read("*a")
+		f:close()
+		return status:match("closed") ~= nil
+	end
+	return false
 end
 
--- Wallpaper: copy whatever is loaded on eDP-1 to the new monitor
-local function set_wallpaper(name)
-	hl.exec_cmd('hyprctl hyprpaper wallpaper "' .. name .. ',$(hyprctl hyprpaper listloaded | head -1)"')
+local lid_closed = check_lid_state()
+
+-- ── Centralized Eww Bar Alignment ────────────────────────────────────────
+local function arrange_bars()
+	-- Close all bars first to ensure a clean state
+	hl.exec_cmd("eww close bar bar-ext 2>/dev/null")
+
+	-- Give the compositor a split second to finish shifting window viewports
+	hl.exec_cmd("sleep 0.3")
+
+	if lid_closed and ext_name then
+		-- Clamshell mode: Only the external monitor is active (Index 0)
+		hl.exec_cmd("eww open bar")
+	elseif not lid_closed and ext_name then
+		-- Extended desktop: Laptop (Index 0) + External (Index 1) are active
+		hl.exec_cmd("eww open bar && eww open bar-ext")
+	elseif not lid_closed and not ext_name then
+		-- Laptop only mode
+		hl.exec_cmd("eww open bar")
+	end
 end
 
--- ── DOCK: external monitor connected ─────────────────────────────────────
+-- ── Dynamic Monitor Connection Triggers ──────────────────────────────────
 hl.on("monitor.added", function(monitor)
-	local cfg = EXT[monitor.name]
-	if not cfg then
+	if monitor.name == "eDP-1" then
+		if lid_closed then
+			hl.exec_cmd("hyprctl keyword monitor 'eDP-1,disable'")
+		end
+		arrange_bars()
 		return
 	end
 
-	connected_ext = monitor.name
+	-- A new external monitor was plugged in. Track it and configure it.
+	ext_name = monitor.name
+	-- You can adjust scale (1.5) or position ('auto') here
+	hl.exec_cmd(string.format("hyprctl keyword monitor '%s,highres@highrr,auto,1.5'", ext_name))
 
-	-- Configure alongside laptop display (both active)
-	hl.exec_cmd(
-		"hyprctl keyword monitor '" .. monitor.name .. "," .. cfg.mode .. "," .. cfg.position .. "," .. cfg.scale .. "'"
-	)
-
-	set_wallpaper(monitor.name)
-
-	-- Open bar-ext on index 1 (external is second monitor)
-	-- Delay so the monitor layer is ready before eww attaches
-	hl.exec_cmd("sleep 0.5 && eww open bar-ext")
-end)
-
--- ── UNDOCK: external monitor removed ─────────────────────────────────────
-hl.on("monitor.removed", function(monitor)
-	if not EXT[monitor.name] then
-		return
-	end
-
-	connected_ext = nil
-
-	-- Close the external bar
-	eww("close bar-ext")
-
-	-- If we were in clamshell, re-enable laptop screen and reopen bar on it
 	if lid_closed then
-		hl.exec_cmd("hyprctl keyword monitor 'eDP-1,highres@highrr,auto,1,transform,0'")
-		hl.exec_cmd("sleep 0.3 && eww open bar")
+		-- Enforce clamshell state if plugged in while the lid is down
+		hl.exec_cmd("hyprctl keyword monitor 'eDP-1,disable'")
+		hl.exec_cmd("hyprctl dispatch focusmonitor " .. ext_name)
+	else
+		-- Extended mode: pull focus to the newly connected screen
+		hl.exec_cmd("hyprctl dispatch focusmonitor " .. ext_name)
 	end
+
+	arrange_bars()
 end)
 
--- ── CLAMSHELL: lid closed ─────────────────────────────────────────────────
-hl.bind("switch:on:lid-switch", function()
+hl.on("monitor.removed", function(monitor)
+	if monitor.name == "eDP-1" then
+		return
+	end
+
+	-- If our tracked external monitor is unplugged, clear the variable
+	if monitor.name == ext_name then
+		ext_name = nil
+
+		-- Emergency fallback: Re-enable laptop display if completely undocked with lid closed
+		if lid_closed then
+			hl.exec_cmd("hyprctl keyword monitor 'eDP-1,preferred,0x0,1'")
+		end
+	end
+
+	arrange_bars()
+end)
+
+-- ── ACPI Hardware Switches (Lid Action) ──────────────────────────────────
+hl.bind("switch:on:Lid Switch", function()
 	lid_closed = true
 
-	if connected_ext then
-		-- Close bar-ext (index 1 is about to disappear as eDP-1 becomes 0-only ext)
-		eww("close bar-ext")
-
-		-- Disable laptop screen → external becomes index 0
+	-- Only trigger Clamshell mode if an external monitor is actually connected.
+	-- If ext_name is nil, we do nothing and let systemd put the laptop to sleep.
+	if ext_name then
 		hl.exec_cmd("hyprctl keyword monitor 'eDP-1,disable'")
-
-		-- Reopen bar — now lands on external (index 0)
-		hl.exec_cmd("sleep 0.3 && eww open bar")
+		arrange_bars()
 	end
-	-- If no external is connected, do nothing (closing lid with no ext = suspend via hypridle)
-end, { locked = true, description = "Lid closed: clamshell mode" })
+end, { locked = true, description = "Lid closed: Clamshell mode (if docked)" })
 
--- ── LID OPEN: restore laptop display ─────────────────────────────────────
-hl.bind("switch:off:lid-switch", function()
+hl.bind("switch:off:Lid Switch", function()
 	lid_closed = false
 
-	-- Re-enable laptop screen → eDP-1 becomes index 0 again
-	hl.exec_cmd("hyprctl keyword monitor 'eDP-1,highres@highrr,auto,1,transform,0'")
-
-	-- Brief delay so eDP-1 is fully up before eww/bar-ext open
-	if connected_ext then
-		-- Dual mode: bar stays on 0 (eDP-1), reopen bar-ext on 1 (external)
-		hl.exec_cmd("sleep 0.3 && eww open bar-ext")
-	end
-	-- bar is still open on index 0; after eDP-1 re-enables it shifts back to laptop
-end, { locked = true, description = "Lid opened: restore built-in display" })
+	-- Always restore the built-in display when the lid is opened
+	hl.exec_cmd("hyprctl keyword monitor 'eDP-1,preferred,0x0,1'")
+	arrange_bars()
+end, { locked = true, description = "Lid opened: Restore built-in display" })
