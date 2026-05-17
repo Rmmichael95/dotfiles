@@ -1,0 +1,13 @@
+[Unit]
+Description=Llama.cpp GPU Fill-In-The-Middle (FIM) Server for Blink.nvim
+After=network.target
+
+[Service]
+Type=simple
+Environment="AMD_VULKAN_ICD=AMDVLK"
+ExecStart=/usr/bin/llama-server -hf Qwen/Qwen2.5-Coder-1.5B-Instruct-GGUF:Q4_K_M --port 8081 -c 4096 -ngl 99
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=default.target
